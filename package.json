@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "lint-staged --relative",
+    "lint": "ng lint",
+    "lint:staged": "lint-staged --relative",
     "prepare": "husky install"
   },
   "lint-staged": {
