@@ -4,7 +4,7 @@ on:
     branches:
       - 'feat/*'
 jobs:
-  build-and-deploy:
+  test-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
