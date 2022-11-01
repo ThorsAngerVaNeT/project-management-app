@@ -1,0 +1,218 @@
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+
+@primary-color: #d39264; // primary color for all components
+@primary-light: #ffb37f;
+@custom-grey: #a9a9a9;
+@secondary-color: #002e5c;
+@secondary-light: #5a81b9;
+@background-color-medium: #d3dde4;
+@background-color-light: #ebf0f4; // background of header and selected item
+@font-size-base: 16px; // @font-size-base: 14px;
+@link-color: @secondary-color; // link color
+@success-color: #438d1e; // success state color
+@warning-color: #f7bd4a; // warning state color
+@error-color: #ac353b; // error state color
+
+
+
+.ant-card-head {
+  background-color: #fafcfd;
+}
+
+.ant-card .anticon:hover {
+  color: @primary-color;
+  cursor: pointer;
+}
+
+.project__inner-content .ant-card:hover {
+  cursor: grab;
+}
+
+
+.ant-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: @background-color-light;
+}
+
+.ant-layout-header {
+  height: 64px;
+  align-items: center;
+  padding: 0 64px;
+  line-height: 64px;
+  background:@secondary-color;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ant-layout-header .anticon {
+  color: @background-color-light;
+}
+
+nz-content {
+  padding: 0 64px;
+}
+
+.ant-layout-footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: @background-color-medium;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  color: @background-color-light;
+  gap: 8px;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.header__logo img {
+  width: 32px;
+}
+
+
+.header__right-group {
+  display: flex;
+  gap: 24px;
+}
+
+.header__lang-switch {
+  display: flex;
+  align-items: center;
+}
+
+.header__lang-switch .ant-radio-button-wrapper {
+  background-color: inherit;
+  color: @background-color-light;
+  border: none;
+}
+
+.header__lang-switch .ant-radio-button-wrapper-checked {
+  color: @primary-light;
+}
+
+.header__lang-switch .ant-radio-button-wrapper-checked::before {
+  background-color: transparent;
+}
+
+.header__lang-switch .ant-radio-button-wrapper::before {
+  background-color: @custom-grey;
+}
+
+.header__lang-switch .ant-radio-button-wrapper:hover {
+  color: @primary-light;
+}
+
+
+.header__search-field {
+  height: 32px;
+  width: 20%;
+  background-color: transparent;
+}
+
+.header__search-field input {
+  background-color: transparent;
+  color: @primary-light;
+}
+
+.user-menu {
+  color: @background-color-light;
+}
+
+.user-menu:hover{
+  color: @primary-light;
+}
+
+
+
+
+nz-skeleton {
+  height: 100%;
+}
+
+nz-skeleton div:first-child {
+  height: 100%;
+}
+
+
+nz-footer img {
+  width: 64px;
+}
+
+.contacts {
+  display: flex;
+  gap: 24px;
+}
+
+.contacts div, .copyright {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contacts {
+  display: flex;
+  gap: 24px;
+}
+
+
+.title-to-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.title-to-input h3 {
+  margin: 0;
+  line-height: 32px;
+}
+
+.title-to-input .anticon {
+  color: @custom-grey;
+}
+
+
+
+.project__heading {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.project__heading h1 {
+  margin: 0;
+}
+
+.project__boards {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.project__board {
+  min-width: 300px;
+}
+
+.project__inner-content {
+  padding: 24px 0;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.main-inner-content {
+  padding: 24px 0;
+  min-height: 280px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 24px;
+}
