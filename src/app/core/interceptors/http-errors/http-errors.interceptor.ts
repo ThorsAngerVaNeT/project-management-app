@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpRequest,
+  HttpHandler,
+  HttpInterceptor,
+  HttpStatusCode,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
@@ -12,11 +19,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(environment.retryHTTPCall),
       catchError((error) =>
         throwError(() => {
-          if (error.status === 401) {
+          if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
             // todo refresh token, now just throw error
-            return new Error(error);
+            return error;
           } else {
-            return new Error(error);
+            return error;
           }
         }),
       ),
