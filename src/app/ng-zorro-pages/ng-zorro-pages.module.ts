@@ -7,7 +7,6 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -30,7 +29,6 @@ import { MainComponent } from './main/main.component';
     NzInputModule,
     NzIconModule,
     NzCardModule,
-    NzSkeletonModule,
     NzTypographyModule,
     NzButtonModule,
     NzAvatarModule,

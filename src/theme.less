@@ -1,4 +1,20 @@
-@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@root-entry-name: default;
+
+@import "../node_modules/ng-zorro-antd/style/entry.less"; /* base styles */
+
+@import "../node_modules/ng-zorro-antd/button/style/entry.less";
+@import "../node_modules/ng-zorro-antd/dropdown/style/entry.less";
+@import "../node_modules/ng-zorro-antd/list/style/entry.less";
+@import "../node_modules/ng-zorro-antd/layout/style/entry.less";
+@import "../node_modules/ng-zorro-antd/switch/style/entry.less";
+@import "../node_modules/ng-zorro-antd/input/style/entry.less";
+@import "../node_modules/ng-zorro-antd/icon/style/entry.less";
+@import "../node_modules/ng-zorro-antd/card/style/entry.less";
+@import "../node_modules/ng-zorro-antd/typography/style/entry.less";
+@import "../node_modules/ng-zorro-antd/avatar/style/entry.less";
+@import "../node_modules/ng-zorro-antd/tooltip/style/entry.less";
+@import "../node_modules/ng-zorro-antd/radio/style/entry.less";
+@import "../node_modules/ng-zorro-antd/badge/style/entry.less";
 
 @primary-color: #d39264; // primary color for all components
 @primary-light: #ffb37f;
@@ -6,14 +22,32 @@
 @secondary-color: #002e5c;
 @secondary-light: #5a81b9;
 @background-color-medium: #d3dde4;
-@background-color-light: #ebf0f4; // background of header and selected item
+@background-color-light: #ebf0f4;
 @font-size-base: 16px; // @font-size-base: 14px;
 @link-color: @secondary-color; // link color
 @success-color: #438d1e; // success state color
 @warning-color: #f7bd4a; // warning state color
 @error-color: #ac353b; // error state color
 
+html, body {
+  height: 100%;
+  background: @background-color-light;
+}
 
+app-main, app-boards {
+  display: flex;
+  height: 100%;
+}
+
+.ant-layout-content {
+  min-height: auto;
+}
+
+.ant-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: @background-color-light;
+}
 
 .ant-card-head {
   background-color: #fafcfd;
@@ -28,14 +62,6 @@
   cursor: grab;
 }
 
-
-.ant-layout {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: @background-color-light;
-}
-
 .ant-layout-header {
   height: 64px;
   align-items: center;
@@ -44,6 +70,7 @@
   background:@secondary-color;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .ant-layout-header .anticon {
@@ -58,6 +85,8 @@ nz-content {
   display: flex;
   justify-content: space-between;
   background-color: @background-color-medium;
+  align-items: center;
+  gap: 16px;
 }
 
 .header__logo {
@@ -145,6 +174,8 @@ nz-footer img {
 .contacts {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .contacts div, .copyright {
@@ -152,12 +183,6 @@ nz-footer img {
   align-items: center;
   gap: 8px;
 }
-
-.contacts {
-  display: flex;
-  gap: 24px;
-}
-
 
 .title-to-input {
   display: flex;
