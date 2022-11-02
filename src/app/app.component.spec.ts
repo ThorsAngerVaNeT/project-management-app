@@ -25,11 +25,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ng-pma');
   });
 
-  it('should have app-main element', () => {
+  it('should have router-outlet element', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const { debugElement } = fixture;
-    const main = debugElement.query(By.css('app-main'));
+    const main = debugElement.query(By.css('router-outlet'));
     expect(main).toBeTruthy();
   });
 });
