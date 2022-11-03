@@ -3,4 +3,5 @@ export enum APIEndpoints {
   signUp = 'auth/signup',
   users = 'users',
   boards = 'boards',
+  boardsSet = 'boardsSet',
 }
