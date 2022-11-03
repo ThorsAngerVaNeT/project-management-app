@@ -6,15 +6,15 @@ import { ErrorHandler, Injectable } from '@angular/core';
 })
 export class ErrorHandlerService implements ErrorHandler {
   handleError(error: Error | HttpErrorResponse): void {
-    let errorMess = 'Unknown Error: ';
+    let errorMessage = 'Unknown Error: ';
 
     if (error instanceof HttpErrorResponse) {
-      errorMess = `${error.statusText}(${error.status}) ${error.message}`;
+      errorMessage = `${error.statusText}(${error.status}) ${error.message}`;
     } else {
-      errorMess += error.message;
+      errorMessage += error.message;
     }
 
     // todo alert from ng-zorro
-    console.error(errorMess);
+    console.error(errorMessage);
   }
 }

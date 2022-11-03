@@ -16,7 +16,7 @@ import { environment } from '@environments/environment';
 export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      retry(environment.retryHTTPCall),
+      retry(environment.RETRY_HTTP_COUNT),
       catchError((error) =>
         throwError(() => {
           if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
