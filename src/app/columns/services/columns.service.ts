@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { Column, ColumnParams, ColumnsSetParams } from '../models/columns.model';
+import { Column, ColumnParams, ColumnSetUpdParams, ColumnsSetParams } from '../models/columns.model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,11 +42,11 @@ export class ColumnsService {
     return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
   }
 
-  public updColumnsSet(listColumnParams: ColumnParams[]): Observable<Column[]> {
+  public updColumnsSet(listColumnParams: ColumnSetUpdParams[]): Observable<Column[]> {
     return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnParams);
   }
 
   public createColumnsSet(listColumnsSetParams: ColumnsSetParams[]): Observable<Column[]> {
-    return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnsSetParams);
+    return this.http.post<Column[]>(APIEndpoints.columnsSet, listColumnsSetParams);
   }
 }

@@ -10,6 +10,11 @@ export interface ColumnParams {
   order: number;
 }
 
+export interface ColumnSetUpdParams {
+  _id: string;
+  order: number;
+}
+
 export interface ColumnsSetParams {
   title: string;
   order: number;
