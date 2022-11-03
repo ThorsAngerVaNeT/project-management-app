@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { Column, ColumnParams } from '../models/columns.model';
+import { Column, ColumnParams, ColumnsSetParams } from '../models/columns.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +28,25 @@ export class ColumnsService {
 
   public delColumn(boardId: string, columnId: string): Observable<Column> {
     return this.http.delete<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`);
+  }
+
+  public getColumnsSet(listColumnsId: string[]): Observable<Column[]> {
+    const params = new HttpParams().set('ids', listColumnsId.join());
+
+    return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
+  }
+
+  public getColumnsByUser(userId: string): Observable<Column[]> {
+    const params = new HttpParams().set('userId', userId);
+
+    return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
+  }
+
+  public updColumnsSet(listColumnParams: ColumnParams[]): Observable<Column[]> {
+    return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnParams);
+  }
+
+  public createColumnsSet(listColumnsSetParams: ColumnsSetParams[]): Observable<Column[]> {
+    return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnsSetParams);
   }
 }

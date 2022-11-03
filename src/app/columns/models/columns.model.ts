@@ -9,3 +9,9 @@ export interface ColumnParams {
   title: string;
   order: number;
 }
+
+export interface ColumnsSetParams {
+  title: string;
+  order: number;
+  boardId: string;
+}
