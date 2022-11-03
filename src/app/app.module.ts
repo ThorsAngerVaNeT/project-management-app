@@ -1,21 +1,13 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpBaseInterceptor } from '@core/interceptors/http-base/http-base.interceptor';
-import { HttpErrorInterceptor } from '@core/interceptors/http-errors/http-errors.interceptor';
-import { ErrorHandlerService } from '@core/services/error-handler/error-handler.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [
-    { provide: ErrorHandler, useClass: ErrorHandlerService },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-  ],
+  imports: [BrowserModule, AppRoutingModule, CoreModule],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
