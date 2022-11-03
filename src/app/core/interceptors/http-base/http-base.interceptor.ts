@@ -7,10 +7,10 @@ import { environment } from '@environments/environment';
 @Injectable()
 export class HttpBaseInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const keyReq = request.clone({
-      url: `${environment.apiUrl}${request.url}`,
+    const clonedRequest = request.clone({
+      url: `${environment.API_URL}${request.url}`,
     });
 
-    return next.handle(keyReq);
+    return next.handle(clonedRequest);
   }
 }

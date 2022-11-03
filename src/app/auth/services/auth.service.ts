@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public signIn(authParams: SignInParams): Observable<string> {
-    return this.http.post<Token>(APIEndpoints.signIn, authParams).pipe(map((token) => token.token));
+    return this.http.post<Token>(APIEndpoints.signIn, authParams).pipe(map((response) => response.token));
   }
 
   public signUp(authParams: UserParams): Observable<User> {
