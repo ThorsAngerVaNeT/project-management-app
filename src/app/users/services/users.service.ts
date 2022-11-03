@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   public updUser(id: string, userParams: UserParams): Observable<User> {
-    return this.http.put<User>(APIEndpoints.signUp, userParams);
+    return this.http.put<User>(`${APIEndpoints.users}/${id}`, userParams);
   }
 
   public delUser(id: string): Observable<User> {
