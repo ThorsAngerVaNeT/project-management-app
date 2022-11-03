@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  RETRY_HTTP_COUNT: 1,
+  API_URL: 'https://boiling-island-84863.herokuapp.com/',
 };
 
 /*
