@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { Observable } from 'rxjs';
-import { SignUpParams, User } from 'src/app/auth/models/user.model';
+import { UserParams, User } from 'src/app/users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class UsersService {
     return this.http.get<User>(`${APIEndpoints.users}/${id}`);
   }
 
-  public updUser(id: string, userParams: SignUpParams): Observable<User> {
+  public updUser(id: string, userParams: UserParams): Observable<User> {
     return this.http.put<User>(APIEndpoints.signUp, userParams);
   }
 
