@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { SignInParams, SignUpParams, Token, User } from '../models/user.model';
-import { APIEndpoints } from '../models/api-endpoints.enum';
+import { APIEndpoints } from '../../core/enums/api-endpoints.enum';
 
 @Injectable({
   providedIn: 'root',
