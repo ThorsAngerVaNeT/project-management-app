@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ErrorHandlerService } from './services/error-handler/error-handler.service';
 import { HttpBaseInterceptor } from './interceptors/http-base/http-base.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
