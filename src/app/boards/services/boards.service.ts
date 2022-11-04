@@ -14,29 +14,29 @@ export class BoardsService {
     return this.http.get<Board[]>(APIEndpoints.boards);
   }
 
-  public createBoard(newBoard: BoardParams): Observable<Board> {
-    return this.http.post<Board>(APIEndpoints.boards, newBoard);
-  }
-
-  public getBoard(id: string): Observable<Board> {
-    return this.http.get<Board>(`${APIEndpoints.boards}/${id}`);
-  }
-
-  public updBoard(id: string, boardParams: BoardParams): Observable<Board> {
-    return this.http.put<Board>(`${APIEndpoints.boards}/${id}`, boardParams);
-  }
-
-  public delBoard(id: string): Observable<Board> {
-    return this.http.delete<Board>(`${APIEndpoints.boards}/${id}`);
-  }
-
-  public getBoardsSet(listId: string[]): Observable<Board[]> {
-    const params = new HttpParams().set('ids', listId.join());
+  public getBoardsSet(listBoardsId: string[]): Observable<Board[]> {
+    const params = new HttpParams().set('ids', listBoardsId.join());
 
     return this.http.get<Board[]>(APIEndpoints.boardsSet, { params });
   }
 
-  public getBoardsByUser(id: string): Observable<Board[]> {
-    return this.http.get<Board[]>(`${APIEndpoints.boardsSet}/${id}`);
+  public getBoardsByUser(userId: string): Observable<Board[]> {
+    return this.http.get<Board[]>(`${APIEndpoints.boardsSet}/${userId}`);
+  }
+
+  public getBoard(boardId: string): Observable<Board> {
+    return this.http.get<Board>(`${APIEndpoints.boards}/${boardId}`);
+  }
+
+  public createBoard(newBoard: BoardParams): Observable<Board> {
+    return this.http.post<Board>(APIEndpoints.boards, newBoard);
+  }
+
+  public updateBoard(boardId: string, boardParams: BoardParams): Observable<Board> {
+    return this.http.put<Board>(`${APIEndpoints.boards}/${boardId}`, boardParams);
+  }
+
+  public deleteBoard(boardId: string): Observable<Board> {
+    return this.http.delete<Board>(`${APIEndpoints.boards}/${boardId}`);
   }
 }
