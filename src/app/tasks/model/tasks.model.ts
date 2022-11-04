@@ -17,6 +17,15 @@ export interface TaskParams {
   users: string[];
 }
 
+export interface TaskUpdateParams {
+  title: string;
+  order: number;
+  columnId: string;
+  description: string;
+  userId: string;
+  users: string[];
+}
+
 export interface TaskSetUpdateParams {
   _id: string;
   order: number;

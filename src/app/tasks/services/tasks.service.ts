@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { Task, TaskParams, TaskSetUpdateParams } from '../model/tasks.model';
+import { Task, TaskParams, TaskUpdateParams, TaskSetUpdateParams } from '../model/tasks.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,11 +45,11 @@ export class TasksService {
     return this.http.get<Task>(this.getTasksUrl(boardId, columnId, taskId));
   }
 
-  public createTasks(boardId: string, columnId: string, newTask: TaskParams): Observable<Task> {
+  public createTask(boardId: string, columnId: string, newTask: TaskParams): Observable<Task> {
     return this.http.post<Task>(this.getTasksUrl(boardId, columnId), newTask);
   }
 
-  public updateTask(boardId: string, columnId: string, taskId: string, taskParams: TaskParams): Observable<Task> {
+  public updateTask(boardId: string, columnId: string, taskId: string, taskParams: TaskUpdateParams): Observable<Task> {
     return this.http.put<Task>(this.getTasksUrl(boardId, columnId, taskId), taskParams);
   }
 
