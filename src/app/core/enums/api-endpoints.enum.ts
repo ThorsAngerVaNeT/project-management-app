@@ -9,4 +9,5 @@ export enum APIEndpoints {
   columnsSet = 'columnsSet',
   tasks = 'tasks',
   tasksSet = 'tasksSet',
+  points = 'points',
 }
