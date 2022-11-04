@@ -10,13 +10,13 @@ export interface ColumnParams {
   order: number;
 }
 
-export interface ColumnSetUpdParams {
-  _id: string;
-  order: number;
-}
-
 export interface ColumnsSetParams {
   title: string;
   order: number;
   boardId: string;
+}
+
+export interface ColumnSetUpdateParams {
+  _id: string;
+  order: number;
 }
