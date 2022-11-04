@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { APIParams } from '@core/enums/api-params.enum';
 import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../models/columns.model';
 
 @Injectable({
@@ -15,13 +16,13 @@ export class ColumnsService {
   }
 
   public getColumnsSet(listColumnIds: string[]): Observable<Column[]> {
-    const params = new HttpParams().set('ids', listColumnIds.join());
+    const params = new HttpParams().set(APIParams.ids, listColumnIds.join());
 
     return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
   }
 
   public getColumnsByUser(userId: string): Observable<Column[]> {
-    const params = new HttpParams().set('userId', userId);
+    const params = new HttpParams().set(APIParams.userId, userId);
 
     return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
   }

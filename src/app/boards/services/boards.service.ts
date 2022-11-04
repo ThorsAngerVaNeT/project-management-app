@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { APIParams } from '@core/enums/api-params.enum';
 import { Board, BoardParams } from '../models/board.model';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class BoardsService {
   }
 
   public getBoardsSet(listBoardIds: string[]): Observable<Board[]> {
-    const params = new HttpParams().set('ids', listBoardIds.join());
+    const params = new HttpParams().set(APIParams.ids, listBoardIds.join());
 
     return this.http.get<Board[]>(APIEndpoints.boardsSet, { params });
   }

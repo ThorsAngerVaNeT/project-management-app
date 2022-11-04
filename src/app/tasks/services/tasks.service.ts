@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { APIParams } from '@core/enums/api-params.enum';
 import { Task, TaskParams, TaskUpdateParams, TaskSetUpdateParams } from '../model/tasks.model';
 
 @Injectable({
@@ -20,13 +21,13 @@ export class TasksService {
   }
 
   public getTasksSet(listTaskIds: string[]): Observable<Task[]> {
-    const params = new HttpParams().set('ids', listTaskIds.join());
+    const params = new HttpParams().set(APIParams.ids, listTaskIds.join());
 
     return this.http.get<Task[]>(APIEndpoints.tasksSet, { params });
   }
 
   public getTasksByUser(userId: string): Observable<Task[]> {
-    const params = new HttpParams().set('userId', userId);
+    const params = new HttpParams().set(APIParams.userId, userId);
 
     return this.http.get<Task[]>(APIEndpoints.tasksSet, { params });
   }
@@ -36,7 +37,7 @@ export class TasksService {
   }
 
   public getTasksBySearchString(searchString: string): Observable<Task[]> {
-    const params = new HttpParams().set('search', searchString);
+    const params = new HttpParams().set(APIParams.search, searchString);
 
     return this.http.get<Task[]>(APIEndpoints.tasksSet, { params });
   }
