@@ -5,10 +5,22 @@ import { ErrorHandlerService } from './services/error-handler/error-handler.serv
 import { HttpBaseInterceptor } from './interceptors/http-base/http-base.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
 import { HttpTokenInterceptor } from './interceptors/http-token/http-token.interceptor';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+  ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
