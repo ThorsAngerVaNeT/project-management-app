@@ -4,7 +4,7 @@ export interface User {
   login: string;
 }
 
-export interface SignUpParams {
+export interface UserParams {
   name: string;
   login: string;
   password: string;
