@@ -11,8 +11,8 @@ import { TaskFile } from '../model/file.model';
 export class FilesService {
   constructor(private http: HttpClient) {}
 
-  public getFilesSet(listTaskIds: string[]): Observable<TaskFile[]> {
-    const params = new HttpParams().set(APIParams.ids, listTaskIds.join());
+  public getFilesSet(listFileIds: string[]): Observable<TaskFile[]> {
+    const params = new HttpParams().set(APIParams.ids, listFileIds.join());
 
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
   }
