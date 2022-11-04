@@ -14,8 +14,8 @@ export class BoardsService {
     return this.http.get<Board[]>(APIEndpoints.boards);
   }
 
-  public getBoardsSet(listBoardsId: string[]): Observable<Board[]> {
-    const params = new HttpParams().set('ids', listBoardsId.join());
+  public getBoardsSet(listBoardIds: string[]): Observable<Board[]> {
+    const params = new HttpParams().set('ids', listBoardIds.join());
 
     return this.http.get<Board[]>(APIEndpoints.boardsSet, { params });
   }

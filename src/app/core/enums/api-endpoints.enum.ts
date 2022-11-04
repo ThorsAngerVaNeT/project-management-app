@@ -5,4 +5,6 @@ export enum APIEndpoints {
   users = 'users',
   boards = 'boards',
   boardsSet = 'boardsSet',
+  columns = 'columns',
+  columnsSet = 'columnsSet',
 }
