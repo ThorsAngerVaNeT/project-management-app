@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { SignInParams, UserParams, Token, User } from 'src/app/users/models/user.model';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { SignInParams, UserParams, Token, User } from '../../users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
