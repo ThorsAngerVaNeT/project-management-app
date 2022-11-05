@@ -7,7 +7,7 @@ import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIMethods } from '@core/enums/api-methods.enum';
 import { paramForNewUser, mockUser3, paramForLogin } from '@mocks/mock-users/mock-users';
 
-describe('UsersService', () => {
+describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
 
