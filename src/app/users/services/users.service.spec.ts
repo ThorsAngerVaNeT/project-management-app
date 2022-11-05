@@ -4,8 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { UsersService } from './users.service';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { APIMethods } from '@core/enums/api-methods.enum';
 import { mockUserArray, paramForUpdateUser, updatedUser } from '@mocks/mock-users/mock-users';
-import { APIMethods } from '../../core/enums/api-methods.enum';
 
 describe('UsersService', () => {
   let service: UsersService;
