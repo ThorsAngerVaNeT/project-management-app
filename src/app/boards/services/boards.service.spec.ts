@@ -79,7 +79,7 @@ describe('BoardsService', () => {
     request.flush(mockBoardArray);
   });
 
-  it('should call getBoard and return the Boards', () => {
+  it('should call getBoard and return the Board', () => {
     const mockBoard = mockBoardArray[0];
     const id = mockBoard._id;
 

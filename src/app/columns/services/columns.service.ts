@@ -10,8 +10,13 @@ import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '.
 export class ColumnsService {
   constructor(private http: HttpClient) {}
 
+  private getColumnUrl(boardId: string, columnId: string = ''): string {
+    const columnEndpoint = columnId ? `/${columnId}` : '';
+    return `${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}${columnEndpoint}`;
+  }
+
   public getColumns(boardId: string): Observable<Column[]> {
-    return this.http.get<Column[]>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}`);
+    return this.http.get<Column[]>(this.getColumnUrl(boardId));
   }
 
   public getColumnsSet(listColumnIds: string[]): Observable<Column[]> {
@@ -27,11 +32,11 @@ export class ColumnsService {
   }
 
   public getColumn(boardId: string, columnId: string): Observable<Column> {
-    return this.http.get<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`);
+    return this.http.get<Column>(this.getColumnUrl(boardId, columnId));
   }
 
-  public createColumns(boardId: string, newColumn: ColumnParams): Observable<Column> {
-    return this.http.post<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}`, newColumn);
+  public createColumn(boardId: string, newColumn: ColumnParams): Observable<Column> {
+    return this.http.post<Column>(this.getColumnUrl(boardId), newColumn);
   }
 
   public createColumnsSet(listColumnsSetParams: ColumnsSetParams[]): Observable<Column[]> {
@@ -39,7 +44,7 @@ export class ColumnsService {
   }
 
   public updateColumn(boardId: string, columnId: string, columnParams: ColumnParams): Observable<Column> {
-    return this.http.put<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`, columnParams);
+    return this.http.put<Column>(this.getColumnUrl(boardId, columnId), columnParams);
   }
 
   public updateColumnsSet(listColumnParams: ColumnSetUpdateParams[]): Observable<Column[]> {
@@ -47,6 +52,6 @@ export class ColumnsService {
   }
 
   public deleteColumn(boardId: string, columnId: string): Observable<Column> {
-    return this.http.delete<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`);
+    return this.http.delete<Column>(this.getColumnUrl(boardId, columnId));
   }
 }
