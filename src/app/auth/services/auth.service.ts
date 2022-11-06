@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { SignInParams, UserParams, Token, User } from '../../users/models/user.model';
+import { SignInParams, UserParams, APIToken, User } from '../../users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public signIn(authParams: SignInParams): Observable<string> {
-    return this.http.post<Token>(APIEndpoints.signIn, authParams).pipe(map((response) => response.token));
+    return this.http.post<APIToken>(APIEndpoints.signIn, authParams).pipe(map((response) => response.token));
   }
 
   public signUp(authParams: UserParams): Observable<User> {
