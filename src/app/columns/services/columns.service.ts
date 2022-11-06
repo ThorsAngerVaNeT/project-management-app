@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../models/columns.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../models/column.model';
 
 @Injectable({
   providedIn: 'root',

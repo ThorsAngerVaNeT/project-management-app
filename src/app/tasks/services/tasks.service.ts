@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
-import { Task, TaskParams, TaskUpdateParams, TaskSetUpdateParams } from '../model/tasks.model';
+import { Task, TaskParams, TaskUpdateParams, TaskSetUpdateParams } from '../model/task.model';
 
 @Injectable({
   providedIn: 'root',
