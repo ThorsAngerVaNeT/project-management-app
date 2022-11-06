@@ -10,4 +10,5 @@ export enum APIEndpoints {
   tasks = 'tasks',
   tasksSet = 'tasksSet',
   points = 'points',
+  file = 'file',
 }
