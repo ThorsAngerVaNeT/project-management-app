@@ -1,0 +1,48 @@
+<nz-modal
+  nzVisible="true"
+  nzTitle="Sign Up"
+  nzOkText="Sign Up"
+  nzCancelText="Cancel"
+  i18n-nzTitle="@@SignUpModalTitle"
+  (nzOnOk)="handleOk()"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <p>To sign up please provide a username and a password.</p>
+    <p>For your safety password should be:</p>
+    <ul>
+      <li>at least 8 characters</li>
+      <li>both uppercase and lowercase letters</li>
+      <li>both letters and numbers</li>
+      <li>contain at least one special character, e.g., ! @ # ? ]</li>
+    </ul>
+    <form nz-form class="auth-form">
+      <nz-form-item>
+        <nz-form-control i18n-nzErrorTip="@@userNameErrorTip" nzErrorTip="Please provide your username">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="userName"
+              placeholder="Username"
+              i18n-placeholder="@@userNamePlaceholder"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control i18n-nzErrorTip="@@passwordErrorTip" nzErrorTip="Please provide your password">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+              i18n-placeholder="@@passwordPlaceholder"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

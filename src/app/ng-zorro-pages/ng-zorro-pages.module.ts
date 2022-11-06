@@ -15,11 +15,16 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+
 import { BoardsComponent } from './boards/boards.component';
 import { MainComponent } from './main/main.component';
+import { SignInComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [BoardsComponent, MainComponent],
+  declarations: [BoardsComponent, MainComponent, SignInComponent, SignupComponent],
   imports: [
     CommonModule,
 
@@ -36,6 +41,9 @@ import { MainComponent } from './main/main.component';
     NzToolTipModule,
     NzRadioModule,
     NzBadgeModule,
+
+    NzFormModule,
+    NzModalModule,
   ],
   exports: [BoardsComponent, MainComponent],
 })
