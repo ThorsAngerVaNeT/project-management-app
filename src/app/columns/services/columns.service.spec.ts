@@ -38,6 +38,23 @@ describe('ColumnsService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should call getColumnUrl(boardId) and return an correct url', () => {
+    const boardId = mockColumnArray[0].boardId;
+    const mockUrl = `${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}`;
+
+    // @ts-expect-error
+    expect(service.getColumnUrl(boardId)).toEqual(mockUrl);
+  });
+
+  it('should call getColumnUrl(boardId, columnId) and return an correct url', () => {
+    const boardId = mockColumnArray[0].boardId;
+    const columnId = mockColumnArray[0]._id;
+    const mockUrl = `${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`;
+
+    // @ts-expect-error
+    expect(service.getColumnUrl(boardId, columnId)).toEqual(mockUrl);
+  });
+
   it('should call getColumns and return an array of Columns', () => {
     const boardId = mockColumnArray[0].boardId;
 
