@@ -184,7 +184,7 @@ describe('TasksService', () => {
     req.flush(updatedTask);
   });
 
-  it('should call updateColumnsSet and return the updated array of Tasks', () => {
+  it('should call updateTasksSet and return the updated array of Tasks', () => {
     service.updateTasksSet(paramForUpdateTasksSet).subscribe((data) => {
       expect(data).toEqual(updatedTasks);
     });
