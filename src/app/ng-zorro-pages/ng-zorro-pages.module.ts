@@ -22,9 +22,10 @@ import { BoardsComponent } from './boards/boards.component';
 import { MainComponent } from './main/main.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
-  declarations: [BoardsComponent, MainComponent, SignInComponent, SignupComponent],
+  declarations: [BoardsComponent, MainComponent, SignInComponent, SignupComponent, WelcomeComponent],
   imports: [
     CommonModule,
 

@@ -36,7 +36,7 @@ html, body {
   background: @background-color-light;
 }
 
-app-main, app-boards {
+app-main, app-boards, app-welcome {
   display: flex;
   height: 100%;
 }
@@ -250,4 +250,18 @@ nz-footer img {
   gap: 24px;
   flex-direction: column;
   align-items: center;
+}
+
+
+.header__welcome_actions {
+  display: flex;
+  gap: 32px;
+}
+
+.header__welcome_actions a {
+    color: @background-color-light;
+}
+
+.header__welcome_actions a:hover {
+    color: @primary-light;
 }
