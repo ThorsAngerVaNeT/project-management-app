@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { StoreFacade } from './store-facade';
 
@@ -6,7 +7,7 @@ describe('StoreFacade', () => {
   let facade: StoreFacade;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ providers: [provideMockStore()] });
     facade = TestBed.inject(StoreFacade);
   });
 
