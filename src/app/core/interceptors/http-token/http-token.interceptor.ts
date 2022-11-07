@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { first, Observable, switchMap } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { Store } from '@ngrx/store';
-import { selectToken } from '../../../auth/store/selectors/user.selectors';
+import { StoreFacade } from '../../services/store-facade/store-facade';
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
-  constructor(private store: Store) {}
+  token$ = this.storeFacade.token$;
+
+  constructor(private storeFacade: StoreFacade) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return this.store.select(selectToken).pipe(
+    return this.token$.pipe(
       first(),
       switchMap((token) => {
         if (!request.url.includes(APIEndpoints.auth)) {
