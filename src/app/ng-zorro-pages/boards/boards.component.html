@@ -47,14 +47,17 @@
 
   <nz-content>
     <div class="project__inner-content">
-      <div class="project__heading">
+      <nz-page-header class="site-page-header" nzBackIcon>
+        <nz-page-header-title>Name of the awesome board</nz-page-header-title>
         <nz-avatar
-          [nzSize]="80"
-          nzIcon="project"
-          nzSrc="https://ss.sport-express.ru/userfiles/materials/173/1735202/volga.jpg"
-        >
-        </nz-avatar>
-        <h1>Name of the awesome project</h1>
+          nz-page-header-avatar
+          [nzSize]="64"
+          nzSrc="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+        ></nz-avatar>
+      </nz-page-header>
+
+      <div class="board-participants">
+        Participants: <nz-tag class="user-tag">Lea</nz-tag> <nz-tag class="user-tag">Mike 34798bb545 </nz-tag>
       </div>
 
       <div class="project__boards">
@@ -74,7 +77,7 @@
             <nz-list-item>
               <nz-list-item-meta>
                 <nz-list-item-meta-title> Very Important Task </nz-list-item-meta-title>
-                <nz-list-item-meta-description> John Doe </nz-list-item-meta-description>
+                <nz-list-item-meta-description> Lea </nz-list-item-meta-description>
               </nz-list-item-meta>
               <ul nz-list-item-actions>
                 <nz-list-item-action>
@@ -122,7 +125,7 @@
             <nz-list-item>
               <nz-list-item-meta>
                 <nz-list-item-meta-title> Very Important Task </nz-list-item-meta-title>
-                <nz-list-item-meta-description> John Doe </nz-list-item-meta-description>
+                <nz-list-item-meta-description> Mike 34798bb545 </nz-list-item-meta-description>
               </nz-list-item-meta>
               <ul nz-list-item-actions>
                 <nz-list-item-action>
@@ -194,7 +197,7 @@
 
         <ng-template #title2>
           <div class="title-to-input" nzAlign="center">
-            <h3>Another One Awesome Board</h3>
+            <h3>Click to edit</h3>
             <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted"></span>
           </div>
         </ng-template>

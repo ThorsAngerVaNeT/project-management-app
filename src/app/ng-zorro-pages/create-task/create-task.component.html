@@ -1,0 +1,99 @@
+<nz-modal
+  nzVisible="true"
+  nzTitle="Create Task"
+  nzOkText="Create"
+  nzCancelText="Cancel"
+  i18n-nzTitle="@@CreateColumnModalTitle"
+>
+  <ng-container *nzModalContent>
+    <form nz-form class="content-form">
+      <nz-form-item>
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">Title</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Title is required">
+          <input nz-input formControlName="title" id="title" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- not necessary since we will have drag&drop?
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="order">Order</nz-form-label>
+        <nz-form-control [nzSm]="3">
+          <nz-input-number [nzMin]="0" [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+      </nz-form-item>
+    -->
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="description">Description</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24">
+          <textarea nz-input rows="2"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants">Responsible</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24">
+          <nz-select nzMode="default" nzPlaceHolder="Please select responsible person">
+            <nz-option nzLabel="Lea" nzValue="Lea"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike1"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea3"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike2"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea2"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike3"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea1"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike4"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants">Participants</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24">
+          <nz-select nzMode="multiple" nzPlaceHolder="Please select team members">
+            <nz-option nzLabel="Lea" nzValue="Lea"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike1"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea3"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike2"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea2"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike3"></nz-option>
+            <nz-option nzLabel="Lea" nzValue="Lea1"></nz-option>
+            <nz-option nzLabel="Mike" nzValue="Mike4"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-divider nzText="Task Checklist"></nz-divider>
+
+      <nz-form-item>
+        <label nz-checkbox>Design task checklist</label>
+      </nz-form-item>
+
+      <nz-form-item>
+        <div class="title-to-input">
+          <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
+            <input nz-input placeholder="To Do" nzSize="small" />
+          </nz-input-group>
+          <ng-template #suffixTemplateInfo>
+            <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle"></span>
+          </ng-template>
+          <ng-template #suffixTemplateInfo2>
+            <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle"></span>
+          </ng-template>
+        </div>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzXs]="24" [nzSm]="24">
+          <button nz-button nzType="dashed" class="add-button">
+            <span nz-icon nzType="plus"></span>
+            Add subtask
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<ng-template #deleteTask>
+  <span nz-icon nz-tooltip anticon nzTooltipTitle="Delete" nzType="close-circle"></span>
+</ng-template>

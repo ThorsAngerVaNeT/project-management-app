@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardsComponent } from './ng-zorro-pages/boards/boards.component';
+import { CreateBoardComponent } from './ng-zorro-pages/create-board/create-board.component';
+import { CreateTaskComponent } from './ng-zorro-pages/create-task/create-task.component';
 import { MainComponent } from './ng-zorro-pages/main/main.component';
 import { SignInComponent } from './ng-zorro-pages/signin/signin.component';
 import { SignupComponent } from './ng-zorro-pages/signup/signup.component';
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'create-board', component: CreateBoardComponent },
+  { path: 'create-task', component: CreateTaskComponent },
 ];
 
 @NgModule({

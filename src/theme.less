@@ -15,6 +15,12 @@
 @import "../node_modules/ng-zorro-antd/tooltip/style/entry.less";
 @import "../node_modules/ng-zorro-antd/radio/style/entry.less";
 @import "../node_modules/ng-zorro-antd/badge/style/entry.less";
+@import "../node_modules/ng-zorro-antd/tag/style/entry.less";
+@import "../node_modules/ng-zorro-antd/upload/style/entry.less";
+@import "../node_modules/ng-zorro-antd/input-number/style/entry.less";
+@import "../node_modules/ng-zorro-antd/divider/style/entry.less";
+@import "../node_modules/ng-zorro-antd/checkbox/style/entry.less";
+@import "../node_modules/ng-zorro-antd/page-header/style/entry.less";
 
 @import "../node_modules/ng-zorro-antd/modal/style/entry.less";
 
@@ -140,7 +146,8 @@ nz-content {
 
 .header__search-field {
   height: 32px;
-  width: 20%;
+  width: 302px;
+  margin-left: 66px;
   background-color: transparent;
 }
 
@@ -191,11 +198,13 @@ nz-footer img {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  width: 100%;
 }
 
 .title-to-input h3 {
   margin: 0;
   line-height: 32px;
+  cursor: pointer;
 }
 
 .title-to-input .anticon {
@@ -210,7 +219,7 @@ nz-footer img {
   align-items: center;
 }
 
-.project__heading h1 {
+.project__heading h1, .project__heading p {
   margin: 0;
 }
 
@@ -264,4 +273,36 @@ nz-footer img {
 
 .header__welcome_actions a:hover {
     color: @primary-light;
+}
+
+.user-tag {
+  background-color: @secondary-color;
+  border: none;
+  color: @background-color-light;
+  border-radius: 16px;
+  padding-bottom: 2px;
+}
+
+.content-form {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+form .anticon {
+  color: #a9a9a9;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ant-page-header {
+  padding: 0;
+}
+
+.ant-list-item-meta {
+  cursor: pointer;
 }
