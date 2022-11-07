@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { userGetInfo, userSignIn } from '../../../auth/store/actions/user.actions';
 import { selectToken, selectUser } from '../../../auth/store/selectors/user.selectors';
 import { loadBoards } from '../../../boards/store/actions/board.actions';
+import { selectAllBoards } from '../../../boards/store/selectors/board.selectors';
 import { SignInParams } from '../../../users/models/user.model';
 
 @Injectable({
@@ -12,6 +13,8 @@ export class StoreFacade {
   user$ = this.store.select(selectUser);
 
   token$ = this.store.select(selectToken);
+
+  boards$ = this.store.select(selectAllBoards);
 
   constructor(private store: Store) {}
 
