@@ -1,7 +1,7 @@
 export interface Point {
   _id: string;
   title: string;
-  taskId: number;
+  taskId: string;
   boardId: string;
   done: boolean;
 }

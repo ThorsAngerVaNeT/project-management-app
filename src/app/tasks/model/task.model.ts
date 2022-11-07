@@ -1,4 +1,4 @@
-export interface Task {
+export interface ColumnTask {
   _id: string;
   title: string;
   order: number;
@@ -9,7 +9,7 @@ export interface Task {
   users: string[];
 }
 
-export interface TaskParams {
+export interface ColumnTaskParams {
   title: string;
   order: number;
   description: string;
@@ -17,7 +17,7 @@ export interface TaskParams {
   users: string[];
 }
 
-export interface TaskUpdateParams {
+export interface ColumnTaskUpdateParams {
   title: string;
   order: number;
   columnId: string;
@@ -26,7 +26,7 @@ export interface TaskUpdateParams {
   users: string[];
 }
 
-export interface TaskSetUpdateParams {
+export interface ColumnTaskSetUpdateParams {
   _id: string;
   order: number;
   columnId: string;
