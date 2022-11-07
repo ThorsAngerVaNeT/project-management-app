@@ -38,6 +38,7 @@
     "@ngrx/store-devtools": "^14.3.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "ngrx-store-localstorage": "^14.0.0",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
     "rxjs": "~7.5.0",
