@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../../users/services/users.service';
 import {
@@ -29,8 +29,13 @@ export class UserEffects {
       ofType(userSignIn),
       exhaustMap((action) =>
         this.authService.signIn(action.data).pipe(
-          map((token) => userSignInSuccess({ token })),
-          catchError((error: unknown) => of(userSignInFailure({ error }))),
+          map((token) => {
+            const payload = this.authService.decodeToken(token);
+            return userSignInSuccess({ token, payload });
+          }),
+          catchError((error: unknown) => {
+            return of(userSignInFailure({ error }));
+          }),
         ),
       ),
     );
@@ -39,18 +44,17 @@ export class UserEffects {
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(userGetInfo, userSignInSuccess),
-      exhaustMap(() =>
-        this.usersService.getUsers().pipe(
-          withLatestFrom(this.store.select(selectUser)),
-          map(([users, state]) => {
-            const user = users.find((u) => u.login === state.login)!;
+      concatLatestFrom(() => this.store.select(selectUser)),
+      exhaustMap(([, state]) => {
+        return this.usersService.getUser(state._id).pipe(
+          map((user) => {
             return userGetInfoSuccess({ user });
           }),
           catchError((error: unknown) => {
             return of(userGetInfoFailure({ error }));
           }),
-        ),
-      ),
+        );
+      }),
     );
   });
 }

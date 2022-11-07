@@ -1,9 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { SignInParams, User } from '../../../users/models/user.model';
+import { SignInParams, TokenPayload, User } from '../../../users/models/user.model';
 
 export const userSignIn = createAction('[Auth] User Sign In', props<{ data: SignInParams }>());
 
-export const userSignInSuccess = createAction('[Auth] User Sign In Success', props<{ token: string }>());
+export const userSignInSuccess = createAction(
+  '[Auth] User Sign In Success',
+  props<{ token: string; payload: TokenPayload }>(),
+);
 
 export const userSignInFailure = createAction('[Auth] User Sign In Failure', props<{ error: unknown }>());
 

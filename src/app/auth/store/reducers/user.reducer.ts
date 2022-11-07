@@ -19,7 +19,10 @@ export const initialState: UserState = {
 export const userReducer = createReducer(
   initialState,
   on(userSignIn, (state: UserState, { data: { login } }): UserState => ({ ...state, login })),
-  on(userSignInSuccess, (state: UserState, { token }): UserState => ({ ...state, token })),
+  on(
+    userSignInSuccess,
+    (state: UserState, { token, payload: { id, login } }): UserState => ({ ...state, token, _id: id, login }),
+  ),
   on(userGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
 );
 
