@@ -32,6 +32,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { CreateBoardComponent } from './create-board/create-board.component';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
     WelcomeComponent,
     CreateBoardComponent,
     CreateTaskComponent,
+    ConfirmationComponent,
   ],
   imports: [
     CommonModule,
