@@ -38,7 +38,7 @@ export class UserEffects {
 
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(userGetInfo),
+      ofType(userGetInfo, userSignInSuccess),
       exhaustMap(() =>
         this.usersService.getUsers().pipe(
           withLatestFrom(this.store.select(selectUser)),
