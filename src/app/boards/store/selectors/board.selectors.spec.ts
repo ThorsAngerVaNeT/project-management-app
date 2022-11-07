@@ -1,12 +1,14 @@
-import * as fromBoard from '../reducers/board.reducer';
-import { selectBoardsState } from './board.selectors';
+import { selectAllBoards } from './board.selectors';
 
 describe('Board Selectors', () => {
-  it('should select the feature state', () => {
-    const result = selectBoardsState({
-      [fromBoard.boardsFeatureKey]: {},
-    });
+  const initialState = {
+    ids: [],
+    entities: [],
+  };
 
-    expect(result).toEqual({});
+  it('should select the feature state', () => {
+    const result = selectAllBoards.projector(initialState);
+
+    expect(result).toEqual(initialState.entities);
   });
 });

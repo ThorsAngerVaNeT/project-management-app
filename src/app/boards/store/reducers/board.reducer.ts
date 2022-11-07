@@ -22,3 +22,10 @@ export const reducer = createReducer(
   on(BoardActions.loadBoards, (state: BoardsState): BoardsState => adapter.removeAll(state)),
   on(BoardActions.loadBoardsSuccess, (state: BoardsState, action): BoardsState => adapter.addMany(action.data, state)),
 );
+
+export const {
+  selectIds: selectBoardIds,
+  selectEntities: selectBoardEntities,
+  selectAll: selectAllBoards,
+  selectTotal: selectBoardTotal,
+} = adapter.getSelectors();
