@@ -6,8 +6,7 @@
   nzOkText="Sign In"
   nzCancelText="Cancel"
   i18n-nzTitle="@@SignInModalTitle"
-  i18n-nzOkText="@@SignInOk"
-  i18n-nzCancelText="@@SignInCancel"
+  [nzFooter]="null"
 >
   <ng-container *nzModalContent>
     <form nz-form class="auth-form">
@@ -36,6 +35,10 @@
             />
           </nz-input-group>
         </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button nzType="primary">Sign In</button>
       </nz-form-item>
     </form>
   </ng-container>

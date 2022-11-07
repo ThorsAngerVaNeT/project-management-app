@@ -4,8 +4,7 @@
   nzOkText="Sign Up"
   nzCancelText="Cancel"
   i18n-nzTitle="@@SignUpModalTitle"
-  i18n-nzOkText="@@SignUpOk"
-  i18n-nzCancelText="@@SignUpCancel"
+  [nzFooter]="null"
 >
   <ng-container *nzModalContent>
     <p>To sign up please provide a username and a password.</p>
@@ -42,6 +41,10 @@
             />
           </nz-input-group>
         </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button nzType="primary">Register</button>
       </nz-form-item>
     </form>
   </ng-container>

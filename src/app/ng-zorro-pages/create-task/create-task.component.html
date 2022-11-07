@@ -1,12 +1,4 @@
-<nz-modal
-  nzVisible="true"
-  nzTitle="Create Task"
-  nzOkText="Create"
-  nzCancelText="Cancel"
-  i18n-nzTitle="@@CreateTaskModalTitle"
-  i18n-nzOkText="@@CreateTaskOk"
-  i18n-nzCancelText="@@CreateTaskCancel"
->
+<nz-modal nzVisible="true" nzTitle="Create Task" i18n-nzTitle="@@CreateTaskModalTitle">
   <ng-container *nzModalContent>
     <form nz-form class="content-form">
       <nz-form-item>
@@ -86,15 +78,9 @@
 
       <nz-form-item>
         <div class="title-to-input">
-          <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
-            <input nz-input nzSize="small" />
+          <nz-input-group>
+            <input nz-input />
           </nz-input-group>
-          <ng-template #suffixTemplateInfo>
-            <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle"></span>
-          </ng-template>
-          <ng-template #suffixTemplateInfo2>
-            <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle"></span>
-          </ng-template>
         </div>
       </nz-form-item>
 
@@ -102,10 +88,11 @@
         <nz-form-control [nzXs]="24" [nzSm]="24">
           <button nz-button nzType="dashed" class="add-button" i18n="@@CreateTaskAddSubTask">
             <span nz-icon nzType="plus"></span>
-            Add subtask
+            Add Subtask
           </button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </ng-container>
+  <div *nzModalFooter>Autosaved</div>
 </nz-modal>

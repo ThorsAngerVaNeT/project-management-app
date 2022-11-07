@@ -1,12 +1,4 @@
-<nz-modal
-  nzVisible="true"
-  nzTitle="Create Board"
-  nzOkText="Create"
-  nzCancelText="Cancel"
-  i18n-nzTitle="@@CreateBoardModalTitle"
-  i18n-nzOkText="@@CreateBoardOk"
-  i18n-nzCancelText="@@CreateBoardCancel"
->
+<nz-modal nzVisible="true" nzTitle="Create Board" nzCancelText="Cancel" i18n-nzTitle="@@CreateBoardModalTitle">
   <ng-container *nzModalContent>
     <form nz-form class="content-form">
       <nz-form-item>
@@ -62,4 +54,5 @@
       </nz-form-item>
     </form>
   </ng-container>
+  <div *nzModalFooter>Autosaved</div>
 </nz-modal>
