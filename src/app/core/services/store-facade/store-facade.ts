@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { userGetInfo, userSignIn } from '../../../auth/store/actions/user.actions';
 import { selectToken, selectUser } from '../../../auth/store/selectors/user.selectors';
+import { loadBoards } from '../../../boards/store/actions/board.actions';
 import { SignInParams } from '../../../users/models/user.model';
 
 @Injectable({
@@ -20,5 +21,9 @@ export class StoreFacade {
 
   getUserInfo(): void {
     this.store.dispatch(userGetInfo());
+  }
+
+  getBoards(): void {
+    this.store.dispatch(loadBoards());
   }
 }
