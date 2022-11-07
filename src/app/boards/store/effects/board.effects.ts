@@ -12,10 +12,7 @@ export class BoardEffects {
       ofType(BoardActions.loadBoards),
       concatMap(() =>
         this.boardsService.getBoards().pipe(
-          map((data) => {
-            console.log('data: ', data);
-            return BoardActions.loadBoardsSuccess({ data });
-          }),
+          map((data) => BoardActions.loadBoardsSuccess({ data })),
           catchError((error) => of(BoardActions.loadBoardsFailure({ error }))),
         ),
       ),
