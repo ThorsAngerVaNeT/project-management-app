@@ -12,8 +12,44 @@ export class BoardEffects {
       ofType(BoardActions.loadBoards),
       concatMap(() =>
         this.boardsService.getBoards().pipe(
-          map((data) => BoardActions.loadBoardsSuccess({ data })),
+          map((boards) => BoardActions.loadBoardsSuccess({ boards })),
           catchError((error) => of(BoardActions.loadBoardsFailure({ error }))),
+        ),
+      ),
+    );
+  });
+
+  loadBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadBoard),
+      concatMap(({ id }) =>
+        this.boardsService.getBoard(id).pipe(
+          map((board) => BoardActions.loadBoardSuccess({ board })),
+          catchError((error) => of(BoardActions.loadBoardFailure({ error }))),
+        ),
+      ),
+    );
+  });
+
+  loadBoardsSet$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadBoardsSet),
+      concatMap(({ ids }) =>
+        this.boardsService.getBoardsSet(ids).pipe(
+          map((boards) => BoardActions.loadBoardsSetSuccess({ boards })),
+          catchError((error) => of(BoardActions.loadBoardsSetFailure({ error }))),
+        ),
+      ),
+    );
+  });
+
+  loadBoardsByUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadBoardsByUser),
+      concatMap(({ userId }) =>
+        this.boardsService.getBoardsByUser(userId).pipe(
+          map((boards) => BoardActions.loadBoardsByUserSuccess({ boards })),
+          catchError((error) => of(BoardActions.loadBoardsByUserFailure({ error }))),
         ),
       ),
     );

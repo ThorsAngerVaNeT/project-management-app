@@ -35,6 +35,14 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoard({ id }));
   }
 
+  getBoardsSet(ids: string[]): void {
+    this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
+  }
+
+  getBoardsByUser(userId: string): void {
+    this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
+  }
+
   updateBoard(id: string, board: BoardParams): void {
     this.store.dispatch(fromBoard.updateBoard({ id, board }));
   }
