@@ -92,15 +92,7 @@
           <div class="title-to-input" nzAlign="center">
             <h3>
               Backlog
-              <nz-badge
-                nzStandalone
-                [nzCount]="2"
-                [nzStyle]="{
-                  backgroundColor: 'transparent',
-                  color: '#d39264',
-                  boxShadow: '0 0 0 1px #d39264 inset'
-                }"
-              ></nz-badge>
+              <nz-badge class="tasks-number-badge" nzStandalone [nzCount]="2"></nz-badge>
             </h3>
             <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
           </div>
@@ -150,7 +142,7 @@
         <ng-template #titleinput>
           <div class="title-to-input">
             <nz-input-group>
-              <input nz-input placeholder="To Do" />
+              <input nz-input placeholder="To Do" nzSize="small" />
             </nz-input-group>
           </div>
         </ng-template>

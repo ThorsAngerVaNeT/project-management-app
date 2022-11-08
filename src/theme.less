@@ -30,7 +30,9 @@
 @secondary-color: #002e5c;
 @secondary-light: #5a81b9;
 @background-color-medium: #d3dde4;
-@background-color-light: #ebf0f4;
+// @background-color-light: #ebf0f4;
+@background-color-light: #eef5fb;
+@background-color-xlight: #fafcfd;
 @font-size-base: 16px; // @font-size-base: 14px;
 @link-color: @secondary-color; // link color
 @success-color: #438d1e; // success state color
@@ -58,7 +60,7 @@ app-main, app-boards, app-welcome {
 }
 
 .ant-card-head {
-  background-color: #fafcfd;
+  background-color: @background-color-xlight;
 }
 
 .ant-card .anticon:hover {
@@ -204,7 +206,11 @@ nz-footer img {
 .title-to-input h3 {
   margin: 0;
   line-height: 32px;
+}
+
+.title-to-input h3:hover {
   cursor: pointer;
+  color: @primary-color;
 }
 
 .title-to-input .anticon {
@@ -304,6 +310,22 @@ form .anticon {
   padding: 0;
 }
 
-.ant-list-item-meta {
+.ant-list-item-meta h4:hover{
   cursor: pointer;
+  color: @primary-color;
+}
+
+.tasks-number-badge .ant-badge-count {
+  background: transparent;
+  color: @primary-color;
+  box-shadow: 0 0 0 1px @primary-color inset;
+}
+
+.ant-list-item {
+  padding-left: 8px;
+  border-radius: 2px;
+}
+
+.ant-list-item:hover {
+  background-color: @background-color-light;
 }

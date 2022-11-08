@@ -2,11 +2,12 @@
 
 <nz-modal
   [(nzVisible)]="isVisible"
-  nzTitle="Sign In"
-  nzOkText="Sign In"
+  nzTitle="Login"
+  nzOkText="Login"
   nzCancelText="Cancel"
   i18n-nzTitle="@@SignInModalTitle"
   [nzFooter]="null"
+  [nzWidth]="400"
 >
   <ng-container *nzModalContent>
     <form nz-form class="auth-form">
@@ -38,7 +39,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <button nz-button nzType="primary">Sign In</button>
+        <button nz-button nzType="primary">Log In</button>
       </nz-form-item>
     </form>
   </ng-container>
