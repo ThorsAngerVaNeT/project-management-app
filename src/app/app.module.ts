@@ -9,7 +9,12 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgZorroPagesModule } from './ng-zorro-pages/ng-zorro-pages.module';
+import { WelcomeModule } from './welcome/welcome.module';
+import { SharedModule } from './shared/shared.module';
+import { BoardsModule } from './boards/boards.module';
+import { TaskModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
+import { ColumnsModule } from './columns/columns.module';
 
 registerLocaleData(en);
 
@@ -21,7 +26,13 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroPagesModule,
+
+    WelcomeModule,
+    SharedModule,
+    BoardsModule,
+    TaskModule,
+    AuthModule,
+    ColumnsModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

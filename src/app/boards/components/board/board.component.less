@@ -1,0 +1,98 @@
+@import '../../../../theme.less';
+
+.board__inner-content {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project__columns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+
+.ant-page-header {
+  padding: 0;
+}
+
+.ant-avatar {
+  margin-right: 16px;
+}
+
+
+.user-tag {
+  background-color: @secondary-color;
+  border: none;
+  color: @background-color-light;
+  border-radius: 16px;
+  padding-bottom: 2px;
+}
+
+
+// below styles for examples - to be removed
+
+.ant-card:hover {
+  cursor: grab;
+}
+
+.title-to-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.title-to-input h3 {
+  margin: 0;
+  line-height: 32px;
+}
+
+.title-to-input h3:hover {
+  cursor: pointer;
+  color: @primary-color;
+}
+
+.title-to-input .anticon {
+  color: @custom-grey;
+}
+
+.project__column {
+  min-width: 300px;
+}
+
+
+
+::ng-deep .ant-badge-count {
+  background: transparent;
+  color: @primary-color;
+  box-shadow: 0 0 0 1px @primary-color inset;
+}
+
+::ng-deep .ant-list-item-meta-title:hover {
+  cursor: pointer;
+  color: @primary-color;
+}
+
+.ant-list-item {
+  padding-left: 8px;
+  border-radius: 2px;
+}
+
+.ant-list-item:hover {
+  background-color: @background-color-light;
+  cursor: grab;
+}
+
+.ant-card .anticon:hover {
+  color: @primary-color;
+  cursor: pointer;
+}
+
+.ant-card-head {
+  background-color: @background-color-xlight;
+}

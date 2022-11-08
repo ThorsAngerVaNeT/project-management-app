@@ -1,0 +1,109 @@
+<div class="board__inner-content">
+  <nz-page-header nzBackIcon>
+    <nz-avatar
+      nz-page-header-avatar
+      [nzSize]="64"
+      nzSrc="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+    ></nz-avatar>
+    <nz-page-header-title>Name of the awesome board</nz-page-header-title>
+  </nz-page-header>
+
+  <div class="board-participants">
+    Participants: <nz-tag class="user-tag">Lea</nz-tag> <nz-tag class="user-tag">Mike 34798bb545 </nz-tag>
+  </div>
+
+  <div class="project__columns">
+    <app-column></app-column>
+
+    <!-- below hard-coded cards for example -->
+
+    <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd2]" [nzTitle]="titleinput">
+      <nz-list nzItemLayout="horizontal">
+        <nz-list-item>
+          <nz-list-item-meta>
+            <nz-list-item-meta-title class="card__title"> Very Important Task </nz-list-item-meta-title>
+            <nz-list-item-meta-description> Mike 34798bb545 </nz-list-item-meta-description>
+          </nz-list-item-meta>
+          <ul nz-list-item-actions>
+            <nz-list-item-action>
+              <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted"></span>
+            </nz-list-item-action>
+          </ul>
+        </nz-list-item>
+        <nz-list-item>
+          <nz-list-item-meta>
+            <nz-list-item-meta-title>Very Important Task</nz-list-item-meta-title>
+            <nz-list-item-meta-description> John Doe </nz-list-item-meta-description>
+          </nz-list-item-meta>
+          <ul nz-list-item-actions>
+            <nz-list-item-action>
+              <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted"></span>
+            </nz-list-item-action>
+          </ul>
+        </nz-list-item>
+      </nz-list>
+    </nz-card>
+    <ng-template #actionAdd2>
+      <button
+        i18n="@@AddNewTask"
+        nz-button
+        nz-tooltip
+        nzType="default"
+        nzShape="circle"
+        nzTooltipTitle="Add New Task"
+        nzTooltipPlacement="bottom"
+        nzTooltipColor="#203c56"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+    </ng-template>
+
+    <ng-template #titleinput>
+      <div class="title-to-input">
+        <nz-input-group>
+          <input nz-input placeholder="To Do" nzSize="small" />
+        </nz-input-group>
+      </div>
+    </ng-template>
+
+    <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title2">
+      <nz-list nzItemLayout="horizontal">
+        <nz-list-empty nzNoResult="No Tasks Here" *ngIf="data.length === 0"></nz-list-empty>
+      </nz-list>
+    </nz-card>
+    <ng-template #actionAdd>
+      <button
+        i18n="@@AddNewTask"
+        nz-button
+        nz-tooltip
+        nzType="default"
+        nzShape="circle"
+        nzTooltipTitle="Add New Task"
+        nzTooltipPlacement="bottom"
+        nzTooltipColor="#203c56"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+    </ng-template>
+
+    <ng-template #title2>
+      <div class="title-to-input" nzAlign="center">
+        <h3>Click to edit</h3>
+        <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted"></span>
+      </div>
+    </ng-template>
+
+    <button
+      nz-button
+      nz-tooltip
+      i18n-nzTooltipTitle="@@AddNewColumn"
+      nzType="primary"
+      nzShape="circle"
+      nzTooltipTitle="Add New Column"
+      nzTooltipPlacement="bottom"
+      nzTooltipColor="#203c56"
+    >
+      <span nz-icon nzType="plus"></span>
+    </button>
+  </div>
+</div>

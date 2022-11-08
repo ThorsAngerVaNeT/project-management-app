@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BoardsComponent } from './ng-zorro-pages/boards/boards.component';
-import { ConfirmationComponent } from './ng-zorro-pages/confirmation/confirmation.component';
-import { CreateBoardComponent } from './ng-zorro-pages/create-board/create-board.component';
-import { CreateTaskComponent } from './ng-zorro-pages/create-task/create-task.component';
-import { MainComponent } from './ng-zorro-pages/main/main.component';
-import { SignInComponent } from './ng-zorro-pages/signin/signin.component';
-import { SignupComponent } from './ng-zorro-pages/signup/signup.component';
-import { WelcomeComponent } from './ng-zorro-pages/welcome/welcome.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignUpComponent } from './auth/components/sign-up/sign-up.component';
+import { BoardAddComponent } from './boards/components/board-add/board-add.component';
+import { BoardComponent } from './boards/components/board/board.component';
+import { MainPageComponent } from './boards/components/main-page/main-page.component';
+import { ConfirmationComponent } from './shared/components/confirmation/confirmation.component';
+import { TaskAddComponent } from './tasks/components/task-add/task-add.component';
+import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'boards', component: BoardsComponent },
-  { path: 'signin', component: SignInComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'create-board', component: CreateBoardComponent },
-  { path: 'create-task', component: CreateTaskComponent },
-  { path: 'confirmation', component: ConfirmationComponent },
+  { path: '', component: WelcomeComponent },
+
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'main', component: MainPageComponent },
+  { path: 'board-add', component: BoardAddComponent },
+  { path: 'board', component: BoardComponent },
+  { path: 'task-add', component: TaskAddComponent },
+  { path: 'confirm', component: ConfirmationComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,36 @@
+<nz-header>
+  <div class="header__logo">
+    <img src="assets/images/ngpma.png" />
+    ngPMA
+  </div>
+
+  <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field">
+    <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <span nz-icon nzType="search"></span>
+  </ng-template>
+
+  <div class="header__right-group">
+    <nz-radio-group class="header__lang-switch" nzSize="small">
+      <label nz-radio-button nzValue="RU">RU</label>
+      <label nz-radio-button nzValue="EN">EN</label>
+    </nz-radio-group>
+
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
+      John Doe
+      <span nz-icon nzType="down"></span>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item i18n="@@editProfile">Edit Profile</li>
+        <li nz-menu-item i18n="@@logOut">Log Out</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+
+  <div class="header__welcome_actions">
+    <a href="">Sign Up</a>
+    <a href="">Login</a>
+  </div>
+</nz-header>
