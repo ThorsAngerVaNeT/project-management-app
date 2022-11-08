@@ -19,32 +19,13 @@ export const initialState: BoardsState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(BoardActions.loadBoards, (state: BoardsState): BoardsState => adapter.removeAll(state)),
-  on(
-    BoardActions.loadBoardsSuccess,
-    (state: BoardsState, action): BoardsState => adapter.addMany(action.boards, state),
-  ),
-
-  on(BoardActions.loadBoardSuccess, (state: BoardsState, action): BoardsState => adapter.setOne(action.board, state)),
-
-  on(
-    BoardActions.loadBoardsSetSuccess,
-    (state: BoardsState, action): BoardsState => adapter.setMany(action.boards, state),
-  ),
-
-  on(
-    BoardActions.loadBoardsByUserSuccess,
-    (state: BoardsState, action): BoardsState => adapter.setMany(action.boards, state),
-  ),
-
-  on(BoardActions.createBoardSuccess, (state: BoardsState, action): BoardsState => adapter.addOne(action.board, state)),
-
-  on(
-    BoardActions.updateBoardSuccess,
-    (state: BoardsState, action): BoardsState => adapter.updateOne(action.board, state),
-  ),
-
-  on(BoardActions.deleteBoardSuccess, (state: BoardsState, action): BoardsState => adapter.removeOne(action.id, state)),
+  on(BoardActions.loadBoardsSuccess, (state, action) => adapter.setAll(action.boards, state)),
+  on(BoardActions.loadBoardSuccess, (state, action) => adapter.setOne(action.board, state)),
+  on(BoardActions.loadBoardsSetSuccess, (state, action) => adapter.setMany(action.boards, state)),
+  on(BoardActions.loadBoardsByUserSuccess, (state, action) => adapter.setMany(action.boards, state)),
+  on(BoardActions.createBoardSuccess, (state, action) => adapter.addOne(action.board, state)),
+  on(BoardActions.updateBoardSuccess, (state, action) => adapter.updateOne(action.board, state)),
+  on(BoardActions.deleteBoardSuccess, (state, action) => adapter.removeOne(action.id, state)),
 );
 
 export const {
