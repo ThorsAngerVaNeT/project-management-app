@@ -4,7 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
-  styleUrls: ['./confirmation.component.scss'],
+  styleUrls: ['./confirmation.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationComponent {

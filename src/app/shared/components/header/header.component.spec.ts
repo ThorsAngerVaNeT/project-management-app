@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 import { HeaderComponent } from './header.component';
 
@@ -9,6 +10,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
+      imports: [NzDropDownModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
