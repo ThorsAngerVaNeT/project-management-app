@@ -21,6 +21,18 @@ export const reducer = createReducer(
 
   on(BoardActions.loadBoards, (state: BoardsState): BoardsState => adapter.removeAll(state)),
   on(BoardActions.loadBoardsSuccess, (state: BoardsState, action): BoardsState => adapter.addMany(action.data, state)),
+
+  on(BoardActions.loadBoard, (state: BoardsState, action): BoardsState => adapter.removeOne(action.id, state)),
+  on(BoardActions.loadBoardSuccess, (state: BoardsState, action): BoardsState => adapter.addOne(action.data, state)),
+
+  on(BoardActions.createBoardSuccess, (state: BoardsState, action): BoardsState => adapter.addOne(action.board, state)),
+
+  on(
+    BoardActions.updateBoardSuccess,
+    (state: BoardsState, action): BoardsState => adapter.updateOne(action.board, state),
+  ),
+
+  on(BoardActions.deleteBoardSuccess, (state: BoardsState, action): BoardsState => adapter.removeOne(action.id, state)),
 );
 
 export const {
