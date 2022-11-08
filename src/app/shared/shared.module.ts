@@ -11,29 +11,19 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
+const MODULES = [
+  NzLayoutModule,
+  NzInputModule,
+  NzRadioModule,
+  NzDropDownModule,
+  NzIconModule,
+  NzButtonModule,
+  NzToolTipModule,
+];
+
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, ConfirmationComponent],
-  imports: [
-    CommonModule,
-    NzLayoutModule,
-    NzInputModule,
-    NzRadioModule,
-    NzDropDownModule,
-    NzIconModule,
-    NzButtonModule,
-    NzToolTipModule,
-  ],
-  exports: [
-    CommonModule,
-    NzLayoutModule,
-    NzInputModule,
-    NzRadioModule,
-    NzDropDownModule,
-    NzIconModule,
-    FooterComponent,
-    HeaderComponent,
-    NzButtonModule,
-    NzToolTipModule,
-  ],
+  imports: [...MODULES, CommonModule],
+  exports: [...MODULES, CommonModule, FooterComponent, HeaderComponent],
 })
 export class SharedModule {}
