@@ -1,0 +1,45 @@
+@import './theme.less';
+
+@import './variables.less';
+
+html, body {
+  height: 100%;
+  background: @background-color-light;
+}
+
+nz-content {
+  padding: 0 64px;
+}
+
+app-root, app-main, app-board, app-welcome {
+  display: flex;
+  height: 100%;
+}
+
+.ant-layout-content {
+  min-height: auto;
+}
+
+.ant-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: @background-color-light;
+}
+
+.content-form {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+form .anticon {
+  color: @background-color-medium;
+}
+
+.auth-form {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0;
+}
