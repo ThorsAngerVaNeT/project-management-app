@@ -7,6 +7,8 @@ import { BoardsService } from '../../services/boards.service';
 
 @Injectable()
 export class BoardEffects {
+  constructor(private actions$: Actions, private boardsService: BoardsService) {}
+
   loadBoards$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoards),
@@ -90,6 +92,4 @@ export class BoardEffects {
       ),
     );
   });
-
-  constructor(private actions$: Actions, private boardsService: BoardsService) {}
 }
