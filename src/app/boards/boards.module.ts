@@ -7,9 +7,10 @@ import { BoardComponent } from './components/board/board.component';
 import { BoardAddComponent } from './components/board-add/board-add.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { ColumnsModule } from '../columns/columns.module';
+import BoardsRoutingModule from './boards.route.module';
 
 @NgModule({
   declarations: [MainPageComponent, BoardComponent, BoardAddComponent, BoardCardComponent],
-  imports: [CommonModule, SharedModule, ColumnsModule],
+  imports: [CommonModule, SharedModule, ColumnsModule, BoardsRoutingModule],
 })
 export class BoardsModule {}
