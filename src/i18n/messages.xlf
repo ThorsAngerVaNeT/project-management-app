@@ -2,299 +2,245 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="inputSearchPlaceholder" datatype="html">
-        <source>Search</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/main/main.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="editProfile" datatype="html">
-        <source>Edit Profile</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/main/main.component.html</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="logOut" datatype="html">
-        <source>Log Out</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/main/main.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AddNewTask" datatype="html">
-        <source>Add New Task</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">146</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AddNewColumn" datatype="html">
-        <source>Add New Column</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/boards/boards.component.html</context>
-          <context context-type="linenumber">197</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardModalTitle" datatype="html">
-        <source>Create Board</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardOk" datatype="html">
-        <source>Create</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardCancel" datatype="html">
-        <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardTitle" datatype="html">
-        <source>Title</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardnzErrorTip" datatype="html">
-        <source>Title is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardParticipants" datatype="html">
-        <source>Participants</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardTeamMembers" datatype="html">
-        <source>Please select team members</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateBoardImageTooltip" datatype="html">
-        <source>What do you want to see on board cover</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="Upload" datatype="html">
-        <source>Upload</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-board/create-board.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskModalTitle" datatype="html">
-        <source>Create Task</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskOk" datatype="html">
-        <source>Create</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskCancel" datatype="html">
-        <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskTitle" datatype="html">
-        <source>Title</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskErrorTip" datatype="html">
-        <source>Title is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskDescription" datatype="html">
-        <source>Description</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskResponsible" datatype="html">
-        <source>Responsible</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskResponsiblePlaceHolder" datatype="html">
-        <source>Please select responsible person</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskParticipants" datatype="html">
-        <source>Participants</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskParticipantsPlaceHolder" datatype="html">
-        <source>Please select team members</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskChecklist" datatype="html">
-        <source>Task Checklist</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="CreateTaskAddSubTask" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> Add subtask </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/create-task/create-task.component.html</context>
-          <context context-type="linenumber">104,106</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AddNewBoard" datatype="html">
-        <source>Add New Board</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/main/main.component.html</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="SignInModalTitle" datatype="html">
-        <source>Sign In</source>
+        <source>Login</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="SignInOk" datatype="html">
-        <source>Sign In</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="SignInCancel" datatype="html">
-        <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="userNameErrorTip" datatype="html">
         <source>Please provide your username</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="userNamePlaceholder" datatype="html">
         <source>Username</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordErrorTip" datatype="html">
         <source>Please provide your password</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordPlaceholder" datatype="html">
         <source>Password</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signin/signin.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="LogInButton" datatype="html">
+        <source>Log In</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SignUpModalTitle" datatype="html">
         <source>Sign Up</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="SignUpOk" datatype="html">
+      <trans-unit id="SignUpButton" datatype="html">
         <source>Sign Up</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="SignUpCancel" datatype="html">
-        <source>Cancel</source>
+      <trans-unit id="CreateBoardModalTitle" datatype="html">
+        <source>Create Board</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/ng-zorro-pages/signup/signup.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardTitle" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardnzErrorTip" datatype="html">
+        <source>Title is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardParticipants" datatype="html">
+        <source>Participants</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardTeamMembers" datatype="html">
+        <source>Please select team members</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardImageTooltip" datatype="html">
+        <source>What do you want to see on board cover</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Upload" datatype="html">
+        <source>Drag or click to upload</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddNewTask" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddNewColumn" datatype="html">
+        <source>Add New Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="linenumber">102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddNewBoard" datatype="html">
+        <source>Add New Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/main-page/main-page.component.html</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="inputSearchPlaceholder" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editProfile" datatype="html">
+        <source>Edit Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="logOut" datatype="html">
+        <source>Log Out</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskModalTitle" datatype="html">
+        <source>Create Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskTitle" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskErrorTip" datatype="html">
+        <source>Title is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskDescription" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskResponsible" datatype="html">
+        <source>Responsible</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskResponsiblePlaceHolder" datatype="html">
+        <source>Please select responsible person</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskParticipants" datatype="html">
+        <source>Participants</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskParticipantsPlaceHolder" datatype="html">
+        <source>Please select team members</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskChecklist" datatype="html">
+        <source>Task Checklist</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskAddSubTask" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> Add Subtask </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">83,85</context>
         </context-group>
       </trans-unit>
     </body>
