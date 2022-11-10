@@ -1,14 +1,13 @@
 <nz-modal
   [(nzVisible)]="isVisible"
   nzTitle="Login"
-  nzOkText="Login"
-  nzCancelText="Cancel"
   i18n-nzTitle="@@SignInModalTitle"
   [nzFooter]="null"
   [nzWidth]="400"
+  (nzOnCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
-    <form nz-form class="auth-form">
+    <form nz-form class="auth-form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control i18n-nzErrorTip="@@userNameErrorTip" nzErrorTip="Please provide your username">
           <nz-input-group nzPrefixIcon="user">

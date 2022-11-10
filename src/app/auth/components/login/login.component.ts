@@ -9,11 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class LoginComponent {
   isVisible = true;
 
-  handleOk(): void {
-    console.log('Button ok clicked');
-  }
+  submitForm(): void {}
 
   handleCancel(): void {
     console.log('Button cancel clicked');
+    this.isVisible = false;
   }
 }

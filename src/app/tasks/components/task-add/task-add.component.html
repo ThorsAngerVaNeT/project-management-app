@@ -1,4 +1,10 @@
-<nz-modal nzVisible="true" nzTitle="Create Task" i18n-nzTitle="@@CreateTaskModalTitle">
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Create Task"
+  i18n-nzTitle="@@CreateTaskModalTitle"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
   <ng-container *nzModalContent>
     <form nz-form class="content-form">
       <nz-form-item>
@@ -81,5 +87,4 @@
       </nz-form-item>
     </form>
   </ng-container>
-  <div *nzModalFooter>Autosaved</div>
 </nz-modal>

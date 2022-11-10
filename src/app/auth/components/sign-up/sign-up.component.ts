@@ -7,11 +7,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent {
-  handleOk(): void {
-    console.log('Button ok clicked');
-  }
+  isVisible = true;
+
+  submitForm(): void {}
 
   handleCancel(): void {
     console.log('Button cancel clicked');
+    this.isVisible = false;
   }
 }
