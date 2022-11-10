@@ -3,10 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ConfirmationComponent } from './shared/components/confirmation/confirmation.component';
 
-import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
-
 const routes: Routes = [
-  { path: '', component: WelcomeComponent },
+  { path: '', loadChildren: () => import('./welcome/welcome.module').then((m) => m.WelcomeModule) },
 
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
   { path: 'board', loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule) },

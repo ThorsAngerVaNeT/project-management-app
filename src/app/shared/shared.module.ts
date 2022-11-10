@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
+import { FormsModule } from '@angular/forms';
+
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FooterComponent } from './components/footer/footer.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
@@ -23,7 +22,13 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+
 const MODULES = [
+  CommonModule,
+
   NzLayoutModule,
   NzInputModule,
   NzRadioModule,
@@ -42,13 +47,12 @@ const MODULES = [
   NzDividerModule,
   NzCheckboxModule,
   NzCardModule,
-
   NzModalModule,
 ];
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, ConfirmationComponent],
-  imports: [...MODULES, CommonModule],
+  imports: [...MODULES, FormsModule],
   exports: [...MODULES, CommonModule, FooterComponent, HeaderComponent],
 })
 export class SharedModule {}
