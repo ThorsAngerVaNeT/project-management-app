@@ -4,8 +4,9 @@ import { userGetInfo, userSignIn } from '../../../auth/store/actions/user.action
 import { selectToken, selectUser } from '../../../auth/store/selectors/user.selectors';
 import { BoardParams } from '../../../boards/models/board.model';
 import * as fromBoard from '../../../boards/store/actions/board.actions';
+import * as fromUser from '../../../users/store/actions/user.actions';
 import { selectAllBoards } from '../../../boards/store/selectors/board.selectors';
-import { SignInParams } from '../../../users/models/user.model';
+import { SignInParams, UserParams } from '../../../users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -43,15 +44,35 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
-  updateBoard(id: string, board: BoardParams): void {
-    this.store.dispatch(fromBoard.updateBoard({ id, board }));
-  }
-
   createBoard(board: BoardParams): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
+  updateBoard(id: string, board: BoardParams): void {
+    this.store.dispatch(fromBoard.updateBoard({ id, board }));
+  }
+
   deleteBoard(id: string): void {
     this.store.dispatch(fromBoard.deleteBoard({ id }));
+  }
+
+  getUsers(): void {
+    this.store.dispatch(fromUser.loadUsers());
+  }
+
+  getUser(id: string): void {
+    this.store.dispatch(fromUser.loadUser({ id }));
+  }
+
+  createUser(user: UserParams): void {
+    this.store.dispatch(fromUser.createUser({ user }));
+  }
+
+  updateUser(id: string, user: UserParams): void {
+    this.store.dispatch(fromUser.updateUser({ id, user }));
+  }
+
+  deleteUser(id: string): void {
+    this.store.dispatch(fromUser.deleteUser({ id }));
   }
 }
