@@ -6,20 +6,21 @@ import { HttpBaseInterceptor } from './interceptors/http-base/http-base.intercep
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
 import { HttpTokenInterceptor } from './interceptors/http-token/http-token.interceptor';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { AuthModule } from '../auth/auth.module';
+import { RouterSerializer } from './store/reducers/router.reducer';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ router: routerReducer }, {}),
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,
   ],
