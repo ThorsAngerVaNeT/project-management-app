@@ -5,8 +5,8 @@ import { selectToken, selectUser } from '../../../auth/store/selectors/user.sele
 import { BoardParams } from '../../../boards/models/board.model';
 import * as fromBoard from '../../../boards/store/actions/board.actions';
 import * as fromUser from '../../../users/store/actions/user.actions';
-import { selectAllBoards } from '../../../boards/store/selectors/board.selectors';
 import { SignInParams, UserParams } from '../../../users/models/user.model';
+import { selectBoardsWithUsers } from '../../../boards/store/selectors/board.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class StoreFacade {
 
   token$ = this.store.select(selectToken);
 
-  boards$ = this.store.select(selectAllBoards);
+  boards$ = this.store.select(selectBoardsWithUsers);
 
   constructor(private store: Store) {}
 
