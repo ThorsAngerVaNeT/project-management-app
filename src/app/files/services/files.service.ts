@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
 import { TaskFile } from '../model/file.model';
+import { User } from '../../users/models/user.model';
+import { Board } from '../../boards/models/board.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,33 +13,33 @@ import { TaskFile } from '../model/file.model';
 export class FilesService {
   constructor(private http: HttpClient) {}
 
-  public getFilesSet(listFileIds: string[]): Observable<TaskFile[]> {
+  public getFilesSet(listFileIds: TaskFile['_id'][]): Observable<TaskFile[]> {
     const params = new HttpParams().set(APIParams.ids, listFileIds.join());
 
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
   }
 
-  public getFilesByUser(userId: string): Observable<TaskFile[]> {
+  public getFilesByUser(userId: User['_id']): Observable<TaskFile[]> {
     const params = new HttpParams().set(APIParams.userId, userId);
 
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
   }
 
-  public getFilesByTask(taskId: string): Observable<TaskFile[]> {
+  public getFilesByTask(taskId: TaskFile['_id']): Observable<TaskFile[]> {
     const params = new HttpParams().set(APIParams.taskId, taskId);
 
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
   }
 
-  public getFilesByBoard(boardId: string): Observable<TaskFile[]> {
+  public getFilesByBoard(boardId: Board['_id']): Observable<TaskFile[]> {
     return this.http.get<TaskFile[]>(`${APIEndpoints.file}/${boardId}`);
   }
 
-  public deleteFile(fileId: string): Observable<TaskFile> {
+  public deleteFile(fileId: TaskFile['_id']): Observable<TaskFile> {
     return this.http.delete<TaskFile>(`${APIEndpoints.file}/${fileId}`);
   }
 
-  public uploadFile(boardId: string, taskId: string, file: File): Observable<TaskFile> {
+  public uploadFile(boardId: Board['_id'], taskId: TaskFile['_id'], file: File): Observable<TaskFile> {
     const formData = new FormData();
     formData.append(APIParams.boardId, boardId);
     formData.append(APIParams.taskId, taskId);

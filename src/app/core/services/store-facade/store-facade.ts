@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { userGetInfo, userSignIn } from '../../../auth/store/actions/user.actions';
+import * as fromAuth from '../../../auth/store/actions/user.actions';
 import { selectToken, selectUser } from '../../../auth/store/selectors/user.selectors';
-import { BoardParams } from '../../../boards/models/board.model';
+import { Board, BoardParams } from '../../../boards/models/board.model';
 import * as fromBoard from '../../../boards/store/actions/board.actions';
 import * as fromUser from '../../../users/store/actions/user.actions';
-import { SignInParams, UserParams } from '../../../users/models/user.model';
+import { SignInParams, User, UserParams } from '../../../users/models/user.model';
 import { selectBoardsWithUsers } from '../../../boards/store/selectors/board.selectors';
 
 @Injectable({
@@ -21,26 +21,26 @@ export class StoreFacade {
   constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
-    this.store.dispatch(userSignIn({ data }));
+    this.store.dispatch(fromAuth.userSignIn({ data }));
   }
 
   getUserInfo(): void {
-    this.store.dispatch(userGetInfo());
+    this.store.dispatch(fromAuth.userGetInfo());
   }
 
   getBoards(): void {
     this.store.dispatch(fromBoard.loadBoards());
   }
 
-  getBoard(id: string): void {
+  getBoard(id: Board['_id']): void {
     this.store.dispatch(fromBoard.loadBoard({ id }));
   }
 
-  getBoardsSet(ids: string[]): void {
+  getBoardsSet(ids: Board['_id'][]): void {
     this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
   }
 
-  getBoardsByUser(userId: string): void {
+  getBoardsByUser(userId: User['_id']): void {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
@@ -48,11 +48,11 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
-  updateBoard(id: string, board: BoardParams): void {
+  updateBoard(id: Board['_id'], board: BoardParams): void {
     this.store.dispatch(fromBoard.updateBoard({ id, board }));
   }
 
-  deleteBoard(id: string): void {
+  deleteBoard(id: Board['_id']): void {
     this.store.dispatch(fromBoard.deleteBoard({ id }));
   }
 
@@ -60,7 +60,7 @@ export class StoreFacade {
     this.store.dispatch(fromUser.loadUsers());
   }
 
-  getUser(id: string): void {
+  getUser(id: User['_id']): void {
     this.store.dispatch(fromUser.loadUser({ id }));
   }
 
@@ -68,11 +68,11 @@ export class StoreFacade {
     this.store.dispatch(fromUser.createUser({ user }));
   }
 
-  updateUser(id: string, user: UserParams): void {
+  updateUser(id: User['_id'], user: UserParams): void {
     this.store.dispatch(fromUser.updateUser({ id, user }));
   }
 
-  deleteUser(id: string): void {
+  deleteUser(id: User['_id']): void {
     this.store.dispatch(fromUser.deleteUser({ id }));
   }
 }

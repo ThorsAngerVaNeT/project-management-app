@@ -14,15 +14,15 @@ export class UsersService {
     return this.http.get<User[]>(APIEndpoints.users);
   }
 
-  public getUser(id: string): Observable<User> {
+  public getUser(id: User['_id']): Observable<User> {
     return this.http.get<User>(`${APIEndpoints.users}/${id}`);
   }
 
-  public updateUser(id: string, userParams: UserParams): Observable<User> {
+  public updateUser(id: User['_id'], userParams: UserParams): Observable<User> {
     return this.http.put<User>(`${APIEndpoints.users}/${id}`, userParams);
   }
 
-  public deleteUser(id: string): Observable<User> {
+  public deleteUser(id: User['_id']): Observable<User> {
     return this.http.delete<User>(`${APIEndpoints.users}/${id}`);
   }
 }
