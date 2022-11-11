@@ -1,0 +1,53 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Sign Up"
+  i18n-nzTitle="@@SignUpModalTitle"
+  [nzFooter]="null"
+  [nzWidth]="400"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <div i18n="@@passwordRequirements">
+      <p>To sign up please provide username (more than two characters) and a strong password.</p>
+      <p>For your safety password should be:</p>
+      <ul>
+        <li>at least 8 characters</li>
+        <li>both uppercase and lowercase letters</li>
+        <li>both letters and numbers</li>
+        <li>contain at least one special character, e.g., ! @ # ? ]</li>
+      </ul>
+    </div>
+    <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
+      <nz-form-item>
+        <nz-form-control i18n-nzErrorTip="@@userNameErrorTip" nzErrorTip="Please provide your username">
+          <nz-input-group nzPrefixIcon="user">
+            <input
+              type="text"
+              nz-input
+              formControlName="userName"
+              placeholder="Username"
+              i18n-placeholder="@@userNamePlaceholder"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control i18n-nzErrorTip="@@passwordErrorTip" nzErrorTip="Please provide your password">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="Password"
+              i18n-placeholder="@@passwordPlaceholder"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <button nz-button nzType="primary" i18n="@@SignUpButton">Sign Up</button>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
