@@ -1,8 +1,11 @@
 <nz-modal
   [(nzVisible)]="isVisible"
   nzTitle="Create Board"
-  nzCancelText="Cancel"
   i18n-nzTitle="@@CreateBoardModalTitle"
+  nzOkText="Save"
+  i18n-nzCancelTextOkText="@@CreateBoardOkText"
+  nzCancelText="Cancel"
+  i18n-nzCancelText="@@CreateBoardCancelText"
   (nzOnCancel)="handleCancel()"
   (nzOnOk)="handleOk()"
 >

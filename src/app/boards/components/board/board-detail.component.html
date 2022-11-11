@@ -60,15 +60,21 @@
 
     <ng-template #titleinput>
       <div class="title-to-input">
-        <nz-input-group>
+        <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
           <input nz-input placeholder="To Do" nzSize="small" />
         </nz-input-group>
+        <ng-template #suffixTemplateInfo>
+          <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle"></span>
+        </ng-template>
+        <ng-template #suffixTemplateInfo2>
+          <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle"></span>
+        </ng-template>
       </div>
     </ng-template>
 
     <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title2">
       <nz-list nzItemLayout="horizontal">
-        <nz-list-empty nzNoResult="No Tasks Here" *ngIf="data.length === 0"></nz-list-empty>
+        <nz-list-empty nzNoResult="No Tasks Here" *ngIf="!data.length"></nz-list-empty>
       </nz-list>
     </nz-card>
     <ng-template #actionAdd>

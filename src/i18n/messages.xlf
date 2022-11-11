@@ -88,46 +88,53 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="CreateBoardCancelText" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="CreateBoardTitle" datatype="html">
         <source>Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardnzErrorTip" datatype="html">
         <source>Title is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardParticipants" datatype="html">
         <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardTeamMembers" datatype="html">
         <source>Please select team members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardImageTooltip" datatype="html">
         <source>What do you want to see on board cover</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Upload" datatype="html">
         <source>Drag or click to upload</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewTask1" datatype="html">
@@ -207,67 +214,74 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="CreateTaskCancelText" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="CreateTaskTitle" datatype="html">
         <source>Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskErrorTip" datatype="html">
         <source>Title is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskDescription" datatype="html">
         <source>Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskResponsible" datatype="html">
         <source>Responsible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskResponsiblePlaceHolder" datatype="html">
         <source>Please select responsible person</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskParticipants" datatype="html">
         <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskParticipantsPlaceHolder" datatype="html">
         <source>Please select team members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskChecklist" datatype="html">
         <source>Task Checklist</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskAddSubTask" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> Add Subtask </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">85,87</context>
+          <context context-type="linenumber">89,91</context>
         </context-group>
       </trans-unit>
     </body>
