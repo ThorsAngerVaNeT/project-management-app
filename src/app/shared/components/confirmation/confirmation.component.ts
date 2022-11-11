@@ -10,12 +10,16 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 export class ConfirmationComponent {
   param: string = 'something to delete';
 
+  confirmationTitle: string = $localize`:@@confirmationTitle: Are you sure?`;
+
+  confirmationText: string = $localize`:@@confirmationText: Are you sure you want to delete`;
+
   constructor(private modalService: NzModalService) {}
 
   showConfirm(): void {
     this.modalService.confirm({
-      nzTitle: 'Are you sure?',
-      nzContent: `Are you sure you want to delete ${this.param}?`,
+      nzTitle: this.confirmationTitle,
+      nzContent: `${this.confirmationText} ${this.param}?`,
       nzOnOk: () => console.log('OK'),
     });
   }

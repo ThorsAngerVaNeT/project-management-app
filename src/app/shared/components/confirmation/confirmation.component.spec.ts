@@ -1,6 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import '@angular/localize/init';
 
 import { ConfirmationComponent } from './confirmation.component';
 
