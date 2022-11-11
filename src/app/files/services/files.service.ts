@@ -6,6 +6,7 @@ import { APIParams } from '@core/enums/api-params.enum';
 import { TaskFile } from '../model/file.model';
 import { User } from '@users/models/user.model';
 import { Board } from '@boards/models/board.model';
+import { ColumnTask } from '../../tasks/model/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class FilesService {
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
   }
 
-  public getFilesByTask(taskId: TaskFile['_id']): Observable<TaskFile[]> {
+  public getFilesByTask(taskId: ColumnTask['_id']): Observable<TaskFile[]> {
     const params = new HttpParams().set(APIParams.taskId, taskId);
 
     return this.http.get<TaskFile[]>(APIEndpoints.file, { params });
@@ -39,7 +40,7 @@ export class FilesService {
     return this.http.delete<TaskFile>(`${APIEndpoints.file}/${fileId}`);
   }
 
-  public uploadFile(boardId: Board['_id'], taskId: TaskFile['_id'], file: File): Observable<TaskFile> {
+  public uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): Observable<TaskFile> {
     const formData = new FormData();
     formData.append(APIParams.boardId, boardId);
     formData.append(APIParams.taskId, taskId);
