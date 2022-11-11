@@ -11,7 +11,7 @@ export const loadFilesSetFailure = createAction('[Files] Load FilesSet Failure',
 export const loadFilesByUser = createAction('[Files] Load Files By User', props<{ userId: User['_id'] }>());
 export const loadFilesByUserSuccess = createAction(
   '[Files] Load Files By User Success',
-  props<{ userId: User['_id'] }>(),
+  props<{ files: TaskFile[] }>(),
 );
 export const loadFilesByUserFailure = createAction('[Files] Load Files By User Failure', props<{ error: unknown }>());
 
