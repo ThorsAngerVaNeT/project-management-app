@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./task-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskAddComponent {
+export class TaskAddComponent implements OnInit {
   isVisible = true;
 
   taskAddForm!: FormGroup;
 
-  constructor() {
+  ngOnInit(): void {
     this.taskAddForm = new FormGroup({
       title: new FormControl(),
       description: new FormControl(),

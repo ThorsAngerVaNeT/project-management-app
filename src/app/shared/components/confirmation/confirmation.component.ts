@@ -9,13 +9,19 @@ import '@angular/localize/init';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationComponent {
-  param: string = 'something to delete';
+  param?: string;
 
-  confirmationTitle: string = $localize`:@@confirmationTitle: Are you sure?`;
+  confirmationTitle?: string;
 
-  confirmationText: string = $localize`:@@confirmationText: Are you sure you want to delete`;
+  confirmationText?: string;
 
   constructor(private modalService: NzModalService) {}
+
+  ngOnInit(): void {
+    this.param = 'something to delete';
+    this.confirmationTitle = $localize`:@@confirmationTitle: Are you sure?`;
+    this.confirmationText = $localize`:@@confirmationText: Are you sure you want to delete`;
+  }
 
   showConfirm(): void {
     this.modalService.confirm({

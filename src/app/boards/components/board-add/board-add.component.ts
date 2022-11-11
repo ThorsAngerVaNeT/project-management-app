@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./board-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardAddComponent {
+export class BoardAddComponent implements OnInit {
   isVisible = true;
 
   boardAddForm!: FormGroup;
 
-  constructor() {
+  ngOnInit(): void {
     this.boardAddForm = new FormGroup({
       title: new FormControl(),
       participants: new FormControl(),

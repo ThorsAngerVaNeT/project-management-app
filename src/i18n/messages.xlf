@@ -140,22 +140,22 @@
       <trans-unit id="AddNewTask1" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
+          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewTask2" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewColumn" datatype="html">
         <source>Add New Column</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewBoard" datatype="html">
@@ -176,14 +176,14 @@
         <source> Are you sure?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirmationText" datatype="html">
         <source> Are you sure you want to delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="inputSearchPlaceholder" datatype="html">

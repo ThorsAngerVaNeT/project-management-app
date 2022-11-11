@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./sign-up.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
   isVisible = true;
 
   signUpForm!: FormGroup;
 
-  constructor() {
+  ngOnInit(): void {
     this.signUpForm = new FormGroup({
       userName: new FormControl(),
       password: new FormControl(),
