@@ -6,7 +6,7 @@ import { APIParams } from '@core/enums/api-params.enum';
 import { TaskFile } from '../model/file.model';
 import { User } from '@users/models/user.model';
 import { Board } from '@boards/models/board.model';
-import { ColumnTask } from '../../tasks/model/task.model';
+import { ColumnTask } from '@tasks/model/task.model';
 
 @Injectable({
   providedIn: 'root',
