@@ -17,7 +17,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="userNamePlaceholder" datatype="html">
@@ -28,7 +28,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordErrorTip" datatype="html">
@@ -39,7 +39,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordPlaceholder" datatype="html">
@@ -50,7 +50,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LogInButton" datatype="html">
@@ -67,11 +67,18 @@
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="passwordRequirements" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>To sign up please provide username and password.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>For your safety password should be:<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>at least 8 characters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both uppercase and lowercase letters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both letters and numbers<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>contain at least one special character, e.g., ! @ # ? ]<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">11,18</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="SignUpButton" datatype="html">
         <source>Sign Up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardModalTitle" datatype="html">
@@ -113,35 +120,34 @@
         <source>What do you want to see on board cover</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="Upload" datatype="html">
         <source>Drag or click to upload</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="AddNewTask" datatype="html">
+      <trans-unit id="AddNewTask1" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
           <context context-type="linenumber">57</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="AddNewTask2" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
           <context context-type="linenumber">85</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
-          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewColumn" datatype="html">
         <source>Add New Column</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board/board.component.html</context>
+          <context context-type="sourcefile">src/app/boards/components/board/board-detail.component.html</context>
           <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
@@ -150,6 +156,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/main-page/main-page.component.html</context>
           <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AddNewTask" datatype="html">
+        <source>Add New Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="inputSearchPlaceholder" datatype="html">
@@ -219,28 +232,28 @@
         <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskParticipantsPlaceHolder" datatype="html">
         <source>Please select team members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskChecklist" datatype="html">
         <source>Task Checklist</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">70</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskAddSubTask" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> Add Subtask </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">83,85</context>
+          <context context-type="linenumber">85,87</context>
         </context-group>
       </trans-unit>
     </body>

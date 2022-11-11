@@ -7,14 +7,16 @@
   (nzOnCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
-    <p>To sign up please provide username and password.</p>
-    <p>For your safety password should be:</p>
-    <ul>
-      <li>at least 8 characters</li>
-      <li>both uppercase and lowercase letters</li>
-      <li>both letters and numbers</li>
-      <li>contain at least one special character, e.g., ! @ # ? ]</li>
-    </ul>
+    <div i18n="@@passwordRequirements">
+      <p>To sign up please provide username (more than two characters) and a strong password.</p>
+      <p>For your safety password should be:</p>
+      <ul>
+        <li>at least 8 characters</li>
+        <li>both uppercase and lowercase letters</li>
+        <li>both letters and numbers</li>
+        <li>contain at least one special character, e.g., ! @ # ? ]</li>
+      </ul>
+    </div>
     <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
       <nz-form-item>
         <nz-form-control i18n-nzErrorTip="@@userNameErrorTip" nzErrorTip="Please provide your username">
