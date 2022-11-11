@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import '@angular/localize/init';
 
@@ -8,7 +8,7 @@ import '@angular/localize/init';
   styleUrls: ['./confirmation.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmationComponent {
+export class ConfirmationComponent implements OnInit {
   param?: string;
 
   confirmationTitle?: string;
