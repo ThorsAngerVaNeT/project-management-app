@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../../models/columns.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../../models/column.model';
 import { Board } from '../../../boards/models/board.model';
 import { User } from '../../../users/models/user.model';
 
