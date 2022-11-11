@@ -30,7 +30,7 @@ export class ColumnsService {
     return this.http.get<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}`);
   }
 
-  public createColumns(boardId: string, newColumn: ColumnParams): Observable<Column> {
+  public createColumn(boardId: string, newColumn: ColumnParams): Observable<Column> {
     return this.http.post<Column>(`${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}`, newColumn);
   }
 
