@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
 import { Point, PointParams, PointsSetUpdateParams, PointUpdateParams } from '../model/point.model';
-import { User } from '../../users/models/user.model';
-import { TaskFile } from '../../files/model/file.model';
+import { User } from '@users/models/user.model';
+import { TaskFile } from '@files/model/file.model';
 
 @Injectable({
   providedIn: 'root',

@@ -18,11 +18,38 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "paths": {
-      "@environments/*": ["src/environments/*"],
-      "@mocks/*": ["src/mocks/*"],
-      "@core/*": ["src/app/core/*"]
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@mocks/*": [
+        "src/mocks/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@boards/*": [
+        "src/app/boards/*"
+      ],
+      "@columns/*": [
+        "src/app/columns/*"
+      ],
+      "@files/*": [
+        "src/app/files/*"
+      ],
+      "@points/*": [
+        "src/app/points/*"
+      ],
+      "@users/*": [
+        "src/app/users/*"
+      ],
     }
   },
   "angularCompilerOptions": {

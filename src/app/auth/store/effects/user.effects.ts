@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import { UsersService } from '../../../users/services/users.service';
+import { UsersService } from '@users/services/users.service';
 import {
   userGetInfo,
   userGetInfoFailure,

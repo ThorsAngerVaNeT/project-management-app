@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SignInParams, TokenPayload, User } from '../../../users/models/user.model';
+import { SignInParams, TokenPayload, User } from '@users/models/user.model';
 
 export const userSignIn = createAction('[Auth] User Sign In', props<{ data: SignInParams }>());
 

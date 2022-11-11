@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '../../../auth/store/actions/user.actions';
-import { selectToken, selectUser } from '../../../auth/store/selectors/user.selectors';
-import { Board, BoardParams } from '../../../boards/models/board.model';
-import * as fromBoard from '../../../boards/store/actions/board.actions';
-import * as fromUser from '../../../users/store/actions/user.actions';
-import { SignInParams, User, UserParams } from '../../../users/models/user.model';
-import { selectBoardsWithUsers } from '../../../boards/store/selectors/board.selectors';
+import * as fromAuth from '@auth/store/actions/user.actions';
+import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
+import { Board, BoardParams } from '@boards/models/board.model';
+import * as fromBoard from '@boards/store/actions/board.actions';
+import * as fromUser from '@users/store/actions/user.actions';
+import { SignInParams, User, UserParams } from '@users/models/user.model';
+import { selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 
 @Injectable({
   providedIn: 'root',

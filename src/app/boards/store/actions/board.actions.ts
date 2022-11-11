@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import { Board, BoardParams } from '../../models/board.model';
-import { User } from '../../../users/models/user.model';
+import { User } from '@users/models/user.model';
 
 export const loadBoards = createAction('[Boards] Load Boards');
 export const loadBoardsSuccess = createAction('[Boards] Load Boards Success', props<{ boards: Board[] }>());

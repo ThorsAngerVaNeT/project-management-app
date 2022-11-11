@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromBoard from '../reducers/board.reducer';
-import { selectUsersEntities } from '../../../users/store/selectors/user.selectors';
+import { selectUsersEntities } from '@users/store/selectors/user.selectors';
 
 export const selectBoardsState = createFeatureSelector<fromBoard.BoardsState>(fromBoard.boardsFeatureKey);
 

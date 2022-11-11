@@ -3,7 +3,7 @@ import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { selectToken } from '../../../auth/store/selectors/user.selectors';
+import { selectToken } from '@auth/store/selectors/user.selectors';
 
 import { APIEndpoints } from '../../enums/api-endpoints.enum';
 import { APIMethods } from '../../enums/api-methods.enum';
