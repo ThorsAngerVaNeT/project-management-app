@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class LoginComponent {
   isVisible = true;
 
-  submitForm(): void {}
+  logInForm!: FormGroup;
+
+  constructor() {
+    this.logInForm = new FormGroup({
+      userName: new FormControl(),
+      password: new FormControl(),
+    });
+  }
+
+  submitForm(): void {
+    console.log('Form Submitted: ', this.logInForm);
+  }
 
   handleCancel(): void {
     console.log('Button cancel clicked');

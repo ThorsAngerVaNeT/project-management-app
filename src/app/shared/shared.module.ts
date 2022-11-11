@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -27,8 +26,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const MODULES = [
-  CommonModule,
-
   NzLayoutModule,
   NzInputModule,
   NzRadioModule,
@@ -53,6 +50,6 @@ const MODULES = [
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, ConfirmationComponent],
   imports: [...MODULES, FormsModule],
-  exports: [...MODULES, CommonModule, FooterComponent, HeaderComponent],
+  exports: [...MODULES, FooterComponent, HeaderComponent],
 })
 export class SharedModule {}

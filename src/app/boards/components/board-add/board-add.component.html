@@ -7,7 +7,7 @@
   (nzOnOk)="handleOk()"
 >
   <ng-container *nzModalContent>
-    <form nz-form class="content-form">
+    <form nz-form class="content-form" [formGroup]="boardAddForm">
       <nz-form-item>
         <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateBoardTitle">Title</nz-form-label>
         <nz-form-control
@@ -28,6 +28,7 @@
             nzMode="multiple"
             nzPlaceHolder="Please select team members"
             i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
+            formControlName="participants"
           >
             <nz-option nzLabel="Lea" nzValue="Lea"></nz-option>
             <nz-option nzLabel="Mike" nzValue="Mike1"></nz-option>

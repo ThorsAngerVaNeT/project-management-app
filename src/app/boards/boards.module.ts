@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { SharedModule } from '../shared/shared.module';
@@ -10,9 +9,10 @@ import { BoardCardComponent } from './components/board-card/board-card.component
 
 import BoardsRoutingModule from './boards.route.module';
 import { ColumnsModule } from './../columns/columns.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MainPageComponent, BoardDetailComponent, BoardAddComponent, BoardCardComponent],
-  imports: [CommonModule, SharedModule, ColumnsModule, BoardsRoutingModule],
+  imports: [ReactiveFormsModule, SharedModule, ColumnsModule, BoardsRoutingModule],
 })
 export class BoardsModule {}

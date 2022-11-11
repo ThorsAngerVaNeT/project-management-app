@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +10,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class SignUpComponent {
   isVisible = true;
 
-  submitForm(): void {}
+  signUpForm!: FormGroup;
+
+  constructor() {
+    this.signUpForm = new FormGroup({
+      userName: new FormControl(),
+      password: new FormControl(),
+    });
+  }
+
+  submitForm(): void {
+    console.log('Form Submitted: ', this.signUpForm);
+  }
 
   handleCancel(): void {
     console.log('Button cancel clicked');

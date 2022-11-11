@@ -11,22 +11,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { ColumnsModule } from './columns/columns.module';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    CoreModule,
-
-    SharedModule,
-    ColumnsModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, CoreModule, SharedModule],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-board-add',
@@ -8,6 +9,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class BoardAddComponent {
   isVisible = true;
+
+  boardAddForm!: FormGroup;
+
+  constructor() {
+    this.boardAddForm = new FormGroup({
+      title: new FormControl(),
+      participants: new FormControl(),
+      image: new FormControl(),
+    });
+  }
 
   handleOk(): void {
     console.log('Button ok clicked');

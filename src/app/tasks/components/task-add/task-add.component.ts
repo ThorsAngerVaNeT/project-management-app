@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-task-add',
@@ -8,6 +9,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class TaskAddComponent {
   isVisible = true;
+
+  taskAddForm!: FormGroup;
+
+  constructor() {
+    this.taskAddForm = new FormGroup({
+      title: new FormControl(),
+      description: new FormControl(),
+      responsible: new FormControl(),
+      participants: new FormControl(),
+    });
+  }
 
   handleOk(): void {
     console.log('Button ok clicked');
