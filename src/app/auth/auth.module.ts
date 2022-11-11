@@ -5,10 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import AuthRoutingModule from './auth.route.module';
-import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent],
-  imports: [CoreModule, SharedModule, AuthRoutingModule],
+  imports: [SharedModule, AuthRoutingModule],
 })
 export class AuthModule {}

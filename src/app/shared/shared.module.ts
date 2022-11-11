@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -24,6 +23,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const MODULES = [
   NzLayoutModule,
@@ -45,11 +46,14 @@ const MODULES = [
   NzCheckboxModule,
   NzCardModule,
   NzModalModule,
+
+  CommonModule,
+  ReactiveFormsModule,
 ];
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, ConfirmationComponent],
-  imports: [...MODULES, FormsModule],
+  imports: [...MODULES],
   exports: [...MODULES, FooterComponent, HeaderComponent],
 })
 export class SharedModule {}

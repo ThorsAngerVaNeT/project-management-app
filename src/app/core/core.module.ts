@@ -1,6 +1,4 @@
 import { ErrorHandler, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlerService } from './services/error-handler/error-handler.service';
@@ -10,13 +8,12 @@ import { HttpTokenInterceptor } from './interceptors/http-token/http-token.inter
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [HttpClientModule],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
-  exports: [CommonModule, ReactiveFormsModule],
 })
 export class CoreModule {}
