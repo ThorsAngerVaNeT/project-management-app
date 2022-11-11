@@ -15,7 +15,7 @@ export interface SignInParams {
   password: string;
 }
 
-export interface Token {
+export interface APIToken {
   token: string;
 }
 

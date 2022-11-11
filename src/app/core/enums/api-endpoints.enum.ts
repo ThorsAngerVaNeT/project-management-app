@@ -7,4 +7,8 @@ export enum APIEndpoints {
   boardsSet = 'boardsSet',
   columns = 'columns',
   columnsSet = 'columnsSet',
+  tasks = 'tasks',
+  tasksSet = 'tasksSet',
+  points = 'points',
+  file = 'file',
 }
