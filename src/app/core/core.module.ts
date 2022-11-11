@@ -5,15 +5,17 @@ import { ErrorHandlerService } from './services/error-handler/error-handler.serv
 import { HttpBaseInterceptor } from './interceptors/http-base/http-base.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
 import { HttpTokenInterceptor } from './interceptors/http-token/http-token.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
   ],
+  exports: [CommonModule, ReactiveFormsModule],
 })
 export class CoreModule {}

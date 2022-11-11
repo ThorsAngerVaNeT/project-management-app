@@ -9,10 +9,10 @@ import { BoardCardComponent } from './components/board-card/board-card.component
 
 import BoardsRoutingModule from './boards.route.module';
 import { ColumnsModule } from './../columns/columns.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [MainPageComponent, BoardDetailComponent, BoardAddComponent, BoardCardComponent],
-  imports: [ReactiveFormsModule, SharedModule, ColumnsModule, BoardsRoutingModule],
+  imports: [CoreModule, SharedModule, ColumnsModule, BoardsRoutingModule],
 })
 export class BoardsModule {}

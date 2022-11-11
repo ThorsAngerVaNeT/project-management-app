@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import '@angular/localize/init';
 
 @Component({
   selector: 'app-confirmation',
