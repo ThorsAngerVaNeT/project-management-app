@@ -24,4 +24,9 @@ export const reducer = createReducer(
   on(FileActions.deleteFileSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 
-export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
+export const {
+  selectIds: selectFileIds,
+  selectEntities: selectFilesEntities,
+  selectAll: selectAllFiles,
+  selectTotal: selectFilesTotal,
+} = adapter.getSelectors();
