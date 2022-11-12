@@ -15,10 +15,10 @@ export const initialState: UserState = adapter.getInitialState({});
 
 export const reducer = createReducer(
   initialState,
-  on(UserActions.loadUsersSuccess, (state, action) => adapter.setAll(action.users, state)),
-  on(UserActions.createUserSuccess, (state, action) => adapter.addOne(action.user, state)),
-  on(UserActions.updateUserSuccess, (state, action) => adapter.updateOne(action.user, state)),
-  on(UserActions.deleteUserSuccess, (state, action) => adapter.removeOne(action.id, state)),
+  on(UserActions.loadUsersSuccess, (state, { users }) => adapter.setAll(users, state)),
+  on(UserActions.createUserSuccess, (state, { user }) => adapter.addOne(user, state)),
+  on(UserActions.updateUserSuccess, (state, { user }) => adapter.updateOne(user, state)),
+  on(UserActions.deleteUserSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
