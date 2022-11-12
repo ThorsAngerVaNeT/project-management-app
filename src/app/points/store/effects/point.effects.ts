@@ -62,7 +62,7 @@ export class PointEffects {
       ofType(PointActions.updatePoint),
       concatMap(({ pointId, pointParams }) =>
         this.pointsService.updatePoint(pointId, pointParams).pipe(
-          map((point) => PointActions.updatePointSuccess({ point })),
+          map(({ _id: id, ...changes }) => PointActions.updatePointSuccess({ point: { id, changes } })),
           catchError((error) => of(PointActions.updatePointFailure({ error }))),
         ),
       ),
@@ -74,7 +74,14 @@ export class PointEffects {
       ofType(PointActions.updatePointsSet),
       concatMap(({ pointsParams }) =>
         this.pointsService.updatePointsSet(pointsParams).pipe(
-          map((points) => PointActions.updatePointsSetSuccess({ points })),
+          map((points) =>
+            PointActions.updatePointsSetSuccess({
+              points: points.map(({ _id: id, ...changes }) => ({
+                id,
+                changes,
+              })),
+            }),
+          ),
           catchError((error) => of(PointActions.updatePointsSetFailure({ error }))),
         ),
       ),

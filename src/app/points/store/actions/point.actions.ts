@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { TaskFile } from '../../../files/model/file.model';
 import { User } from '../../../users/models/user.model';
@@ -29,14 +30,17 @@ export const updatePoint = createAction(
   '[Point] Update Point',
   props<{ pointId: Point['_id']; pointParams: PointParams }>(),
 );
-export const updatePointSuccess = createAction('[Point] Update Point Success', props<{ point: Point }>());
+export const updatePointSuccess = createAction('[Point] Update Point Success', props<{ point: Update<Point> }>());
 export const updatePointFailure = createAction('[Point] Update Point Failure', props<{ error: unknown }>());
 
 export const updatePointsSet = createAction(
   '[Point] Update Points Set',
   props<{ pointsParams: PointsSetUpdateParams[] }>(),
 );
-export const updatePointsSetSuccess = createAction('[Point] Update Points Set Success', props<{ points: Point[] }>());
+export const updatePointsSetSuccess = createAction(
+  '[Point] Update Points Set Success',
+  props<{ points: Update<Point>[] }>(),
+);
 export const updatePointsSetFailure = createAction('[Point] Update Points Set Failure', props<{ error: unknown }>());
 
 export const deletePoint = createAction('[Point] Delete Point', props<{ pointId: Point['_id'] }>());
