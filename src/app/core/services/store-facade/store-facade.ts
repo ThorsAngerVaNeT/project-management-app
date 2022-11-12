@@ -24,6 +24,14 @@ export class StoreFacade {
     this.store.dispatch(fromAuth.userSignIn({ data }));
   }
 
+  signOut(): void {
+    this.store.dispatch(fromAuth.userSignOut());
+  }
+
+  signUp(data: UserParams): void {
+    this.store.dispatch(fromAuth.userSignUp({ data }));
+  }
+
   getUserInfo(): void {
     this.store.dispatch(fromAuth.userGetInfo());
   }

@@ -1,5 +1,5 @@
 import { Action, ActionReducer, createReducer, MetaReducer, on } from '@ngrx/store';
-import { userGetInfoSuccess, userSignIn, userSignInSuccess } from '../actions/user.actions';
+import * as AuthActions from '../actions/user.actions';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface UserState {
@@ -18,12 +18,14 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(userSignIn, (state: UserState, { data: { login } }): UserState => ({ ...state, login })),
+  on(AuthActions.userSignIn, (state: UserState, { data: { login } }): UserState => ({ ...state, login })),
   on(
-    userSignInSuccess,
+    AuthActions.userSignInSuccess,
     (state: UserState, { token, payload: { id, login } }): UserState => ({ ...state, token, _id: id, login }),
   ),
-  on(userGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
+  on(AuthActions.userSignOut, (): UserState => ({ ...initialState })),
+  on(AuthActions.userSignUpSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
+  on(AuthActions.userGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
 );
 
 export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {
