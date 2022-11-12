@@ -2,17 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
-import {
-  userGetInfo,
-  userGetInfoFailure,
-  userGetInfoSuccess,
-  userSignIn,
-  userSignInFailure,
-  userSignInSuccess,
-} from '../actions/user.actions';
+import * as AuthActions from '../actions/user.actions';
 import { selectUser } from '../selectors/user.selectors';
 
 @Injectable()
@@ -26,16 +19,14 @@ export class UserEffects {
 
   userSignIn$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(userSignIn),
-      exhaustMap((action) =>
+      ofType(AuthActions.userSignIn),
+      concatMap((action) =>
         this.authService.signIn(action.data).pipe(
           map((token) => {
             const payload = this.authService.decodeToken(token);
-            return userSignInSuccess({ token, payload });
+            return AuthActions.userSignInSuccess({ token, payload });
           }),
-          catchError((error: unknown) => {
-            return of(userSignInFailure({ error }));
-          }),
+          catchError((error) => of(AuthActions.userSignInFailure({ error }))),
         ),
       ),
     );
@@ -43,18 +34,14 @@ export class UserEffects {
 
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(userGetInfo, userSignInSuccess),
+      ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
       concatLatestFrom(() => this.store.select(selectUser)),
-      exhaustMap(([, state]) => {
-        return this.usersService.getUser(state._id).pipe(
-          map((user) => {
-            return userGetInfoSuccess({ user });
-          }),
-          catchError((error: unknown) => {
-            return of(userGetInfoFailure({ error }));
-          }),
-        );
-      }),
+      concatMap(([, state]) =>
+        this.usersService.getUser(state._id).pipe(
+          map((user) => AuthActions.userGetInfoSuccess({ user })),
+          catchError((error) => of(AuthActions.userGetInfoFailure({ error }))),
+        ),
+      ),
     );
   });
 }
