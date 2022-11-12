@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   RETRY_HTTP_COUNT: 1,
-  API_URL: 'https://boiling-island-84863.herokuapp.com/',
+  API_URL: 'https://ng-final-task-backend-production.up.railway.app/',
 };
 
 /*
