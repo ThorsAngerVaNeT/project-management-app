@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { first, Observable, switchMap } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
+import { StoreFacade } from '../../services/store-facade/store-facade';
 
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
-  // todo get token from store
-  private token = localStorage.getItem('ngPMA.token');
+  token$ = this.storeFacade.token$;
+
+  constructor(private storeFacade: StoreFacade) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (!request.url.includes(APIEndpoints.auth)) {
-      const clonedRequest = request.clone({
-        setHeaders: { Authorization: `Bearer ${this.token}` },
-      });
-
-      return next.handle(clonedRequest);
-    }
-    return next.handle(request);
+    return this.token$.pipe(
+      first(),
+      switchMap((token) => {
+        if (!request.url.includes(APIEndpoints.auth)) {
+          request = request.clone({ setHeaders: { Authorization: 'Bearer ' + token } });
+        }
+        return next.handle(request);
+      }),
+    );
   }
 }

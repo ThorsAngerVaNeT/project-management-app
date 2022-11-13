@@ -18,3 +18,10 @@ export interface SignInParams {
 export interface APIToken {
   token: string;
 }
+
+export interface TokenPayload {
+  exp: number;
+  iat: number;
+  id: string;
+  login: string;
+}

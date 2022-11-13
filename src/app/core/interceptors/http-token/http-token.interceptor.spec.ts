@@ -2,6 +2,8 @@
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { selectToken } from '@auth/store/selectors/user.selectors';
 
 import { APIEndpoints } from '../../enums/api-endpoints.enum';
 import { APIMethods } from '../../enums/api-methods.enum';
@@ -10,6 +12,7 @@ import { HttpTokenInterceptor } from './http-token.interceptor';
 describe('HttpTokenInterceptor', () => {
   let client: HttpClient;
   let httpMock: HttpTestingController;
+  let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,11 +24,13 @@ describe('HttpTokenInterceptor', () => {
           useClass: HttpTokenInterceptor,
           multi: true,
         },
+        provideMockStore({ initialState: { user: { token: 'TEST_TOKEN' } } }),
       ],
     });
 
     client = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
+    store = TestBed.inject(MockStore);
   });
 
   it('should be created', () => {
@@ -38,11 +43,11 @@ describe('HttpTokenInterceptor', () => {
 
     const requests = httpMock.match({ method: APIMethods.GET });
 
-    // todo get token from store
-    const token = `Bearer ${localStorage.getItem('ngPMA.token')}`;
-
-    expect(requests[0].request.headers.has('Authorization')).toEqual(true);
-    expect(requests[0].request.headers.get('Authorization')).toEqual(token);
+    store.select(selectToken).subscribe((state) => {
+      const token = `Bearer ${state}`;
+      expect(requests[0].request.headers.has('Authorization')).toEqual(true);
+      expect(requests[0].request.headers.get('Authorization')).toEqual(token);
+    });
   });
 
   it('should not add authorization token to request header if its auth endpoints', () => {

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
 import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../models/column.model';
+import { Board } from '@boards/models/board.model';
+import { User } from '@users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,32 +13,32 @@ import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '.
 export class ColumnsService {
   constructor(private http: HttpClient) {}
 
-  private getColumnUrl(boardId: string, columnId: string = ''): string {
+  private getColumnUrl(boardId: Board['_id'], columnId: Column['_id'] = ''): string {
     const columnEndpoint = columnId ? `/${columnId}` : '';
     return `${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}${columnEndpoint}`;
   }
 
-  public getColumns(boardId: string): Observable<Column[]> {
+  public getColumns(boardId: Board['_id']): Observable<Column[]> {
     return this.http.get<Column[]>(this.getColumnUrl(boardId));
   }
 
-  public getColumnsSet(listColumnIds: string[]): Observable<Column[]> {
+  public getColumnsSet(listColumnIds: Column['_id'][]): Observable<Column[]> {
     const params = new HttpParams().set(APIParams.ids, listColumnIds.join());
 
     return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
   }
 
-  public getColumnsByUser(userId: string): Observable<Column[]> {
+  public getColumnsByUser(userId: User['_id']): Observable<Column[]> {
     const params = new HttpParams().set(APIParams.userId, userId);
 
     return this.http.get<Column[]>(APIEndpoints.columnsSet, { params });
   }
 
-  public getColumn(boardId: string, columnId: string): Observable<Column> {
+  public getColumn(boardId: Board['_id'], columnId: Column['_id']): Observable<Column> {
     return this.http.get<Column>(this.getColumnUrl(boardId, columnId));
   }
 
-  public createColumn(boardId: string, newColumn: ColumnParams): Observable<Column> {
+  public createColumn(boardId: Board['_id'], newColumn: ColumnParams): Observable<Column> {
     return this.http.post<Column>(this.getColumnUrl(boardId), newColumn);
   }
 
@@ -44,7 +46,7 @@ export class ColumnsService {
     return this.http.post<Column[]>(APIEndpoints.columnsSet, listColumnsSetParams);
   }
 
-  public updateColumn(boardId: string, columnId: string, columnParams: ColumnParams): Observable<Column> {
+  public updateColumn(boardId: Board['_id'], columnId: Column['_id'], columnParams: ColumnParams): Observable<Column> {
     return this.http.put<Column>(this.getColumnUrl(boardId, columnId), columnParams);
   }
 
@@ -52,7 +54,7 @@ export class ColumnsService {
     return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnParams);
   }
 
-  public deleteColumn(boardId: string, columnId: string): Observable<Column> {
+  public deleteColumn(boardId: Board['_id'], columnId: Column['_id']): Observable<Column> {
     return this.http.delete<Column>(this.getColumnUrl(boardId, columnId));
   }
 }
