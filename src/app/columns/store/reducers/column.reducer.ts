@@ -18,15 +18,15 @@ export const initialState: ColumnsState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(ColumnActions.loadColumnsSuccess, (state, action) => adapter.setAll(action.columns, state)),
-  on(ColumnActions.loadColumnSuccess, (state, action) => adapter.setOne(action.column, state)),
-  on(ColumnActions.loadColumnsSetSuccess, (state, action) => adapter.setAll(action.columns, state)),
-  on(ColumnActions.loadColumnsByUserSuccess, (state, action) => adapter.setAll(action.columns, state)),
-  on(ColumnActions.createColumnSuccess, (state, action) => adapter.addOne(action.column, state)),
-  on(ColumnActions.createColumnsSetSuccess, (state, action) => adapter.addMany(action.columns, state)),
-  on(ColumnActions.updateColumnSuccess, (state, action) => adapter.updateOne(action.column, state)),
-  on(ColumnActions.updateColumnsSetSuccess, (state, action) => adapter.updateMany(action.columns, state)),
-  on(ColumnActions.deleteColumnSuccess, (state, action) => adapter.removeOne(action.id, state)),
+  on(ColumnActions.loadColumnsSuccess, (state, { columns }) => adapter.setAll(columns, state)),
+  on(ColumnActions.loadColumnSuccess, (state, { column }) => adapter.setOne(column, state)),
+  on(ColumnActions.loadColumnsSetSuccess, (state, { columns }) => adapter.setAll(columns, state)),
+  on(ColumnActions.loadColumnsByUserSuccess, (state, { columns }) => adapter.setAll(columns, state)),
+  on(ColumnActions.createColumnSuccess, (state, { column }) => adapter.addOne(column, state)),
+  on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
+  on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
+  on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),
+  on(ColumnActions.deleteColumnSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 
 export const {

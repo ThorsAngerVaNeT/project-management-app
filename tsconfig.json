@@ -50,6 +50,9 @@
       "@users/*": [
         "src/app/users/*"
       ],
+      "@tasks/*": [
+        "src/app/tasks/*"
+      ],
     }
   },
   "angularCompilerOptions": {

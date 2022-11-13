@@ -7,6 +7,9 @@ import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import { SignInParams, User, UserParams } from '@users/models/user.model';
 import { selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
+import * as fromFile from '@files/store/actions/file.actions';
+import { TaskFile } from '../../../files/model/file.model';
+import { ColumnTask } from '../../../tasks/model/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -82,5 +85,29 @@ export class StoreFacade {
 
   deleteUser(id: User['_id']): void {
     this.store.dispatch(fromUser.deleteUser({ id }));
+  }
+
+  getFilesSet(taskFileIds: TaskFile['_id'][]): void {
+    this.store.dispatch(fromFile.loadFilesSet({ taskFileIds }));
+  }
+
+  getFilesByUser(userId: User['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByUser({ userId }));
+  }
+
+  getFilesByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
+  }
+
+  getFilesByBoard(boardId: Board['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
+  }
+
+  deleteFile(id: TaskFile['_id']): void {
+    this.store.dispatch(fromFile.deleteFile({ id }));
+  }
+
+  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): void {
+    this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
   }
 }
