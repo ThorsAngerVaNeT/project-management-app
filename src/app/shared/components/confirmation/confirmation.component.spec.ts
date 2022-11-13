@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import '@angular/localize/init';
 
 import { ConfirmationComponent } from './confirmation.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ConfirmationComponent', () => {
   let component: ConfirmationComponent;
@@ -14,6 +15,7 @@ describe('ConfirmationComponent', () => {
       declarations: [ConfirmationComponent],
       imports: [OverlayModule],
       providers: [NzModalService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ConfirmationComponent);
