@@ -12,7 +12,7 @@ export const loadTasks = createAction(
 export const loadTasksSuccess = createAction('[Tasks] Load Tasks Success', props<{ tasks: ColumnTask[] }>());
 export const loadTasksFailure = createAction('[Tasks] Load Tasks Failure', props<{ error: unknown }>());
 
-export const loadTasksSet = createAction('[Tasks] Load Tasks Set', props<{ ids: ColumnTask['_id'] }>());
+export const loadTasksSet = createAction('[Tasks] Load Tasks Set', props<{ ids: ColumnTask['_id'][] }>());
 export const loadTasksSetSuccess = createAction('[Tasks] Load Tasks Set Success', props<{ tasks: ColumnTask[] }>());
 export const loadTasksSetFailure = createAction('[Tasks] Load Tasks Set Failure', props<{ error: unknown }>());
 
