@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { BoardWithUsers } from '../../models/board.model';
 
 @Component({
   selector: 'app-board-card',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./board-card.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardCardComponent {}
+export class BoardCardComponent {
+  @Input() board!: BoardWithUsers;
+}
