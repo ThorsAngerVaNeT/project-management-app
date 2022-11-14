@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as PointActions from '../actions/point.actions';
 import { PointsService } from '../../services/points.service';
@@ -12,7 +12,7 @@ export class PointEffects {
   loadPointsSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.loadPointsSet),
-      concatMap(({ ids }) =>
+      switchMap(({ ids }) =>
         this.pointsService.getPointsSet(ids).pipe(
           map((points) => PointActions.loadPointsSetSuccess({ points })),
           catchError((error) => of(PointActions.loadPointsSetFailure({ error }))),
@@ -24,7 +24,7 @@ export class PointEffects {
   loadPointsByUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.loadPointsByUser),
-      concatMap(({ userId }) =>
+      switchMap(({ userId }) =>
         this.pointsService.getPointsByUser(userId).pipe(
           map((points) => PointActions.loadPointsByUserSuccess({ points })),
           catchError((error) => of(PointActions.loadPointsByUserFailure({ error }))),
@@ -36,7 +36,7 @@ export class PointEffects {
   loadPointsByTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.loadPointsByTask),
-      concatMap(({ taskId }) =>
+      switchMap(({ taskId }) =>
         this.pointsService.getPointsByTask(taskId).pipe(
           map((points) => PointActions.loadPointsByTaskSuccess({ points })),
           catchError((error) => of(PointActions.loadPointsByTaskFailure({ error }))),

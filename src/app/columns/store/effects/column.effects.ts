@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as ColumnActions from '../actions/column.actions';
 import { ColumnsService } from '../../services/columns.service';
@@ -12,7 +12,7 @@ export class ColumnEffects {
   loadColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.loadColumns),
-      concatMap(({ boardId }) =>
+      switchMap(({ boardId }) =>
         this.columnsService.getColumns(boardId).pipe(
           map((columns) => ColumnActions.loadColumnsSuccess({ columns })),
           catchError((error) => of(ColumnActions.loadColumnsFailure({ error }))),
@@ -24,7 +24,7 @@ export class ColumnEffects {
   loadColumn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.loadColumn),
-      concatMap(({ boardId, columnId }) =>
+      switchMap(({ boardId, columnId }) =>
         this.columnsService.getColumn(boardId, columnId).pipe(
           map((column) => ColumnActions.loadColumnSuccess({ column })),
           catchError((error) => of(ColumnActions.loadColumnFailure({ error }))),
