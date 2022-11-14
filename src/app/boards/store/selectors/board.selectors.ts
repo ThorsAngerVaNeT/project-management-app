@@ -5,6 +5,7 @@ import { selectUsersEntities } from '@users/store/selectors/user.selectors';
 import { User } from '@users/models/user.model';
 import { Board, BoardWithUsers } from '@boards/models/board.model';
 import { selectRouter } from '@core/store/selectors/router.selector';
+import { EMPTY_USER } from '@users/store/reducers/user.reducer';
 
 export const selectBoardsState = createFeatureSelector<fromBoard.BoardsState>(fromBoard.boardsFeatureKey);
 
@@ -14,8 +15,8 @@ export const selectBoardEntities = createSelector(selectBoardsState, fromBoard.s
 
 const populateBoardByUserData = (board: Board, userEntities: Dictionary<User>): BoardWithUsers => {
   const { owner: ownerId, users: boardUsers } = board;
-  const owner = userEntities[ownerId]!;
-  const users = boardUsers.map((userId: string) => userEntities[userId]!);
+  const owner = userEntities[ownerId] ?? EMPTY_USER;
+  const users = boardUsers.map((userId: string) => userEntities[userId] ?? EMPTY_USER);
   return {
     ...board,
     owner,
