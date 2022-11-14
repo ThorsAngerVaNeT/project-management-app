@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectBoardId } from '../../../core/store/selectors/router.selector';
+import { selectBoardId } from '@core/store/selectors/router.selector';
 import * as fromColumn from '../reducers/column.reducer';
 import { selectTasksOfCurrentBoardByColumns } from '@tasks/store/selectors/task.selectors';
 

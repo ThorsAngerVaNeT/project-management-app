@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/user.actions';
 import { Router } from '@angular/router';
-import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class UserEffects {

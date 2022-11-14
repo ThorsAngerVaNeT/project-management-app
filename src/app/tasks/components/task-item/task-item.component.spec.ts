@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockTask1 } from '../../../../mocks/mock-tasks/mock-tasks';
+import { mockTask1 } from '@mocks/mock-tasks/mock-tasks';
 
 import { TaskItemComponent } from './task-item.component';
 

@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { mockBoard1 } from '../../../../mocks/mock-boards/mock-boards';
-import { mockUser1 } from '../../../../mocks/mock-users/mock-users';
+import { mockBoard1 } from '@mocks/mock-boards/mock-boards';
+import { mockUser1 } from '@mocks/mock-users/mock-users';
 
 import { BoardCardComponent } from './board-card.component';
 

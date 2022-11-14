@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Component({
   selector: 'app-main-page',

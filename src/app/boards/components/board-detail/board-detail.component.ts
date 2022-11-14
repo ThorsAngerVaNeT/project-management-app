@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Component({
   selector: 'app-board',
