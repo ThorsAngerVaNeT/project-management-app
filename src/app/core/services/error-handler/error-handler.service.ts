@@ -1,10 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import '@angular/localize/init';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorHandlerService implements ErrorHandler {
+  constructor(private modalService: NzModalService, private ngZone: NgZone) {}
+
   handleError(error: Error | HttpErrorResponse): void {
     let errorMessage = 'Unknown Error: ';
 
@@ -14,7 +18,11 @@ export class ErrorHandlerService implements ErrorHandler {
       errorMessage += error.message;
     }
 
-    // todo alert from ng-zorro
-    console.error(errorMessage);
+    this.ngZone.run(() =>
+      this.modalService.error({
+        nzTitle: 'ERROR',
+        nzContent: errorMessage,
+      }),
+    );
   }
 }
