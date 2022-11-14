@@ -1,3 +1,13 @@
+<ng-template #title>
+  <div class="title-to-input" nzAlign="center">
+    <h3>
+      {{ column.title }}
+      <nz-badge nzStandalone [nzCount]="2"></nz-badge>
+    </h3>
+    <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
+  </div>
+</ng-template>
+
 <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title">
   <nz-list nzItemLayout="horizontal">
     <nz-list-item>
@@ -37,14 +47,4 @@
   >
     <span nz-icon nzType="plus"></span>
   </button>
-</ng-template>
-
-<ng-template #title>
-  <div class="title-to-input" nzAlign="center">
-    <h3>
-      Backlog
-      <nz-badge nzStandalone [nzCount]="2"></nz-badge>
-    </h3>
-    <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
-  </div>
 </ng-template>
