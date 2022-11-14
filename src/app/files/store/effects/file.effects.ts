@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as FileActions from '../actions/file.actions';
 import { FilesService } from '../../services/files.service';
@@ -12,7 +12,7 @@ export class FileEffects {
   loadFilesSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesSet),
-      concatMap(({ taskFileIds }) =>
+      switchMap(({ taskFileIds }) =>
         this.filesService.getFilesSet(taskFileIds).pipe(
           map((files) => FileActions.loadFilesSetSuccess({ files })),
           catchError((error) => of(FileActions.loadFilesSetFailure({ error }))),
@@ -24,7 +24,7 @@ export class FileEffects {
   loadFilesByUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByUser),
-      concatMap(({ userId }) =>
+      switchMap(({ userId }) =>
         this.filesService.getFilesByUser(userId).pipe(
           map((files) => FileActions.loadFilesByUserSuccess({ files })),
           catchError((error) => of(FileActions.loadFilesByUserFailure({ error }))),
@@ -36,7 +36,7 @@ export class FileEffects {
   loadFilesByTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByTask),
-      concatMap(({ taskId }) =>
+      switchMap(({ taskId }) =>
         this.filesService.getFilesByTask(taskId).pipe(
           map((files) => FileActions.loadFilesByTaskSuccess({ files })),
           catchError((error) => of(FileActions.loadFilesByTaskFailure({ error }))),
@@ -48,7 +48,7 @@ export class FileEffects {
   loadFilesByBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByBoard),
-      concatMap(({ boardId }) =>
+      switchMap(({ boardId }) =>
         this.filesService.getFilesByBoard(boardId).pipe(
           map((files) => FileActions.loadFilesByBoardSuccess({ files })),
           catchError((error) => of(FileActions.loadFilesByBoardFailure({ error }))),

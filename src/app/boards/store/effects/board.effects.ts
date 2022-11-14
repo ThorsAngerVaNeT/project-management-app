@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
@@ -12,7 +12,7 @@ export class BoardEffects {
   loadBoards$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoards),
-      concatMap(() =>
+      switchMap(() =>
         this.boardsService.getBoards().pipe(
           map((boards) => BoardActions.loadBoardsSuccess({ boards })),
           catchError((error) => of(BoardActions.loadBoardsFailure({ error }))),
@@ -24,7 +24,7 @@ export class BoardEffects {
   loadBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoard),
-      concatMap(({ id }) =>
+      switchMap(({ id }) =>
         this.boardsService.getBoard(id).pipe(
           map((board) => BoardActions.loadBoardSuccess({ board })),
           catchError((error) => of(BoardActions.loadBoardFailure({ error }))),
@@ -36,7 +36,7 @@ export class BoardEffects {
   loadBoardsSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoardsSet),
-      concatMap(({ ids }) =>
+      switchMap(({ ids }) =>
         this.boardsService.getBoardsSet(ids).pipe(
           map((boards) => BoardActions.loadBoardsSetSuccess({ boards })),
           catchError((error) => of(BoardActions.loadBoardsSetFailure({ error }))),
@@ -48,7 +48,7 @@ export class BoardEffects {
   loadBoardsByUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoardsByUser),
-      concatMap(({ userId }) =>
+      switchMap(({ userId }) =>
         this.boardsService.getBoardsByUser(userId).pipe(
           map((boards) => BoardActions.loadBoardsByUserSuccess({ boards })),
           catchError((error) => of(BoardActions.loadBoardsByUserFailure({ error }))),
