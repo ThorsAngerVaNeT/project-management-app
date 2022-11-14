@@ -5,9 +5,9 @@ import { BoardDetailComponent } from './components/board-detail/board-detail.com
 import { MainPageComponent } from './components/main-page/main-page.component';
 
 const routes: Routes = [
-  { path: 'main', component: MainPageComponent },
-  { path: 'board-add', component: BoardAddComponent },
-  { path: 'board', component: BoardDetailComponent },
+  { path: '', component: MainPageComponent },
+  { path: 'new', component: BoardAddComponent },
+  { path: ':boardId', component: BoardDetailComponent },
 ];
 
 @NgModule({

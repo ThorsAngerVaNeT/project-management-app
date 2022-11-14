@@ -6,7 +6,7 @@ import { BoardDetailComponent } from './components/board-detail/board-detail.com
 
 import { BoardAddComponent } from './components/board-add/board-add.component';
 import { BoardCardComponent } from './components/board-card/board-card.component';
-import BoardsRoutingModule from './boards.route.module';
+import BoardsRoutingModule from './boards-routing.module';
 import { ColumnsModule } from '@columns/columns.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';

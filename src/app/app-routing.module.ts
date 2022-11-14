@@ -6,7 +6,7 @@ import { ConfirmationComponent } from './shared/components/confirmation/confirma
 const routes: Routes = [
   { path: '', loadChildren: () => import('./welcome/welcome.module').then((m) => m.WelcomeModule) },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
-  { path: 'board', loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule) },
+  { path: 'boards', loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule) },
   { path: 'task-add', loadChildren: () => import('./tasks/tasks.module').then((m) => m.TasksModule) },
   { path: 'confirm', component: ConfirmationComponent },
 ];
