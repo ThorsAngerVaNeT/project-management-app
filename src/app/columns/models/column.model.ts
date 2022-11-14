@@ -1,3 +1,5 @@
+import { ColumnTask } from '@tasks/model/task.model';
+
 export interface Column {
   _id: string;
   title: string;
@@ -19,4 +21,8 @@ export interface ColumnsSetParams {
 export interface ColumnSetUpdateParams {
   _id: string;
   order: number;
+}
+
+export interface ColumnWithTasks extends Column {
+  tasks: ColumnTask[];
 }

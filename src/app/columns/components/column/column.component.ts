@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Column } from '../../models/column.model';
+import { ColumnWithTasks } from '../../models/column.model';
 
 @Component({
   selector: 'app-column',
@@ -8,5 +8,5 @@ import { Column } from '../../models/column.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnComponent {
-  @Input() column!: Column;
+  @Input() column!: ColumnWithTasks;
 }
