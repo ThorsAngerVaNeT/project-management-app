@@ -1,7 +1,7 @@
-import * as fromRouter from '@ngrx/router-store';
 import { RouterReducerState } from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { RouterStateUrl } from '../reducers/router.reducer';
 
-export const selectRouter = createFeatureSelector<RouterReducerState>('router');
+export const selectRouter = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
-export const selectCurrentRouteState = createSelector(selectRouter, (state: fromRouter.RouterReducerState) => state);
+export const selectBoardId = createSelector(selectRouter, (state) => state.state.params['boardId']);
