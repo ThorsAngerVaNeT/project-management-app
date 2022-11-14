@@ -1,6 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { ColumnTask, ColumnTaskSetUpdateParams, ColumnTaskUpdateParams } from '../../model/task.model';
+import {
+  ColumnTask,
+  ColumnTaskParams,
+  ColumnTaskSetUpdateParams,
+  ColumnTaskUpdateParams,
+} from '../../model/task.model';
 import { Board } from '../../../boards/models/board.model';
 import { Column } from '../../../columns/models/column.model';
 import { User } from '../../../users/models/user.model';
@@ -52,7 +57,7 @@ export const loadTaskFailure = createAction('[Tasks] Load Task Failure', props<{
 
 export const createTask = createAction(
   '[Tasks] Add Task',
-  props<{ boardId: Board['_id']; columnId: Column['_id']; task: ColumnTask }>(),
+  props<{ boardId: Board['_id']; columnId: Column['_id']; taskParams: ColumnTaskParams }>(),
 );
 export const createTaskSuccess = createAction('[Tasks] Add Task Success', props<{ task: ColumnTask }>());
 export const createTaskFailure = createAction('[Tasks] Add Task Failure', props<{ error: unknown }>());
