@@ -5,11 +5,18 @@ import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
 import { Board, BoardParams } from '@boards/models/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
+import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/models/user.model';
 import { selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile } from '../../../files/model/file.model';
-import { ColumnTask } from '../../../tasks/model/task.model';
+import {
+  ColumnTask,
+  ColumnTaskParams,
+  ColumnTaskSetUpdateParams,
+  ColumnTaskUpdateParams,
+} from '../../../tasks/model/task.model';
+import { Column } from '../../../columns/models/column.model';
 
 @Injectable({
   providedIn: 'root',
@@ -85,6 +92,51 @@ export class StoreFacade {
 
   deleteUser(id: User['_id']): void {
     this.store.dispatch(fromUser.deleteUser({ id }));
+  }
+
+  getTasks(boardId: Board['_id'], columnId: Column['_id']): void {
+    this.store.dispatch(fromTask.loadTasks({ boardId, columnId }));
+  }
+
+  getTasksSet(ids: ColumnTask['_id'][]): void {
+    this.store.dispatch(fromTask.loadTasksSet({ ids }));
+  }
+
+  getTasksByUser(userId: User['_id']): void {
+    this.store.dispatch(fromTask.loadTasksByUser({ userId }));
+  }
+
+  getTasksByBoard(boardId: Board['_id']): void {
+    this.store.dispatch(fromTask.loadTasksByBoard({ boardId }));
+  }
+
+  getTasksBySearchString(searchString: string): void {
+    this.store.dispatch(fromTask.loadTasksBySearchString({ searchString }));
+  }
+
+  getTask(boardId: Board['_id'], columnId: Column['_id'], taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
+  }
+
+  createTask(boardId: Board['_id'], columnId: Column['_id'], taskParams: ColumnTaskParams): void {
+    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams }));
+  }
+
+  updateTask(
+    boardId: Board['_id'],
+    columnId: Column['_id'],
+    taskId: ColumnTask['_id'],
+    taskParams: ColumnTaskUpdateParams,
+  ): void {
+    this.store.dispatch(fromTask.updateTask({ boardId, columnId, taskId, taskParams }));
+  }
+
+  updateTasksSet(tasksParams: ColumnTaskSetUpdateParams[]): void {
+    this.store.dispatch(fromTask.updateTasksSet({ tasksParams }));
+  }
+
+  deleteTask(boardId: Board['_id'], columnId: Column['_id'], taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromTask.deleteTask({ boardId, columnId, taskId }));
   }
 
   getFilesSet(taskFileIds: TaskFile['_id'][]): void {
