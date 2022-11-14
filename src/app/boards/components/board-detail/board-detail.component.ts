@@ -23,8 +23,7 @@ export class BoardDetailComponent implements OnInit {
     this.storeFacade.getUsers();
     this.route.params.subscribe((param) => {
       const { boardId } = param;
-      this.storeFacade.getBoard(boardId);
-      this.storeFacade.getColumns(boardId);
+      this.storeFacade.getBoardAllData(boardId);
     });
   }
 }

@@ -63,6 +63,12 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoard({ id }));
   }
 
+  getBoardAllData(boardId: Board['_id']): void {
+    this.getBoard(boardId);
+    this.getColumns(boardId);
+    this.getTasksByBoard(boardId);
+  }
+
   getBoardsSet(ids: Board['_id'][]): void {
     this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
   }
