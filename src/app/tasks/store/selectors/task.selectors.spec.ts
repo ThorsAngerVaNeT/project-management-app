@@ -1,12 +1,13 @@
-import * as fromTask from '../reducers/task.reducer';
-import { selectTaskState } from './task.selectors';
+import { selectAllTasks } from './task.selectors';
 
 describe('Task Selectors', () => {
+  const initialState = {
+    ids: [],
+    entities: [],
+  };
   it('should select the feature state', () => {
-    const result = selectTaskState({
-      [fromTask.taskFeatureKey]: {},
-    });
+    const result = selectAllTasks.projector(initialState);
 
-    expect(result).toEqual({});
+    expect(result).toEqual(initialState.entities);
   });
 });

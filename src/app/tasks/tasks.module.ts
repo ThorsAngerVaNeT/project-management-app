@@ -14,7 +14,7 @@ import * as fromTask from './store/reducers/task.reducer';
     SharedModule,
     TaskRoutingModule,
     EffectsModule.forFeature([TaskEffects]),
-    StoreModule.forFeature(fromTask.taskFeatureKey, fromTask.reducer),
+    StoreModule.forFeature(fromTask.tasksFeatureKey, fromTask.reducer),
   ],
 })
 export class TasksModule {}
