@@ -21,4 +21,9 @@ export const reducer = createReducer(
   on(UserActions.deleteUserSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 
-export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
+export const {
+  selectIds: selectUserIds,
+  selectEntities: selectUserEntities,
+  selectAll: selectAllUsers,
+  selectTotal: selectUserTotal,
+} = adapter.getSelectors();

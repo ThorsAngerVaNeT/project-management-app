@@ -6,11 +6,11 @@ export const selectBoardsState = createFeatureSelector<fromBoard.BoardsState>(fr
 
 export const selectAllBoards = createSelector(selectBoardsState, fromBoard.selectAllBoards);
 
-export const selectBoardsWithUsers = createSelector(selectAllBoards, selectUsersEntities, (boards, allUsers) => {
+export const selectBoardsWithUsers = createSelector(selectAllBoards, selectUsersEntities, (boards, usersEntities) => {
   return boards.map((board) => {
     const { owner, users: boardUsers } = board;
-    const ownerName = allUsers[owner]?.name;
-    const users = boardUsers.map((userId: string) => allUsers[userId] ?? userId);
+    const ownerName = usersEntities[owner]?.name;
+    const users = boardUsers.map((userId: string) => usersEntities[userId] ?? userId);
     return {
       ...board,
       ownerName,
