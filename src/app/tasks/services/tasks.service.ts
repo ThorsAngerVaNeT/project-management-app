@@ -6,6 +6,7 @@ import { APIParams } from '@core/enums/api-params.enum';
 import { ColumnTask, ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskSetUpdateParams } from '../model/task.model';
 import { Board } from '@boards/models/board.model';
 import { Column } from '@columns/models/column.model';
+import { User } from '../../users/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +23,13 @@ export class TasksService {
     return this.http.get<ColumnTask[]>(this.getTaskUrl(boardId, columnId));
   }
 
-  public getTasksSet(listTaskIds: string[]): Observable<ColumnTask[]> {
+  public getTasksSet(listTaskIds: ColumnTask['_id'][]): Observable<ColumnTask[]> {
     const params = new HttpParams().set(APIParams.ids, listTaskIds.join());
 
     return this.http.get<ColumnTask[]>(APIEndpoints.tasksSet, { params });
   }
 
-  public getTasksByUser(userId: string): Observable<ColumnTask[]> {
+  public getTasksByUser(userId: User['_id']): Observable<ColumnTask[]> {
     const params = new HttpParams().set(APIParams.userId, userId);
 
     return this.http.get<ColumnTask[]>(APIEndpoints.tasksSet, { params });
