@@ -25,4 +25,9 @@ export const reducer = createReducer(
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
 );
 
-export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
+export const {
+  selectIds: selectTaskIds,
+  selectEntities: selectTaskEntities,
+  selectAll: selectAllTasks,
+  selectTotal: selectTaskTotal,
+} = adapter.getSelectors();
