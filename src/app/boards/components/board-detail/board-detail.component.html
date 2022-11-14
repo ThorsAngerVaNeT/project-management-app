@@ -14,5 +14,18 @@
 
   <div class="project__columns" *ngIf="columns$ | async as columns">
     <app-column *ngFor="let column of columns" [column]="column"></app-column>
+
+    <button
+      nz-button
+      nz-tooltip
+      i18n-nzTooltipTitle="@@AddNewColumn"
+      nzType="primary"
+      nzShape="circle"
+      nzTooltipTitle="Add New Column"
+      nzTooltipPlacement="bottom"
+      nzTooltipColor="#203c56"
+    >
+      <span nz-icon nzType="plus"></span>
+    </button>
   </div>
 </div>
