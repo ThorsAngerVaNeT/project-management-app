@@ -19,6 +19,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -46,6 +47,7 @@ const MODULES = [
   NzCheckboxModule,
   NzCardModule,
   NzModalModule,
+  NzSpinModule,
 
   CommonModule,
   ReactiveFormsModule,

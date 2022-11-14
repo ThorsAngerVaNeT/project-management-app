@@ -2,6 +2,10 @@
   <app-header></app-header>
 
   <nz-content>
+    <ng-container *ngIf="loaderService.isLoading$ | async as isLoading">
+      <nz-spin [ngClass]="isLoading ? 'app-loader' : ''" nzSimple [nzSpinning]="isLoading"></nz-spin>
+    </ng-container>
+
     <router-outlet></router-outlet>
   </nz-content>
 
