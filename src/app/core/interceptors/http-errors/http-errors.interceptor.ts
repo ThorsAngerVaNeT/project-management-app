@@ -19,8 +19,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(environment.RETRY_HTTP_COUNT),
       catchError((error) =>
         throwError(() => {
-          if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
-            // todo refresh token, now just throw error
+          if (
+            error instanceof HttpErrorResponse &&
+            (error.status === HttpStatusCode.Unauthorized || error.status === HttpStatusCode.Forbidden)
+          ) {
             return error;
           } else {
             return error;

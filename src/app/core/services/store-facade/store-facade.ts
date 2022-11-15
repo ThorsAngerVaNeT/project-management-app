@@ -7,16 +7,17 @@ import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/models/user.model';
-import { selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
+import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
-import { TaskFile } from '../../../files/model/file.model';
+import { TaskFile } from '@files/model/file.model';
+import * as fromColumn from '@columns/store/actions/column.actions';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/models/column.model';
 import {
   ColumnTask,
   ColumnTaskParams,
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
-} from '../../../tasks/model/task.model';
-import { Column } from '../../../columns/models/column.model';
+} from '@tasks/model/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,8 @@ export class StoreFacade {
   token$ = this.store.select(selectToken);
 
   boards$ = this.store.select(selectBoardsWithUsers);
+
+  boardDetail$ = this.store.select(selectBoardDetailViewModel);
 
   constructor(private store: Store) {}
 
@@ -54,6 +57,12 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoard({ id }));
   }
 
+  getBoardAllData(boardId: Board['_id']): void {
+    this.getBoard(boardId);
+    this.getColumns(boardId);
+    this.getTasksByBoard(boardId);
+  }
+
   getBoardsSet(ids: Board['_id'][]): void {
     this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
   }
@@ -72,6 +81,42 @@ export class StoreFacade {
 
   deleteBoard(id: Board['_id']): void {
     this.store.dispatch(fromBoard.deleteBoard({ id }));
+  }
+
+  getColumns(boardId: Board['_id']): void {
+    this.store.dispatch(fromColumn.loadColumns({ boardId }));
+  }
+
+  getColumnsSet(columnId: Column['_id'][]): void {
+    this.store.dispatch(fromColumn.loadColumnsSet({ columnId }));
+  }
+
+  getColumnsByUser(userId: User['_id']): void {
+    this.store.dispatch(fromColumn.loadColumnsByUser({ userId }));
+  }
+
+  getColumn(boardId: Board['_id'], columnId: Column['_id']): void {
+    this.store.dispatch(fromColumn.loadColumn({ boardId, columnId }));
+  }
+
+  createColumn(boardId: Board['_id'], column: ColumnParams): void {
+    this.store.dispatch(fromColumn.createColumn({ boardId, column }));
+  }
+
+  createColumnsSet(columns: ColumnsSetParams[]): void {
+    this.store.dispatch(fromColumn.createColumnsSet({ columns }));
+  }
+
+  updateColumn(boardId: Board['_id'], columnId: Column['_id'], column: ColumnParams): void {
+    this.store.dispatch(fromColumn.updateColumn({ boardId, columnId, column }));
+  }
+
+  updateColumnsSet(columns: ColumnSetUpdateParams[]): void {
+    this.store.dispatch(fromColumn.updateColumnsSet({ columns }));
+  }
+
+  deleteColumn(boardId: Board['_id'], columnId: Column['_id']): void {
+    this.store.dispatch(fromColumn.deleteColumn({ boardId, columnId }));
   }
 
   getUsers(): void {

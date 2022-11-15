@@ -1,8 +1,18 @@
-<nz-card nzHoverable style="width: 300px" [nzCover]="coverTemplate3" [nzActions]="[actionEdit, actionEllipsis]">
-  <nz-card-meta nzTitle="Yet Another Board" nzDescription="Owner: John Doe"></nz-card-meta>
+<nz-card nzHoverable style="width: 300px" [nzCover]="coverTemplate3" [nzActions]="[actionEllipsis]">
+  <nz-card-meta
+    nzTitle="{{ board.title }}"
+    nzDescription="Owner: {{ board.owner.name }}"
+    [routerLink]="['/boards', board._id]"
+  ></nz-card-meta>
 </nz-card>
 <ng-template #coverTemplate3>
-  <img alt="example" width="300" height="182" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" />
+  <img
+    alt="example"
+    width="300"
+    height="182"
+    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+    [routerLink]="['/boards', board._id]"
+  />
 </ng-template>
 <ng-template #actionSetting>
   <span nz-icon nzType="setting"></span>
