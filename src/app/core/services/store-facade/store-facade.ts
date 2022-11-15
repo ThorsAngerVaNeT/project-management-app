@@ -7,7 +7,7 @@ import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/models/user.model';
-import { selectBoardsWithUsers, selectCurrentBoard } from '@boards/store/selectors/board.selectors';
+import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
@@ -18,8 +18,6 @@ import {
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
-import { selectBoardId } from '@core/store/selectors/router.selector';
-import { selectCurrentBoardColumns } from '@columns/store/selectors/column.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -31,11 +29,7 @@ export class StoreFacade {
 
   boards$ = this.store.select(selectBoardsWithUsers);
 
-  currentBoard$ = this.store.select(selectCurrentBoard);
-
-  boardId$ = this.store.select(selectBoardId);
-
-  columns$ = this.store.select(selectCurrentBoardColumns);
+  boardDetail$ = this.store.select(selectBoardDetailViewModel);
 
   constructor(private store: Store) {}
 

@@ -1,31 +1,33 @@
-<div class="board__inner-content" *ngIf="currentBoard$ | async as board">
-  <nz-page-header nzBackIcon>
-    <nz-avatar
-      nz-page-header-avatar
-      [nzSize]="64"
-      nzSrc="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-    ></nz-avatar>
-    <nz-page-header-title>{{ board.title }}</nz-page-header-title>
-  </nz-page-header>
+<ng-container *ngIf="boardDetail$ | async as boardDetail">
+  <div class="board__inner-content" *ngIf="boardDetail.board as board">
+    <nz-page-header nzBackIcon>
+      <nz-avatar
+        nz-page-header-avatar
+        [nzSize]="64"
+        nzSrc="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+      ></nz-avatar>
+      <nz-page-header-title>{{ board.title }}</nz-page-header-title>
+    </nz-page-header>
 
-  <div class="board-participants">
-    Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
+    <div class="board-participants">
+      Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
+    </div>
+
+    <div class="project__columns" *ngIf="boardDetail.columns as columns">
+      <app-column *ngFor="let column of columns" [column]="column"></app-column>
+
+      <button
+        nz-button
+        nz-tooltip
+        i18n-nzTooltipTitle="@@AddNewColumn"
+        nzType="primary"
+        nzShape="circle"
+        nzTooltipTitle="Add New Column"
+        nzTooltipPlacement="bottom"
+        nzTooltipColor="#203c56"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+    </div>
   </div>
-
-  <div class="project__columns" *ngIf="columns$ | async as columns">
-    <app-column *ngFor="let column of columns" [column]="column"></app-column>
-
-    <button
-      nz-button
-      nz-tooltip
-      i18n-nzTooltipTitle="@@AddNewColumn"
-      nzType="primary"
-      nzShape="circle"
-      nzTooltipTitle="Add New Column"
-      nzTooltipPlacement="bottom"
-      nzTooltipColor="#203c56"
-    >
-      <span nz-icon nzType="plus"></span>
-    </button>
-  </div>
-</div>
+</ng-container>
