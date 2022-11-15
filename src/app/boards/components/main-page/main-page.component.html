@@ -1,17 +1,4 @@
 <div class="main-inner-content" *ngIf="boards$ | async as boards">
   <app-board-card *ngFor="let board of boards" [board]="board"></app-board-card>
-  <nz-card nzHoverable class="new-board-card">
-    <button
-      nz-button
-      nz-tooltip
-      i18n-nzTooltipTitle="@@AddNewBoard"
-      nzType="primary"
-      nzShape="circle"
-      nzTooltipTitle="Add New Board"
-      nzTooltipPlacement="bottom"
-      nzTooltipColor="#203c56"
-    >
-      <span nz-icon nzType="plus"></span>
-    </button>
-  </nz-card>
+  <app-board-add></app-board-add>
 </div>

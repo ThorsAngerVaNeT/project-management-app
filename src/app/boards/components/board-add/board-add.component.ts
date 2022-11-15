@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Component({
   selector: 'app-board-add',
@@ -8,9 +9,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardAddComponent implements OnInit {
-  isVisible = true;
+  isVisible = false;
 
   boardAddForm!: FormGroup;
+
+  users$ = this.storeFacade.users$;
+
+  constructor(private storeFacade: StoreFacade) {}
+
+  showModal(): void {
+    this.isVisible = true;
+  }
 
   ngOnInit(): void {
     this.boardAddForm = new FormGroup({

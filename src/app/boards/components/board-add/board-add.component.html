@@ -1,3 +1,19 @@
+<nz-card nzHoverable class="new-board-card">
+  <button
+    nz-button
+    nz-tooltip
+    i18n-nzTooltipTitle="@@AddNewBoard"
+    nzType="primary"
+    nzShape="circle"
+    nzTooltipTitle="Add New Board"
+    nzTooltipPlacement="bottom"
+    nzTooltipColor="#203c56"
+    (click)="showModal()"
+  >
+    <span nz-icon nzType="plus"></span>
+  </button>
+</nz-card>
+
 <nz-modal
   [(nzVisible)]="isVisible"
   nzTitle="Create Board"
@@ -33,14 +49,11 @@
             i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
             formControlName="participants"
           >
-            <nz-option nzLabel="Lea" nzValue="Lea"></nz-option>
-            <nz-option nzLabel="Mike" nzValue="Mike1"></nz-option>
-            <nz-option nzLabel="Lea" nzValue="Lea3"></nz-option>
-            <nz-option nzLabel="Mike" nzValue="Mike2"></nz-option>
-            <nz-option nzLabel="Lea" nzValue="Lea2"></nz-option>
-            <nz-option nzLabel="Mike" nzValue="Mike3"></nz-option>
-            <nz-option nzLabel="Lea" nzValue="Lea1"></nz-option>
-            <nz-option nzLabel="Mike" nzValue="Mike4"></nz-option>
+            <nz-option
+              *ngFor="let user of users$ | async"
+              nzLabel="{{ user.name }}"
+              nzValue="{{ user.name }}"
+            ></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
