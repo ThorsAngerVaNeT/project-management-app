@@ -8,14 +8,14 @@ export const selectTaskState = createFeatureSelector<fromTask.TasksState>(fromTa
 export const selectAllTasks = createSelector(selectTaskState, fromTask.selectAllTasks);
 
 export const selectTasksOfCurrentBoardByColumns = createSelector(selectAllTasks, selectBoardId, (tasks, boardId) => {
-  const groupedTasks: { [keyof: string]: ColumnTask[] } = {};
+  const initialValue: { [keyof: string]: ColumnTask[] } = {};
   const currentBoardTasks = tasks
     .filter((task) => task.boardId === boardId)
-    .reduce((acc, cur) => {
-      if (!acc[cur.columnId]) acc[cur.columnId] = [];
-      acc[cur.columnId].push(cur);
-      return acc;
-    }, groupedTasks);
+    .reduce((accumulator, currentValue) => {
+      if (!accumulator[currentValue.columnId]) accumulator[currentValue.columnId] = [];
+      accumulator[currentValue.columnId].push(currentValue);
+      return accumulator;
+    }, initialValue);
 
   return currentBoardTasks;
 });
