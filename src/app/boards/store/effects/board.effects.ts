@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class BoardEffects {
-  constructor(private actions$: Actions, private boardsService: BoardsService) {}
+  constructor(private actions$: Actions, private boardsService: BoardsService, private storeFacade: StoreFacade) {}
 
   loadBoards$ = createEffect(() => {
     return this.actions$.pipe(
@@ -60,8 +61,9 @@ export class BoardEffects {
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),
-      concatMap((action) =>
-        this.boardsService.createBoard(action.board).pipe(
+      concatLatestFrom(() => this.storeFacade.user$),
+      concatMap(([action, { _id: owner }]) =>
+        this.boardsService.createBoard({ ...action.board, owner }).pipe(
           map((board) => BoardActions.createBoardSuccess({ board })),
           catchError((error) => of(BoardActions.createBoardFailure({ error }))),
         ),

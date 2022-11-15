@@ -80,7 +80,7 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
-  createBoard(board: BoardParams): void {
+  createBoard(board: Omit<BoardParams, 'owner'>): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
