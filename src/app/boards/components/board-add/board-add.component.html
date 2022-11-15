@@ -52,7 +52,7 @@
             <nz-option
               *ngFor="let user of users$ | async"
               nzLabel="{{ user.name }}"
-              nzValue="{{ user.name }}"
+              nzValue="{{ user._id }}"
             ></nz-option>
           </nz-select>
         </nz-form-control>
