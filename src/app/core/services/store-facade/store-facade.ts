@@ -20,6 +20,7 @@ import {
 } from '@tasks/model/task.model';
 import { selectBoardId } from '@core/store/selectors/router.selector';
 import { selectCurrentBoardColumns } from '@columns/store/selectors/column.selectors';
+import { selectAllUsers } from '@users/store/selectors/user.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,8 @@ export class StoreFacade {
   boardId$ = this.store.select(selectBoardId);
 
   columns$ = this.store.select(selectCurrentBoardColumns);
+
+  users$ = this.store.select(selectAllUsers);
 
   constructor(private store: Store) {}
 
