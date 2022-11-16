@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { StoreFacade } from '../../../core/services/store-facade/store-facade';
 import { BoardWithUsers } from '../../models/board.model';
 
 @Component({
@@ -9,4 +10,10 @@ import { BoardWithUsers } from '../../models/board.model';
 })
 export class BoardCardComponent {
   @Input() board!: BoardWithUsers;
+
+  constructor(private storeFacade: StoreFacade) {}
+
+  removeBoard(): void {
+    this.storeFacade.deleteBoard(this.board._id);
+  }
 }
