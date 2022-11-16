@@ -19,20 +19,51 @@
     </div>
     <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
       <nz-form-item>
-        <nz-form-control i18n-nzErrorTip="@@userNameErrorTip" nzErrorTip="Please provide your username">
+        <nz-form-control [nzErrorTip]="loginErrorTip">
+          <nz-input-group nzPrefixIcon="login">
+            <input
+              type="text"
+              nz-input
+              formControlName="login"
+              placeholder="Login"
+              i18n-placeholder="@@loginPlaceholder"
+            />
+          </nz-input-group>
+          <ng-template #loginErrorTip>
+            <ng-container *ngIf="signUpForm.get('login')?.errors?.['required']" i18n="@@loginRequiredErrorTip"
+              >Please provide a login</ng-container
+            >
+            <ng-container *ngIf="signUpForm.get('login')?.errors?.['minlength']" i18n="@@loginMinlengthErrorTip"
+              >Login should be at least two characters long</ng-container
+            >
+            <ng-container
+              *ngIf="signUpForm.get('login')?.errors?.['userAlreadyExists']"
+              i18n="@@userAlreadyExistsErrorTip"
+              >This user login already exists, please provide a new one</ng-container
+            >
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="nameErrorTip">
           <nz-input-group nzPrefixIcon="user">
             <input
               type="text"
               nz-input
-              formControlName="userName"
-              placeholder="Username"
-              i18n-placeholder="@@userNamePlaceholder"
+              formControlName="name"
+              placeholder="Name"
+              i18n-placeholder="@@namePlaceholder"
             />
           </nz-input-group>
+          <ng-template #nameErrorTip>
+            <ng-container *ngIf="signUpForm.get('name')?.errors?.['required']" i18n="@@nameRequiredErrorTip"
+              >Please provide a name</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control i18n-nzErrorTip="@@passwordErrorTip" nzErrorTip="Please provide your password">
+        <nz-form-control [nzErrorTip]="passwordErrorTip">
           <nz-input-group nzPrefixIcon="lock">
             <input
               type="password"
@@ -42,6 +73,14 @@
               i18n-placeholder="@@passwordPlaceholder"
             />
           </nz-input-group>
+          <ng-template #passwordErrorTip>
+            <ng-container *ngIf="signUpForm.get('password')?.errors?.['required']" i18n="@@passwordRequiredErrorTip"
+              >Please provide a password</ng-container
+            >
+            <ng-container *ngIf="signUpForm.get('password')?.errors?.['pattern']" i18n="@@passwordPatternErrorTip"
+              >Please check if password complies with the requirements above</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 

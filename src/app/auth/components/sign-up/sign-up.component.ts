@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,13 +14,22 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      userName: new FormControl(),
-      password: new FormControl(),
+      login: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
+      ]),
     });
   }
 
   submitForm(): void {
-    console.log('Form Submitted: ', this.signUpForm);
+    const userParams = {
+      name: this.signUpForm.value.name,
+      login: this.signUpForm.value.login,
+      password: this.signUpForm.value.password,
+    };
+    console.log('Form Submitted: ', this.signUpForm, userParams);
   }
 
   handleCancel(): void {
