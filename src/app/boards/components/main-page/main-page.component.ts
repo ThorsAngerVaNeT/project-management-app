@@ -22,15 +22,15 @@ export class MainPageComponent implements OnInit {
 
   showModal(): void {
     const modal = this.modalService.create({
+      nzTitle: $localize`:@@CreateBoardModalTitle:Create Board`,
       nzContent: BoardAddComponent,
-      nzClosable: false,
       nzFooter: [
         {
-          label: $localize`:@@CreateBoardCancelText:`,
+          label: $localize`:@@CreateBoardCancelText:Cancel`,
           onClick: (): void => modal.destroy(),
         },
         {
-          label: $localize`:@@CreateBoardOkText:`,
+          label: $localize`:@@CreateBoardOkText:Save`,
           type: 'primary',
           loading: false,
           onClick(instance): void {
