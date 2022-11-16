@@ -13,7 +13,7 @@
       Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
     </div>
 
-    <div class="project__columns" *ngIf="boardDetail.columns as columns">
+    <div class="project__columns" *ngIf="boardDetail.columns as columns" cdkDropListGroup>
       <app-column *ngFor="let column of columns" [column]="column"></app-column>
 
       <button

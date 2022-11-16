@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -50,6 +51,7 @@ const MODULES = [
 
   CommonModule,
   ReactiveFormsModule,
+  DragDropModule,
 ];
 
 @NgModule({
