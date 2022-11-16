@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board-add',
@@ -18,6 +18,10 @@ export class BoardAddComponent implements OnInit {
       participants: new FormControl(),
       image: new FormControl(),
     });
+  }
+
+  get title(): AbstractControl | null {
+    return this.boardAddForm.get('title');
   }
 
   handleOk(): void {

@@ -17,13 +17,11 @@
           <input nz-input formControlName="title" id="title" />
 
           <ng-template #titleErrorTip>
-            <ng-container
-              *ngIf="boardAddForm.get('title')?.errors?.['required']"
-              i18n="@@CreateBoardTitleRequiredErrorTip"
+            <ng-container *ngIf="title?.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip"
               >Please provide a title</ng-container
             >
             <ng-container
-              *ngIf="boardAddForm.get('title')?.errors?.['maxlength'] || boardAddForm.get('title')?.errors?.['minlength']"
+              *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')"
               i18n="@@CreateBoardTitleMinlengthErrorTip"
               >Title should be 2-40 characters long</ng-container
             >

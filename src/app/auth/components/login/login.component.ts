@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +20,14 @@ export class LoginComponent implements OnInit {
         Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
       ]),
     });
+  }
+
+  get login(): AbstractControl | null {
+    return this.logInForm.get('login');
+  }
+
+  get password(): AbstractControl | null {
+    return this.logInForm.get('password');
   }
 
   submitForm(): void {

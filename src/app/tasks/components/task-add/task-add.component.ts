@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-task-add',
@@ -19,6 +19,18 @@ export class TaskAddComponent implements OnInit {
       responsible: new FormControl('', [Validators.required]),
       participants: new FormControl(),
     });
+  }
+
+  get title(): AbstractControl | null {
+    return this.taskAddForm.get('title');
+  }
+
+  get description(): AbstractControl | null {
+    return this.taskAddForm.get('description');
+  }
+
+  get responsible(): AbstractControl | null {
+    return this.taskAddForm.get('responsible');
   }
 
   handleOk(): void {

@@ -16,11 +16,11 @@
         <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
           <input nz-input id="title" formControlName="title" />
           <ng-template #titleErrorTip>
-            <ng-container *ngIf="taskAddForm.get('title')?.errors?.['required']" i18n="@@TaskTitleRequiredErrorTip"
+            <ng-container *ngIf="title?.hasError('required')" i18n="@@TaskTitleRequiredErrorTip"
               >Please provide a title</ng-container
             >
             <ng-container
-              *ngIf="taskAddForm.get('title')?.errors?.['maxlength'] || taskAddForm.get('title')?.errors?.['minlength']"
+              *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')"
               i18n="@@TaskTitleMinlengthErrorTip"
               >Title should be 2-40 characters long</ng-container
             >
@@ -33,9 +33,7 @@
         <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="descriptionErrorTip">
           <textarea nz-input rows="2" formControlName="description"></textarea>
           <ng-template #descriptionErrorTip>
-            <ng-container
-              *ngIf="taskAddForm.get('description')?.errors?.['maxlength']"
-              i18n="@@TaskTitleMaxlengthErrorTip"
+            <ng-container *ngIf="description?.hasError('maxlength')" i18n="@@TaskTitleMaxlengthErrorTip"
               >Description should be no more than 255 characters long</ng-container
             >
           </ng-template>
@@ -62,9 +60,7 @@
           </nz-select>
 
           <ng-template #responsibleErrorTip>
-            <ng-container
-              *ngIf="taskAddForm.get('responsible')?.errors?.['required']"
-              i18n="@@TaskResponsibleRequiredErrorTip"
+            <ng-container *ngIf="responsible?.hasError('required')" i18n="@@TaskResponsibleRequiredErrorTip"
               >Please provide a responsible (task owner)</ng-container
             >
           </ng-template>

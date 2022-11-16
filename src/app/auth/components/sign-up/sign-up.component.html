@@ -30,15 +30,13 @@
             />
           </nz-input-group>
           <ng-template #loginErrorTip>
-            <ng-container *ngIf="signUpForm.get('login')?.errors?.['required']" i18n="@@loginRequiredErrorTip"
+            <ng-container *ngIf="login?.hasError('required')" i18n="@@loginRequiredErrorTip"
               >Please provide a login</ng-container
             >
-            <ng-container *ngIf="signUpForm.get('login')?.errors?.['minlength']" i18n="@@loginMinlengthErrorTip"
+            <ng-container *ngIf="login?.hasError('minlength')" i18n="@@loginMinlengthErrorTip"
               >Login should be at least two characters long</ng-container
             >
-            <ng-container
-              *ngIf="signUpForm.get('login')?.errors?.['userAlreadyExists']"
-              i18n="@@userAlreadyExistsErrorTip"
+            <ng-container *ngIf="login?.hasError('userAlreadyExists')" i18n="@@userAlreadyExistsErrorTip"
               >This user login already exists, please provide a new one</ng-container
             >
           </ng-template>
@@ -56,7 +54,7 @@
             />
           </nz-input-group>
           <ng-template #nameErrorTip>
-            <ng-container *ngIf="signUpForm.get('name')?.errors?.['required']" i18n="@@nameRequiredErrorTip"
+            <ng-container *ngIf="name?.hasError('required')" i18n="@@nameRequiredErrorTip"
               >Please provide a name</ng-container
             >
           </ng-template>
@@ -74,11 +72,11 @@
             />
           </nz-input-group>
           <ng-template #passwordErrorTip>
-            <ng-container *ngIf="signUpForm.get('password')?.errors?.['required']" i18n="@@passwordRequiredErrorTip"
+            <ng-container *ngIf="password?.hasError('required')" i18n="@@passwordRequiredErrorTip"
               >Please provide a password</ng-container
             >
-            <ng-container *ngIf="signUpForm.get('password')?.errors?.['pattern']" i18n="@@passwordPatternErrorTip"
-              >Please check if password complies with the requirements above</ng-container
+            <ng-container *ngIf="password?.hasError('pattern')" i18n="@@passwordPatternErrorTip"
+              >Please check your password for typos</ng-container
             >
           </ng-template>
         </nz-form-control>

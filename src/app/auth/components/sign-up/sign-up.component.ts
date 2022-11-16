@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,6 +30,18 @@ export class SignUpComponent implements OnInit {
       password: this.signUpForm.value.password,
     };
     console.log('Form Submitted: ', this.signUpForm, userParams);
+  }
+
+  get name(): AbstractControl | null {
+    return this.signUpForm.get('name');
+  }
+
+  get login(): AbstractControl | null {
+    return this.signUpForm.get('login');
+  }
+
+  get password(): AbstractControl | null {
+    return this.signUpForm.get('password');
   }
 
   handleCancel(): void {
