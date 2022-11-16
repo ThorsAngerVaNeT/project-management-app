@@ -2,7 +2,7 @@
   <div class="title-to-input" nzAlign="center">
     <h3>
       {{ column.title }}
-      <nz-badge nzStandalone [nzCount]="column.tasks.length"></nz-badge>
+      <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
     <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
   </div>
