@@ -1,81 +1,42 @@
-<nz-card nzHoverable class="new-board-card">
-  <button
-    nz-button
-    nz-tooltip
-    i18n-nzTooltipTitle="@@AddNewBoard"
-    nzType="primary"
-    nzShape="circle"
-    nzTooltipTitle="Add New Board"
-    nzTooltipPlacement="bottom"
-    nzTooltipColor="#203c56"
-    (click)="showModal()"
-  >
-    <span nz-icon nzType="plus"></span>
-  </button>
-</nz-card>
+<form nz-form class="content-form" [formGroup]="boardAddForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateBoardTitle">Title</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Title is required" i18n-nzErrorTip="@@CreateBoardNzErrorTip">
+      <input nz-input formControlName="title" id="title" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants" i18n="@@CreateBoardParticipants"
+      >Participants</nz-form-label
+    >
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <nz-select
+        nzMode="multiple"
+        nzPlaceHolder="Please select team members"
+        i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
+        formControlName="participants"
+      >
+        <nz-option *ngFor="let user of users$ | async" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
 
-<nz-modal
-  [(nzVisible)]="isVisible"
-  nzTitle="Create Board"
-  i18n-nzTitle="@@CreateBoardModalTitle"
-  nzOkText="Save"
-  i18n-nzCancelTextOkText="@@CreateBoardOkText"
-  nzCancelText="Cancel"
-  i18n-nzCancelText="@@CreateBoardCancelText"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
->
-  <ng-container *nzModalContent>
-    <form nz-form class="content-form" [formGroup]="boardAddForm">
-      <nz-form-item>
-        <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateBoardTitle">Title</nz-form-label>
-        <nz-form-control
-          [nzSm]="17"
-          [nzXs]="24"
-          nzErrorTip="Title is required"
-          i18n-nzErrorTip="@@CreateBoardnzErrorTip"
-        >
-          <input nz-input formControlName="title" id="title" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants" i18n="@@CreateBoardParticipants"
-          >Participants</nz-form-label
-        >
-        <nz-form-control [nzSm]="17" [nzXs]="24">
-          <nz-select
-            nzMode="multiple"
-            nzPlaceHolder="Please select team members"
-            i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
-            formControlName="participants"
-          >
-            <nz-option
-              *ngFor="let user of users$ | async"
-              nzLabel="{{ user.name }}"
-              nzValue="{{ user._id }}"
-            ></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-label
-          [nzSm]="7"
-          [nzXs]="24"
-          nzFor="boardCoverImage"
-          nzTooltipTitle="What do you want to see on board cover"
-          i18n-nzTooltipTitle="@@CreateBoardImageTooltip"
-          >Board Image
-        </nz-form-label>
-        <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
-          <nz-upload nzType="drag" nzListType="picture" [nzMultiple]="false">
-            <p class="ant-upload-drag-icon">
-              <span nz-icon nzType="file-image"></span>
-            </p>
-            <p class="ant-upload-text" i18n="@@Upload">Drag or click to upload</p>
-          </nz-upload>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  </ng-container>
-</nz-modal>
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="7"
+      [nzXs]="24"
+      nzFor="boardCoverImage"
+      nzTooltipTitle="What do you want to see on board cover"
+      i18n-nzTooltipTitle="@@CreateBoardImageTooltip"
+      >Board Image
+    </nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
+      <nz-upload nzType="drag" nzListType="picture" [nzMultiple]="false">
+        <p class="ant-upload-drag-icon">
+          <span nz-icon nzType="file-image"></span>
+        </p>
+        <p class="ant-upload-text" i18n="@@Upload">Drag or click to upload</p>
+      </nz-upload>
+    </nz-form-control>
+  </nz-form-item>
+</form>
