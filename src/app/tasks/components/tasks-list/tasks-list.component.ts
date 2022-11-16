@@ -21,19 +21,36 @@ export class TasksListComponent {
 
   public drop(event: CdkDragDrop<ColumnTask[]>): void {
     if (event.previousContainer === event.container) {
+      const columnId = event.container.data[0].columnId;
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
-      const columnTaskSetUpdateParams: ColumnTaskSetUpdateParams[] = event.container.data.map((task, index) => {
-        return {
-          _id: task._id,
-          order: index,
-          columnId: task.columnId,
-        };
-      });
+      const columnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data, columnId);
 
       this.storeFacade.updateTasksSet(columnTaskSetUpdateParams);
     } else {
+      const previousColumnId = event.previousContainer.data[0].columnId;
+      const currentColumnId = event.container.data[0].columnId;
+
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+
+      const previousColumnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(
+        event.previousContainer.data,
+        previousColumnId,
+      );
+      const currentColumnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data, currentColumnId);
+
+      this.storeFacade.updateTasksSet([...previousColumnTaskSetUpdateParams, ...currentColumnTaskSetUpdateParams]);
     }
+  }
+
+  private getColumnTaskSetUpdateParams(columnTasks: ColumnTask[], columnId: string): ColumnTaskSetUpdateParams[] {
+    return columnTasks.map((task, index) => {
+      return {
+        _id: task._id,
+        order: index,
+        columnId: columnId,
+      };
+    });
   }
 }
