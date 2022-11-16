@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
 import { ColumnTask } from '../../model/task.model';
 
 @Component({
@@ -9,4 +11,12 @@ import { ColumnTask } from '../../model/task.model';
 })
 export class TasksListComponent {
   @Input() tasks!: ColumnTask[];
+
+  drop(event: CdkDragDrop<ColumnTask[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
+  }
 }

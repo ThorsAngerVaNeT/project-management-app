@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { TaskAddComponent } from './components/task-add/task-add.component';
 import { SharedModule } from '../shared/shared.module';
@@ -13,6 +14,7 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
 @NgModule({
   declarations: [TaskAddComponent, TaskItemComponent, TasksListComponent],
   imports: [
+    DragDropModule,
     SharedModule,
     TaskRoutingModule,
     EffectsModule.forFeature([TaskEffects]),
