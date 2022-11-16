@@ -1,4 +1,6 @@
-<form nz-form class="content-form" [formGroup]="boardAddForm">
+<ng-template [nzModalTitle] i18n="@@CreateBoardModalTitle">Create Board</ng-template>
+
+<form nz-form class="content-form" [formGroup]="boardAddForm" (ngSubmit)="handleOk()">
   <nz-form-item>
     <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateBoardTitle">Title</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Title is required" i18n-nzErrorTip="@@CreateBoardNzErrorTip">
@@ -39,4 +41,11 @@
       </nz-upload>
     </nz-form-control>
   </nz-form-item>
+
+  <ng-template [nzModalFooter]>
+    <button nz-button (click)="handleCancel()" i18n="@@CreateBoardCancelText">Cancel</button>
+    <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="handleOk()" i18n="@@CreateBoardOkText">
+      Save
+    </button>
+  </ng-template>
 </form>

@@ -21,24 +21,6 @@ export class MainPageComponent implements OnInit {
   }
 
   showModal(): void {
-    const modal = this.modalService.create({
-      nzTitle: $localize`:@@CreateBoardModalTitle:Create Board`,
-      nzContent: BoardAddComponent,
-      nzFooter: [
-        {
-          label: $localize`:@@CreateBoardCancelText:Cancel`,
-          onClick: (): void => modal.destroy(),
-        },
-        {
-          label: $localize`:@@CreateBoardOkText:Save`,
-          type: 'primary',
-          loading: false,
-          onClick(instance): void {
-            this.loading = true;
-            instance?.handleOk();
-          },
-        },
-      ],
-    });
+    this.modalService.create({ nzContent: BoardAddComponent });
   }
 }

@@ -15,6 +15,8 @@ import { createBoardSuccess } from '../../store/actions/board.actions';
 export class BoardAddComponent implements OnInit, OnDestroy {
   boardAddForm!: FormGroup;
 
+  isLoading = false;
+
   users$ = this.storeFacade.users$;
 
   subscription = new Subscription();
@@ -30,7 +32,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.action$.pipe(ofType(createBoardSuccess)).subscribe(() => {
-        this.modal.destroy();
+        this.handleCancel();
       }),
     );
   }
@@ -41,6 +43,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   handleOk(): void {
     if (this.boardAddForm.valid) {
+      this.isLoading = true;
       const { title, participants: users } = this.boardAddForm.value;
       this.storeFacade.createBoard({ title, users });
     } else {
@@ -51,5 +54,9 @@ export class BoardAddComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  handleCancel(): void {
+    this.modal.destroy();
   }
 }
