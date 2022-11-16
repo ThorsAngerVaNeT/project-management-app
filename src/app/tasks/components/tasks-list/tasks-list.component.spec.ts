@@ -1,7 +1,15 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 import { TasksListComponent } from './tasks-list.component';
+
+@Pipe({ name: 'sortByOrder' })
+class MockPipe implements PipeTransform {
+  transform<T extends { order: number }>(value: T[]): T[] {
+    return value;
+  }
+}
 
 describe('TasksListComponent', () => {
   let component: TasksListComponent;
@@ -9,7 +17,15 @@ describe('TasksListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TasksListComponent],
+      declarations: [TasksListComponent, MockPipe],
+      providers: [
+        {
+          provide: StoreFacade,
+          useValue: {
+            getUsers: (): void => {},
+          },
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
