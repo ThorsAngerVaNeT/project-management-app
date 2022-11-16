@@ -15,7 +15,11 @@ export class TasksListComponent {
 
   constructor(private storeFacade: StoreFacade) {}
 
-  drop(event: CdkDragDrop<ColumnTask[]>): void {
+  public trackById(index: number, item: ColumnTask): string {
+    return item._id;
+  }
+
+  public drop(event: CdkDragDrop<ColumnTask[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
