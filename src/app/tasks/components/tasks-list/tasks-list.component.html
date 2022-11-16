@@ -1,3 +1,14 @@
-<nz-list nzItemLayout="horizontal" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)">
-  <app-task-item *ngFor="let task of tasks | sortByOrder; trackBy: trackById" [task]="task" cdkDrag></app-task-item>
+<nz-list
+  class="tasks"
+  nzItemLayout="horizontal"
+  cdkDropList
+  [cdkDropListData]="tasks"
+  (cdkDropListDropped)="drop($event)"
+>
+  <app-task-item
+    class="task-item"
+    *ngFor="let task of tasks | sortByOrder; trackBy: trackById"
+    [task]="task"
+    cdkDrag
+  ></app-task-item>
 </nz-list>
