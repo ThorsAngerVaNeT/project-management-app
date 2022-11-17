@@ -9,7 +9,7 @@
 </ng-template>
 
 <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title">
-  <app-tasks-list [tasks]="column.tasks"></app-tasks-list>
+  <app-tasks-list [tasksWithColumnId]="{ columnId: column._id, tasks: column.tasks }"></app-tasks-list>
 </nz-card>
 <ng-template #actionAdd>
   <button

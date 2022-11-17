@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnTask, ColumnTaskSetUpdateParams } from '../../model/task.model';
+import { ColumnTask, ColumnTaskSetUpdateParams, ColumnTasksWithColumnId } from '../../model/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -11,7 +11,7 @@ import { ColumnTask, ColumnTaskSetUpdateParams } from '../../model/task.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksListComponent {
-  @Input() tasks!: ColumnTask[];
+  @Input() tasksWithColumnId!: ColumnTasksWithColumnId;
 
   constructor(private storeFacade: StoreFacade) {}
 
@@ -19,26 +19,34 @@ export class TasksListComponent {
     return item._id;
   }
 
-  public drop(event: CdkDragDrop<ColumnTask[]>): void {
+  public drop(event: CdkDragDrop<ColumnTasksWithColumnId>): void {
     if (event.previousContainer === event.container) {
-      const columnId = event.container.data[0].columnId;
+      const columnId = event.container.data.columnId;
 
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
 
-      const columnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data, columnId);
+      const columnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data.tasks, columnId);
 
       this.storeFacade.updateTasksSet(columnTaskSetUpdateParams);
     } else {
-      const previousColumnId = event.previousContainer.data[0].columnId;
-      const currentColumnId = event.container.data[0].columnId;
+      const previousColumnId = event.previousContainer.data.columnId;
+      const currentColumnId = event.container.data.columnId;
 
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      transferArrayItem(
+        event.previousContainer.data.tasks,
+        event.container.data.tasks,
+        event.previousIndex,
+        event.currentIndex,
+      );
 
       const previousColumnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(
-        event.previousContainer.data,
+        event.previousContainer.data.tasks,
         previousColumnId,
       );
-      const currentColumnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data, currentColumnId);
+      const currentColumnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(
+        event.container.data.tasks,
+        currentColumnId,
+      );
 
       this.storeFacade.updateTasksSet([...previousColumnTaskSetUpdateParams, ...currentColumnTaskSetUpdateParams]);
     }
