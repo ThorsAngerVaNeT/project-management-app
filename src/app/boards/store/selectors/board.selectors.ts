@@ -6,7 +6,7 @@ import { User } from '@users/models/user.model';
 import { Board, BoardWithUsers } from '@boards/models/board.model';
 import { selectRouter } from '@core/store/selectors/router.selector';
 import { EMPTY_USER } from '@users/store/reducers/user.reducer';
-import { selectCurrentBoardColumns } from '../../../columns/store/selectors/column.selectors';
+import { selectCurrentBoardColumns } from '@columns/store/selectors/column.selectors';
 
 export const selectBoardsState = createFeatureSelector<fromBoard.BoardsState>(fromBoard.boardsFeatureKey);
 
