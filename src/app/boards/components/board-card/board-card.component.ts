@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { BoardWithUsers } from '../../models/board.model';
 
 @Component({
@@ -11,9 +13,16 @@ import { BoardWithUsers } from '../../models/board.model';
 export class BoardCardComponent {
   @Input() board!: BoardWithUsers;
 
-  constructor(private storeFacade: StoreFacade) {}
+  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   removeBoard(): void {
-    this.storeFacade.deleteBoard(this.board._id);
+    this.modalService.confirm({
+      nzContent: ConfirmationComponent,
+      nzComponentParams: { itemToDelete: 'this board' },
+      nzOnOk: () => {
+        this.storeFacade.deleteBoard(this.board._id);
+      },
+      nzOkDanger: true,
+    });
   }
 }
