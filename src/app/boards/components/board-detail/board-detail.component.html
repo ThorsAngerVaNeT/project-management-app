@@ -21,7 +21,11 @@
       (cdkDropListDropped)="drop($event)"
       cdkDropListGroup
     >
-      <app-column *ngFor="let column of columns" [column]="column" cdkDrag></app-column>
+      <app-column
+        *ngFor="let column of columns | sortByOrder; trackBy: trackById"
+        [column]="column"
+        cdkDrag
+      ></app-column>
 
       <button
         nz-button

@@ -26,6 +26,10 @@ export class BoardDetailComponent implements OnInit {
     });
   }
 
+  public trackById(index: number, item: ColumnWithTasks): string {
+    return item._id;
+  }
+
   public drop(event: CdkDragDrop<ColumnWithTasks[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
