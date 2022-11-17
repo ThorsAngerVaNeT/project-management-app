@@ -1,1 +1,2 @@
-<button nz-button nzType="primary" (click)="showConfirm()"><span>Show Confirmation</span></button>
+<ng-template [nzModalTitle] i18n="@@confirmationTitle">Are you sure?</ng-template>
+<ng-container i18n="@@confirmationText">Are you sure you want to delete {{ itemToDelete }}?</ng-container>
