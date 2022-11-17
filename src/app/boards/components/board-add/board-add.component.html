@@ -29,6 +29,12 @@
         i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
         formControlName="participants"
       >
+        <nz-option
+          nzLabel="{{ (user$ | async)?.name }}"
+          nzValue="{{ (user$ | async)?._id }}"
+          nzHide
+          nzDisabled
+        ></nz-option>
         <nz-option *ngFor="let user of users$ | async" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
       </nz-select>
     </nz-form-control>
