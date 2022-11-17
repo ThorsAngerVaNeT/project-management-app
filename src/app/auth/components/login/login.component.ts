@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +14,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
-      userName: new FormControl(),
-      password: new FormControl(),
+      login: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      password: new FormControl('', [Validators.required]),
     });
+  }
+
+  get login(): AbstractControl | null {
+    return this.logInForm.get('login');
+  }
+
+  get password(): AbstractControl | null {
+    return this.logInForm.get('password');
   }
 
   submitForm(): void {

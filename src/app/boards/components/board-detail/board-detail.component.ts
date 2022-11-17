@@ -11,11 +11,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 export class BoardDetailComponent implements OnInit {
   data = [];
 
-  currentBoard$ = this.storeFacade.currentBoard$;
-
-  boardId$ = this.storeFacade.boardId$;
-
-  columns$ = this.storeFacade.columns$;
+  boardDetail$ = this.storeFacade.boardDetail$;
 
   constructor(private route: ActivatedRoute, private storeFacade: StoreFacade) {}
 

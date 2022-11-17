@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
@@ -25,8 +25,8 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.boardAddForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      participants: new FormControl([]),
+      title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
+      participants: new FormControl(),
       image: new FormControl(),
     });
 
@@ -39,6 +39,10 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get title(): AbstractControl | null {
+    return this.boardAddForm.get('title');
   }
 
   handleOk(): void {
