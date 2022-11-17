@@ -17,15 +17,14 @@
       class="project__columns"
       *ngIf="boardDetail.columns as columns"
       cdkDropList
+      cdkDropListOrientation="horizontal"
       [cdkDropListData]="columns"
       (cdkDropListDropped)="drop($event)"
       cdkDropListGroup
     >
-      <app-column
-        *ngFor="let column of columns | sortByOrder; trackBy: trackById"
-        [column]="column"
-        cdkDrag
-      ></app-column>
+      <div class="column-item-wrapper" *ngFor="let column of columns | sortByOrder; trackBy: trackById" cdkDrag>
+        <app-column [column]="column"></app-column>
+      </div>
 
       <button
         nz-button
