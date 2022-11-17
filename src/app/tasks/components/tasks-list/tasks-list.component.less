@@ -1,26 +1,21 @@
 @import 'variables.less';
 
 .tasks {
-  border: solid 1px @custom-grey;
   background: @background-color-xlight;
   border-radius: 4px;
   overflow: hidden;
   display: block;
 }
 
-.task-item {
-  border-bottom: solid 1px @custom-grey;
+.task-item-wrapper {
   color: rgba(0, 0, 0, 0.87);
   width: 100%;
   display: flex;
-  // flex-direction: row;
-  // align-items: center;
-  // justify-content: space-between;
   background: @background-color-xlight;
 }
 
-.task-item:last-child {
-  border: none;
+.task-item {
+  flex: 1;
 }
 
 .cdk-drag-preview {
@@ -30,13 +25,14 @@
 }
 
 .cdk-drag-placeholder {
-  opacity: 0;
+  background: @background-color-medium;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.tasks.cdk-drop-list-dragging .task-item:not(.cdk-drag-placeholder) {
+.tasks.cdk-drop-list-dragging .task-item-wrapper:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
