@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { ConfirmationComponent } from '../../../shared/components/confirmation/confirmation.component';
 import { ColumnTask } from '../../model/task.model';
 
 @Component({
@@ -9,4 +12,18 @@ import { ColumnTask } from '../../model/task.model';
 })
 export class TaskItemComponent {
   @Input() task!: ColumnTask;
+
+  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+
+  deleteTask(): void {
+    this.modalService.confirm({
+      nzContent: ConfirmationComponent,
+      nzComponentParams: { itemToDelete: 'this task' },
+      nzOnOk: () => {
+        const { boardId, columnId, _id: taskId } = this.task;
+        this.storeFacade.deleteTask(boardId, columnId, taskId);
+      },
+      nzOkDanger: true,
+    });
+  }
 }
