@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as ColumnActions from '../actions/column.actions';
-import { Column } from '../../models/column.model';
+import { Column } from '../../model/column.model';
 
 export const columnsFeatureKey = 'columns';
 

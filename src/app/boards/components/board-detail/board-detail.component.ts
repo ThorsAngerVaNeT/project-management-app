@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/models/column.model';
+import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
 
 @Component({
   selector: 'app-board',

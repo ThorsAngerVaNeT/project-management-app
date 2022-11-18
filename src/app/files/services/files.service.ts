@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
 import { TaskFile } from '../model/file.model';
-import { User } from '@users/models/user.model';
-import { Board } from '@boards/models/board.model';
+import { User } from '@users/model/user.model';
+import { Board } from '@boards/model/board.model';
 import { ColumnTask } from '@tasks/model/task.model';
 
 @Injectable({

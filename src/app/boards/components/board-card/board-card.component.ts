@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { BoardWithUsers } from '../../models/board.model';
+import { BoardWithUsers } from '../../model/board.model';
 
 @Component({
   selector: 'app-board-card',

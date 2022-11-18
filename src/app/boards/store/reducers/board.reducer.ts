@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Board } from '../../models/board.model';
+import { Board } from '../../model/board.model';
 import * as BoardActions from '../actions/board.actions';
 
 export const boardsFeatureKey = 'boards';
