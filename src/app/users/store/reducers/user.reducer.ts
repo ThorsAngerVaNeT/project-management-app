@@ -13,6 +13,12 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
 
 export const initialState: UserState = adapter.getInitialState({});
 
+export const EMPTY_USER: User = {
+  _id: '',
+  login: '',
+  name: '',
+};
+
 export const reducer = createReducer(
   initialState,
   on(UserActions.loadUsersSuccess, (state, { users }) => adapter.setAll(users, state)),

@@ -10,7 +10,7 @@ export const userSignInFailure = createAction('[Auth] User Sign In Failure', pro
 
 export const userSignOut = createAction('[Auth] User Sign Out');
 
-export const userSignUp = createAction('[Auth] User Sign In', props<{ data: UserParams }>());
+export const userSignUp = createAction('[Auth] User Sign Up', props<{ data: UserParams }>());
 export const userSignUpSuccess = createAction('[Auth] User Sign Up Success', props<{ user: User }>());
 export const userSignUpFailure = createAction('[Auth] User Sign Up Failure', props<{ error: unknown }>());
 

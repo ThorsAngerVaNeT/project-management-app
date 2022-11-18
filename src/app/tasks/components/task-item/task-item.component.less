@@ -1,0 +1,16 @@
+@import 'variables';
+
+.ant-list-item {
+  padding-left: 8px;
+  border-radius: 2px;
+}
+
+.ant-list-item:hover {
+  background-color: @background-color-light;
+  cursor: grab;
+}
+
+::ng-deep .ant-list-item-meta-title:hover {
+  cursor: pointer;
+  color: @primary-color;
+}

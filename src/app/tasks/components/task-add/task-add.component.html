@@ -12,29 +12,40 @@
   <ng-container *nzModalContent>
     <form nz-form class="content-form" [formGroup]="taskAddForm">
       <nz-form-item>
-        <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateTaskTitle">Title</nz-form-label>
-        <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Title is required" i18n-nzErrorTip="@@CreateTaskErrorTip">
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@TaskTitle">Title</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
           <input nz-input id="title" formControlName="title" />
+          <ng-template #titleErrorTip>
+            <ng-container *ngIf="title?.hasError('required')" i18n="@@TaskTitleRequiredErrorTip"
+              >Please provide a title</ng-container
+            >
+            <ng-container
+              *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')"
+              i18n="@@TaskTitleMinlengthErrorTip"
+              >Title should be 2-40 characters long</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="description" i18n="@@CreateTaskDescription"
-          >Description</nz-form-label
-        >
-        <nz-form-control [nzSm]="17" [nzXs]="24">
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="description" i18n="@@TaskDescription">Description</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="descriptionErrorTip">
           <textarea nz-input rows="2" formControlName="description"></textarea>
+          <ng-template #descriptionErrorTip>
+            <ng-container *ngIf="description?.hasError('maxlength')" i18n="@@TaskTitleMaxlengthErrorTip"
+              >Description should be no more than 255 characters long</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="responsible" i18n="@@CreateTaskResponsible"
-          >Responsible</nz-form-label
-        >
-        <nz-form-control [nzSm]="17" [nzXs]="24">
+        <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="responsible" i18n="@@TaskResponsible">Responsible</nz-form-label>
+        <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="responsibleErrorTip">
           <nz-select
             nzMode="default"
-            nzPlaceHolder="Please select responsible person"
+            nzPlaceHolder="Please select a responsible person"
             i18n-nzPlaceHolder="@@CreateTaskResponsiblePlaceHolder"
             formControlName="responsible"
           >
@@ -47,6 +58,12 @@
             <nz-option nzLabel="Lea" nzValue="Lea1"></nz-option>
             <nz-option nzLabel="Mike" nzValue="Mike4"></nz-option>
           </nz-select>
+
+          <ng-template #responsibleErrorTip>
+            <ng-container *ngIf="responsible?.hasError('required')" i18n="@@TaskResponsibleRequiredErrorTip"
+              >Please provide a responsible (task owner)</ng-container
+            >
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 

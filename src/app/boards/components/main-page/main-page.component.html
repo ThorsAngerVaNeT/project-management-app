@@ -1,71 +1,17 @@
-<div class="main-inner-content">
-  <app-board-card></app-board-card>
+<div class="main-inner-content" *ngIf="boards$ | async as boards">
+  <app-board-card *ngFor="let board of boards" [board]="board"></app-board-card>
 
-  <!-- below hard-coded cards for example -->
-
-  <nz-card
-    nzHoverable
-    style="width: 300px"
-    [nzCover]="coverTemplate"
-    [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
-  >
-    <nz-card-meta nzTitle="Awesome Board" nzDescription="Board created: 31.10.22 17:01"></nz-card-meta>
-  </nz-card>
-  <ng-template #coverTemplate>
-    <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-  </ng-template>
-  <ng-template #actionSetting>
-    <span nz-icon nzType="setting"></span>
-  </ng-template>
-  <ng-template #actionEdit>
-    <span nz-icon nzType="edit"></span>
-  </ng-template>
-  <ng-template #actionEllipsis>
-    <span nz-icon nzType="delete"></span>
-  </ng-template>
-
-  <nz-card
-    nzHoverable
-    style="width: 300px"
-    [nzCover]="coverTemplate2"
-    [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
-  >
-    <nz-card-meta
-      nzTitle="Even More Awesomely Awesome Board"
-      nzDescription="Board created: 31.10.22 18:01"
-    ></nz-card-meta>
-  </nz-card>
-  <ng-template #coverTemplate2>
-    <img
-      alt="example"
-      width="300"
-      height="182"
-      src="https://www.013.nl/uploads/cache/event_main_desktop/605388a27c174.jpg"
-    />
-  </ng-template>
-  <ng-template #actionSetting>
-    <span nz-icon nzType="setting"></span>
-  </ng-template>
-  <ng-template #actionEdit>
-    <span nz-icon nzType="edit"></span>
-  </ng-template>
-  <ng-template #actionEllipsis>
-    <span nz-icon nzType="delete"></span>
-  </ng-template>
-
-  <nz-card
-    nzHoverable
-    style="width: 300px; display: flex; align-items: center; justify-content: center; gap: 16px; text-align: center"
-  >
+  <nz-card nzHoverable class="new-board-card">
     <button
       nz-button
       nz-tooltip
-      i18n-nzTooltipTitle="@@AddNewBoard"
       nzType="primary"
       nzShape="circle"
       nzTooltipTitle="Add New Board"
+      i18n-nzTooltipTitle="@@AddNewBoard"
       nzTooltipPlacement="bottom"
       nzTooltipColor="#203c56"
+      (click)="showModal()"
     >
       <span nz-icon nzType="plus"></span>
     </button>

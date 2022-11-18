@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { HttpErrorInterceptor } from './http-errors.interceptor';
 
 describe('HttpErrorInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [HttpErrorInterceptor],
+      providers: [HttpErrorInterceptor, provideMockStore()],
     }),
   );
 
