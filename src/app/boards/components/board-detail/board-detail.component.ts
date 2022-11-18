@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { map } from 'rxjs';
 import { ColumnComponent } from '../../../columns/components/column/column.component';
+import { BoardDetailViewModel } from '../../models/board.model';
 
 @Component({
   selector: 'app-board',
@@ -12,9 +14,16 @@ import { ColumnComponent } from '../../../columns/components/column/column.compo
 export class BoardDetailComponent implements OnInit {
   @ViewChild('newColumnPlaceholder', { read: ViewContainerRef }) newColumnPlaceholder!: ViewContainerRef;
 
-  data = [];
+  boardId!: string;
 
-  boardDetail$ = this.storeFacade.boardDetail$;
+  columnsCount!: number;
+
+  boardDetail$ = this.storeFacade.boardDetail$.pipe(
+    map((boardDetail: BoardDetailViewModel) => {
+      this.columnsCount = boardDetail.columns.length;
+      return boardDetail;
+    }),
+  );
 
   constructor(private route: ActivatedRoute, private storeFacade: StoreFacade) {}
 
@@ -22,6 +31,7 @@ export class BoardDetailComponent implements OnInit {
     this.storeFacade.getUsers();
     this.route.params.subscribe((param) => {
       const { boardId } = param;
+      this.boardId = boardId;
       this.storeFacade.getBoardAllData(boardId);
     });
   }
@@ -29,5 +39,6 @@ export class BoardDetailComponent implements OnInit {
   addNewColumn(): void {
     const componentRef = this.newColumnPlaceholder.createComponent(ColumnComponent);
     componentRef.instance.componentRef = componentRef;
+    componentRef.setInput('column', { boardId: this.boardId, order: this.columnsCount });
   }
 }

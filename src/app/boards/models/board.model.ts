@@ -1,4 +1,5 @@
-import { User } from '../../users/models/user.model';
+import { ColumnWithTasks } from '@columns/models/column.model';
+import { User } from '@users/models/user.model';
 
 export interface Board {
   _id: string;
@@ -18,4 +19,9 @@ export interface BoardWithUsers {
   title: string;
   owner: User;
   users: User[];
+}
+
+export interface BoardDetailViewModel {
+  board: BoardWithUsers | null;
+  columns: ColumnWithTasks[];
 }

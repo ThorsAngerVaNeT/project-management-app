@@ -10,11 +10,19 @@
 
 <ng-template #titleInput>
   <div class="title-to-input">
-    <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
-      <input nz-input placeholder="To Do" nzSize="small" />
-    </nz-input-group>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+      <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
+        <input nz-input placeholder="To Do" nzSize="small" [formControl]="titleControl" />
+
+        <ng-template #titleErrorTip>
+          <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
+            Please provide a title
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
     <ng-template #suffixTemplateInfo>
-      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle"></span>
+      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle" (click)="createColumn()"></span>
     </ng-template>
     <ng-template #suffixTemplateInfo2>
       <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle" (click)="deleteComponent()"></span>
@@ -22,8 +30,8 @@
   </div>
 </ng-template>
 
-<nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="column ? title : titleInput">
-  <app-tasks-list [tasks]="column ? column.tasks : []"></app-tasks-list>
+<nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="column._id ? title : titleInput">
+  <app-tasks-list [tasks]="column._id ? column.tasks : []"></app-tasks-list>
 </nz-card>
 
 <ng-template #actionAdd>
