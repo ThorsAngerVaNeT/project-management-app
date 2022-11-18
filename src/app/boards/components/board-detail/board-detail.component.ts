@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { ColumnComponent } from '../../../columns/components/column/column.component';
 
 @Component({
   selector: 'app-board',
@@ -9,6 +10,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardDetailComponent implements OnInit {
+  @ViewChild('newColumnPlaceholder', { read: ViewContainerRef }) newColumnPlaceholder!: ViewContainerRef;
+
   data = [];
 
   boardDetail$ = this.storeFacade.boardDetail$;
@@ -21,5 +24,9 @@ export class BoardDetailComponent implements OnInit {
       const { boardId } = param;
       this.storeFacade.getBoardAllData(boardId);
     });
+  }
+
+  addNewColumn(): void {
+    this.newColumnPlaceholder.createComponent(ColumnComponent);
   }
 }

@@ -8,9 +8,24 @@
   </div>
 </ng-template>
 
-<nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title">
-  <app-tasks-list [tasks]="column.tasks"></app-tasks-list>
+<ng-template #titleInput>
+  <div class="title-to-input">
+    <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
+      <input nz-input placeholder="To Do" nzSize="small" />
+    </nz-input-group>
+    <ng-template #suffixTemplateInfo>
+      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle"></span>
+    </ng-template>
+    <ng-template #suffixTemplateInfo2>
+      <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle"></span>
+    </ng-template>
+  </div>
+</ng-template>
+
+<nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="column ? title : titleInput">
+  <app-tasks-list [tasks]="column ? column.tasks : []"></app-tasks-list>
 </nz-card>
+
 <ng-template #actionAdd>
   <button
     i18n-nzTooltipTitle="@@AddNewTask"

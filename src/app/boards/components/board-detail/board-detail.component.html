@@ -16,6 +16,8 @@
     <div class="project__columns" *ngIf="boardDetail.columns as columns">
       <app-column *ngFor="let column of columns" [column]="column"></app-column>
 
+      <ng-template #newColumnPlaceholder></ng-template>
+
       <button
         nz-button
         nz-tooltip
@@ -25,6 +27,7 @@
         nzTooltipTitle="Add New Column"
         nzTooltipPlacement="bottom"
         nzTooltipColor="#203c56"
+        (click)="addNewColumn()"
       >
         <span nz-icon nzType="plus"></span>
       </button>
