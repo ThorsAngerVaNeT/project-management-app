@@ -71,6 +71,9 @@ export class ColumnComponent implements OnInit {
 
   addTask(): void {
     const { boardId, _id: columnId } = this.column;
-    this.modalService.create({ nzContent: TaskAddComponent, nzComponentParams: { boardId, columnId } });
+    this.modalService.create({
+      nzContent: TaskAddComponent,
+      nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
+    });
   }
 }
