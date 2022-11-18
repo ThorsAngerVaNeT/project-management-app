@@ -1,6 +1,6 @@
 <ng-template #title>
   <div class="title-to-input" nzAlign="center">
-    <h3>
+    <h3 (click)="toggleEdit()">
       {{ column.title }}
       <nz-badge nzStandalone [nzCount]="column.tasks.length"></nz-badge>
     </h3>
@@ -27,15 +27,32 @@
       </nz-input-group>
     </nz-form-control>
     <ng-template #suffixTemplateInfo>
-      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle" (click)="createColumn()"></span>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Save"
+        nzType="check-circle"
+        (click)="column._id ? updateColumn() : createColumn()"
+      ></span>
     </ng-template>
     <ng-template #suffixTemplateInfo2>
-      <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle" (click)="deleteComponent()"></span>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Cancel"
+        nzType="close-circle"
+        (click)="column._id ? toggleEdit() : deleteComponent()"
+      ></span>
     </ng-template>
   </div>
 </ng-template>
 
-<nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="column._id ? title : titleInput">
+<nz-card
+  nzHoverable
+  class="project__column"
+  [nzActions]="[actionAdd]"
+  [nzTitle]="column._id && !isEditState ? title : titleInput"
+>
   <app-tasks-list [tasks]="column._id ? column.tasks : []"></app-tasks-list>
 </nz-card>
 

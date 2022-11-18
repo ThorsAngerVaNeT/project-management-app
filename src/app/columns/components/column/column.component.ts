@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, ComponentRef, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { StoreFacade } from '../../../core/services/store-facade/store-facade';
-import { ConfirmationComponent } from '../../../shared/components/confirmation/confirmation.component';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { ColumnWithTasks } from '../../models/column.model';
 
 @Component({
@@ -18,10 +18,19 @@ export class ColumnComponent implements OnInit {
 
   titleControl!: FormControl;
 
+  isEditState = false;
+
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.titleControl = new FormControl('', Validators.required);
+  }
+
+  toggleEdit(): void {
+    this.isEditState = !this.isEditState;
+    if (this.isEditState) {
+      this.titleControl.setValue(this.column.title);
+    }
   }
 
   createColumn(): void {
@@ -32,6 +41,14 @@ export class ColumnComponent implements OnInit {
     } else if (this.titleControl.invalid) {
       this.titleControl.markAsDirty();
       this.titleControl.updateValueAndValidity({ onlySelf: true });
+    }
+  }
+
+  updateColumn(): void {
+    if (this.titleControl.valid) {
+      const { boardId, _id: columnId, tasks, ...columnParams } = this.column;
+      columnParams.title = this.titleControl.value;
+      this.storeFacade.updateColumn(boardId, columnId, columnParams);
     }
   }
 
