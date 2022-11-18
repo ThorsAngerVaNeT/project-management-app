@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
+import { UserParams } from '@users/models/user.model';
+import { updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpSuccess } from '../../store/actions/user.actions';
 
 @Component({
@@ -21,6 +23,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
+  @Input() buttonText?: string;
+
+  @Input() isEditing?: boolean;
+
+  user$ = this.storeFacade.user$;
+
   constructor(private storeFacade: StoreFacade, private action$: Actions, private modal: NzModalRef) {}
 
   ngOnInit(): void {
@@ -34,17 +42,29 @@ export class SignUpComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignUpSuccess)).subscribe(() => {
+      this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess)).subscribe(() => {
         this.handleCancel();
       }),
     );
+
+    if (this.isEditing) {
+      this.subscription.add(
+        this.user$.subscribe((user) => {
+          this.login?.setValue(user.login);
+          this.name?.setValue(user.name);
+        }),
+      );
+    }
   }
 
   submitForm(): void {
     if (this.signUpForm.valid) {
       this.isLoading = true;
-      const { name, login, password } = this.signUpForm.value;
-      this.storeFacade.signUp({ name, login, password });
+      if (this.isEditing) {
+        this.editUser();
+      } else {
+        this.signUp();
+      }
     } else {
       Object.values(this.signUpForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -53,6 +73,30 @@ export class SignUpComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  signUp(): void {
+    const { name, login, password } = this.signUpForm.value;
+    this.storeFacade.signUp({ name, login, password });
+  }
+
+  editUser(): void {
+    console.log('editing...');
+    this.subscription.add(
+      this.user$.subscribe((user) => {
+        const userParams: UserParams = {
+          name: this.signUpForm.value.name,
+          login: this.signUpForm.value.login,
+          password: this.signUpForm.value.password,
+        };
+        console.log(user._id, userParams);
+        // this.storeFacade.updateUser(user._id, userParams);
+      }),
+    );
+  }
+
+  deleteUser(): void {
+    // todo
   }
 
   get name(): AbstractControl | null {

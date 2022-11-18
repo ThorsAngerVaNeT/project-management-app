@@ -20,7 +20,14 @@ export class HeaderComponent {
   }
 
   signUp(): void {
-    this.modalService.create({ nzContent: SignUpComponent, nzFooter: null });
+    this.modalService.create({
+      nzContent: SignUpComponent,
+      nzFooter: null,
+      nzTitle: 'SignUp',
+      nzComponentParams: {
+        buttonText: 'Sign Up',
+      },
+    });
   }
 
   logIn(): void {
@@ -28,6 +35,14 @@ export class HeaderComponent {
   }
 
   editProfile(): void {
-    // todo
+    this.modalService.create({
+      nzContent: SignUpComponent,
+      nzFooter: null,
+      nzTitle: 'Edit Profile',
+      nzComponentParams: {
+        buttonText: 'Save',
+        isEditing: true,
+      },
+    });
   }
 }
