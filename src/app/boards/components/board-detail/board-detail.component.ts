@@ -27,6 +27,7 @@ export class BoardDetailComponent implements OnInit {
   }
 
   addNewColumn(): void {
-    this.newColumnPlaceholder.createComponent(ColumnComponent);
+    const componentRef = this.newColumnPlaceholder.createComponent(ColumnComponent);
+    componentRef.instance.componentRef = componentRef;
   }
 }

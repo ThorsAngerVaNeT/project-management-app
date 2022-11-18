@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentRef, Input } from '@angular/core';
 import { ColumnWithTasks } from '../../models/column.model';
 
 @Component({
@@ -9,4 +9,10 @@ import { ColumnWithTasks } from '../../models/column.model';
 })
 export class ColumnComponent {
   @Input() column!: ColumnWithTasks;
+
+  componentRef!: ComponentRef<ColumnComponent>;
+
+  deleteComponent(): void {
+    this.componentRef.destroy();
+  }
 }
