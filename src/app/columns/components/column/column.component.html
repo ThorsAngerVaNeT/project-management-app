@@ -4,7 +4,12 @@
       {{ column.title }}
       <nz-badge nzStandalone [nzCount]="column.tasks.length"></nz-badge>
     </h3>
-    <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
+    <span
+      nz-icon
+      nzType="delete"
+      class="anticon anticon-delete ng-star-inserted action-icon"
+      (click)="deleteColumn()"
+    ></span>
   </div>
 </ng-template>
 

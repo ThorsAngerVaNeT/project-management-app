@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ComponentRef, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '../../../core/services/store-facade/store-facade';
+import { ConfirmationComponent } from '../../../shared/components/confirmation/confirmation.component';
 import { ColumnWithTasks } from '../../models/column.model';
 
 @Component({
@@ -16,7 +18,7 @@ export class ColumnComponent implements OnInit {
 
   titleControl!: FormControl;
 
-  constructor(private storeFacade: StoreFacade) {}
+  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.titleControl = new FormControl('', Validators.required);
@@ -31,6 +33,18 @@ export class ColumnComponent implements OnInit {
       this.titleControl.markAsDirty();
       this.titleControl.updateValueAndValidity({ onlySelf: true });
     }
+  }
+
+  deleteColumn(): void {
+    this.modalService.confirm({
+      nzContent: ConfirmationComponent,
+      nzComponentParams: { itemToDelete: 'this column' },
+      nzOnOk: () => {
+        const { boardId, _id: columnId } = this.column;
+        this.storeFacade.deleteColumn(boardId, columnId);
+      },
+      nzOkDanger: true,
+    });
   }
 
   deleteComponent(): void {
