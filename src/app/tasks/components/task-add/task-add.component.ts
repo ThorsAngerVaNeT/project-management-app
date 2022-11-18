@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Board } from '../../../boards/models/board.model';
+import { Column } from '../../../columns/models/column.model';
+import { StoreFacade } from '../../../core/services/store-facade/store-facade';
 
 @Component({
   selector: 'app-task-add',
@@ -10,7 +13,15 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 export class TaskAddComponent implements OnInit {
   isVisible = true;
 
+  boardId!: Board['_id'];
+
+  columnId!: Column['_id'];
+
   taskAddForm!: FormGroup;
+
+  users$ = this.storeFacade.users$;
+
+  constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
     this.taskAddForm = new FormGroup({

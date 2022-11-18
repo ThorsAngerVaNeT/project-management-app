@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { ColumnWithTasks } from '../../models/column.model';
+import { TaskAddComponent } from '../../../tasks/components/task-add/task-add.component';
 
 @Component({
   selector: 'app-column',
@@ -66,5 +67,10 @@ export class ColumnComponent implements OnInit {
 
   deleteComponent(): void {
     this.componentRef.destroy();
+  }
+
+  addTask(): void {
+    const { boardId, _id: columnId } = this.column;
+    this.modalService.create({ nzContent: TaskAddComponent, nzComponentParams: { boardId, columnId } });
   }
 }

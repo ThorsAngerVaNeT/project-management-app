@@ -66,6 +66,8 @@
     nzTooltipTitle="Add New Task"
     nzTooltipPlacement="bottom"
     nzTooltipColor="#203c56"
+    [disabled]="!column._id"
+    (click)="addTask()"
   >
     <span nz-icon nzType="plus"></span>
   </button>
