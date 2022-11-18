@@ -18,6 +18,7 @@ import {
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
+import { selectAllUsers } from '@users/store/selectors/user.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,8 @@ export class StoreFacade {
   boards$ = this.store.select(selectBoardsWithUsers);
 
   boardDetail$ = this.store.select(selectBoardDetailViewModel);
+
+  users$ = this.store.select(selectAllUsers);
 
   constructor(private store: Store) {}
 
@@ -71,7 +74,7 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
-  createBoard(board: BoardParams): void {
+  createBoard(board: Omit<BoardParams, 'owner'>): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
