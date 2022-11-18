@@ -1,6 +1,9 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockTask1 } from '@mocks/mock-tasks/mock-tasks';
+import { provideMockStore } from '@ngrx/store/testing';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { TaskItemComponent } from './task-item.component';
 
@@ -11,6 +14,7 @@ describe('TaskItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TaskItemComponent],
+      providers: [provideMockStore(), NzModalService, Overlay],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
