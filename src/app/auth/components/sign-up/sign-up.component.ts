@@ -5,8 +5,8 @@ import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 import { UserParams } from '@users/models/user.model';
-import { updateUserSuccess } from '@users/store/actions/user.actions';
-import { userSignUpSuccess } from '../../store/actions/user.actions';
+import { updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
+import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -62,6 +62,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
         }),
       );
     }
+
+    this.subscription.add(
+      this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
+        this.isLoading = false;
+        this.login?.setErrors({ userAlreadyExists: true });
+        console.log(this.signUpForm);
+      }),
+    );
   }
 
   submitForm(): void {
