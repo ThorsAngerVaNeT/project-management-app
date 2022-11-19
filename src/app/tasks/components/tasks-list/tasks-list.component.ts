@@ -53,6 +53,6 @@ export class TasksListComponent {
   }
 
   private getColumnTaskSetUpdateParams(columnTasks: ColumnTask[], columnId: string): ColumnTaskSetUpdateParams[] {
-    return columnTasks.map((task, index) => ({ _id: task._id, order: index, columnId: columnId }));
+    return columnTasks.map(({ _id }, index) => ({ _id, order: index, columnId }));
   }
 }
