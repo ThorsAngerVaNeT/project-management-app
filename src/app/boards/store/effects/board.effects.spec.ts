@@ -5,6 +5,7 @@ import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { BoardEffects } from './board.effects';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('BoardEffects', () => {
   let actions$: Observable<Action>;
@@ -13,7 +14,7 @@ describe('BoardEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [BoardEffects, provideMockActions(() => actions$)],
+      providers: [BoardEffects, provideMockStore(), provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(BoardEffects);

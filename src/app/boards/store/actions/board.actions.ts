@@ -19,7 +19,7 @@ export const loadBoardsByUser = createAction('[Boards] Load BoardsByUser', props
 export const loadBoardsByUserSuccess = createAction('[Boards] Load BoardsByUser Success', props<{ boards: Board[] }>());
 export const loadBoardsByUserFailure = createAction('[Boards] Load BoardsByUser Failure', props<{ error: unknown }>());
 
-export const createBoard = createAction('[Boards] Create Board', props<{ board: BoardParams }>());
+export const createBoard = createAction('[Boards] Create Board', props<{ board: Omit<BoardParams, 'owner'> }>());
 export const createBoardSuccess = createAction('[Boards] Create Board Success', props<{ board: Board }>());
 export const createBoardFailure = createAction('[Boards] Create Board Failure', props<{ error: unknown }>());
 
