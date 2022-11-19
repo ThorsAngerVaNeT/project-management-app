@@ -41,11 +41,6 @@ export class BoardDetailComponent implements OnInit {
   }
 
   private getColumnSetUpdateParams(columns: ColumnWithTasks[]): ColumnSetUpdateParams[] {
-    return columns.map((column, index) => {
-      return {
-        _id: column._id,
-        order: index,
-      };
-    });
+    return columns.map((column, index) => ({ _id: column._id, order: index }));
   }
 }
