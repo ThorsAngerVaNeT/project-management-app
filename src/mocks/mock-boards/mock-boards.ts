@@ -1,4 +1,4 @@
-import { Board, BoardParams } from '../../app/boards/model/board.model';
+import { Board, BoardParams } from '@boards/model/board.model';
 
 export const mockBoard1: Board = {
   _id: '1',
