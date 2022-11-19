@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { UserParams } from '@users/models/user.model';
 import { updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpSuccess } from '../../store/actions/user.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -29,7 +30,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   user$ = this.storeFacade.user$;
 
-  constructor(private storeFacade: StoreFacade, private action$: Actions, private modal: NzModalRef) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private action$: Actions,
+    private modal: NzModalRef,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -43,6 +49,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess)).subscribe(() => {
+        this.router.navigate(['/boards']);
         this.handleCancel();
       }),
     );
