@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColumnTask } from '../../model/task.model';
+import { ColumnTaskWithUsers } from '../../model/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -8,5 +8,5 @@ import { ColumnTask } from '../../model/task.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksListComponent {
-  @Input() tasks!: ColumnTask[];
+  @Input() tasks!: ColumnTaskWithUsers[];
 }

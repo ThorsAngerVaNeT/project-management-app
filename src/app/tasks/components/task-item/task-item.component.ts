@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '../../../core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '../../../shared/components/confirmation/confirmation.component';
-import { ColumnTask } from '../../model/task.model';
+import { ColumnTaskWithUsers } from '../../model/task.model';
 
 @Component({
   selector: 'app-task-item',
@@ -11,7 +11,7 @@ import { ColumnTask } from '../../model/task.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskItemComponent {
-  @Input() task!: ColumnTask;
+  @Input() task!: ColumnTaskWithUsers;
 
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
