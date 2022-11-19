@@ -51,3 +51,10 @@ form .anticon {
 .ant-form-item-explain-error {
   color: @error-color;
 }
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+  display: inline-block;
+  margin-right: 4px;
+  color: @error-color;
+  content: "*";
+}
