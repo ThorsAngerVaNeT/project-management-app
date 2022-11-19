@@ -53,6 +53,9 @@
       "@tasks/*": [
         "src/app/tasks/*"
       ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
     }
   },
   "angularCompilerOptions": {

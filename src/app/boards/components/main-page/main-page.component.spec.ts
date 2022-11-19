@@ -4,6 +4,8 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 import { MainPageComponent } from './main-page.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { Overlay } from '@angular/cdk/overlay';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -12,7 +14,7 @@ describe('MainPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MainPageComponent],
-      providers: [provideMockStore()],
+      providers: [provideMockStore(), NzModalService, Overlay],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
