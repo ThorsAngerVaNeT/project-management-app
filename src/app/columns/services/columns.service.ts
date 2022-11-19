@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../models/column.model';
-import { Board } from '@boards/models/board.model';
-import { User } from '@users/models/user.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../model/column.model';
+import { Board } from '@boards/model/board.model';
+import { User } from '@users/model/user.model';
 
 @Injectable({
   providedIn: 'root',

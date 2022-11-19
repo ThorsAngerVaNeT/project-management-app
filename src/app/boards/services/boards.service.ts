@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { APIParams } from '@core/enums/api-params.enum';
-import { Board, BoardParams } from '../models/board.model';
-import { User } from '@users/models/user.model';
+import { Board, BoardParams } from '../model/board.model';
+import { User } from '@users/model/user.model';
 
 @Injectable({
   providedIn: 'root',

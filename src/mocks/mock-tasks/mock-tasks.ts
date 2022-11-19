@@ -3,7 +3,7 @@ import {
   ColumnTaskParams,
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
-} from '../../app/tasks/model/task.model';
+} from '@tasks/model/task.model';
 
 export const mockTask1: ColumnTask = {
   _id: '1',
