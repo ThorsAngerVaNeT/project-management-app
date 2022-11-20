@@ -1,12 +1,20 @@
 <ng-template #title>
   <div class="title-to-input" nzAlign="center">
-    <h3 (click)="toggleEdit()">
+    <h3
+      nz-tooltip
+      nzTooltipTitle="Edit column title"
+      i18n-nzTooltipTitle="@@EditColumnTitleTooltip"
+      (click)="toggleEdit()"
+    >
       {{ column.title }}
       <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
     <span
       nz-icon
       nzType="delete"
+      nz-tooltip
+      nzTooltipTitle="Delete column"
+      i18n-nzTooltipTitle="@@DeleteColumnTooltip"
       class="anticon anticon-delete ng-star-inserted action-icon"
       (click)="deleteColumn()"
     ></span>
@@ -15,7 +23,7 @@
 
 <ng-template #titleInput>
   <div class="title-to-input">
-    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+    <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
       <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
         <input nz-input placeholder="To Do" nzSize="small" [formControl]="titleControl" />
 
@@ -31,6 +39,7 @@
         nz-icon
         nz-tooltip
         nzTooltipTitle="Save"
+        i18n-nzTooltipTitle="@@SaveNewColumn"
         nzType="check-circle"
         (click)="column._id ? updateColumn() : createColumn()"
       ></span>
@@ -40,6 +49,7 @@
         nz-icon
         nz-tooltip
         nzTooltipTitle="Cancel"
+        i18n-nzTooltipTitle="@@CancelNewColumn"
         nzType="close-circle"
         (click)="column._id ? toggleEdit() : deleteComponent()"
       ></span>
