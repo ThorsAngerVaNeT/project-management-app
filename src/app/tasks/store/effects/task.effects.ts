@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as TaskActions from '../actions/task.actions';
 import { TasksService } from '../../services/tasks.service';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class TaskEffects {
@@ -139,12 +140,11 @@ export class TaskEffects {
   searchTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TaskActions.searchTask),
-      switchMap(({ searchString }) =>
-        this.tasksService.getTasksBySearchString(searchString).pipe(
-          map((tasks) => TaskActions.searchTaskSuccess({ tasks })),
-          catchError((error) => of(TaskActions.searchTaskFailure({ error }))),
-        ),
-      ),
+      map(({ searchString }) => searchString.trim()),
+      debounceTime(environment.SEARCH_DEBOUNCE_TIME),
+      distinctUntilChanged(),
+      switchMap((searchString) => this.tasksService.getTasksBySearchString(searchString)),
+      map((tasks) => TaskActions.searchTaskSuccess({ tasks })),
     );
   });
 }
