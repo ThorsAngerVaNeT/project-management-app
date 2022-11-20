@@ -4,7 +4,6 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
-import { UserParams } from '@users/models/user.model';
 import { updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
@@ -29,6 +28,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   @Input() isEditing?: boolean;
 
   user$ = this.storeFacade.user$;
+
+  currentUserId = '';
 
   constructor(
     private storeFacade: StoreFacade,
@@ -59,6 +60,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.user$.subscribe((user) => {
           this.login?.setValue(user.login);
           this.name?.setValue(user.name);
+
+          this.currentUserId = user._id;
         }),
       );
     }
@@ -96,18 +99,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   editUser(): void {
-    console.log('editing...');
-    this.subscription.add(
-      this.user$.subscribe((user) => {
-        const userParams: UserParams = {
-          name: this.signUpForm.value.name,
-          login: this.signUpForm.value.login,
-          password: this.signUpForm.value.password,
-        };
-        console.log(user._id, userParams);
-        // this.storeFacade.updateUser(user._id, userParams);
-      }),
-    );
+    const userParams = {
+      name: this.signUpForm.value.name,
+      login: this.signUpForm.value.login,
+      password: this.signUpForm.value.password,
+    };
+    this.storeFacade.updateUser(this.currentUserId, userParams);
   }
 
   deleteUser(): void {

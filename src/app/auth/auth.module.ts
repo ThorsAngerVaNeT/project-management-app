@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { UserEffects } from './store/effects/user.effects';
 import { userReducer, userMetaReducers } from './store/reducers/user.reducer';
+import { UsersModule } from '../users/users.module';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent],
@@ -17,6 +18,7 @@ import { userReducer, userMetaReducers } from './store/reducers/user.reducer';
     AuthRoutingModule,
     StoreModule.forFeature('user', userReducer, { metaReducers: userMetaReducers }),
     EffectsModule.forFeature([UserEffects]),
+    UsersModule,
   ],
 })
 export class AuthModule {}

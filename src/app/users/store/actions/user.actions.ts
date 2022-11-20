@@ -15,7 +15,7 @@ export const createUser = createAction('[Users] Create User', props<{ user: User
 export const createUserSuccess = createAction('[Users] Create User Success', props<{ user: User }>());
 export const createUserFailed = createAction('[Users] Create User Failed', props<{ error: unknown }>());
 
-export const updateUser = createAction('[Users] Update User', props<{ id: User['_id']; user: UserParams }>());
+export const updateUser = createAction('[Users] Update User', props<{ userId: User['_id']; user: UserParams }>());
 export const updateUserSuccess = createAction('[Users] Update User Success', props<{ user: Update<User> }>());
 export const updateUserFailed = createAction('[Users] Update User Failed', props<{ error: unknown }>());
 
