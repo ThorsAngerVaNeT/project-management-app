@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockTask1 } from '@mocks/mock-tasks/mock-tasks';
 import { provideMockStore } from '@ngrx/store/testing';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { mockUser1, mockUser2 } from '../../../../mocks/mock-users/mock-users';
+import { mockUser1, mockUser2 } from '@mocks/mock-users/mock-users';
 
 import { TaskItemComponent } from './task-item.component';
 
