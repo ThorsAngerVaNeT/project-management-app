@@ -1,5 +1,3 @@
-<ng-template [nzModalTitle] i18n="@@CreateTaskModalTitle">Create Task</ng-template>
-
 <form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="users$ | async as users">
   <nz-form-item>
     <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@TaskTitle">Title</nz-form-label>

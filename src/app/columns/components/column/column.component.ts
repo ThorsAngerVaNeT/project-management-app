@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ComponentRef, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import '@angular/localize/init';
+
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { ColumnWithTasks } from '../../models/column.model';
-import { TaskAddComponent } from '../../../tasks/components/task-add/task-add.component';
+import { TaskAddComponent } from '@tasks/components/task-add/task-add.component';
 
 @Component({
   selector: 'app-column',
@@ -72,6 +74,7 @@ export class ColumnComponent implements OnInit {
   addTask(): void {
     const { boardId, _id: columnId } = this.column;
     this.modalService.create({
+      nzTitle: $localize`:@@CreateTaskModalTitle:Create Task`,
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
     });

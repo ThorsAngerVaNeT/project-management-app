@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import '@angular/localize/init';
+
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { ColumnTaskWithUsers } from '../../model/task.model';
@@ -18,6 +20,7 @@ export class TaskItemComponent {
 
   editTask(): void {
     this.modalService.create({
+      nzTitle: $localize`:@@EditTaskModalTitle:Edit Task`,
       nzContent: TaskAddComponent,
       nzComponentParams: { task: this.task },
     });
