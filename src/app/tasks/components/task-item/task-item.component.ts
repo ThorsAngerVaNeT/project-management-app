@@ -29,7 +29,7 @@ export class TaskItemComponent {
   deleteTask(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: 'this task' },
+      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteThisTask:'this task` },
       nzOnOk: () => {
         const { boardId, columnId, _id: taskId } = this.task;
         this.storeFacade.deleteTask(boardId, columnId, taskId);

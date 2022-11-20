@@ -59,7 +59,7 @@ export class ColumnComponent implements OnInit {
   deleteColumn(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: 'this column' },
+      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteThisColumn:this column` },
       nzOnOk: () => {
         const { boardId, _id: columnId } = this.column;
         this.storeFacade.deleteColumn(boardId, columnId);
