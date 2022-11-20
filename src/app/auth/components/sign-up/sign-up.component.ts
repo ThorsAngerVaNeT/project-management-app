@@ -6,8 +6,8 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
-import { Router } from '@angular/router';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
+import '@angular/localize/init';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,7 +36,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private storeFacade: StoreFacade,
     private action$: Actions,
     private modal: NzModalRef,
-    private router: Router,
     private modalService: NzModalService,
   ) {}
 
@@ -106,7 +105,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   deleteUser(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: 'your account' },
+      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
       nzOnOk: () => {
         this.storeFacade.deleteUser(this.currentUserId);
       },

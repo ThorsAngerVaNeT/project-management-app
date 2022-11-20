@@ -3,6 +3,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { SignUpComponent } from '../../../auth/components/sign-up/sign-up.component';
+import '@angular/localize/init';
 
 @Component({
   selector: 'app-header',
@@ -23,9 +24,9 @@ export class HeaderComponent {
     this.modalService.create({
       nzContent: SignUpComponent,
       nzFooter: null,
-      nzTitle: 'SignUp',
+      nzTitle: $localize`:@@SignUpModalTitle:Sign Up`,
       nzComponentParams: {
-        buttonText: 'Sign Up',
+        buttonText: $localize`:@@SignUpButton:Sign Up`,
       },
     });
   }
@@ -38,9 +39,9 @@ export class HeaderComponent {
     this.modalService.create({
       nzContent: SignUpComponent,
       nzFooter: null,
-      nzTitle: 'Edit Profile',
+      nzTitle: $localize`:@@EditProfileModalTitle:Edit Profile`,
       nzComponentParams: {
-        buttonText: 'Save',
+        buttonText: $localize`:@@EditProfileSaveButton:Save`,
         isEditing: true,
       },
     });
