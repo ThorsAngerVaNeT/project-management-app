@@ -27,6 +27,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
+import { SearchComponent } from './components/search/search.component';
 
 const MODULES = [
   NzLayoutModule,
@@ -55,8 +56,8 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe],
+  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe, SearchComponent],
   imports: [...MODULES],
-  exports: [...MODULES, FooterComponent, HeaderComponent, SortByOrderPipe],
+  exports: [...MODULES, FooterComponent, HeaderComponent, SearchComponent, SortByOrderPipe],
 })
 export class SharedModule {}

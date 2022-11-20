@@ -6,12 +6,7 @@
     </a>
   </div>
 
-  <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field">
-    <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
-  </nz-input-group>
-  <ng-template #suffixIconSearch>
-    <span nz-icon nzType="search"></span>
-  </ng-template>
+  <app-search></app-search>
 
   <div class="header__right-group">
     <nz-radio-group class="header__lang-switch" nzSize="small">
