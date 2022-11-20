@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
+import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,6 +37,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private action$: Actions,
     private modal: NzModalRef,
     private router: Router,
+    private modalService: NzModalService,
   ) {}
 
   ngOnInit(): void {
@@ -98,16 +100,18 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   editUser(): void {
-    const userParams = {
-      name: this.signUpForm.value.name,
-      login: this.signUpForm.value.login,
-      password: this.signUpForm.value.password,
-    };
-    this.storeFacade.updateUser(this.currentUserId, userParams);
+    this.storeFacade.updateUser(this.currentUserId, this.signUpForm.value);
   }
 
   deleteUser(): void {
-    this.storeFacade.deleteUser(this.currentUserId);
+    this.modalService.confirm({
+      nzContent: ConfirmationComponent,
+      nzComponentParams: { itemToDelete: 'your account' },
+      nzOnOk: () => {
+        this.storeFacade.deleteUser(this.currentUserId);
+      },
+      nzOkDanger: true,
+    });
   }
 
   get name(): AbstractControl | null {

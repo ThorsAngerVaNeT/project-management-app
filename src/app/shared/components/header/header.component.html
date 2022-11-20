@@ -13,15 +13,15 @@
     <span nz-icon nzType="search"></span>
   </ng-template>
 
-  <ng-container *ngIf="{ user: user$ | async } as data">
-    <div class="header__right-group" *ngIf="data.user?._id">
+  <ng-container *ngIf="user$ | async as user">
+    <div class="header__right-group" *ngIf="user._id">
       <nz-radio-group class="header__lang-switch" nzSize="small">
         <label nz-radio-button nzValue="RU">RU</label>
         <label nz-radio-button nzValue="EN">EN</label>
       </nz-radio-group>
 
       <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-        {{ data.user?.name }}
+        {{ user.name }}
         <span nz-icon nzType="down"></span>
       </a>
       <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -32,7 +32,7 @@
       </nz-dropdown-menu>
     </div>
 
-    <div class="header__welcome_actions" *ngIf="!data.user?._id">
+    <div class="header__welcome_actions" *ngIf="!user._id">
       <span (click)="signUp()">Sign Up</span>
       <span (click)="logIn()">Login</span>
     </div>
