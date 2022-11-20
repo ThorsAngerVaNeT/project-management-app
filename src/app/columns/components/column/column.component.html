@@ -2,14 +2,14 @@
   <div class="title-to-input" nzAlign="center">
     <h3>
       {{ column.title }}
-      <nz-badge nzStandalone [nzCount]="column.tasks.length"></nz-badge>
+      <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
     <span nz-icon nzType="delete" class="anticon anticon-delete ng-star-inserted action-icon"></span>
   </div>
 </ng-template>
 
 <nz-card nzHoverable class="project__column" [nzActions]="[actionAdd]" [nzTitle]="title">
-  <app-tasks-list [tasks]="column.tasks"></app-tasks-list>
+  <app-tasks-list [tasksWithColumnId]="tasksForTasksList"></app-tasks-list>
 </nz-card>
 <ng-template #actionAdd>
   <button

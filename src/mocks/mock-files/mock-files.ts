@@ -1,4 +1,4 @@
-import { TaskFile } from '../../app/files/model/file.model';
+import { TaskFile } from '@files/model/file.model';
 
 export const mockFile1: TaskFile = {
   _id: '1',

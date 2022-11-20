@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAuth from '@auth/store/actions/user.actions';
 import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
-import { Board, BoardParams } from '@boards/models/board.model';
+import { Board, BoardParams } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
-import { SignInParams, User, UserParams } from '@users/models/user.model';
+import { SignInParams, User, UserParams } from '@users/model/user.model';
 import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/models/column.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/model/column.model';
 import {
   ColumnTask,
   ColumnTaskParams,

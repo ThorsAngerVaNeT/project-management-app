@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
-import { BoardWithUsers } from '../../models/board.model';
+import { BoardWithUsers } from '../../model/board.model';
 
 @Component({
   selector: 'app-board-card',

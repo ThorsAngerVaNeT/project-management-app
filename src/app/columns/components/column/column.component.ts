@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ColumnWithTasks } from '../../models/column.model';
+import { ColumnTasksWithColumnId } from '@tasks/model/task.model';
+import { ColumnWithTasks } from '../../model/column.model';
 
 @Component({
   selector: 'app-column',
@@ -9,4 +10,8 @@ import { ColumnWithTasks } from '../../models/column.model';
 })
 export class ColumnComponent {
   @Input() column!: ColumnWithTasks;
+
+  public get tasksForTasksList(): ColumnTasksWithColumnId {
+    return { columnId: this.column._id, tasks: this.column.tasks };
+  }
 }

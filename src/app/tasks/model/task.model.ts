@@ -31,3 +31,8 @@ export interface ColumnTaskSetUpdateParams {
   order: number;
   columnId: string;
 }
+
+export interface ColumnTasksWithColumnId {
+  columnId: string;
+  tasks: ColumnTask[];
+}

@@ -1,7 +1,7 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { TaskFile } from '@files/model/file.model';
-import { User } from '@users/models/user.model';
+import { User } from '@users/model/user.model';
 import { Point, PointParams, PointsSetUpdateParams } from '../../model/point.model';
 
 export const loadPointsSet = createAction('[Point] Load PointsSet', props<{ ids: Point['_id'][] }>());

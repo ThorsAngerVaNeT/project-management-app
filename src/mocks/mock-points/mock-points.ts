@@ -1,4 +1,4 @@
-import { Point, PointParams, PointsSetUpdateParams, PointUpdateParams } from '../../app/points/model/point.model';
+import { Point, PointParams, PointsSetUpdateParams, PointUpdateParams } from '@points/model/point.model';
 
 export const mockPoint1: Point = {
   _id: '1',

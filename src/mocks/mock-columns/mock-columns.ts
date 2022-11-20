@@ -1,4 +1,4 @@
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../../app/columns/models/column.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/model/column.model';
 
 export const mockColumn1: Column = {
   _id: '1',
