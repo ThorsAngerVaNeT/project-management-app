@@ -1,5 +1,5 @@
 <div i18n="@@passwordRequirements">
-  <p>To sign up please provide username (more than two characters) and a strong password.</p>
+  <p>Please provide login (more than two characters), name and a strong password.</p>
   <p>For your safety password should be:</p>
   <ul>
     <li>at least 8 characters</li>
@@ -68,5 +68,7 @@
 </form>
 <div class="delete-block" *ngIf="isEditing">
   <div i18n="@@deleteUserText">Delete your user account</div>
-  <button nz-button [nzLoading]="isLoading" i18n="@@deleteUserButton" (click)="deleteUser()">Delete Forever</button>
+  <button nz-button nzDanger [nzLoading]="isLoading" i18n="@@deleteUserButton" (click)="deleteUser()">
+    Delete Forever
+  </button>
 </div>

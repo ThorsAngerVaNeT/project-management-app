@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       login: new FormControl('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', [Validators.required]),
     });
+
     this.subscription.add(
       this.action$.pipe(ofType(userSignInSuccess)).subscribe(() => {
         this.router.navigate(['/boards']);
