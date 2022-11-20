@@ -27,12 +27,10 @@ export class UserEffects {
       ofType(UserActions.updateUser),
       concatMap(({ userId, user }) =>
         this.userService.updateUser(userId, user).pipe(
-          switchMap(({ _id: id, ...changes }) => {
-            return [
-              UserActions.updateUserSuccess({ user: { id, changes } }),
-              AuthActions.userGetInfoSuccess({ user: { _id: id, ...changes } }),
-            ];
-          }),
+          switchMap(({ _id: id, ...changes }) => [
+            UserActions.updateUserSuccess({ user: { id, changes } }),
+            AuthActions.userGetInfoSuccess({ user: { _id: id, ...changes } }),
+          ]),
           catchError((error) => of(UserActions.updateUserFailed({ error }))),
         ),
       ),

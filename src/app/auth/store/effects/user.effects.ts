@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/user.actions';
@@ -48,7 +48,10 @@ export class UserEffects {
       ofType(AuthActions.userSignUp),
       exhaustMap(({ data }) =>
         this.authService.signUp(data).pipe(
-          map((user) => AuthActions.userSignUpSuccess({ user })),
+          switchMap((user) => [
+            AuthActions.userSignUpSuccess({ user }),
+            AuthActions.userSignIn({ data: { login: data.login, password: data.password } }),
+          ]),
           catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
         ),
       ),
