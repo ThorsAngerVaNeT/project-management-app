@@ -49,7 +49,7 @@ export const updateColumnFailure = createAction('[Columns] Update Column Failure
 
 export const updateColumnsSet = createAction(
   '[Columns] Update ColumnsSet',
-  props<{ columns: ColumnSetUpdateParams[] }>(),
+  props<{ columnsParams: ColumnSetUpdateParams[] }>(),
 );
 export const updateColumnsSetSuccess = createAction(
   '[Columns] Update ColumnsSet Success',
