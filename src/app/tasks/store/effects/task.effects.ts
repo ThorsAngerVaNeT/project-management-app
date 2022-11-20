@@ -135,4 +135,16 @@ export class TaskEffects {
       ),
     );
   });
+
+  searchTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskActions.searchTask),
+      switchMap(({ searchString }) =>
+        this.tasksService.getTasksBySearchString(searchString).pipe(
+          map((tasks) => TaskActions.searchTaskSuccess({ tasks })),
+          catchError((error) => of(TaskActions.searchTaskFailure({ error }))),
+        ),
+      ),
+    );
+  });
 }

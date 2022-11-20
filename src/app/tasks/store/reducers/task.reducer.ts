@@ -31,6 +31,7 @@ export const reducer = createReducer(
     return adapter.updateMany(tasks, state);
   }),
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
+  on(TaskActions.searchTaskSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
 );
 
 export const {
