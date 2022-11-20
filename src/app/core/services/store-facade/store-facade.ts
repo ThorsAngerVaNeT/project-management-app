@@ -114,8 +114,8 @@ export class StoreFacade {
     this.store.dispatch(fromColumn.updateColumn({ boardId, columnId, column }));
   }
 
-  updateColumnsSet(columns: ColumnSetUpdateParams[]): void {
-    this.store.dispatch(fromColumn.updateColumnsSet({ columns }));
+  updateColumnsSet(columnsParams: ColumnSetUpdateParams[]): void {
+    this.store.dispatch(fromColumn.updateColumnsSet({ columnsParams }));
   }
 
   deleteColumn(boardId: Board['_id'], columnId: Column['_id']): void {
