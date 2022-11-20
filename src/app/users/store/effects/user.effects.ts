@@ -27,11 +27,23 @@ export class UserEffects {
       ofType(UserActions.updateUser),
       concatMap(({ userId, user }) =>
         this.userService.updateUser(userId, user).pipe(
-          switchMap(({ _id: id, ...changes }) => [
+          concatMap(({ _id: id, ...changes }) => [
             UserActions.updateUserSuccess({ user: { id, changes } }),
             AuthActions.userGetInfoSuccess({ user: { _id: id, ...changes } }),
           ]),
           catchError((error) => of(UserActions.updateUserFailed({ error }))),
+        ),
+      ),
+    );
+  });
+
+  deleteUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.deleteUser),
+      concatMap(({ id }) =>
+        this.userService.deleteUser(id).pipe(
+          concatMap(() => [UserActions.deleteUserSuccess({ id }), AuthActions.userSignOut()]),
+          catchError((error) => of(UserActions.deleteUserFailed({ error }))),
         ),
       ),
     );

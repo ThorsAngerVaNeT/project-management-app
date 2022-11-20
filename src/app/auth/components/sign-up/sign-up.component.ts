@@ -4,7 +4,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
-import { updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
+import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { Router } from '@angular/router';
 
@@ -49,8 +49,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess)).subscribe(() => {
-        this.router.navigate(['/boards']);
+      this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess, deleteUserSuccess)).subscribe(() => {
         this.handleCancel();
       }),
     );
@@ -108,7 +107,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(): void {
-    // todo
+    this.storeFacade.deleteUser(this.currentUserId);
   }
 
   get name(): AbstractControl | null {
