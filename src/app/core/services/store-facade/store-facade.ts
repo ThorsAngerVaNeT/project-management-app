@@ -210,4 +210,8 @@ export class StoreFacade {
   uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): void {
     this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
   }
+
+  searchTask(searchString: string): void {
+    this.store.dispatch(fromTask.searchTask({ searchString }));
+  }
 }

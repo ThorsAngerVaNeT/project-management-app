@@ -1,5 +1,12 @@
 <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field">
-  <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
+  <input
+    type="text"
+    nz-input
+    placeholder="Search"
+    i18n-placeholder="@@inputSearchPlaceholder"
+    #searchBox
+    (input)="search(searchBox.value)"
+  />
 </nz-input-group>
 <ng-template #suffixIconSearch>
   <span nz-icon nzType="search"></span>
