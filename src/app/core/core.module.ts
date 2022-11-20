@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environments/environment';
 import { RouterSerializer } from './store/reducers/router.reducer';
 import { CommonModule } from '@angular/common';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    AuthModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
