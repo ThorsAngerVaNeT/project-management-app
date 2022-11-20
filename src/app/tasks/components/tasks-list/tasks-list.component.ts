@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnTask, ColumnTaskSetUpdateParams, ColumnTasksWithColumnId } from '../../model/task.model';
+import { ColumnTaskWithUsers, ColumnTaskSetUpdateParams, ColumnTasksWithColumnId } from '../../model/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -15,7 +15,7 @@ export class TasksListComponent {
 
   constructor(private storeFacade: StoreFacade) {}
 
-  public trackById(index: number, item: ColumnTask): string {
+  public trackById(index: number, item: ColumnTaskWithUsers): string {
     return item._id;
   }
 
@@ -52,7 +52,10 @@ export class TasksListComponent {
     }
   }
 
-  private getColumnTaskSetUpdateParams(columnTasks: ColumnTask[], columnId: string): ColumnTaskSetUpdateParams[] {
+  private getColumnTaskSetUpdateParams(
+    columnTasks: ColumnTaskWithUsers[],
+    columnId: string,
+  ): ColumnTaskSetUpdateParams[] {
     return columnTasks.map(({ _id }, index) => ({ _id, order: index, columnId }));
   }
 }

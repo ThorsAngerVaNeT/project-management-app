@@ -1,3 +1,4 @@
+import { ColumnWithTasks } from '@columns/model/column.model';
 import { User } from '@users/model/user.model';
 
 export interface Board {
@@ -18,4 +19,9 @@ export interface BoardWithUsers {
   title: string;
   owner: User;
   users: User[];
+}
+
+export interface BoardDetailViewModel {
+  board: BoardWithUsers | null;
+  columns: ColumnWithTasks[];
 }
