@@ -6,9 +6,9 @@ import {
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
 } from '../../model/task.model';
-import { Board } from '@boards/models/board.model';
-import { Column } from '@columns/models/column.model';
-import { User } from '@users/models/user.model';
+import { Board } from '@boards/model/board.model';
+import { Column } from '@columns/model/column.model';
+import { User } from '@users/model/user.model';
 
 export const loadTasks = createAction(
   '[Tasks] Load Tasks',

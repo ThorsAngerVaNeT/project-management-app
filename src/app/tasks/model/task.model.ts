@@ -1,4 +1,4 @@
-import { User } from '@users/models/user.model';
+import { User } from '@users/model/user.model';
 
 export interface ColumnTask {
   _id: string;
@@ -37,4 +37,9 @@ export interface ColumnTaskSetUpdateParams {
 export interface ColumnTaskWithUsers extends Omit<ColumnTask, 'users'> {
   user: User;
   users: User[];
+}
+
+export interface ColumnTasksWithColumnId {
+  columnId: string;
+  tasks: ColumnTaskWithUsers[];
 }

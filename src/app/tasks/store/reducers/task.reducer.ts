@@ -21,7 +21,15 @@ export const reducer = createReducer(
   on(TaskActions.loadTaskSuccess, (state, { task }) => adapter.setOne(task, state)),
   on(TaskActions.createTaskSuccess, (state, { task }) => adapter.addOne(task, state)),
   on(TaskActions.updateTaskSuccess, (state, { task }) => adapter.updateOne(task, state)),
-  on(TaskActions.updateTasksSetSuccess, (state, { tasks }) => adapter.updateMany(tasks, state)),
+  on(TaskActions.updateTasksSet, (state, { tasksParams }) => {
+    const tasks = tasksParams.map(({ _id: id, ...changes }) => {
+      const { _id, ...originalTask } = { ...state.entities[id] };
+      const task = { id, changes: { ...originalTask, ...changes } };
+
+      return task;
+    });
+    return adapter.updateMany(tasks, state);
+  }),
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
 );
 

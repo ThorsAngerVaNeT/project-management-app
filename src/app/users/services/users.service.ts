@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { Observable } from 'rxjs';
-import { User, UserParams } from '../models/user.model';
+import { User, UserParams } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',

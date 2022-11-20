@@ -5,7 +5,8 @@ import '@angular/localize/init';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
-import { ColumnWithTasks } from '../../models/column.model';
+import { ColumnTasksWithColumnId } from '@tasks/model/task.model';
+import { ColumnWithTasks } from '../../model/column.model';
 import { TaskAddComponent } from '@tasks/components/task-add/task-add.component';
 
 @Component({
@@ -78,5 +79,9 @@ export class ColumnComponent implements OnInit {
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
     });
+  }
+
+  public get tasksForTasksList(): ColumnTasksWithColumnId {
+    return { columnId: this.column._id, tasks: this.column.tasks };
   }
 }

@@ -1,5 +1,5 @@
-import { ColumnWithTasks } from '@columns/models/column.model';
-import { User } from '@users/models/user.model';
+import { ColumnWithTasks } from '@columns/model/column.model';
+import { User } from '@users/model/user.model';
 
 export interface Board {
   _id: string;

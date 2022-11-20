@@ -2,7 +2,7 @@
   <div class="title-to-input" nzAlign="center">
     <h3 (click)="toggleEdit()">
       {{ column.title }}
-      <nz-badge nzStandalone [nzCount]="column.tasks.length"></nz-badge>
+      <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
     <span
       nz-icon
@@ -53,7 +53,7 @@
   [nzActions]="[actionAdd]"
   [nzTitle]="column._id && !isEditState ? title : titleInput"
 >
-  <app-tasks-list [tasks]="column._id ? column.tasks : []"></app-tasks-list>
+  <app-tasks-list [tasksWithColumnId]="tasksForTasksList"></app-tasks-list>
 </nz-card>
 
 <ng-template #actionAdd>

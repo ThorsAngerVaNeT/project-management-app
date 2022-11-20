@@ -13,8 +13,18 @@
       Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
     </div>
 
-    <div class="project__columns" *ngIf="boardDetail.columns as columns">
-      <app-column *ngFor="let column of columns" [column]="column"></app-column>
+    <div
+      class="project__columns"
+      *ngIf="boardDetail.columns as columns"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="columns"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListGroup
+    >
+      <div class="column-item-wrapper" *ngFor="let column of columns | sortByOrder; trackBy: trackById" cdkDrag>
+        <app-column [column]="column"></app-column>
+      </div>
 
       <ng-template #newColumnPlaceholder></ng-template>
 
