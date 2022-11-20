@@ -21,13 +21,15 @@ export class TasksListComponent {
 
   public drop(event: CdkDragDrop<ColumnTasksWithColumnId>): void {
     if (event.previousContainer === event.container) {
-      const columnId = event.container.data.columnId;
+      if (event.previousIndex !== event.currentIndex) {
+        const columnId = event.container.data.columnId;
 
-      moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
+        moveItemInArray(event.container.data.tasks, event.previousIndex, event.currentIndex);
 
-      const columnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data.tasks, columnId);
+        const columnTaskSetUpdateParams = this.getColumnTaskSetUpdateParams(event.container.data.tasks, columnId);
 
-      this.storeFacade.updateTasksSet(columnTaskSetUpdateParams);
+        this.storeFacade.updateTasksSet(columnTaskSetUpdateParams);
+      }
     } else {
       const previousColumnId = event.previousContainer.data.columnId;
       const currentColumnId = event.container.data.columnId;
