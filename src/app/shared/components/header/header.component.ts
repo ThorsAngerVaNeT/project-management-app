@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { LoginComponent } from '../../../auth/components/login/login.component';
-import { SignUpComponent } from '../../../auth/components/sign-up/sign-up.component';
+import { LoginComponent } from '@auth/components/login/login.component';
+import { SignUpComponent } from '@auth/components/sign-up/sign-up.component';
 import '@angular/localize/init';
 
 @Component({

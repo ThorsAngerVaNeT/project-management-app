@@ -19,15 +19,17 @@ import { User } from '../../../users/model/user.model';
 export class SignUpComponent implements OnInit, OnDestroy {
   isVisible = true;
 
-  isLoading = false;
+  isSaving = false;
 
-  signUpForm!: FormGroup;
-
-  subscription = new Subscription();
+  isDeleting = false;
 
   @Input() buttonText?: string;
 
   @Input() isEditing?: boolean;
+
+  signUpForm!: FormGroup;
+
+  subscription = new Subscription();
 
   user$ = this.storeFacade.user$.pipe(
     tap((user) => {
@@ -76,7 +78,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
-        this.isLoading = false;
+        this.isSaving = false;
         this.login?.setErrors({ userAlreadyExists: true });
         console.log(this.signUpForm);
       }),
@@ -85,7 +87,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.signUpForm.valid) {
-      this.isLoading = true;
+      this.isSaving = true;
       if (this.isEditing) {
         this.editUser();
       } else {
@@ -115,6 +117,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
       nzOnOk: () => {
+        this.isDeleting = true;
         this.storeFacade.deleteUser(this.currentUserId);
       },
       nzOkDanger: true,
