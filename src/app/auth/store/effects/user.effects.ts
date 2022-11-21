@@ -18,6 +18,30 @@ export class UserEffects {
     private router: Router,
   ) {}
 
+  userSignUp$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.userSignUp),
+      exhaustMap(({ data }) =>
+        this.authService.signUp(data).pipe(map((user) => AuthActions.userSignUpProcess({ data, user }))),
+      ),
+      catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
+    );
+  });
+
+  userSignUpProcess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.userSignUpProcess),
+      map(({ user }) => AuthActions.userSignUpSuccess({ user })),
+    );
+  });
+
+  userSignInAfterSignUp$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.userSignUpProcess),
+      map(({ data }) => AuthActions.userSignIn({ data: { login: data.login, password: data.password } })),
+    );
+  });
+
   userSignIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userSignIn),
@@ -28,31 +52,6 @@ export class UserEffects {
             return AuthActions.userSignInSuccess({ token, payload });
           }),
           catchError((error) => of(AuthActions.userSignInFailure({ error }))),
-        ),
-      ),
-    );
-  });
-
-  userSignOut$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(AuthActions.userSignOut),
-        tap(() => this.router.navigateByUrl('/')),
-      );
-    },
-    { dispatch: false },
-  );
-
-  userSignUp$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(AuthActions.userSignUp),
-      exhaustMap(({ data }) =>
-        this.authService.signUp(data).pipe(
-          concatMap((user) => [
-            AuthActions.userSignUpSuccess({ user }),
-            AuthActions.userSignIn({ data: { login: data.login, password: data.password } }),
-          ]),
-          catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
         ),
       ),
     );
@@ -70,4 +69,14 @@ export class UserEffects {
       ),
     );
   });
+
+  userSignOut$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.userSignOut),
+        tap(() => this.router.navigateByUrl('/')),
+      );
+    },
+    { dispatch: false },
+  );
 }

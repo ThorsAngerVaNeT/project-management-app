@@ -14,6 +14,8 @@ export const userSignUp = createAction('[Auth] User Sign Up', props<{ data: User
 export const userSignUpSuccess = createAction('[Auth] User Sign Up Success', props<{ user: User }>());
 export const userSignUpFailure = createAction('[Auth] User Sign Up Failure', props<{ error: unknown }>());
 
+export const userSignUpProcess = createAction('[Auth] User Sign Up Process', props<{ data: UserParams; user: User }>());
+
 export const userGetInfo = createAction('[Auth] User Get Info');
 export const userGetInfoSuccess = createAction('[Auth] User Get Info Success', props<{ user: User }>());
 export const userGetInfoFailure = createAction('[Auth] User Get Info Failure', props<{ error: unknown }>());
