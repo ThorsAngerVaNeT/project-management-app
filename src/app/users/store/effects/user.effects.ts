@@ -13,26 +13,39 @@ export class UserEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.loadUsers),
-      switchMap(() =>
-        this.userService.getUsers().pipe(
-          map((users) => UserActions.loadUsersSuccess({ users })),
-          catchError((error) => of(UserActions.loadUsersFailed({ error }))),
-        ),
-      ),
+      switchMap(() => this.userService.getUsers()),
+      map((users) => UserActions.loadUsersSuccess({ users })),
+      catchError((error) => of(UserActions.loadUsersFailed({ error }))),
     );
   });
 
   updateUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.updateUser),
-      concatMap(({ userId, user }) =>
-        this.userService.updateUser(userId, user).pipe(
-          concatMap(({ _id: id, ...changes }) => [
-            UserActions.updateUserSuccess({ user: { id, changes } }),
-            AuthActions.userGetInfoSuccess({ user: { _id: id, ...changes } }),
-          ]),
-          catchError((error) => of(UserActions.updateUserFailed({ error }))),
-        ),
+      concatMap(({ userId, user }) => this.userService.updateUser(userId, user)),
+      map(({ _id: id, ...changes }) => UserActions.changeAfterUserUpdateSuccess({ user: { id, changes } })),
+      catchError((error) => of(UserActions.updateUserFailed({ error }))),
+    );
+  });
+
+  updateUserState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.changeAfterUserUpdateSuccess),
+      map((user) => UserActions.updateUserSuccess(user)),
+    );
+  });
+
+  updateUserInfo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.changeAfterUserUpdateSuccess),
+      map((user) =>
+        AuthActions.userUpdateGetInfoSuccess({
+          user: {
+            _id: String(user.user.id),
+            name: String(user.user.changes.name),
+            login: String(user.user.changes.login),
+          },
+        }),
       ),
     );
   });
@@ -40,12 +53,23 @@ export class UserEffects {
   deleteUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.deleteUser),
-      concatMap(({ id }) =>
-        this.userService.deleteUser(id).pipe(
-          concatMap(() => [UserActions.deleteUserSuccess({ id }), AuthActions.userSignOut()]),
-          catchError((error) => of(UserActions.deleteUserFailed({ error }))),
-        ),
-      ),
+      concatMap(({ id }) => this.userService.deleteUser(id)),
+      map((user$) => UserActions.afterUserDeleteSuccess({ id: user$._id })),
+      catchError((error) => of(UserActions.deleteUserFailed({ error }))),
+    );
+  });
+
+  deleteUserSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.afterUserDeleteSuccess),
+      map(({ id }) => UserActions.deleteUserSuccess({ id: id })),
+    );
+  });
+
+  userSignOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.afterUserDeleteSuccess),
+      map(() => AuthActions.userSignOut()),
     );
   });
 }
