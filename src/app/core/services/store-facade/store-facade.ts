@@ -227,4 +227,8 @@ export class StoreFacade {
   updatePoint(pointId: Point['_id'], pointParams: PointUpdateParams): void {
     this.store.dispatch(fromPoint.updatePoint({ pointId, pointParams }));
   }
+
+  deletePoint(pointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deletePoint({ pointId }));
+  }
 }

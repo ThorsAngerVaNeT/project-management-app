@@ -87,4 +87,13 @@ export class PointEffects {
       ),
     );
   });
+
+  deletePoint$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PointActions.deletePoint),
+      concatMap(({ pointId }) => this.pointsService.deletePoint(pointId)),
+      map(({ _id: pointId }) => PointActions.deletePointSuccess({ pointId })),
+      catchError((error) => of(PointActions.deletePointFailure({ error }))),
+    );
+  });
 }
