@@ -5,11 +5,15 @@ import * as TaskActions from '../actions/task.actions';
 
 export const tasksFeatureKey = 'tasks';
 
-export interface TasksState extends EntityState<ColumnTask> {}
+export interface TasksState extends EntityState<ColumnTask> {
+  currentTaskId: ColumnTask['_id'];
+}
 
 export const adapter: EntityAdapter<ColumnTask> = createEntityAdapter<ColumnTask>({ selectId: (task) => task._id });
 
-export const initialState: TasksState = adapter.getInitialState({});
+export const initialState: TasksState = adapter.getInitialState({
+  currentTaskId: '',
+});
 
 export const reducer = createReducer(
   initialState,
@@ -31,6 +35,7 @@ export const reducer = createReducer(
     return adapter.updateMany(tasks, state);
   }),
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
+  on(TaskActions.selectTask, (state, { taskId }): TasksState => ({ ...state, currentTaskId: taskId })),
 );
 
 export const {

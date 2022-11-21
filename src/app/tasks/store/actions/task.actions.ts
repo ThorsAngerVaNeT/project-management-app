@@ -90,3 +90,5 @@ export const deleteTask = createAction(
 );
 export const deleteTaskSuccess = createAction('[Tasks] Delete Task Success', props<{ taskId: ColumnTask['_id'] }>());
 export const deleteTaskFailure = createAction('[Tasks] Delete Task Failure', props<{ error: unknown }>());
+
+export const selectTask = createAction('[Tasks] Select Task', props<{ taskId: ColumnTask['_id'] }>());
