@@ -29,6 +29,8 @@ export class TaskAddComponent implements OnInit {
 
   points$ = this.storeFacade.points$;
 
+  pointControl!: FormControl;
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
@@ -47,6 +49,8 @@ export class TaskAddComponent implements OnInit {
 
       this.taskAddForm.setValue({ title, description, responsible, participants });
     }
+
+    this.pointControl = new FormControl('', Validators.required);
   }
 
   get title(): AbstractControl | null {
@@ -95,5 +99,26 @@ export class TaskAddComponent implements OnInit {
 
   handleCancel(): void {
     this.modal.destroy();
+  }
+
+  addPoint(): void {
+    if (this.pointControl.valid) {
+      if (this.task._id) {
+        const { boardId, _id: taskId } = this.task;
+        const title = this.pointControl.value;
+        const pointParams = {
+          title,
+          taskId,
+          boardId,
+          done: false,
+        };
+
+        this.storeFacade.createPoint(pointParams);
+        this.pointControl.reset();
+      }
+    } else {
+      this.pointControl.markAsDirty();
+      this.pointControl.updateValueAndValidity({ onlySelf: true });
+    }
   }
 }
