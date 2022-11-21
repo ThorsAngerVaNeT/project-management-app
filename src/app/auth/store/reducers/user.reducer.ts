@@ -26,8 +26,6 @@ export const userReducer = createReducer(
   on(AuthActions.userSignOut, (): UserState => ({ ...initialState })),
   on(AuthActions.userSignUpSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
   on(AuthActions.userGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
-
-  on(AuthActions.userUpdateGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
 );
 
 export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {

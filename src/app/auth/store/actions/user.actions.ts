@@ -19,5 +19,3 @@ export const userGetInfoSuccess = createAction('[Auth] User Get Info Success', p
 export const userGetInfoFailure = createAction('[Auth] User Get Info Failure', props<{ error: unknown }>());
 
 export const getUsers = createAction('[Auth] Get Users', props<{ users: User[] }>());
-
-export const userUpdateGetInfoSuccess = createAction('[Auth] User Get Info Success', props<{ user: User }>());

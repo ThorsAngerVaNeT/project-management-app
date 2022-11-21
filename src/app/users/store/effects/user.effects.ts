@@ -32,7 +32,7 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.updateUserSuccess),
       map((user) =>
-        AuthActions.userUpdateGetInfoSuccess({
+        AuthActions.userGetInfoSuccess({
           user: {
             _id: String(user.user.id),
             name: String(user.user.changes.name),
