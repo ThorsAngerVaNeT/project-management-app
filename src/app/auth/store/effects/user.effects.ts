@@ -22,22 +22,15 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(AuthActions.userSignUp),
       exhaustMap(({ data }) =>
-        this.authService.signUp(data).pipe(map((user) => AuthActions.userSignUpProcess({ data, user }))),
+        this.authService.signUp(data).pipe(map((user) => AuthActions.userSignUpSuccess({ data, user }))),
       ),
       catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
     );
   });
 
-  userSignUpProcess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(AuthActions.userSignUpProcess),
-      map(({ user }) => AuthActions.userSignUpSuccess({ user })),
-    );
-  });
-
   userSignInAfterSignUp$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.userSignUpProcess),
+      ofType(AuthActions.userSignUpSuccess),
       map(({ data }) => AuthActions.userSignIn({ data: { login: data.login, password: data.password } })),
     );
   });
