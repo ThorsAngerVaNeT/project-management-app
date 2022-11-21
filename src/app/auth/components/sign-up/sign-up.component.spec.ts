@@ -1,6 +1,7 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { provideMockStore } from '@ngrx/store/testing';
 import { ScannedActionsSubject } from '@ngrx/store';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
@@ -16,12 +17,8 @@ describe('SignUpComponent', () => {
         { provide: NzModalRef, useValue: { service: null } },
         ScannedActionsSubject,
         NzModalService,
-        {
-          provide: StoreFacade,
-          useValue: {
-            getUsers: (): void => {},
-          },
-        },
+        Overlay,
+        provideMockStore(),
       ],
       declarations: [SignUpComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
