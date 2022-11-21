@@ -15,12 +15,12 @@ export const loadPointsByUserSuccess = createAction(
 );
 export const loadPointsByUserFailure = createAction('[Point] Load Points By User Failure', props<{ error: unknown }>());
 
-export const loadPointsByTask = createAction('[Point] Load Points By User', props<{ taskId: TaskFile['_id'] }>());
+export const loadPointsByTask = createAction('[Point] Load Points By Task', props<{ taskId: TaskFile['_id'] }>());
 export const loadPointsByTaskSuccess = createAction(
-  '[Point] Load Points By User Success',
+  '[Point] Load Points By Task Success',
   props<{ points: Point[] }>(),
 );
-export const loadPointsByTaskFailure = createAction('[Point] Load Points By User Failure', props<{ error: unknown }>());
+export const loadPointsByTaskFailure = createAction('[Point] Load Points By Task Failure', props<{ error: unknown }>());
 
 export const createPoint = createAction('[Point] Create Point', props<{ point: PointParams }>());
 export const createPointSuccess = createAction('[Point] Create Point Success', props<{ point: Point }>());
