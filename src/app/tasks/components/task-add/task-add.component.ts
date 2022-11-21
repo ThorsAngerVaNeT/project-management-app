@@ -40,9 +40,11 @@ export class TaskAddComponent implements OnInit {
     });
 
     if (this.task) {
-      this.storeFacade.getPointsByTask(this.task._id);
       const { title, description, userId: responsible, users } = this.task;
       const participants = users.map((user) => user._id);
+
+      this.storeFacade.getPointsByTask(this.task._id);
+
       this.taskAddForm.setValue({ title, description, responsible, participants });
     }
   }
