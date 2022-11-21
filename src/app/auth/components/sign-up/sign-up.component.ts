@@ -40,8 +40,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   user!: User;
 
-  currentUserId = '';
-
   constructor(
     private storeFacade: StoreFacade,
     private action$: Actions,
@@ -64,17 +62,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.handleCancel();
       }),
     );
-
-    if (this.isEditing) {
-      this.subscription.add(
-        this.user$.subscribe((user) => {
-          this.login?.setValue(user.login);
-          this.name?.setValue(user.name);
-
-          this.currentUserId = user._id;
-        }),
-      );
-    }
 
     this.subscription.add(
       this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
@@ -109,7 +96,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   editUser(): void {
-    this.storeFacade.updateUser(this.currentUserId, this.signUpForm.value);
+    this.storeFacade.updateUser(this.user._id, this.signUpForm.value);
   }
 
   deleteUser(): void {
@@ -118,7 +105,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
       nzOnOk: () => {
         this.isDeleting = true;
-        this.storeFacade.deleteUser(this.currentUserId);
+        this.storeFacade.deleteUser(this.user._id);
       },
       nzOkDanger: true,
     });
