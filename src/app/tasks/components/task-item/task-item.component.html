@@ -1,4 +1,4 @@
-<nz-list-item>
+<nz-list-item [class.selected]="task.selected">
   <nz-list-item-meta nz-tooltip nzTooltipTitle="Edit task" i18n-nzTooltipTitle="@@EditTaskTooltip" (click)="editTask()">
     <nz-list-item-meta-title>{{ task.title }}</nz-list-item-meta-title>
     <nz-list-item-meta-description>{{ task.user.name }}</nz-list-item-meta-description>

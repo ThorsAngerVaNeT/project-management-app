@@ -5,4 +5,6 @@ export const selectSearchResultState = createFeatureSelector<fromSearchResult.Se
   fromSearchResult.tasksFeatureKey,
 );
 
-export const selectAllSearchResult = createSelector(selectSearchResultState, fromSearchResult.selectAllTasks);
+export const selectAllSearchResults = createSelector(selectSearchResultState, fromSearchResult.selectAllSearchResults);
+
+export const selectSearchResultIds = createSelector(selectSearchResultState, fromSearchResult.selectSearchResultIds);

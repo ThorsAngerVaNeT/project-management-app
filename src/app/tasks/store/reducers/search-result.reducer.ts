@@ -17,8 +17,8 @@ export const reducer = createReducer(
 );
 
 export const {
-  selectIds: selectTaskIds,
-  selectEntities: selectTaskEntities,
-  selectAll: selectAllTasks,
-  selectTotal: selectTaskTotal,
+  selectIds: selectSearchResultIds,
+  selectEntities: selectSearchResultEntities,
+  selectAll: selectAllSearchResults,
+  selectTotal: selectSearchResultTotal,
 } = adapter.getSelectors();

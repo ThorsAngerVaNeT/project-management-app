@@ -21,7 +21,7 @@ describe('TaskItemComponent', () => {
 
     fixture = TestBed.createComponent(TaskItemComponent);
     component = fixture.componentInstance;
-    component.task = { ...mockTask1, user: mockUser1, users: [mockUser2] };
+    component.task = { ...mockTask1, user: mockUser1, users: [mockUser2], selected: false };
     fixture.detectChanges();
   });
 

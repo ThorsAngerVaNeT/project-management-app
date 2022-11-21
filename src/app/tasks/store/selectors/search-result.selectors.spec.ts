@@ -1,4 +1,4 @@
-import { selectAllSearchResult } from './search-result.selectors';
+import { selectAllSearchResults } from './search-result.selectors';
 
 describe('Search Result Selectors', () => {
   const initialState = {
@@ -6,7 +6,7 @@ describe('Search Result Selectors', () => {
     entities: [],
   };
   it('should select the feature state', () => {
-    const result = selectAllSearchResult.projector(initialState);
+    const result = selectAllSearchResults.projector(initialState);
 
     expect(result).toEqual(initialState.entities);
   });
