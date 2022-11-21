@@ -15,7 +15,7 @@
   <div class="search__result-container">
     <div *ngIf="searchResult$ | async as searchResult">
       <div *ngFor="let task of searchResult">
-        <a href="./boards/{{ task.boardId }}"
+        <a routerLink="/boards/{{ task.boardId }}"
           ><p>{{ task._id }} {{ task.title }} {{ task.description }}</p></a
         >
       </div>

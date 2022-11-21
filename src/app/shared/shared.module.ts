@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -63,6 +64,7 @@ const MODULES = [
   declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe, SearchComponent],
   imports: [
     ...MODULES,
+    RouterModule,
     EffectsModule.forFeature([SearchResultEffects]),
     StoreModule.forFeature(fromSearchResult.tasksFeatureKey, fromSearchResult.reducer),
   ],
