@@ -8,7 +8,7 @@
     <li>contain at least one special character, e.g., ! @ # ? ]</li>
   </ul>
 </div>
-<form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
+<form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm" *ngIf="user$ | async">
   <nz-form-item>
     <nz-form-control [nzErrorTip]="loginErrorTip">
       <nz-input-group nzPrefixIcon="login">

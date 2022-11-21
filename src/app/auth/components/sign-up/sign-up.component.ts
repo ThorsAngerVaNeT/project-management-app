@@ -3,11 +3,12 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
 import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import '@angular/localize/init';
+import { User } from '../../../users/model/user.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -28,7 +29,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   @Input() isEditing?: boolean;
 
-  user$ = this.storeFacade.user$;
+  user$ = this.storeFacade.user$.pipe(
+    tap((user) => {
+      this.user = user;
+      this.signUpForm.patchValue(user);
+    }),
+  );
+
+  user!: User;
 
   currentUserId = '';
 
