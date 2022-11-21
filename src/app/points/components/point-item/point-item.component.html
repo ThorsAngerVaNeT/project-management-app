@@ -1,10 +1,56 @@
-<label nz-checkbox (ngModelChange)="updatePoint()" [(ngModel)]="isChecked">{{ point.title }}</label>
+<label
+  nz-checkbox
+  (ngModelChange)="toggleDone()"
+  [(ngModel)]="isChecked"
+  nz-tooltip
+  nzTooltipTitle="Check/Uncheck checkpoint"
+  i18n-nzTooltipTitle="@@CheckPointTooltip"
+  *ngIf="!isEdit; else editTitle"
+  >{{ point.title }}</label
+>
+
+<ng-template #editTitle>
+  <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+    <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
+      <input nz-input placeholder="To Do" nzSize="small" [formControl]="titleControl" />
+
+      <ng-template #titleErrorTip>
+        <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
+          Please provide a title
+        </ng-container>
+      </ng-template>
+    </nz-input-group>
+    <ng-template #suffixTemplateInfo>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Save"
+        nzType="check-circle"
+        (click)="point._id ? updateTitle() : createPoint()"
+      ></span>
+    </ng-template>
+    <ng-template #suffixTemplateInfo2>
+      <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle" (click)="toggleEdit()"></span>
+    </ng-template>
+  </nz-form-control>
+</ng-template>
+<span
+  nz-icon
+  nzType="edit"
+  nz-tooltip
+  nzTooltipTitle="Edit checkpoint"
+  i18n-nzTooltipTitle="@@EditPointTooltip"
+  class="anticon anticon-edit ng-star-inserted action-icon"
+  (click)="toggleEdit()"
+  *ngIf="!isEdit"
+></span>
 <span
   nz-icon
   nzType="delete"
   nz-tooltip
   nzTooltipTitle="Delete checkpoint"
-  i18n-nzTooltipTitle="@@DeletePointTitleTooltip"
+  i18n-nzTooltipTitle="@@DeletePointTooltip"
   class="anticon anticon-delete ng-star-inserted action-icon"
   (click)="deletePoint()"
+  *ngIf="!isEdit"
 ></span>
