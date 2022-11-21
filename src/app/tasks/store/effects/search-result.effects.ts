@@ -4,6 +4,7 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 import * as TaskActions from '../actions/search-result.actions';
 import { TasksService } from '../../services/tasks.service';
 import { environment } from '@environments/environment';
+import { SearchTypes } from '@core/enums/search-types.enums';
 
 @Injectable()
 export class SearchResultEffects {
@@ -12,10 +13,14 @@ export class SearchResultEffects {
   searchTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TaskActions.searchTask),
-      map(({ searchString }) => searchString.trim()),
+      map(({ searchString, searchType }) => ({ searchString: searchString.trim(), searchType })),
       debounceTime(environment.SEARCH_DEBOUNCE_TIME),
       distinctUntilChanged(),
-      switchMap((searchString) => this.tasksService.getTasksBySearchString(searchString)),
+      switchMap(({ searchString, searchType }) =>
+        searchType === SearchTypes.byKeyWords
+          ? this.tasksService.getTasksBySearchString(searchString)
+          : this.tasksService.getTasksSet(searchString.split(' ')),
+      ),
       map((searchResult) => TaskActions.searchTaskSuccess({ searchResult })),
     );
   });

@@ -215,7 +215,7 @@ export class StoreFacade {
     this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
   }
 
-  searchTask(searchString: string): void {
-    this.store.dispatch(fromSearchResult.searchTask({ searchString }));
+  searchTask(searchString: string, searchType: string): void {
+    this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
   }
 }
