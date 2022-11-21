@@ -2,7 +2,7 @@ import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { TaskFile } from '@files/model/file.model';
 import { User } from '@users/model/user.model';
-import { Point, PointParams, PointsSetUpdateParams } from '../../model/point.model';
+import { Point, PointParams, PointsSetUpdateParams, PointUpdateParams } from '../../model/point.model';
 
 export const loadPointsSet = createAction('[Point] Load PointsSet', props<{ ids: Point['_id'][] }>());
 export const loadPointsSetSuccess = createAction('[Point] Load PointsSet Success', props<{ points: Point[] }>());
@@ -28,7 +28,7 @@ export const createPointFailure = createAction('[Point] Create Point Failure', p
 
 export const updatePoint = createAction(
   '[Point] Update Point',
-  props<{ pointId: Point['_id']; pointParams: PointParams }>(),
+  props<{ pointId: Point['_id']; pointParams: PointUpdateParams }>(),
 );
 export const updatePointSuccess = createAction('[Point] Update Point Success', props<{ point: Update<Point> }>());
 export const updatePointFailure = createAction('[Point] Update Point Failure', props<{ error: unknown }>());

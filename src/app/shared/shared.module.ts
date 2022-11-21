@@ -25,7 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
 
 const MODULES = [
@@ -48,6 +48,7 @@ const MODULES = [
   NzCheckboxModule,
   NzCardModule,
   NzModalModule,
+  FormsModule,
 
   CommonModule,
   ReactiveFormsModule,

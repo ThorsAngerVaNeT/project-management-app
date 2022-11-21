@@ -19,8 +19,9 @@ import {
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
-import { loadPointsByTask } from '@points/store/actions/point.actions';
+import * as fromPoint from '@points/store/actions/point.actions';
 import { selectPointsByCurrentTask } from '@points/store/selectors/point.selectors';
+import { Point, PointUpdateParams } from '@points/model/point.model';
 
 @Injectable({
   providedIn: 'root',
@@ -220,6 +221,10 @@ export class StoreFacade {
   }
 
   getPointsByTask(taskId: ColumnTask['_id']): void {
-    this.store.dispatch(loadPointsByTask({ taskId }));
+    this.store.dispatch(fromPoint.loadPointsByTask({ taskId }));
+  }
+
+  updatePoint(pointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updatePoint({ pointId, pointParams }));
   }
 }

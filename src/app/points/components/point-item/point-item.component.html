@@ -1,4 +1,4 @@
-<label nz-checkbox>{{ point.title }}</label>
+<label nz-checkbox (ngModelChange)="updatePoint()" [(ngModel)]="isChecked">{{ point.title }}</label>
 <span
   nz-icon
   nzType="delete"
