@@ -1,0 +1,10 @@
+<label nz-checkbox>{{ point.title }}</label>
+<span
+  nz-icon
+  nzType="delete"
+  nz-tooltip
+  nzTooltipTitle="Delete checkpoint"
+  i18n-nzTooltipTitle="@@DeletePointTitleTooltip"
+  class="anticon anticon-delete ng-star-inserted action-icon"
+  (click)="deletePoint()"
+></span>

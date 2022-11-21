@@ -67,7 +67,7 @@
   <nz-divider nzText="Task Checklist" i18n-nzText="@@CreateTaskChecklist"></nz-divider>
 
   <nz-form-item>
-    <label nz-checkbox>Design task checklist</label>
+    <app-point-item *ngFor="let point of points$ | async as points" [point]="point"></app-point-item>
   </nz-form-item>
 
   <nz-form-item>
