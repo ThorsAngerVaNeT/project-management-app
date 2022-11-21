@@ -27,6 +27,8 @@ export class TaskAddComponent implements OnInit {
 
   users$ = this.storeFacade.users$;
 
+  points$ = this.storeFacade.points$;
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class TaskAddComponent implements OnInit {
     });
 
     if (this.task) {
+      this.storeFacade.getPointsByTask(this.task._id);
       const { title, description, userId: responsible, users } = this.task;
       const participants = users.map((user) => user._id);
       this.taskAddForm.setValue({ title, description, responsible, participants });
