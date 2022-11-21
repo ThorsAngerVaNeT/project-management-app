@@ -10,6 +10,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 export class SearchComponent {
   searchResult$ = this.storeFacade.searchResult$;
 
+  nzFilterOption = (): boolean => true;
+
   constructor(private storeFacade: StoreFacade) {}
 
   search(searchString: string): void {
