@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Observable, of } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
+import { EMPTY_POINT, Point } from '@points/model/point.model';
 
 @Component({
   selector: 'app-task-add',
@@ -27,9 +29,11 @@ export class TaskAddComponent implements OnInit {
 
   users$ = this.storeFacade.users$;
 
-  points$ = this.storeFacade.points$;
+  points$!: Observable<Point[]>;
 
   pointControl!: FormControl;
+
+  points: Point[] = [];
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
@@ -45,9 +49,13 @@ export class TaskAddComponent implements OnInit {
       const { title, description, userId: responsible, users } = this.task;
       const participants = users.map((user) => user._id);
 
+      this.points$ = this.storeFacade.points$;
+
       this.storeFacade.getPointsByTask(this.task._id);
 
       this.taskAddForm.setValue({ title, description, responsible, participants });
+    } else {
+      this.points$ = of(this.points);
     }
 
     this.pointControl = new FormControl('', Validators.required);
@@ -84,7 +92,12 @@ export class TaskAddComponent implements OnInit {
       } else {
         const taskParams: ColumnTaskParams = { title, description, userId, users, order: this.order };
 
-        this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
+        this.storeFacade.createTask(
+          this.boardId,
+          this.columnId,
+          taskParams,
+          this.points.map(({ _id, ...pointParams }) => pointParams),
+        );
       }
       this.handleCancel();
     } else {
@@ -103,9 +116,9 @@ export class TaskAddComponent implements OnInit {
 
   addPoint(): void {
     if (this.pointControl.valid) {
-      if (this.task._id) {
+      const title = this.pointControl.value;
+      if (this.task) {
         const { boardId, _id: taskId } = this.task;
-        const title = this.pointControl.value;
         const pointParams = {
           title,
           taskId,
@@ -114,8 +127,11 @@ export class TaskAddComponent implements OnInit {
         };
 
         this.storeFacade.createPoint(pointParams);
-        this.pointControl.reset();
+      } else {
+        this.points.push({ ...EMPTY_POINT, title, boardId: this.boardId });
       }
+
+      this.pointControl.reset();
     } else {
       this.pointControl.markAsDirty();
       this.pointControl.updateValueAndValidity({ onlySelf: true });

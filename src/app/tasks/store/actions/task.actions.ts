@@ -9,6 +9,7 @@ import {
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { User } from '@users/model/user.model';
+import { PointParams } from '@points/model/point.model';
 
 export const loadTasks = createAction(
   '[Tasks] Load Tasks',
@@ -57,9 +58,17 @@ export const loadTaskFailure = createAction('[Tasks] Load Task Failure', props<{
 
 export const createTask = createAction(
   '[Tasks] Add Task',
-  props<{ boardId: Board['_id']; columnId: Column['_id']; taskParams: ColumnTaskParams }>(),
+  props<{
+    boardId: Board['_id'];
+    columnId: Column['_id'];
+    taskParams: ColumnTaskParams;
+    pointsParams: PointParams[];
+  }>(),
 );
-export const createTaskSuccess = createAction('[Tasks] Add Task Success', props<{ task: ColumnTask }>());
+export const createTaskSuccess = createAction(
+  '[Tasks] Add Task Success',
+  props<{ task: ColumnTask; pointsParams: PointParams[] }>(),
+);
 export const createTaskFailure = createAction('[Tasks] Add Task Failure', props<{ error: unknown }>());
 
 export const updateTask = createAction(

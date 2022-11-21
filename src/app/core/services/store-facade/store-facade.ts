@@ -171,8 +171,13 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
   }
 
-  createTask(boardId: Board['_id'], columnId: Column['_id'], taskParams: ColumnTaskParams): void {
-    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams }));
+  createTask(
+    boardId: Board['_id'],
+    columnId: Column['_id'],
+    taskParams: ColumnTaskParams,
+    pointsParams: PointParams[] = [],
+  ): void {
+    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams, pointsParams }));
   }
 
   updateTask(

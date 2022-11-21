@@ -4,6 +4,7 @@ import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as PointActions from '../actions/point.actions';
 import { PointsService } from '../../services/points.service';
+import { createTaskSuccess } from '@tasks/store/actions/task.actions';
 
 @Injectable()
 export class PointEffects {
@@ -53,6 +54,15 @@ export class PointEffects {
           map((point) => PointActions.createPointSuccess({ point })),
           catchError((error) => of(PointActions.createPointFailure({ error }))),
         ),
+      ),
+    );
+  });
+
+  createPointForLatestTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createTaskSuccess),
+      concatMap(({ task: { _id: taskId }, pointsParams }) =>
+        pointsParams.map((pointParams) => PointActions.createPoint({ point: { ...pointParams, taskId } })),
       ),
     );
   });

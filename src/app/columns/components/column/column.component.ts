@@ -74,6 +74,8 @@ export class ColumnComponent implements OnInit {
 
   addTask(): void {
     const { boardId, _id: columnId } = this.column;
+
+    this.storeFacade.selectTask('');
     this.modalService.create({
       nzTitle: $localize`:@@CreateTaskModalTitle:Create Task`,
       nzContent: TaskAddComponent,
