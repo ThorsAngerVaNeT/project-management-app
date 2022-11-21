@@ -90,6 +90,3 @@ export const deleteTask = createAction(
 );
 export const deleteTaskSuccess = createAction('[Tasks] Delete Task Success', props<{ taskId: ColumnTask['_id'] }>());
 export const deleteTaskFailure = createAction('[Tasks] Delete Task Failure', props<{ error: unknown }>());
-
-export const searchTask = createAction('[Tasks] Search Task', props<{ searchString: string }>());
-export const searchTaskSuccess = createAction('[Tasks] Search Task Success', props<{ tasks: ColumnTask[] }>());

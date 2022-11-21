@@ -19,6 +19,8 @@ import {
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
+import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
+import { selectAllSearchResult } from '@tasks/store/selectors/search-result.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +35,8 @@ export class StoreFacade {
   boardDetail$ = this.store.select(selectBoardDetailViewModel);
 
   users$ = this.store.select(selectAllUsers);
+
+  searchResult$ = this.store.select(selectAllSearchResult);
 
   constructor(private store: Store) {}
 
@@ -212,6 +216,6 @@ export class StoreFacade {
   }
 
   searchTask(searchString: string): void {
-    this.store.dispatch(fromTask.searchTask({ searchString }));
+    this.store.dispatch(fromSearchResult.searchTask({ searchString }));
   }
 }

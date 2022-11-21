@@ -7,6 +7,12 @@
     #searchBox
     (input)="search(searchBox.value)"
   />
+
+  <div *ngIf="searchResult$ | async as searchResult">
+    <div *ngFor="let result of searchResult">
+      <p>{{ result._id }} {{ result.title }} {{ result.description }}</p>
+    </div>
+  </div>
 </nz-input-group>
 <ng-template #suffixIconSearch>
   <span nz-icon nzType="search"></span>

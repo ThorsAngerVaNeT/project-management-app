@@ -8,6 +8,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
+  searchResult$ = this.storeFacade.searchResult$;
+
   constructor(private storeFacade: StoreFacade) {}
 
   search(searchString: string): void {
