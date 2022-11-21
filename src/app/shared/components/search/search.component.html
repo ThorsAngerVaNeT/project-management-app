@@ -1,23 +1,27 @@
 <nz-select
   class="search__search-field"
+  nzBorderless
   nzShowSearch
-  nzServerSearch
-  placeholder="Search"
+  nzPlaceHolder="Search"
   i18n-placeholder="@@inputSearchPlaceholder"
   [nzDropdownRender]="renderTemplate"
   [nzShowArrow]="false"
   [nzFilterOption]="nzFilterOption"
   (nzOnSearch)="search($event)"
 >
-  <nz-option nzLabel="search result:" [nzValue]="null"></nz-option>
+  <nz-option nzLabel="search result:" [nzValue]="null" nzDisabled></nz-option>
 </nz-select>
 <ng-template #renderTemplate>
   <div class="search__result-container">
     <div *ngIf="searchResult$ | async as searchResult">
       <div *ngFor="let task of searchResult">
-        <a routerLink="/boards/{{ task.boardId }}"
-          ><p>{{ task._id }} {{ task.title }} {{ task.description }}</p></a
-        >
+        <a routerLink="/boards/{{ task.boardId }}">
+          <div class="search__result">
+            <span class="search__result-title">{{ task.title }} </span
+            ><span class="search__result-description"> {{ task.description }}</span
+            ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@ import {
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
-import { selectAllSearchResults } from '@tasks/store/selectors/search-result.selectors';
+import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class StoreFacade {
 
   users$ = this.store.select(selectAllUsers);
 
-  searchResult$ = this.store.select(selectAllSearchResults);
+  searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
   constructor(private store: Store) {}
 

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { ColumnTaskWithUsers } from '@tasks/model/task.model';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,11 @@ export class SearchComponent {
 
   constructor(private storeFacade: StoreFacade) {}
 
-  search(searchString: string): void {
+  public getUsersList(task: ColumnTaskWithUsers): string {
+    return task.users.map((user) => user.name).join(', ');
+  }
+
+  public search(searchString: string): void {
     this.storeFacade.searchTask(searchString);
   }
 }
