@@ -20,6 +20,7 @@ describe('BoardDetailComponent', () => {
           provide: StoreFacade,
           useValue: {
             getUsers: (): void => {},
+            boardDetail$: of(),
           },
         },
         {

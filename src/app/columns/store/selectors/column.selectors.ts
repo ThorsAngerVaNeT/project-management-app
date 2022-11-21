@@ -17,7 +17,7 @@ export const selectCurrentBoardColumns = createSelector(
     return columns
       .filter((column) => column.boardId === boardId)
       .map((column) => {
-        const tasks = boardTasks[column._id] || [];
+        const tasks = boardTasks[column._id] ?? [];
 
         return { ...column, tasks };
       });
