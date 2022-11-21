@@ -1,16 +1,22 @@
-<nz-select
-  class="search__search-field"
-  nzBorderless
-  nzShowSearch
-  nzPlaceHolder="Search"
-  i18n-placeholder="@@inputSearchPlaceholder"
-  [nzDropdownRender]="renderTemplate"
-  [nzShowArrow]="false"
-  [nzFilterOption]="nzFilterOption"
-  (nzOnSearch)="search($event)"
->
-  <nz-option nzLabel="search result:" [nzValue]="null" nzDisabled></nz-option>
-</nz-select>
+<div>
+  <nz-select
+    class="search__select search__search-field"
+    nzBorderless
+    nzShowSearch
+    nzPlaceHolder="Search"
+    i18n-nzPlaceHolder="@@inputSearchPlaceholder"
+    [nzDropdownRender]="renderTemplate"
+    [nzShowArrow]="false"
+    [nzFilterOption]="nzFilterOption"
+    (nzOnSearch)="search($event)"
+  >
+    <nz-option [nzValue]="null" nzLabel="search result:" i18n-nzLabel="@@inputSearchLabel" nzDisabled></nz-option>
+  </nz-select>
+  <nz-select class="search__select search__search-type" nzBorderless [nzShowArrow]="false">
+    <nz-option nzValue="byIds" nzLabel="by task number" i18n-nzLabel="@@byIdsSearchLabel"></nz-option>
+    <nz-option nzValue="byKeyWords" nzLabel="by key words" i18n-nzLabel="@@byKeyWordsSearchLabel"></nz-option>
+  </nz-select>
+</div>
 <ng-template #renderTemplate>
   <div class="search__result-container">
     <div *ngIf="searchResult$ | async as searchResult">
