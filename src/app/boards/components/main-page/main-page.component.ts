@@ -17,7 +17,6 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeFacade.getBoards();
-    this.storeFacade.getUsers();
   }
 
   showModal(): void {
