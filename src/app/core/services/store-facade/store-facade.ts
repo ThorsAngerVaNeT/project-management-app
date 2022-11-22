@@ -134,8 +134,8 @@ export class StoreFacade {
     this.store.dispatch(fromUser.createUser({ user }));
   }
 
-  updateUser(id: User['_id'], user: UserParams): void {
-    this.store.dispatch(fromUser.updateUser({ id, user }));
+  updateUser(userId: User['_id'], user: UserParams): void {
+    this.store.dispatch(fromUser.updateUser({ userId, user }));
   }
 
   deleteUser(id: User['_id']): void {

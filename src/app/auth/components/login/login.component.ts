@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { Actions, ofType } from '@ngrx/effects';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Subscription } from 'rxjs';
+import { userSignInSuccess } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +13,49 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   isVisible = true;
 
+  isLoading = false;
+
   logInForm!: FormGroup;
+
+  subscription = new Subscription();
+
+  constructor(
+    private storeFacade: StoreFacade,
+    private action$: Actions,
+    private modal: NzModalRef,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
       login: new FormControl('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', [Validators.required]),
     });
+
+    this.subscription.add(
+      this.action$.pipe(ofType(userSignInSuccess)).subscribe(() => {
+        this.router.navigate(['/boards']);
+        this.handleCancel();
+      }),
+    );
+  }
+
+  submitForm(): void {
+    if (this.logInForm.valid) {
+      this.isLoading = true;
+      const { login, password } = this.logInForm.value;
+      this.storeFacade.signIn({ login, password });
+    } else {
+      Object.values(this.logInForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
   }
 
   get login(): AbstractControl | null {
@@ -27,12 +66,11 @@ export class LoginComponent implements OnInit {
     return this.logInForm.get('password');
   }
 
-  submitForm(): void {
-    console.log('Form Submitted: ', this.logInForm);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked');
-    this.isVisible = false;
+    this.modal.destroy();
   }
 }

@@ -11,7 +11,7 @@ export const userSignInFailure = createAction('[Auth] User Sign In Failure', pro
 export const userSignOut = createAction('[Auth] User Sign Out');
 
 export const userSignUp = createAction('[Auth] User Sign Up', props<{ data: UserParams }>());
-export const userSignUpSuccess = createAction('[Auth] User Sign Up Success', props<{ user: User }>());
+export const userSignUpSuccess = createAction('[Auth] User Sign Up Success', props<{ data: UserParams; user: User }>());
 export const userSignUpFailure = createAction('[Auth] User Sign Up Failure', props<{ error: unknown }>());
 
 export const userGetInfo = createAction('[Auth] User Get Info');
@@ -19,3 +19,8 @@ export const userGetInfoSuccess = createAction('[Auth] User Get Info Success', p
 export const userGetInfoFailure = createAction('[Auth] User Get Info Failure', props<{ error: unknown }>());
 
 export const getUsers = createAction('[Auth] Get Users', props<{ users: User[] }>());
+
+export const userUpdateGetInfoSuccess = createAction(
+  '[Auth] Update User Info After SignUp Success',
+  props<{ user: User }>(),
+);
