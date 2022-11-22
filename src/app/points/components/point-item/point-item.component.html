@@ -12,7 +12,13 @@
 <ng-template #editTitle>
   <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
     <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
-      <input nz-input placeholder="To Do" nzSize="small" [formControl]="titleControl" />
+      <input
+        nz-input
+        placeholder="Subtask Title"
+        i18n-placeholder="@@SubtaskTitleInputPlaceholder"
+        nzSize="small"
+        [formControl]="titleControl"
+      />
 
       <ng-template #titleErrorTip>
         <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
@@ -21,10 +27,24 @@
       </ng-template>
     </nz-input-group>
     <ng-template #suffixTemplateInfo>
-      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle" (click)="updateTitle()"></span>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Save"
+        i18n-nzTooltipTitle="@@SaveButtonTooltip"
+        nzType="check-circle"
+        (click)="updateTitle()"
+      ></span>
     </ng-template>
     <ng-template #suffixTemplateInfo2>
-      <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle" (click)="toggleEdit()"></span>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Cancel"
+        i18n-nzTooltipTitle="@@CancelButtonTooltip"
+        nzType="close-circle"
+        (click)="toggleEdit()"
+      ></span>
     </ng-template>
   </nz-form-control>
 </ng-template>
