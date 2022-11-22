@@ -53,7 +53,7 @@ export const addNewTaskPoint = createAction(
 );
 export const updateNewTaskPoint = createAction(
   '[Point] Update New Task Point',
-  props<{ newTaskPointId: Point['_id']; point: Point }>(),
+  props<{ newTaskPointId: Point['_id']; pointParams: PointUpdateParams }>(),
 );
 export const deleteNewTaskPoint = createAction(
   '[Point] Delete New Task Point',

@@ -38,9 +38,12 @@ export const reducer = createReducer(
   ),
   on(
     PointActions.updateNewTaskPoint,
-    (state, { newTaskPointId, point }): PointsState => ({
+    (state, { newTaskPointId, pointParams }): PointsState => ({
       ...state,
-      newTaskPoints: { ...state.newTaskPoints, [newTaskPointId]: point },
+      newTaskPoints: {
+        ...state.newTaskPoints,
+        [newTaskPointId]: { ...state.newTaskPoints[newTaskPointId], ...pointParams },
+      },
     }),
   ),
   on(PointActions.deleteNewTaskPoint, (state, { newTaskPointId }): PointsState => {

@@ -247,8 +247,8 @@ export class StoreFacade {
     this.store.dispatch(fromPoint.addNewTaskPoint({ newTaskPointId, point }));
   }
 
-  updateNewTaskPoint(newTaskPointId: Point['_id'], point: Point): void {
-    this.store.dispatch(fromPoint.updateNewTaskPoint({ newTaskPointId, point }));
+  updateNewTaskPoint(newTaskPointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updateNewTaskPoint({ newTaskPointId, pointParams }));
   }
 
   deleteNewTaskPoint(newTaskPointId: Point['_id']): void {
