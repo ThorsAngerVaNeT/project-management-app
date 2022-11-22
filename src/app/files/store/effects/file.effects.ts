@@ -60,8 +60,8 @@ export class FileEffects {
   uploadFile$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.uploadFile),
-      concatMap(({ boardId, taskId, file }) =>
-        this.filesService.uploadFile(boardId, taskId, file).pipe(
+      concatMap(({ boardId, taskId, file, filename }) =>
+        this.filesService.uploadFile(boardId, taskId, file, filename).pipe(
           map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
           catchError((error) => of(FileActions.uploadFileFailure({ error }))),
         ),

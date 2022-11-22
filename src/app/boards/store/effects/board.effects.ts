@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap, filter } from 'rxjs/operators';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { environment } from '@environments/environment';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { uploadFile } from '@files/store/actions/file.actions';
 
 @Injectable()
 export class BoardEffects {
@@ -62,11 +64,32 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),
       concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(([action, { _id: owner }]) =>
-        this.boardsService.createBoard({ ...action.board, owner }).pipe(
-          map((board) => BoardActions.createBoardSuccess({ board })),
-          catchError((error) => of(BoardActions.createBoardFailure({ error }))),
-        ),
+      concatMap(
+        ([
+          {
+            board: { file, ...boardParams },
+          },
+          { _id: owner },
+        ]) =>
+          this.boardsService.createBoard({ ...boardParams, owner }).pipe(
+            map((board) => BoardActions.createBoardSuccess({ board, file })),
+            catchError((error) => of(BoardActions.createBoardFailure({ error }))),
+          ),
+      ),
+    );
+  });
+
+  uploadBoardCoverAfterCreateBoardSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.createBoardSuccess),
+      filter(({ file }) => !!file),
+      map(({ board: { _id: boardId }, file }) =>
+        uploadFile({
+          boardId,
+          taskId: environment.BOARD_COVER_FILE_TASK_ID,
+          file,
+          filename: `${boardId}.${file.name.split('.').at(-1)}`,
+        }),
       ),
     );
   });

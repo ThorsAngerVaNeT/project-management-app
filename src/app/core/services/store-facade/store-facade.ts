@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAuth from '@auth/store/actions/user.actions';
 import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
-import { Board, BoardParams } from '@boards/model/board.model';
+import { Board, BoardParams, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
@@ -87,7 +87,7 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
-  createBoard(board: Omit<BoardParams, 'owner'>): void {
+  createBoard(board: BoardParamsWithImage): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
@@ -225,8 +225,8 @@ export class StoreFacade {
     this.store.dispatch(fromFile.deleteFile({ id }));
   }
 
-  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): void {
-    this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
+  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File, filename = file.name): void {
+    this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file, filename }));
   }
 
   selectTask(taskId: ColumnTask['_id']): void {
