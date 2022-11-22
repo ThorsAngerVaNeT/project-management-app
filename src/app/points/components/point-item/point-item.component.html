@@ -21,19 +21,14 @@
       </ng-template>
     </nz-input-group>
     <ng-template #suffixTemplateInfo>
-      <span
-        nz-icon
-        nz-tooltip
-        nzTooltipTitle="Save"
-        nzType="check-circle"
-        (click)="point._id ? updateTitle() : createPoint()"
-      ></span>
+      <span nz-icon nz-tooltip nzTooltipTitle="Save" nzType="check-circle" (click)="updateTitle()"></span>
     </ng-template>
     <ng-template #suffixTemplateInfo2>
       <span nz-icon nz-tooltip nzTooltipTitle="Cancel" nzType="close-circle" (click)="toggleEdit()"></span>
     </ng-template>
   </nz-form-control>
 </ng-template>
+
 <span
   nz-icon
   nzType="edit"

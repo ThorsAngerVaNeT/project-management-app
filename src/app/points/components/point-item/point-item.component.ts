@@ -36,10 +36,6 @@ export class PointItemComponent implements OnInit {
     this.isEdit = !this.isEdit;
   }
 
-  createPoint(): void {
-    console.log('create');
-  }
-
   updateTitle(): void {
     if (this.titleControl.valid) {
       this.toggleEdit();
@@ -51,17 +47,24 @@ export class PointItemComponent implements OnInit {
   }
 
   updatePoint(): void {
-    const { _id: pointId } = this.point;
+    const { _id: pointId, taskId } = this.point;
     const title = this.titleControl.value;
 
-    this.storeFacade.updatePoint(pointId, { title, done: this.isChecked });
+    if (taskId) {
+      this.storeFacade.updatePoint(pointId, { title, done: this.isChecked });
+    } else {
+      this.storeFacade.updateNewTaskPoint(pointId, { title, done: this.isChecked });
+    }
   }
 
   deletePoint(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: 'this check point' },
-      nzOnOk: () => this.storeFacade.deletePoint(this.point._id),
+      nzOnOk: () =>
+        this.point.taskId
+          ? this.storeFacade.deletePoint(this.point._id)
+          : this.storeFacade.deleteNewTaskPoint(this.point._id),
       nzOkDanger: true,
     });
   }
