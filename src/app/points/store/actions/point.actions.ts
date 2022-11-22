@@ -59,4 +59,4 @@ export const deleteNewTaskPoint = createAction(
   '[Point] Delete New Task Point',
   props<{ newTaskPointId: Point['_id'] }>(),
 );
-export const clearNewTaskPoint = createAction('[Point] Clean New Task Points');
+export const clearNewTaskPoint = createAction('[Point] Clear New Task Points');
