@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as PointActions from '../actions/point.actions';
 import { PointsService } from '../../services/points.service';
-import { createTaskSuccess } from '@tasks/store/actions/task.actions';
+import * as TaskActions from '@tasks/store/actions/task.actions';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class PointEffects {
-  constructor(private actions$: Actions, private pointsService: PointsService) {}
+  constructor(private actions$: Actions, private pointsService: PointsService, private storeFacade: StoreFacade) {}
 
   loadPointsSet$ = createEffect(() => {
     return this.actions$.pipe(
@@ -60,9 +61,20 @@ export class PointEffects {
 
   createPointForLatestTask$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(createTaskSuccess),
-      concatMap(({ task: { _id: taskId }, pointsParams }) =>
-        pointsParams.map((pointParams) => PointActions.createPoint({ point: { ...pointParams, taskId } })),
+      ofType(TaskActions.createTaskSuccess),
+      concatLatestFrom(() => this.storeFacade.newTaskPoints$),
+      concatMap(
+        ([
+          {
+            task: { _id: taskId },
+          },
+          newTaskPoints,
+        ]) => [
+          ...newTaskPoints.map(({ _id, ...pointParams }) =>
+            PointActions.createPoint({ point: { ...pointParams, taskId } }),
+          ),
+          PointActions.clearNewTaskPoint(),
+        ],
       ),
     );
   });

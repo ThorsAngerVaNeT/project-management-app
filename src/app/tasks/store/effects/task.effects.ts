@@ -84,9 +84,9 @@ export class TaskEffects {
   createTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TaskActions.createTask),
-      concatMap(({ boardId, columnId, taskParams, pointsParams }) =>
+      concatMap(({ boardId, columnId, taskParams }) =>
         this.tasksService.createTask(boardId, columnId, taskParams).pipe(
-          map((task) => TaskActions.createTaskSuccess({ task, pointsParams })),
+          map((task) => TaskActions.createTaskSuccess({ task })),
           catchError((error) => of(TaskActions.createTaskFailure({ error }))),
         ),
       ),

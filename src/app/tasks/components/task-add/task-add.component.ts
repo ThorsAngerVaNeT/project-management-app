@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { Point } from '@points/model/point.model';
   styleUrls: ['./task-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskAddComponent implements OnInit, OnDestroy {
+export class TaskAddComponent implements OnInit {
   @Input() task!: ColumnTaskWithUsers;
 
   isVisible = true;
@@ -55,10 +55,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.storeFacade.clearNewTaskPoint();
-  }
-
   get title(): AbstractControl | null {
     return this.taskAddForm.get('title');
   }
@@ -96,7 +92,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
         this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
       }
-      this.handleCancel();
+
+      this.modal.destroy();
     } else {
       Object.values(this.taskAddForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -108,6 +105,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   }
 
   handleCancel(): void {
+    this.storeFacade.clearNewTaskPoint();
     this.modal.destroy();
   }
 }

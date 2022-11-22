@@ -65,10 +65,7 @@ export const createTask = createAction(
     pointsParams: PointParams[];
   }>(),
 );
-export const createTaskSuccess = createAction(
-  '[Tasks] Add Task Success',
-  props<{ task: ColumnTask; pointsParams: PointParams[] }>(),
-);
+export const createTaskSuccess = createAction('[Tasks] Add Task Success', props<{ task: ColumnTask }>());
 export const createTaskFailure = createAction('[Tasks] Add Task Failure', props<{ error: unknown }>());
 
 export const updateTask = createAction(
