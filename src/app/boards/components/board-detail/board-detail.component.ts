@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { map } from 'rxjs';
-import { ColumnComponent } from '@columns/components/column/column.component';
 import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ColumnAddComponent } from '@columns/components/column-add/column-add.component';
 
 @Component({
   selector: 'app-board',
@@ -15,8 +16,6 @@ import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.mo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardDetailComponent implements OnInit {
-  @ViewChild('newColumnPlaceholder', { read: ViewContainerRef }) newColumnPlaceholder!: ViewContainerRef;
-
   boardId!: string;
 
   columnsCount!: number;
@@ -28,7 +27,7 @@ export class BoardDetailComponent implements OnInit {
     }),
   );
 
-  constructor(private route: ActivatedRoute, private storeFacade: StoreFacade) {}
+  constructor(private route: ActivatedRoute, private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.storeFacade.getUsers();
@@ -40,9 +39,11 @@ export class BoardDetailComponent implements OnInit {
   }
 
   addNewColumn(): void {
-    const componentRef = this.newColumnPlaceholder.createComponent(ColumnComponent);
-    componentRef.instance.componentRef = componentRef;
-    componentRef.setInput('column', { boardId: this.boardId, order: this.columnsCount });
+    this.modalService.create({
+      nzTitle: $localize`:@@CreateColumnModalTitle:Create Column`,
+      nzContent: ColumnAddComponent,
+      nzComponentParams: { boardId: this.boardId, order: this.columnsCount },
+    });
   }
 
   public trackById(index: number, item: ColumnWithTasks): string {

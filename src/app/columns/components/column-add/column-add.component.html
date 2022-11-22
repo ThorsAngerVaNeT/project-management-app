@@ -1,0 +1,20 @@
+<nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+  <input
+    nz-input
+    placeholder="Column Title"
+    i18n-placeholder="Column Title"
+    nzSize="small"
+    [formControl]="titleControl"
+  />
+
+  <ng-template #titleErrorTip>
+    <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
+      Please provide a title
+    </ng-container>
+  </ng-template>
+</nz-form-control>
+
+<ng-template [nzModalFooter]>
+  <button nz-button (click)="handleCancel()" i18n="@@CancelButtonText">Cancel</button>
+  <button nz-button nzType="primary" (click)="handleOk()" i18n="@@SaveButtonText">Save</button>
+</ng-template>

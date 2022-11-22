@@ -37,17 +37,6 @@ export class ColumnComponent implements OnInit {
     }
   }
 
-  createColumn(): void {
-    if (this.titleControl.valid) {
-      const { boardId, order } = this.column;
-      this.storeFacade.createColumn(boardId, { title: this.titleControl.value, order });
-      this.deleteComponent();
-    } else if (this.titleControl.invalid) {
-      this.titleControl.markAsDirty();
-      this.titleControl.updateValueAndValidity({ onlySelf: true });
-    }
-  }
-
   updateColumn(): void {
     if (this.titleControl.valid) {
       const { boardId, _id: columnId, tasks, ...columnParams } = this.column;
@@ -67,10 +56,6 @@ export class ColumnComponent implements OnInit {
       },
       nzOkDanger: true,
     });
-  }
-
-  deleteComponent(): void {
-    this.componentRef.destroy();
   }
 
   addTask(): void {

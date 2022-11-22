@@ -47,7 +47,7 @@
         nz-tooltip
         nzTooltipTitle="Save"
         i18n-nzTooltipTitle="@@SaveButtonTooltip"
-        (click)="column._id ? updateColumn() : createColumn()"
+        (click)="updateColumn()"
       ></span>
     </ng-template>
     <ng-template #suffixTemplateInfo2>
@@ -57,7 +57,7 @@
         nzTooltipTitle="Cancel"
         i18n-nzTooltipTitle="@@CancelButtonTooltip"
         nzType="close-circle"
-        (click)="column._id ? toggleEdit() : deleteComponent()"
+        (click)="toggleEdit()"
       ></span>
     </ng-template>
   </div>
