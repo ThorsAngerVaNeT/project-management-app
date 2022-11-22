@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { map } from 'rxjs';
+import { ColumnComponent } from '@columns/components/column/column.component';
+import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
 
 @Component({
@@ -12,9 +15,18 @@ import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.mo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardDetailComponent implements OnInit {
-  data = [];
+  @ViewChild('newColumnPlaceholder', { read: ViewContainerRef }) newColumnPlaceholder!: ViewContainerRef;
 
-  boardDetail$ = this.storeFacade.boardDetail$;
+  boardId!: string;
+
+  columnsCount!: number;
+
+  boardDetail$ = this.storeFacade.boardDetail$.pipe(
+    map((boardDetail: BoardDetailViewModel) => {
+      this.columnsCount = boardDetail.columns.length;
+      return boardDetail;
+    }),
+  );
 
   constructor(private route: ActivatedRoute, private storeFacade: StoreFacade) {}
 
@@ -22,8 +34,15 @@ export class BoardDetailComponent implements OnInit {
     this.storeFacade.getUsers();
     this.route.params.subscribe((param) => {
       const { boardId } = param;
+      this.boardId = boardId;
       this.storeFacade.getBoardAllData(boardId);
     });
+  }
+
+  addNewColumn(): void {
+    const componentRef = this.newColumnPlaceholder.createComponent(ColumnComponent);
+    componentRef.instance.componentRef = componentRef;
+    componentRef.setInput('column', { boardId: this.boardId, order: this.columnsCount });
   }
 
   public trackById(index: number, item: ColumnWithTasks): string {
@@ -31,7 +50,7 @@ export class BoardDetailComponent implements OnInit {
   }
 
   public drop(event: CdkDragDrop<ColumnWithTasks[]>): void {
-    if (event.previousContainer === event.container) {
+    if (event.previousContainer === event.container && event.previousIndex !== event.currentIndex) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
       const columnSetUpdateParams = this.getColumnSetUpdateParams(event.container.data);

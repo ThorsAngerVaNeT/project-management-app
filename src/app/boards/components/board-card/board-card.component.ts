@@ -18,7 +18,7 @@ export class BoardCardComponent {
   removeBoard(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: 'this board' },
+      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteThisBoard:this board` },
       nzOnOk: () => {
         this.storeFacade.deleteBoard(this.board._id);
       },

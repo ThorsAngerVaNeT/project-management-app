@@ -26,6 +26,15 @@ export const reducer = createReducer(
   on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
   on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
   on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),
+  on(ColumnActions.updateColumnsSet, (state, { columnsParams }) => {
+    const columns = columnsParams.map(({ _id: id, ...changes }) => {
+      const { _id, ...originalColumn } = { ...state.entities[id] };
+      const column = { id, changes: { ...originalColumn, ...changes } };
+
+      return column;
+    });
+    return adapter.updateMany(columns, state);
+  }),
   on(ColumnActions.deleteColumnSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 
