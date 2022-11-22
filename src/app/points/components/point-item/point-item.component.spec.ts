@@ -1,4 +1,8 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { mockPoint1 } from '@mocks/mock-points/mock-points';
 
 import { PointItemComponent } from './point-item.component';
 
@@ -9,10 +13,12 @@ describe('PointItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PointItemComponent],
+      providers: [provideMockStore(), NzModalService, Overlay],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PointItemComponent);
     component = fixture.componentInstance;
+    component.point = mockPoint1;
     fixture.detectChanges();
   });
 
