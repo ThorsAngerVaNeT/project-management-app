@@ -25,7 +25,13 @@
   <div class="title-to-input">
     <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
       <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
-        <input nz-input placeholder="To Do" nzSize="small" [formControl]="titleControl" />
+        <input
+          nz-input
+          placeholder="Column Title"
+          i18n-placeholder="Column Title"
+          nzSize="small"
+          [formControl]="titleControl"
+        />
 
         <ng-template #titleErrorTip>
           <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">

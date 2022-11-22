@@ -53,6 +53,7 @@ export class ColumnComponent implements OnInit {
       const { boardId, _id: columnId, tasks, ...columnParams } = this.column;
       columnParams.title = this.titleControl.value;
       this.storeFacade.updateColumn(boardId, columnId, columnParams);
+      this.toggleEdit();
     }
   }
 
