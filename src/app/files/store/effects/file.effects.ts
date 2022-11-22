@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as FileActions from '../actions/file.actions';
 import { FilesService } from '../../services/files.service';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class FileEffects {
@@ -78,6 +79,15 @@ export class FileEffects {
           catchError((error) => of(FileActions.deleteFileFailure({ error }))),
         ),
       ),
+    );
+  });
+
+  loadFilesByTaskAfterCreateBoardSuccess$ = createEffect(() => {
+    const taskId = environment.BOARD_COVER_FILE_TASK_ID;
+    return this.actions$.pipe(
+      ofType(FileActions.uploadFileSuccess),
+      filter(({ file }) => file.taskId === taskId),
+      map(() => FileActions.loadFilesByTask({ taskId })),
     );
   });
 }

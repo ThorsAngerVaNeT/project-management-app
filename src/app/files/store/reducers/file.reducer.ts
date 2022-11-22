@@ -7,7 +7,9 @@ export const filesFeatureKey = 'files';
 
 export interface FilesState extends EntityState<TaskFile> {}
 
-export const adapter: EntityAdapter<TaskFile> = createEntityAdapter<TaskFile>();
+export const adapter: EntityAdapter<TaskFile> = createEntityAdapter<TaskFile>({
+  selectId: (file: TaskFile) => file._id,
+});
 
 export const initialState: FilesState = adapter.getInitialState({
   ids: [],
