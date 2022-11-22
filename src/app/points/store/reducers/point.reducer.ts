@@ -47,11 +47,11 @@ export const reducer = createReducer(
     }),
   ),
   on(PointActions.deleteNewTaskPoint, (state, { newTaskPointId }): PointsState => {
-    const newTaskPointsState = { ...state.newTaskPoints };
-    delete newTaskPointsState[newTaskPointId];
+    const { [newTaskPointId]: deleted, ...newTaskPoints } = state.newTaskPoints;
+
     return {
       ...state,
-      newTaskPoints: newTaskPointsState,
+      newTaskPoints,
     };
   }),
   on(PointActions.clearNewTaskPoint, (state): PointsState => ({ ...state, newTaskPoints: {} })),
