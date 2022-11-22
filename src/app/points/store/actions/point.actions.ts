@@ -46,3 +46,17 @@ export const updatePointsSetFailure = createAction('[Point] Update Points Set Fa
 export const deletePoint = createAction('[Point] Delete Point', props<{ pointId: Point['_id'] }>());
 export const deletePointSuccess = createAction('[Point] Delete Point Success', props<{ pointId: Point['_id'] }>());
 export const deletePointFailure = createAction('[Point] Delete Point Failure', props<{ error: unknown }>());
+
+export const addNewTaskPoint = createAction(
+  '[Point] Add New Task Point',
+  props<{ newTaskPointId: Point['_id']; point: Point }>(),
+);
+export const updateNewTaskPoint = createAction(
+  '[Point] Update New Task Point',
+  props<{ newTaskPointId: Point['_id']; point: Point }>(),
+);
+export const deleteNewTaskPoint = createAction(
+  '[Point] Delete New Task Point',
+  props<{ newTaskPointId: Point['_id'] }>(),
+);
+export const clearNewTaskPoint = createAction('[Point] Clean New Task Points');

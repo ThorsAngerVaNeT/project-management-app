@@ -20,7 +20,7 @@ import {
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
 import * as fromPoint from '@points/store/actions/point.actions';
-import { selectPointsByCurrentTask } from '@points/store/selectors/point.selectors';
+import { selectNewTaskAllPoints, selectPointsByCurrentTask } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 
 @Injectable({
@@ -38,6 +38,8 @@ export class StoreFacade {
   users$ = this.store.select(selectAllUsers);
 
   points$ = this.store.select(selectPointsByCurrentTask);
+
+  newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
 
   constructor(private store: Store) {}
 
@@ -239,5 +241,21 @@ export class StoreFacade {
 
   deletePoint(pointId: Point['_id']): void {
     this.store.dispatch(fromPoint.deletePoint({ pointId }));
+  }
+
+  addNewTaskPoint(newTaskPointId: Point['_id'], point: Point): void {
+    this.store.dispatch(fromPoint.addNewTaskPoint({ newTaskPointId, point }));
+  }
+
+  updateNewTaskPoint(newTaskPointId: Point['_id'], point: Point): void {
+    this.store.dispatch(fromPoint.updateNewTaskPoint({ newTaskPointId, point }));
+  }
+
+  deleteNewTaskPoint(newTaskPointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deleteNewTaskPoint({ newTaskPointId }));
+  }
+
+  clearNewTaskPoint(): void {
+    this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 }

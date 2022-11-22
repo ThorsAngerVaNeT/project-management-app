@@ -5,7 +5,9 @@ import * as PointActions from '../actions/point.actions';
 
 export const pointFeatureKey = 'point';
 
-export interface PointsState extends EntityState<Point> {}
+export interface PointsState extends EntityState<Point> {
+  newTaskPoints: { [keyof: string]: Point };
+}
 
 export const adapter: EntityAdapter<Point> = createEntityAdapter<Point>({
   selectId: (point: Point) => point._id,
@@ -14,6 +16,7 @@ export const adapter: EntityAdapter<Point> = createEntityAdapter<Point>({
 export const initialState: PointsState = adapter.getInitialState({
   ids: [],
   entities: {},
+  newTaskPoints: {},
 });
 
 export const reducer = createReducer(
@@ -26,6 +29,29 @@ export const reducer = createReducer(
   on(PointActions.updatePointSuccess, (state, { point }) => adapter.updateOne(point, state)),
   on(PointActions.updatePointsSetSuccess, (state, { points }) => adapter.updateMany(points, state)),
   on(PointActions.deletePointSuccess, (state, { pointId }) => adapter.removeOne(pointId, state)),
+  on(
+    PointActions.addNewTaskPoint,
+    (state, { newTaskPointId, point }): PointsState => ({
+      ...state,
+      newTaskPoints: { ...state.newTaskPoints, [newTaskPointId]: point },
+    }),
+  ),
+  on(
+    PointActions.updateNewTaskPoint,
+    (state, { newTaskPointId, point }): PointsState => ({
+      ...state,
+      newTaskPoints: { ...state.newTaskPoints, [newTaskPointId]: point },
+    }),
+  ),
+  on(PointActions.deleteNewTaskPoint, (state, { newTaskPointId }): PointsState => {
+    const newTaskPointsState = { ...state.newTaskPoints };
+    delete newTaskPointsState[newTaskPointId];
+    return {
+      ...state,
+      newTaskPoints: newTaskPointsState,
+    };
+  }),
+  on(PointActions.clearNewTaskPoint, (state): PointsState => ({ ...state, newTaskPoints: {} })),
 );
 
 export const {

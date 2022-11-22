@@ -9,3 +9,5 @@ export const selectAllPoints = createSelector(selectPointState, fromPoint.select
 export const selectPointsByCurrentTask = createSelector(selectCurrentTaskId, selectAllPoints, (taskId, points) =>
   points.filter((point) => point.taskId === taskId),
 );
+
+export const selectNewTaskAllPoints = createSelector(selectPointState, (state) => Object.values(state.newTaskPoints));
