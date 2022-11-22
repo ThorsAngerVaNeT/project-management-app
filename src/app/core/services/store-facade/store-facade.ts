@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/user.actions';
 import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
 import { Board, BoardParams, BoardParamsWithImage } from '@boards/model/board.model';
@@ -26,6 +28,7 @@ import {
   selectPointsLoading,
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
+import { selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -77,6 +80,12 @@ export class StoreFacade {
     this.getBoard(boardId);
     this.getColumns(boardId);
     this.getTasksByBoard(boardId);
+  }
+
+  getBoardsAllData(): void {
+    this.getBoardCovers();
+    this.getUsers();
+    this.getBoards();
   }
 
   getBoardsSet(ids: Board['_id'][]): void {
@@ -263,5 +272,13 @@ export class StoreFacade {
 
   clearNewTaskPoint(): void {
     this.store.dispatch(fromPoint.clearNewTaskPoint());
+  }
+
+  getBoardCovers(): void {
+    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  }
+
+  getBoardCoverStream(boardId: Board['_id']): Observable<string> {
+    return this.store.select(selectBoardCoverUrl(boardId));
   }
 }
