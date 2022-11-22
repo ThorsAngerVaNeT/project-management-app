@@ -1,5 +1,9 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { ScannedActionsSubject } from '@ngrx/store';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 import { SignUpComponent } from './sign-up.component';
 
@@ -9,6 +13,13 @@ describe('SignUpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: NzModalRef, useValue: { service: null } },
+        ScannedActionsSubject,
+        NzModalService,
+        Overlay,
+        provideMockStore(),
+      ],
       declarations: [SignUpComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

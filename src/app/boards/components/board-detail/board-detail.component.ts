@@ -50,7 +50,7 @@ export class BoardDetailComponent implements OnInit {
   }
 
   public drop(event: CdkDragDrop<ColumnWithTasks[]>): void {
-    if (event.previousContainer === event.container) {
+    if (event.previousContainer === event.container && event.previousIndex !== event.currentIndex) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
       const columnSetUpdateParams = this.getColumnSetUpdateParams(event.container.data);
