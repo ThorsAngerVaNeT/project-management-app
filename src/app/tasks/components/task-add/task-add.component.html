@@ -70,23 +70,7 @@
     <app-point-item *ngFor="let point of points$ | async as points" [point]="point"></app-point-item>
   </nz-form-item>
 
-  <nz-form-item>
-    <input
-      nz-input
-      [formControl]="pointControl"
-      placeholder="Enter subtask title"
-      i18n-placeholder="@@SubtaskTitlePlaceholder"
-    />
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-control [nzXs]="24" [nzSm]="24">
-      <button nz-button nzType="dashed" class="add-button" i18n="@@CreateTaskAddSubTask" (click)="addPoint()">
-        <span nz-icon nzType="plus"></span>
-        Add Subtask
-      </button>
-    </nz-form-control>
-  </nz-form-item>
+  <app-point-add [pointInputParams]="pointInputParams"></app-point-add>
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()" i18n="@@CreateTaskCancelText">Cancel</button>

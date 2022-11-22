@@ -5,14 +5,15 @@ import { PointItemComponent } from './components/point-item/point-item.component
 import * as fromPoint from './store/reducers/point.reducer';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared/shared.module';
+import { PointAddComponent } from './components/point-add/point-add.component';
 
 @NgModule({
-  declarations: [PointItemComponent],
+  declarations: [PointItemComponent, PointAddComponent],
   imports: [
     EffectsModule.forFeature([PointEffects]),
     StoreModule.forFeature(fromPoint.pointFeatureKey, fromPoint.reducer),
     SharedModule,
   ],
-  exports: [PointItemComponent],
+  exports: [PointItemComponent, PointAddComponent],
 })
 export class PointsModule {}

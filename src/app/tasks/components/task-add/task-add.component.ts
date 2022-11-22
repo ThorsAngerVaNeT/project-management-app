@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
-import { EMPTY_POINT, Point } from '@points/model/point.model';
+import { ColumnTask, ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
+import { Point } from '@points/model/point.model';
 
 @Component({
   selector: 'app-task-add',
@@ -14,7 +14,7 @@ import { EMPTY_POINT, Point } from '@points/model/point.model';
   styleUrls: ['./task-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskAddComponent implements OnInit {
+export class TaskAddComponent implements OnInit, OnDestroy {
   @Input() task!: ColumnTaskWithUsers;
 
   isVisible = true;
@@ -30,10 +30,6 @@ export class TaskAddComponent implements OnInit {
   users$ = this.storeFacade.users$;
 
   points$!: Observable<Point[]>;
-
-  pointControl!: FormControl;
-
-  points: Point[] = [];
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
@@ -55,10 +51,12 @@ export class TaskAddComponent implements OnInit {
 
       this.taskAddForm.setValue({ title, description, responsible, participants });
     } else {
-      this.points$ = of(this.points);
+      this.points$ = this.storeFacade.newTaskPoints$;
     }
+  }
 
-    this.pointControl = new FormControl('', Validators.required);
+  ngOnDestroy(): void {
+    this.storeFacade.clearNewTaskPoint();
   }
 
   get title(): AbstractControl | null {
@@ -71,6 +69,10 @@ export class TaskAddComponent implements OnInit {
 
   get responsible(): AbstractControl | null {
     return this.taskAddForm.get('responsible');
+  }
+
+  get pointInputParams(): { taskId: ColumnTask['_id']; boardId: Board['_id'] } {
+    return { taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
   }
 
   handleOk(): void {
@@ -92,12 +94,7 @@ export class TaskAddComponent implements OnInit {
       } else {
         const taskParams: ColumnTaskParams = { title, description, userId, users, order: this.order };
 
-        this.storeFacade.createTask(
-          this.boardId,
-          this.columnId,
-          taskParams,
-          this.points.map(({ _id, ...pointParams }) => pointParams),
-        );
+        this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
       }
       this.handleCancel();
     } else {
@@ -112,29 +109,5 @@ export class TaskAddComponent implements OnInit {
 
   handleCancel(): void {
     this.modal.destroy();
-  }
-
-  addPoint(): void {
-    if (this.pointControl.valid) {
-      const title = this.pointControl.value;
-      if (this.task) {
-        const { boardId, _id: taskId } = this.task;
-        const pointParams = {
-          title,
-          taskId,
-          boardId,
-          done: false,
-        };
-
-        this.storeFacade.createPoint(pointParams);
-      } else {
-        this.points.push({ ...EMPTY_POINT, title, boardId: this.boardId });
-      }
-
-      this.pointControl.reset();
-    } else {
-      this.pointControl.markAsDirty();
-      this.pointControl.updateValueAndValidity({ onlySelf: true });
-    }
   }
 }
