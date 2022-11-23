@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { map, Observable, Subscription } from 'rxjs';
-import { concatLatestFrom } from '@ngrx/effects';
+import { Observable, Subscription } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
@@ -32,11 +31,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   user$ = this.storeFacade.user$;
 
   users$ = this.storeFacade.users$;
-
-  participants$ = this.users$.pipe(
-    concatLatestFrom(() => this.user$),
-    map(([users, { _id }]) => users.filter((user) => user._id !== _id)),
-  );
 
   userId: User['_id'] = '';
 
@@ -90,6 +84,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   get responsible(): AbstractControl | null {
     return this.taskAddForm.get('responsible');
+  }
+
+  get participants(): AbstractControl | null {
+    return this.taskAddForm.get('participants');
   }
 
   get point(): Point {

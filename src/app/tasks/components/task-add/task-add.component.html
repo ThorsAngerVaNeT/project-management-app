@@ -59,26 +59,20 @@
     <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="participants" i18n="@@CreateTaskParticipants"
       >Participants</nz-form-label
     >
-    <nz-form-control [nzSm]="17" [nzXs]="24">
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="participantsErrorTip">
       <nz-select
         nzMode="multiple"
         nzPlaceHolder="Please select team members"
         i18n-nzPlaceHolder="@@CreateTaskParticipantsPlaceHolder"
         formControlName="participants"
       >
-        <nz-option
-          *ngIf="user$ | async as user"
-          nzLabel="{{ user.name }}"
-          nzValue="{{ user._id }}"
-          nzHide
-          nzDisabled
-        ></nz-option>
-        <nz-option
-          *ngFor="let user of participants$ | async"
-          nzLabel="{{ user.name }}"
-          nzValue="{{ user._id }}"
-        ></nz-option>
+        <nz-option *ngFor="let user of users" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
       </nz-select>
+      <ng-template #participantsErrorTip>
+        <ng-container *ngIf="participants?.hasError('required')" i18n="@@TaskParticipantsRequiredErrorTip"
+          >Please provide the participants</ng-container
+        >
+      </ng-template>
     </nz-form-control>
   </nz-form-item>
 
