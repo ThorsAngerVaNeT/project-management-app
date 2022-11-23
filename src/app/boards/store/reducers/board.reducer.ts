@@ -5,7 +5,9 @@ import * as BoardActions from '../actions/board.actions';
 
 export const boardsFeatureKey = 'boards';
 
-export interface BoardsState extends EntityState<Board> {}
+export interface BoardsState extends EntityState<Board> {
+  loading: boolean;
+}
 
 const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
   selectId: (board: Board) => board._id,
@@ -14,12 +16,14 @@ const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
 export const initialState: BoardsState = adapter.getInitialState({
   ids: [],
   entities: {},
+  loading: false,
 });
 
 export const reducer = createReducer(
   initialState,
 
-  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, state)),
+  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state, loading: true })),
+  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state, loading: false })),
   on(BoardActions.loadBoardSuccess, (state, { board }) => adapter.setOne(board, state)),
   on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),

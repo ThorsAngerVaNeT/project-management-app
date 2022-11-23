@@ -46,3 +46,5 @@ export const selectBoardDetailViewModel = createSelector(
   selectCurrentBoardColumns,
   (board, columns) => ({ board, columns }),
 );
+
+export const selectBoardsLoading = createSelector(selectBoardsState, (state) => state.loading);

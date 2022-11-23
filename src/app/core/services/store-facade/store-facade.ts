@@ -9,7 +9,11 @@ import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
-import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
+import {
+  selectBoardDetailViewModel,
+  selectBoardsLoading,
+  selectBoardsWithUsers,
+} from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile, UploadFileParams } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
@@ -51,6 +55,8 @@ export class StoreFacade {
   pointsLoading$ = this.store.select(selectPointsLoading);
 
   boardCovers$ = this.store.select(selectBoardCovers);
+
+  boardsLoading$ = this.store.select(selectBoardsLoading);
 
   constructor(private store: Store) {}
 

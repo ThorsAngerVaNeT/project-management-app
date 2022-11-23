@@ -13,6 +13,8 @@ import { BoardAddComponent } from '../board-add/board-add.component';
 export class MainPageComponent implements OnInit {
   boards$ = this.storeFacade.boards$;
 
+  boardsLoading$ = this.storeFacade.boardsLoading$;
+
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
