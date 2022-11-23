@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Board } from '@boards/model/board.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnTask } from '@tasks/model/task.model';
-import { PointItemComponent } from '../point-item/point-item.component';
+import { Point } from '../../model/point.model';
 
 @Component({
   selector: 'app-point-add',
@@ -12,26 +10,21 @@ import { PointItemComponent } from '../point-item/point-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PointAddComponent implements OnInit {
-  @Input() pointInputParams!: { taskId: ColumnTask['_id']; boardId: Board['_id'] };
+  @Input() point!: Point;
 
   pointControl!: FormControl;
 
-  parent!: PointItemComponent;
+  @Output() pointTitleSave = new EventEmitter<string>();
 
-  constructor(@Optional() parent: PointItemComponent, private storeFacade: StoreFacade) {
-    this.parent = parent;
-  }
+  constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
-    this.pointControl = new FormControl(this.parent ? this.parent.point.title : '', [
-      Validators.required,
-      Validators.maxLength(255),
-    ]);
+    this.pointControl = new FormControl(this.point?.title, [Validators.required, Validators.maxLength(255)]);
   }
 
   addPoint(): void {
     if (this.pointControl.valid) {
-      const { taskId, boardId } = this.pointInputParams;
+      const { taskId, boardId } = this.point;
       const title = this.pointControl.value;
       const pointParams = {
         title,
@@ -40,7 +33,7 @@ export class PointAddComponent implements OnInit {
         done: false,
       };
 
-      if (this.pointInputParams.taskId) {
+      if (this.point.taskId) {
         this.storeFacade.createPoint(pointParams);
       } else {
         const newTaskPointId = `${Date.now()}`;
@@ -56,11 +49,14 @@ export class PointAddComponent implements OnInit {
 
   updateTitle(): void {
     if (this.pointControl.valid) {
-      this.parent.toggleEdit();
-      this.parent.updatePoint(this.pointControl.value);
+      this.pointTitleSave.emit(this.pointControl.value);
     } else {
       this.pointControl.markAsDirty();
       this.pointControl.updateValueAndValidity({ onlySelf: true });
     }
+  }
+
+  cancelEdit(): void {
+    this.pointTitleSave.emit(this.point.title);
   }
 }

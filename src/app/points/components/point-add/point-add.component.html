@@ -24,9 +24,9 @@
       nzTooltipTitle="Save"
       i18n-nzTooltipTitle="@@SaveButtonTooltip"
       nzType="check-circle"
-      (click)="parent ? updateTitle() : addPoint()"
+      (click)="point._id ? updateTitle() : addPoint()"
     ></span>
-    <ng-container *ngIf="parent">
+    <ng-container *ngIf="point._id">
       <nz-divider nzType="vertical"></nz-divider>
       <span
         nz-icon
@@ -34,7 +34,7 @@
         nzTooltipTitle="Cancel"
         i18n-nzTooltipTitle="@@CancelButtonTooltip"
         nzType="close-circle"
-        (click)="parent.toggleEdit()"
+        (click)="cancelEdit()"
       ></span>
     </ng-container>
   </ng-template>

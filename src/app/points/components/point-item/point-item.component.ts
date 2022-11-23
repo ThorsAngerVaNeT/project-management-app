@@ -53,4 +53,11 @@ export class PointItemComponent implements OnInit {
       nzOkDanger: true,
     });
   }
+
+  onPointTitleSave(title: string): void {
+    if (title !== this.point.title) {
+      this.updatePoint(title);
+    }
+    this.toggleEdit();
+  }
 }

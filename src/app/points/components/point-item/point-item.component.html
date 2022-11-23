@@ -10,7 +10,7 @@
 >
 
 <ng-template #editTitle>
-  <app-point-add></app-point-add>
+  <app-point-add [point]="point" (pointTitleSave)="onPointTitleSave($event)"></app-point-add>
 </ng-template>
 
 <span

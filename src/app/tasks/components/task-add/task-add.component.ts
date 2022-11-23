@@ -6,8 +6,8 @@ import { concatLatestFrom } from '@ngrx/effects';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { ColumnTask, ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
-import { Point } from '@points/model/point.model';
+import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
+import { EMPTY_POINT, Point } from '@points/model/point.model';
 import { User } from '@users/model/user.model';
 
 @Component({
@@ -92,8 +92,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     return this.taskAddForm.get('responsible');
   }
 
-  get pointInputParams(): { taskId: ColumnTask['_id']; boardId: Board['_id'] } {
-    return { taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
+  get point(): Point {
+    return { ...EMPTY_POINT, taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
   }
 
   handleOk(): void {
