@@ -3,7 +3,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { BoardWithUsers } from '../../model/board.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { BoardAddComponent } from '../board-add/board-add.component';
 import '@angular/localize/init';
 
@@ -18,7 +18,20 @@ export class BoardCardComponent implements OnInit {
 
   boardCoverUrl$!: Observable<string>;
 
-  user$ = this.storeFacade.user$;
+  user$ = this.storeFacade.user$.pipe(
+    tap((user) => {
+      if (user._id === this.board.owner._id) {
+        this.isOwner = true;
+      }
+      if (this.board.users.map((boardUser) => boardUser._id).includes(user._id)) {
+        this.isParticipant = true;
+      }
+    }),
+  );
+
+  isOwner = false;
+
+  isParticipant = false;
 
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
@@ -41,7 +54,10 @@ export class BoardCardComponent implements OnInit {
     });
   }
 
-  alert(): void {
-    alert('1111');
+  showInfo(): void {
+    this.modalService.info({
+      nzTitle: $localize`:@@AccessDeniedModalTitle:Access Denied`,
+      nzContent: $localize`:@@AccessDeniedModalContent:You are not the participant of this board!`,
+    });
   }
 }

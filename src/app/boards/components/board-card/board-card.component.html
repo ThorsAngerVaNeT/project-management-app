@@ -3,12 +3,12 @@
     nzHoverable
     style="width: 300px"
     [nzCover]="coverTemplate3"
-    [nzActions]="user._id === board.owner._id ? [actionEdit, actionEllipsis] : [actionEllipsis]"
+    [nzActions]="isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee] : [actionLock]"
   >
     <nz-card-meta
       nzTitle="{{ board.title }}"
       nzDescription="Owner: {{ board.owner.name }}"
-      [routerLink]="user._id === board.owner._id ? ['/boards', board._id] : null"
+      [routerLink]="isOwner || isParticipant ? ['/boards', board._id] : null"
     ></nz-card-meta>
   </nz-card>
   <ng-template #coverTemplate3>
@@ -18,11 +18,11 @@
       height="182"
       [src]="boardCoverUrl$ | async"
       alt=""
-      [routerLink]="['/boards', board._id]"
+      [routerLink]="isOwner || isParticipant ? ['/boards', board._id] : null"
     />
   </ng-template>
-  <ng-template #actionSetting>
-    <span nz-icon nzType="setting"></span>
+  <ng-template #actionSee>
+    <span nz-icon nzType="eye" nzTheme="outline" [routerLink]="['/boards', board._id]"></span>
   </ng-template>
   <ng-template #actionEdit>
     <span nz-icon nzType="edit" (click)="editBoard()"></span>
@@ -31,6 +31,6 @@
     <span nz-icon nzType="delete" (click)="removeBoard()"></span>
   </ng-template>
   <ng-template #actionLock>
-    <span nz-icon nzTheme="twotone" nzType="lock" (click)="alert()"></span>
+    <span nz-icon nzTheme="twotone" nzType="lock" (click)="showInfo()"></span>
   </ng-template>
 </ng-container>
