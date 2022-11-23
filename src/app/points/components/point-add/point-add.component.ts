@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Optional } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Board } from '@boards/model/board.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTask } from '@tasks/model/task.model';
+import { PointItemComponent } from '../point-item/point-item.component';
 
 @Component({
   selector: 'app-point-add',
@@ -15,10 +16,17 @@ export class PointAddComponent implements OnInit {
 
   pointControl!: FormControl;
 
-  constructor(private storeFacade: StoreFacade) {}
+  parent!: PointItemComponent;
+
+  constructor(@Optional() parent: PointItemComponent, private storeFacade: StoreFacade) {
+    this.parent = parent;
+  }
 
   ngOnInit(): void {
-    this.pointControl = new FormControl('', [Validators.required, Validators.maxLength(255)]);
+    this.pointControl = new FormControl(this.parent ? this.parent.point.title : '', [
+      Validators.required,
+      Validators.maxLength(255),
+    ]);
   }
 
   addPoint(): void {
@@ -40,6 +48,16 @@ export class PointAddComponent implements OnInit {
       }
 
       this.pointControl.reset();
+    } else {
+      this.pointControl.markAsDirty();
+      this.pointControl.updateValueAndValidity({ onlySelf: true });
+    }
+  }
+
+  updateTitle(): void {
+    if (this.pointControl.valid) {
+      this.parent.toggleEdit();
+      this.parent.updatePoint(this.pointControl.value);
     } else {
       this.pointControl.markAsDirty();
       this.pointControl.updateValueAndValidity({ onlySelf: true });
