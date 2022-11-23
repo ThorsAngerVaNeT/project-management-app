@@ -37,22 +37,12 @@ export class ColumnComponent implements OnInit {
     }
   }
 
-  createColumn(): void {
-    if (this.titleControl.valid) {
-      const { boardId, order } = this.column;
-      this.storeFacade.createColumn(boardId, { title: this.titleControl.value, order });
-      this.deleteComponent();
-    } else if (this.titleControl.invalid) {
-      this.titleControl.markAsDirty();
-      this.titleControl.updateValueAndValidity({ onlySelf: true });
-    }
-  }
-
   updateColumn(): void {
     if (this.titleControl.valid) {
       const { boardId, _id: columnId, tasks, ...columnParams } = this.column;
       columnParams.title = this.titleControl.value;
       this.storeFacade.updateColumn(boardId, columnId, columnParams);
+      this.toggleEdit();
     }
   }
 
@@ -68,12 +58,10 @@ export class ColumnComponent implements OnInit {
     });
   }
 
-  deleteComponent(): void {
-    this.componentRef.destroy();
-  }
-
   addTask(): void {
     const { boardId, _id: columnId } = this.column;
+
+    this.storeFacade.selectTask('');
     this.modalService.create({
       nzTitle: $localize`:@@CreateTaskModalTitle:Create Task`,
       nzContent: TaskAddComponent,

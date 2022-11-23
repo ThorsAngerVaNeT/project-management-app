@@ -7,6 +7,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 import { BoardDetailComponent } from './board-detail.component';
 import { of } from 'rxjs';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { Overlay } from '@angular/cdk/overlay';
 
 describe('BoardDetailComponent', () => {
   let component: BoardDetailComponent;
@@ -30,6 +32,8 @@ describe('BoardDetailComponent', () => {
           },
         },
         provideMockStore({ initialState: {} }),
+        NzModalService,
+        Overlay,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

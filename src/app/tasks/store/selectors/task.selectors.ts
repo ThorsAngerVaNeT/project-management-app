@@ -29,3 +29,5 @@ export const selectTasksOfCurrentBoardByColumns = createSelector(
     return currentBoardTasks;
   },
 );
+
+export const selectCurrentTaskId = createSelector(selectTaskState, (state) => state.currentTaskId);

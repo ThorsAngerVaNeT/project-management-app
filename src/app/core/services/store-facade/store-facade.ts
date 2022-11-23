@@ -19,6 +19,13 @@ import {
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
+import * as fromPoint from '@points/store/actions/point.actions';
+import {
+  selectNewTaskAllPoints,
+  selectPointsByCurrentTask,
+  selectPointsLoading,
+} from '@points/store/selectors/point.selectors';
+import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +40,12 @@ export class StoreFacade {
   boardDetail$ = this.store.select(selectBoardDetailViewModel);
 
   users$ = this.store.select(selectAllUsers);
+
+  points$ = this.store.select(selectPointsByCurrentTask);
+
+  newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
+
+  pointsLoading$ = this.store.select(selectPointsLoading);
 
   constructor(private store: Store) {}
 
@@ -166,8 +179,13 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
   }
 
-  createTask(boardId: Board['_id'], columnId: Column['_id'], taskParams: ColumnTaskParams): void {
-    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams }));
+  createTask(
+    boardId: Board['_id'],
+    columnId: Column['_id'],
+    taskParams: ColumnTaskParams,
+    pointsParams: PointParams[] = [],
+  ): void {
+    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams, pointsParams }));
   }
 
   updateTask(
@@ -209,5 +227,41 @@ export class StoreFacade {
 
   uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): void {
     this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
+  }
+
+  selectTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromTask.selectTask({ taskId }));
+  }
+
+  getPointsByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromPoint.loadPointsByTask({ taskId }));
+  }
+
+  createPoint(point: PointParams): void {
+    this.store.dispatch(fromPoint.createPoint({ point }));
+  }
+
+  updatePoint(pointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updatePoint({ pointId, pointParams }));
+  }
+
+  deletePoint(pointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deletePoint({ pointId }));
+  }
+
+  addNewTaskPoint(newTaskPointId: Point['_id'], point: Point): void {
+    this.store.dispatch(fromPoint.addNewTaskPoint({ newTaskPointId, point }));
+  }
+
+  updateNewTaskPoint(newTaskPointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updateNewTaskPoint({ newTaskPointId, pointParams }));
+  }
+
+  deleteNewTaskPoint(newTaskPointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deleteNewTaskPoint({ newTaskPointId }));
+  }
+
+  clearNewTaskPoint(): void {
+    this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 }

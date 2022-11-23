@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import jwt_decode from 'jwt-decode';
 
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
 import { SignInParams, UserParams, APIToken, User, TokenPayload } from '@users/model/user.model';
@@ -20,6 +21,6 @@ export class AuthService {
   }
 
   public decodeToken(token: string): TokenPayload {
-    return JSON.parse(window.atob(token.split('.')[1]).toString());
+    return jwt_decode<TokenPayload>(token);
   }
 }

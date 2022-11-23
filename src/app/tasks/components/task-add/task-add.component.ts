@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Observable, Subscription } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
+import { EMPTY_POINT, Point } from '@points/model/point.model';
+import { User } from '@users/model/user.model';
 
 @Component({
   selector: 'app-task-add',
@@ -12,7 +15,7 @@ import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '.
   styleUrls: ['./task-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskAddComponent implements OnInit {
+export class TaskAddComponent implements OnInit, OnDestroy {
   @Input() task!: ColumnTaskWithUsers;
 
   isVisible = true;
@@ -25,23 +28,50 @@ export class TaskAddComponent implements OnInit {
 
   taskAddForm!: FormGroup;
 
+  user$ = this.storeFacade.user$;
+
   users$ = this.storeFacade.users$;
+
+  userId: User['_id'] = '';
+
+  subscription = new Subscription();
+
+  pointsLoading$ = this.storeFacade.pointsLoading$;
+
+  points$!: Observable<Point[]>;
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.user$.subscribe(({ _id }) => {
+        this.userId = _id;
+      }),
+    );
+
     this.taskAddForm = new FormGroup({
       title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
       description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
       responsible: new FormControl(null, [Validators.required]),
-      participants: new FormControl([]),
+      participants: new FormControl([this.userId], [Validators.required]),
     });
 
     if (this.task) {
       const { title, description, userId: responsible, users } = this.task;
       const participants = users.map((user) => user._id);
+
+      this.points$ = this.storeFacade.points$;
+
+      this.storeFacade.getPointsByTask(this.task._id);
+
       this.taskAddForm.setValue({ title, description, responsible, participants });
+    } else {
+      this.points$ = this.storeFacade.newTaskPoints$;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   get title(): AbstractControl | null {
@@ -54,6 +84,14 @@ export class TaskAddComponent implements OnInit {
 
   get responsible(): AbstractControl | null {
     return this.taskAddForm.get('responsible');
+  }
+
+  get participants(): AbstractControl | null {
+    return this.taskAddForm.get('participants');
+  }
+
+  get point(): Point {
+    return { ...EMPTY_POINT, taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
   }
 
   handleOk(): void {
@@ -77,7 +115,8 @@ export class TaskAddComponent implements OnInit {
 
         this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
       }
-      this.handleCancel();
+
+      this.modal.destroy();
     } else {
       Object.values(this.taskAddForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -89,6 +128,7 @@ export class TaskAddComponent implements OnInit {
   }
 
   handleCancel(): void {
+    this.storeFacade.clearNewTaskPoint();
     this.modal.destroy();
   }
 }

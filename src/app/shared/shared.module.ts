@@ -25,8 +25,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 const MODULES = [
   NzLayoutModule,
@@ -48,8 +49,10 @@ const MODULES = [
   NzCheckboxModule,
   NzCardModule,
   NzModalModule,
+  NzSpinModule,
 
   CommonModule,
+  FormsModule,
   ReactiveFormsModule,
   DragDropModule,
 ];

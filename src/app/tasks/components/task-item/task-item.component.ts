@@ -19,6 +19,7 @@ export class TaskItemComponent {
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   editTask(): void {
+    this.storeFacade.selectTask(this.task._id);
     this.modalService.create({
       nzTitle: $localize`:@@EditTaskModalTitle:Edit Task`,
       nzContent: TaskAddComponent,

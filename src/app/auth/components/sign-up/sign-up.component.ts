@@ -67,7 +67,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
         this.isSaving = false;
         this.login?.setErrors({ userAlreadyExists: true });
-        console.log(this.signUpForm);
       }),
     );
   }
