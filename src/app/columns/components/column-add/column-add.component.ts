@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { Board } from '../../../boards/model/board.model';
+import { Board } from '@boards/model/board.model';
 import { Column } from '../../model/column.model';
 
 @Component({
@@ -25,7 +25,6 @@ export class ColumnAddComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log('this.titleControl.valid: ', this.titleControl.valid);
     if (this.titleControl.valid) {
       const { boardId, order } = this;
       this.storeFacade.createColumn(boardId, { title: this.titleControl.value, order });

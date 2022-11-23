@@ -19,7 +19,6 @@ export class PointAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.pointControl = new FormControl('', Validators.required);
-    console.log(this.pointInputParams);
   }
 
   addPoint(): void {
