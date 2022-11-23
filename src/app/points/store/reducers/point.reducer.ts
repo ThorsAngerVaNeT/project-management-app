@@ -7,6 +7,7 @@ export const pointFeatureKey = 'point';
 
 export interface PointsState extends EntityState<Point> {
   newTaskPoints: { [keyof: string]: Point };
+  loading: boolean;
 }
 
 export const adapter: EntityAdapter<Point> = createEntityAdapter<Point>({
@@ -17,14 +18,21 @@ export const initialState: PointsState = adapter.getInitialState({
   ids: [],
   entities: {},
   newTaskPoints: {},
+  loading: false,
 });
 
 export const reducer = createReducer(
   initialState,
 
-  on(PointActions.loadPointsSetSuccess, (state, { points }) => adapter.setAll(points, state)),
-  on(PointActions.loadPointsByUserSuccess, (state, { points }) => adapter.setAll(points, state)),
-  on(PointActions.loadPointsByTaskSuccess, (state, { points }) => adapter.setAll(points, state)),
+  on(PointActions.loadPointsSet, (state): PointsState => ({ ...state, loading: true })),
+  on(PointActions.loadPointsByUser, (state): PointsState => ({ ...state, loading: true })),
+  on(PointActions.loadPointsByTask, (state): PointsState => ({ ...state, loading: true })),
+  on(PointActions.loadPointsSetSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
+  on(PointActions.loadPointsByUserSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
+  on(PointActions.loadPointsByTaskSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
+  on(PointActions.loadPointsSetFailure, (state): PointsState => ({ ...state, loading: false })),
+  on(PointActions.loadPointsByUserFailure, (state): PointsState => ({ ...state, loading: false })),
+  on(PointActions.loadPointsByTaskFailure, (state): PointsState => ({ ...state, loading: false })),
   on(PointActions.createPointSuccess, (state, { point }) => adapter.addOne(point, state)),
   on(PointActions.updatePointSuccess, (state, { point }) => adapter.updateOne(point, state)),
   on(PointActions.updatePointsSetSuccess, (state, { points }) => adapter.updateMany(points, state)),

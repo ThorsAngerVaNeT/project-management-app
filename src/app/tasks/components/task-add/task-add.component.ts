@@ -29,6 +29,8 @@ export class TaskAddComponent implements OnInit {
 
   users$ = this.storeFacade.users$;
 
+  pointsLoading$ = this.storeFacade.pointsLoading$;
+
   points$!: Observable<Point[]>;
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}

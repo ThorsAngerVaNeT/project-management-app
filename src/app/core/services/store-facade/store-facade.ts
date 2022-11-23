@@ -20,7 +20,11 @@ import {
 } from '@tasks/model/task.model';
 import { selectAllUsers } from '@users/store/selectors/user.selectors';
 import * as fromPoint from '@points/store/actions/point.actions';
-import { selectNewTaskAllPoints, selectPointsByCurrentTask } from '@points/store/selectors/point.selectors';
+import {
+  selectNewTaskAllPoints,
+  selectPointsByCurrentTask,
+  selectPointsLoading,
+} from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 
 @Injectable({
@@ -40,6 +44,8 @@ export class StoreFacade {
   points$ = this.store.select(selectPointsByCurrentTask);
 
   newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
+
+  pointsLoading$ = this.store.select(selectPointsLoading);
 
   constructor(private store: Store) {}
 

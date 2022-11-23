@@ -67,7 +67,12 @@
   <nz-divider nzText="Task Checklist" i18n-nzText="@@CreateTaskChecklist"></nz-divider>
 
   <nz-form-item>
-    <app-point-item *ngFor="let point of points$ | async as points" [point]="point"></app-point-item>
+    <ng-container *ngIf="(pointsLoading$ | async) === false; else loadingSpinner">
+      <app-point-item *ngFor="let point of points$ | async as points" [point]="point"></app-point-item>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <nz-spin nzSimple></nz-spin>
+    </ng-template>
   </nz-form-item>
 
   <app-point-add [pointInputParams]="pointInputParams"></app-point-add>

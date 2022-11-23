@@ -6,6 +6,8 @@ export const selectPointState = createFeatureSelector<fromPoint.PointsState>(fro
 
 export const selectAllPoints = createSelector(selectPointState, fromPoint.selectAllPoints);
 
+export const selectPointsLoading = createSelector(selectPointState, (state) => state.loading);
+
 export const selectPointsByCurrentTask = createSelector(selectCurrentTaskId, selectAllPoints, (taskId, points) =>
   points.filter((point) => point.taskId === taskId),
 );
