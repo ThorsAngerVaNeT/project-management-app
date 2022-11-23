@@ -8,8 +8,11 @@
   />
 
   <ng-template #titleErrorTip>
-    <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
+    <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateColumnTitleRequiredErrorTip">
       Please provide a title
+    </ng-container>
+    <ng-container *ngIf="titleControl.hasError('maxlength')" i18n="@@CreateColumnTitleMaxlengthErrorTip">
+      Title should be 1-20 characters long
     </ng-container>
   </ng-template>
 </nz-form-control>
