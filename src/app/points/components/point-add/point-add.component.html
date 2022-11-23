@@ -1,5 +1,5 @@
 <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
-  <nz-input-group [nzSuffix]="suffixSaveButton" [nzAddOnAfter]="parent ? suffixCancelButton : ''">
+  <nz-input-group [nzAddOnAfter]="suffixButtons">
     <input
       nz-input
       placeholder="Checkpoint Title"
@@ -17,7 +17,7 @@
       >
     </ng-template>
   </nz-input-group>
-  <ng-template #suffixSaveButton>
+  <ng-template #suffixButtons>
     <span
       nz-icon
       nz-tooltip
@@ -26,15 +26,16 @@
       nzType="check-circle"
       (click)="parent ? updateTitle() : addPoint()"
     ></span>
-  </ng-template>
-  <ng-template #suffixCancelButton>
-    <span
-      nz-icon
-      nz-tooltip
-      nzTooltipTitle="Cancel"
-      i18n-nzTooltipTitle="@@CancelButtonTooltip"
-      nzType="close-circle"
-      (click)="parent.toggleEdit()"
-    ></span>
+    <ng-container *ngIf="parent">
+      <nz-divider nzType="vertical"></nz-divider>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Cancel"
+        i18n-nzTooltipTitle="@@CancelButtonTooltip"
+        nzType="close-circle"
+        (click)="parent.toggleEdit()"
+      ></span>
+    </ng-container>
   </ng-template>
 </nz-form-control>

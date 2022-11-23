@@ -24,7 +24,7 @@
 <ng-template #titleInput>
   <div class="title-to-input">
     <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
-      <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzAddOnAfter]="suffixTemplateInfo2">
+      <nz-input-group [nzAddOnAfter]="suffixButtons">
         <input
           nz-input
           placeholder="Column Title"
@@ -40,17 +40,16 @@
         </ng-template>
       </nz-input-group>
     </nz-form-control>
-    <ng-template #suffixTemplateInfo>
+    <ng-template #suffixButtons>
       <span
         nz-icon
-        nzType="check-circle"
         nz-tooltip
         nzTooltipTitle="Save"
         i18n-nzTooltipTitle="@@SaveButtonTooltip"
+        nzType="check-circle"
         (click)="updateColumn()"
       ></span>
-    </ng-template>
-    <ng-template #suffixTemplateInfo2>
+      <nz-divider nzType="vertical"></nz-divider>
       <span
         nz-icon
         nz-tooltip
