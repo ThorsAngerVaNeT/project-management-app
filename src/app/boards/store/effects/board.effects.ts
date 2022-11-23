@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { catchError, map, concatMap, switchMap, filter } from 'rxjs/operators';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { environment } from '@environments/environment';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { uploadFile } from '@files/store/actions/file.actions';
 
 @Injectable()
 export class BoardEffects {
@@ -63,33 +61,11 @@ export class BoardEffects {
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),
-      concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(
-        ([
-          {
-            board: { file, ...boardParams },
-          },
-          { _id: owner },
-        ]) =>
-          this.boardsService.createBoard({ ...boardParams, owner }).pipe(
-            map((board) => BoardActions.createBoardSuccess({ board, file })),
-            catchError((error) => of(BoardActions.createBoardFailure({ error }))),
-          ),
-      ),
-    );
-  });
-
-  uploadBoardCoverAfterCreateBoardSuccess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(BoardActions.createBoardSuccess),
-      filter(({ file }) => !!file),
-      map(({ board: { _id: boardId }, file }) =>
-        uploadFile({
-          boardId,
-          taskId: environment.BOARD_COVER_FILE_TASK_ID,
-          file,
-          filename: `${boardId}.${file.name.split('.').at(-1)}`,
-        }),
+      concatMap(({ board: { file, ...boardParams } }) =>
+        this.boardsService.createBoard({ ...boardParams }).pipe(
+          map((board) => BoardActions.createBoardSuccess({ board, file })),
+          catchError((error) => of(BoardActions.createBoardFailure({ error }))),
+        ),
       ),
     );
   });
@@ -97,9 +73,9 @@ export class BoardEffects {
   updateBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.updateBoard),
-      concatMap((action) =>
-        this.boardsService.updateBoard(`${action.id}`, action.board).pipe(
-          map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes } })),
+      concatMap(({ boardId, board: { file, ...boardParams } }) =>
+        this.boardsService.updateBoard(boardId, boardParams).pipe(
+          map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes }, file })),
           catchError((error) => of(BoardActions.updateBoardFailure({ error }))),
         ),
       ),

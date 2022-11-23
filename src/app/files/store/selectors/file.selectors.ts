@@ -28,5 +28,5 @@ export const selectBoardCoverUrl = (
       return environment.BOARD_COVER_DEFAULT_IMAGE_URL;
     }
 
-    return `${environment.API_URL}${covers[boardId].path}`;
+    return `${environment.API_URL}${covers[boardId].path}?${Date.now()}`;
   });

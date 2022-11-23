@@ -1,23 +1,36 @@
-<nz-card nzHoverable style="width: 300px" [nzCover]="cover" [nzActions]="[actionEllipsis]">
-  <nz-card-meta
-    nzTitle="{{ board.title }}"
-    nzDescription="Owner: {{ board.owner.name }}"
-    [routerLink]="['/boards', board._id]"
-  ></nz-card-meta>
-</nz-card>
-<ng-template #cover>
-  <img
-    class="board-cover"
-    width="300"
-    height="182"
-    [src]="boardCoverUrl$ | async"
-    alt=""
-    [routerLink]="['/boards', board._id]"
-  />
-</ng-template>
-<ng-template #actionEdit>
-  <span nz-icon nzType="edit"></span>
-</ng-template>
-<ng-template #actionEllipsis>
-  <span nz-icon nzType="delete" (click)="removeBoard()"></span>
-</ng-template>
+<ng-container *ngIf="user$ | async as user">
+  <nz-card
+    nzHoverable
+    style="width: 300px"
+    [nzCover]="coverTemplate3"
+    [nzActions]="user._id === board.owner._id ? [actionEdit, actionEllipsis] : [actionEllipsis]"
+  >
+    <nz-card-meta
+      nzTitle="{{ board.title }}"
+      nzDescription="Owner: {{ board.owner.name }}"
+      [routerLink]="user._id === board.owner._id ? ['/boards', board._id] : null"
+    ></nz-card-meta>
+  </nz-card>
+  <ng-template #coverTemplate3>
+    <img
+      class="board-cover"
+      width="300"
+      height="182"
+      [src]="boardCoverUrl$ | async"
+      alt=""
+      [routerLink]="['/boards', board._id]"
+    />
+  </ng-template>
+  <ng-template #actionSetting>
+    <span nz-icon nzType="setting"></span>
+  </ng-template>
+  <ng-template #actionEdit>
+    <span nz-icon nzType="edit" (click)="editBoard()"></span>
+  </ng-template>
+  <ng-template #actionEllipsis>
+    <span nz-icon nzType="delete" (click)="removeBoard()"></span>
+  </ng-template>
+  <ng-template #actionLock>
+    <span nz-icon nzTheme="twotone" nzType="lock" (click)="alert()"></span>
+  </ng-template>
+</ng-container>

@@ -26,6 +26,6 @@ export interface BoardDetailViewModel {
   columns: ColumnWithTasks[];
 }
 
-export interface BoardParamsWithImage extends Omit<BoardParams, 'owner'> {
+export interface BoardParamsWithImage extends BoardParams {
   file: File;
 }

@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/user.actions';
 import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
-import { Board, BoardParams, BoardParamsWithImage } from '@boards/model/board.model';
+import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
 import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
-import { TaskFile } from '@files/model/file.model';
+import { TaskFile, UploadFileParams } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
 import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/model/column.model';
 import {
@@ -28,7 +28,7 @@ import {
   selectPointsLoading,
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
-import { selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
+import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +49,8 @@ export class StoreFacade {
   newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
 
   pointsLoading$ = this.store.select(selectPointsLoading);
+
+  boardCovers$ = this.store.select(selectBoardCovers);
 
   constructor(private store: Store) {}
 
@@ -100,8 +102,8 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
-  updateBoard(id: Board['_id'], board: BoardParams): void {
-    this.store.dispatch(fromBoard.updateBoard({ id, board }));
+  updateBoard(boardId: Board['_id'], board: BoardParamsWithImage): void {
+    this.store.dispatch(fromBoard.updateBoard({ boardId, board }));
   }
 
   deleteBoard(id: Board['_id']): void {
@@ -234,7 +236,7 @@ export class StoreFacade {
     this.store.dispatch(fromFile.deleteFile({ id }));
   }
 
-  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File, filename = file.name): void {
+  uploadFile({ boardId, taskId, file, filename = file.name }: UploadFileParams): void {
     this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file, filename }));
   }
 
