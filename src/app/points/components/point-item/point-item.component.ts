@@ -24,7 +24,7 @@ export class PointItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.isChecked = this.point.done;
-    this.titleControl = new FormControl(this.point.title, Validators.required);
+    this.titleControl = new FormControl(this.point.title, [Validators.required, Validators.maxLength(255)]);
   }
 
   toggleDone(): void {

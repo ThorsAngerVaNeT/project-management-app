@@ -21,9 +21,12 @@
       />
 
       <ng-template #titleErrorTip>
-        <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
+        <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreatePointTitleRequiredErrorTip">
           Please provide a title
         </ng-container>
+        <ng-container *ngIf="titleControl.hasError('maxlength')" i18n="@@CreatePointTitleMinlengthErrorTip"
+          >Title should be 1-255 characters long</ng-container
+        >
       </ng-template>
     </nz-input-group>
     <ng-template #suffixTemplateInfo>

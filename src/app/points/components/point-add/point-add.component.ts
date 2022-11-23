@@ -18,7 +18,7 @@ export class PointAddComponent implements OnInit {
   constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
-    this.pointControl = new FormControl('', Validators.required);
+    this.pointControl = new FormControl('', [Validators.required, Validators.maxLength(255)]);
   }
 
   addPoint(): void {
