@@ -7,6 +7,10 @@ import { FilesService } from '../../services/files.service';
 import { environment } from '@environments/environment';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import * as BoardActions from '@boards/store/actions/board.actions';
+import { Board } from '@boards/model/board.model';
+
+const generateBoardCoverFilename = (boardId: Board['_id'] | number, filename: string): string =>
+  `${boardId}-${Date.now()}.${filename.split('.').at(-1)}`;
 
 @Injectable()
 export class FileEffects {
@@ -102,7 +106,7 @@ export class FileEffects {
           boardId,
           taskId: environment.BOARD_COVER_FILE_TASK_ID,
           file,
-          filename: `${boardId}.${file.name.split('.').at(-1)}`,
+          filename: generateBoardCoverFilename(boardId, file.name),
         }),
       ),
     );
@@ -128,7 +132,7 @@ export class FileEffects {
                 boardId: `${boardId}`,
                 taskId: environment.BOARD_COVER_FILE_TASK_ID,
                 file,
-                filename: `${boardId}.${file.name.split('.').at(-1)}`,
+                filename: generateBoardCoverFilename(boardId, file.name),
               });
         },
       ),
@@ -155,7 +159,7 @@ export class FileEffects {
           boardId: `${boardId}`,
           taskId: environment.BOARD_COVER_FILE_TASK_ID,
           file,
-          filename: `${boardId}.${file.name.split('.').at(-1)}`,
+          filename: generateBoardCoverFilename(boardId, file.name),
         }),
       ),
     );
