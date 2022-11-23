@@ -1,25 +1,30 @@
 <nz-form-item>
   <nz-form-control [nzXs]="24" [nzSm]="24" [nzErrorTip]="titleErrorTip">
-    <input
-      nz-input
-      [formControl]="pointControl"
-      placeholder="Enter subtask title"
-      i18n-placeholder="@@SubtaskTitlePlaceholder"
-    />
-    <ng-template #titleErrorTip>
-      <ng-container *ngIf="pointControl?.hasError('required')" i18n="@@CreatePointTitleRequiredErrorTip"
-        >Please provide a title</ng-container
-      >
-      <ng-container *ngIf="pointControl?.hasError('maxlength')" i18n="@@CreatePointTitleMinlengthErrorTip"
-        >Title should be 1-255 characters long</ng-container
-      >
+    <nz-input-group [nzSuffix]="suffixSave">
+      <input
+        nz-input
+        [formControl]="pointControl"
+        placeholder="Enter subtask title"
+        i18n-placeholder="@@SubtaskTitlePlaceholder"
+      />
+      <ng-template #titleErrorTip>
+        <ng-container *ngIf="pointControl?.hasError('required')" i18n="@@CreatePointTitleRequiredErrorTip"
+          >Please provide a title</ng-container
+        >
+        <ng-container *ngIf="pointControl?.hasError('maxlength')" i18n="@@CreatePointTitleMinlengthErrorTip"
+          >Title should be 1-255 characters long</ng-container
+        >
+      </ng-template>
+    </nz-input-group>
+    <ng-template #suffixSave>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Save"
+        i18n-nzTooltipTitle="@@SaveButtonTooltip"
+        nzType="check-circle"
+        (click)="addPoint()"
+      ></span>
     </ng-template>
   </nz-form-control>
-</nz-form-item>
-
-<nz-form-item>
-  <button nz-button nzType="dashed" class="add-button" i18n="@@CreateTaskAddSubTask" (click)="addPoint()">
-    <span nz-icon nzType="plus"></span>
-    Add Subtask
-  </button>
 </nz-form-item>
