@@ -17,11 +17,16 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="description" i18n="@@TaskDescription">Description</nz-form-label>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="description" i18n="@@TaskDescription"
+      >Description</nz-form-label
+    >
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="descriptionErrorTip">
       <textarea nz-input rows="2" formControlName="description"></textarea>
       <ng-template #descriptionErrorTip>
-        <ng-container *ngIf="description?.hasError('maxlength')" i18n="@@TaskTitleMaxlengthErrorTip"
+        <ng-container *ngIf="description?.hasError('required')" i18n="@@TaskDescriptionRequiredErrorTip"
+          >Please provide a description</ng-container
+        >
+        <ng-container *ngIf="description?.hasError('maxlength')" i18n="@@TaskDescriptionMaxlengthErrorTip"
           >Description should be no more than 255 characters long</ng-container
         >
       </ng-template>
@@ -29,7 +34,9 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="responsible" i18n="@@TaskResponsible">Responsible</nz-form-label>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="responsible" i18n="@@TaskResponsible"
+      >Responsible</nz-form-label
+    >
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="responsibleErrorTip">
       <nz-select
         nzMode="default"
@@ -49,7 +56,7 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="participants" i18n="@@CreateTaskParticipants"
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="participants" i18n="@@CreateTaskParticipants"
       >Participants</nz-form-label
     >
     <nz-form-control [nzSm]="17" [nzXs]="24">
@@ -59,7 +66,18 @@
         i18n-nzPlaceHolder="@@CreateTaskParticipantsPlaceHolder"
         formControlName="participants"
       >
-        <nz-option *ngFor="let user of users" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
+        <nz-option
+          *ngIf="user$ | async as user"
+          nzLabel="{{ user.name }}"
+          nzValue="{{ user._id }}"
+          nzHide
+          nzDisabled
+        ></nz-option>
+        <nz-option
+          *ngFor="let user of participants$ | async"
+          nzLabel="{{ user.name }}"
+          nzValue="{{ user._id }}"
+        ></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
