@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoaderService } from './core/services/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { LoaderService } from './core/services/loader/loader.service';
 })
 export class AppComponent {
   title = 'ng-pma';
-
-  constructor(public loaderService: LoaderService) {}
 }
