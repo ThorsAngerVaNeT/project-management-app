@@ -11,7 +11,7 @@ import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/model/column.model';
+import { Column, ColumnParams, ColumnSetUpdateParams } from '@columns/model/column.model';
 import {
   ColumnTask,
   ColumnTaskParams,
@@ -103,13 +103,13 @@ export class StoreFacade {
     this.store.dispatch(fromColumn.loadColumns({ boardId }));
   }
 
-  getColumnsSet(columnId: Column['_id'][]): void {
-    this.store.dispatch(fromColumn.loadColumnsSet({ columnId }));
-  }
+  // getColumnsSet(columnId: Column['_id'][]): void {
+  //   this.store.dispatch(fromColumn.loadColumnsSet({ columnId }));
+  // }
 
-  getColumnsByUser(userId: User['_id']): void {
-    this.store.dispatch(fromColumn.loadColumnsByUser({ userId }));
-  }
+  // getColumnsByUser(userId: User['_id']): void {
+  //   this.store.dispatch(fromColumn.loadColumnsByUser({ userId }));
+  // }
 
   getColumn(boardId: Board['_id'], columnId: Column['_id']): void {
     this.store.dispatch(fromColumn.loadColumn({ boardId, columnId }));
@@ -119,9 +119,9 @@ export class StoreFacade {
     this.store.dispatch(fromColumn.createColumn({ boardId, column }));
   }
 
-  createColumnsSet(columns: ColumnsSetParams[]): void {
-    this.store.dispatch(fromColumn.createColumnsSet({ columns }));
-  }
+  // createColumnsSet(columns: ColumnsSetParams[]): void {
+  //   this.store.dispatch(fromColumn.createColumnsSet({ columns }));
+  // }
 
   updateColumn(boardId: Board['_id'], columnId: Column['_id'], column: ColumnParams): void {
     this.store.dispatch(fromColumn.updateColumn({ boardId, columnId, column }));
