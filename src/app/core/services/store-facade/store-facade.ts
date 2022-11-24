@@ -183,19 +183,13 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
   }
 
-  private completeUsers({ userId, users }: ColumnTaskParams | ColumnTaskUpdateParams): User['_id'][] {
-    if (users.includes(userId)) return users;
-    return [userId, ...users];
-  }
-
   createTask(
     boardId: Board['_id'],
     columnId: Column['_id'],
     taskParams: ColumnTaskParams,
     pointsParams: PointParams[] = [],
   ): void {
-    const users = this.completeUsers(taskParams);
-    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams: { ...taskParams, users }, pointsParams }));
+    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams, pointsParams }));
   }
 
   updateTask(
@@ -204,8 +198,7 @@ export class StoreFacade {
     taskId: ColumnTask['_id'],
     taskParams: ColumnTaskUpdateParams,
   ): void {
-    const users = this.completeUsers(taskParams);
-    this.store.dispatch(fromTask.updateTask({ boardId, columnId, taskId, taskParams: { ...taskParams, users } }));
+    this.store.dispatch(fromTask.updateTask({ boardId, columnId, taskId, taskParams }));
   }
 
   updateTasksSet(tasksParams: ColumnTaskSetUpdateParams[]): void {

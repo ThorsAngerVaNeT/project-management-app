@@ -28,11 +28,9 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskAddForm!: FormGroup;
 
-  user$ = this.storeFacade.user$;
-
   users$ = this.storeFacade.users$;
 
-  userId: User['_id'] = '';
+  users: User[] = [];
 
   subscription = new Subscription();
 
@@ -40,12 +38,14 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   points$!: Observable<Point[]>;
 
+  responsibleToParticipants = { _id: '', name: '' };
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
     this.subscription.add(
-      this.user$.subscribe(({ _id }) => {
-        this.userId = _id;
+      this.users$.subscribe((users) => {
+        this.users = users;
       }),
     );
 
@@ -53,18 +53,22 @@ export class TaskAddComponent implements OnInit, OnDestroy {
       title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
       description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
       responsible: new FormControl(null, [Validators.required]),
-      participants: new FormControl([this.userId], [Validators.required]),
+      participants: new FormControl([], [Validators.required]),
     });
 
     if (this.task) {
-      const { title, description, userId: responsible, users } = this.task;
+      const { title, description, userId: responsibleId, users } = this.task;
       const participants = users.map((user) => user._id);
+
+      if (responsibleId) {
+        this.setResponsibleToParticipants(responsibleId);
+      }
 
       this.points$ = this.storeFacade.points$;
 
       this.storeFacade.getPointsByTask(this.task._id);
 
-      this.taskAddForm.setValue({ title, description, responsible, participants });
+      this.taskAddForm.setValue({ title, description, responsible: responsibleId, participants });
     } else {
       this.points$ = this.storeFacade.newTaskPoints$;
     }
@@ -130,5 +134,22 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   handleCancel(): void {
     this.storeFacade.clearNewTaskPoint();
     this.modal.destroy();
+  }
+
+  addResponsibleToParticipants(responsibleId: string): void {
+    if (!responsibleId) return;
+    this.setResponsibleToParticipants(responsibleId);
+
+    const { participants } = this.taskAddForm.value;
+    this.taskAddForm.patchValue({ participants: [...new Set([responsibleId, ...participants])] });
+  }
+
+  setResponsibleToParticipants(responsibleId: string): void {
+    const usersFiltered = this.users.filter((user) => user._id === responsibleId);
+
+    if (usersFiltered.length) {
+      const name = usersFiltered[0].name || '';
+      this.responsibleToParticipants = { _id: responsibleId, name };
+    }
   }
 }
