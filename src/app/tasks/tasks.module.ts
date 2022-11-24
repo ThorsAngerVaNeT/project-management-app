@@ -5,10 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import TaskRoutingModule from './tasks-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { TaskEffects } from './store/effects/task.effects';
-// import { SearchResultEffects } from './store/effects/search-result.effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromTask from './store/reducers/task.reducer';
-// import * as fromSearchResult from './store/reducers/search-result.reducer';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 
