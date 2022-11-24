@@ -19,4 +19,8 @@ export class WelcomeComponent {
   logout(): void {
     this.storeFacade.signOut();
   }
+
+  technologies = ['Angular', 'Typescript', 'NG Zorro (AntD)', 'NGRX'];
+
+  developers = ['developer', 'developer', 'developer'];
 }

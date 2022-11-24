@@ -1,3 +1,4 @@
+<!--
 <ng-container *ngIf="(user$ | async)?._id; else loggedOut">
   <button nz-button nzType="primary" [routerLink]="['/boards']" routerLinkActive="router-link-active">Boards</button>
   <button nz-button nzType="primary" *ngIf="(user$ | async)?._id" (click)="logout()">Logout</button>
@@ -6,3 +7,46 @@
 <ng-template #loggedOut>
   <button nz-button nzType="primary" (click)="login()">Login</button>
 </ng-template>
+
+ -->
+
+<div class="hero">
+  <div class="hero__headline">
+    <h1>ngPMA</h1>
+    <h2>Be a Lord of the Board</h2>
+    <p>Organize your work in a visual intuitive way using ngPMA application features:</p>
+    <p>
+      Boards | Columns | Tasks | Checklists
+      <span class="hero-divider" nz-icon nzType="plus"></span> Drag&Drop | Collaborators | Search
+    </p>
+  </div>
+
+  <div class="hero__image">
+    <img src="assets/images/scrshot.png" />
+  </div>
+</div>
+
+<h2>Technologies</h2>
+
+<div class="technologies">
+  <div class="technologies__list">
+    <nz-card *ngFor="let item of technologies">
+      {{ item }}
+      <img src="https://angular.io/assets/images/logos/angular/angular.svg" />
+    </nz-card>
+  </div>
+</div>
+
+<h2>Course</h2>
+
+<div class="course">
+  <a href="https://rs.school/angular/"><img src="https://rollingscopes.com/images/logo_rs2.svg" /></a>
+  <p>
+    This project was developed by students of Angular 2022Q3 Course at the RSSchool. RS School is free-of-charge and
+    community-based education program conducted by The Rolling Scopes developer community since 2013.
+  </p>
+</div>
+
+<h2>Developers</h2>
+
+<div class="developers"></div>
