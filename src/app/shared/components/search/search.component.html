@@ -12,7 +12,7 @@
   >
     <nz-option [nzValue]="null" nzLabel="search result:" i18n-nzLabel="@@inputSearchLabel" nzDisabled></nz-option>
   </nz-select>
-  <nz-select class="search__select search__search-type" nzBorderless [nzShowArrow]="false" [(ngModel)]="searchType">
+  <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
     <nz-option nzValue="byIds" nzLabel="by task number" i18n-nzLabel="@@SearchByIdsLabel"></nz-option>
     <nz-option nzValue="byKeyWords" nzLabel="by key words" i18n-nzLabel="@@SearchByKeyWordsLabel"></nz-option>
   </nz-select>
