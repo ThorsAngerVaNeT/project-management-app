@@ -148,7 +148,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     const usersFiltered = this.users.filter((user) => user._id === responsibleId);
 
     if (usersFiltered.length) {
-      const name = usersFiltered[0].name || '';
+      const name = usersFiltered[0].name ?? '';
       this.responsibleToParticipants = { _id: responsibleId, name };
     }
   }
