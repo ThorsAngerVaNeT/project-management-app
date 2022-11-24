@@ -72,7 +72,7 @@ export class ColumnEffects {
   updateColumnsSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.updateColumnsSet),
-      concatMap(({ columns: columnsParams }) =>
+      switchMap(({ columnsParams }) =>
         this.columnsService.updateColumnsSet(columnsParams).pipe(
           map((columns) =>
             ColumnActions.updateColumnsSetSuccess({

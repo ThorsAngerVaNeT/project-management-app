@@ -13,26 +13,28 @@
     <span nz-icon nzType="search"></span>
   </ng-template>
 
-  <div class="header__right-group">
-    <nz-radio-group class="header__lang-switch" nzSize="small">
-      <label nz-radio-button nzValue="RU">RU</label>
-      <label nz-radio-button nzValue="EN">EN</label>
-    </nz-radio-group>
+  <ng-container *ngIf="user$ | async as user">
+    <div class="header__right-group" *ngIf="user._id">
+      <nz-radio-group class="header__lang-switch" nzSize="small">
+        <label nz-radio-button nzValue="RU">RU</label>
+        <label nz-radio-button nzValue="EN">EN</label>
+      </nz-radio-group>
 
-    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-      John Doe
-      <span nz-icon nzType="down"></span>
-    </a>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul nz-menu>
-        <li nz-menu-item i18n="@@editProfile">Edit Profile</li>
-        <li nz-menu-item i18n="@@logOut">Log Out</li>
-      </ul>
-    </nz-dropdown-menu>
-  </div>
+      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
+        {{ user.name }}
+        <span nz-icon nzType="down"></span>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile</li>
+          <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
 
-  <div class="header__welcome_actions">
-    <a href="">Sign Up</a>
-    <a href="">Login</a>
-  </div>
+    <div class="header__welcome_actions" *ngIf="!user._id">
+      <span (click)="signUp()">Sign Up</span>
+      <span (click)="logIn()">Login</span>
+    </div>
+  </ng-container>
 </nz-header>

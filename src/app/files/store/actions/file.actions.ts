@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Board } from '@boards/models/board.model';
+import { Board } from '@boards/model/board.model';
 import { ColumnTask } from '@tasks/model/task.model';
-import { User } from '@users/models/user.model';
+import { User } from '@users/model/user.model';
 import { TaskFile } from '../../model/file.model';
 
 export const loadFilesSet = createAction('[Files] Load FilesSet', props<{ taskFileIds: TaskFile['_id'][] }>());

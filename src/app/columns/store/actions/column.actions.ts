@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../../models/column.model';
-import { Board } from '@boards/models/board.model';
-import { User } from '@users/models/user.model';
+import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '../../model/column.model';
+import { Board } from '@boards/model/board.model';
+import { User } from '@users/model/user.model';
 
 export const loadColumns = createAction('[Columns] Load Columns', props<{ boardId: Board['_id'] }>());
 export const loadColumnsSuccess = createAction('[Columns] Load Columns Success', props<{ columns: Column[] }>());
@@ -49,7 +49,7 @@ export const updateColumnFailure = createAction('[Columns] Update Column Failure
 
 export const updateColumnsSet = createAction(
   '[Columns] Update ColumnsSet',
-  props<{ columns: ColumnSetUpdateParams[] }>(),
+  props<{ columnsParams: ColumnSetUpdateParams[] }>(),
 );
 export const updateColumnsSetSuccess = createAction(
   '[Columns] Update ColumnsSet Success',

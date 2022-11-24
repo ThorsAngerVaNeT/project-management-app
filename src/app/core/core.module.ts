@@ -10,8 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../../environments/environment';
-import { AuthModule } from '../auth/auth.module';
+import { environment } from '@environments/environment';
+import { AuthModule } from '@auth/auth.module';
 import { RouterSerializer } from './store/reducers/router.reducer';
 import { CommonModule } from '@angular/common';
 

@@ -1,4 +1,4 @@
-import { SignInParams, User, UserParams } from '../../app/users/models/user.model';
+import { SignInParams, User, UserParams } from '@users/model/user.model';
 
 export const mockUser1: User = {
   _id: '1',

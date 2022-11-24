@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as ColumnActions from '../actions/column.actions';
-import { Column } from '../../models/column.model';
+import { Column } from '../../model/column.model';
 
 export const columnsFeatureKey = 'columns';
 
@@ -26,6 +26,15 @@ export const reducer = createReducer(
   on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
   on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
   on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),
+  on(ColumnActions.updateColumnsSet, (state, { columnsParams }) => {
+    const columns = columnsParams.map(({ _id: id, ...changes }) => {
+      const { _id, ...originalColumn } = { ...state.entities[id] };
+      const column = { id, changes: { ...originalColumn, ...changes } };
+
+      return column;
+    });
+    return adapter.updateMany(columns, state);
+  }),
   on(ColumnActions.deleteColumnSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 

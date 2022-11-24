@@ -2,7 +2,8 @@
 
 @import 'variables.less';
 
-html, body {
+html,
+body {
   height: 100%;
   background: @background-color-light;
 }
@@ -11,7 +12,10 @@ nz-content {
   padding: 0 64px;
 }
 
-app-root, app-main, app-board, app-welcome {
+app-root,
+app-main,
+app-board,
+app-welcome {
   display: flex;
   height: 100%;
 }
@@ -50,4 +54,80 @@ form .anticon {
 
 .ant-form-item-explain-error {
   color: @error-color;
+}
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+  display: inline-block;
+  margin-right: 4px;
+  color: @error-color;
+  content: "*";
+}
+
+.ant-btn-dangerous:hover {
+  background-color: @error-color;
+  color: @background-color-light;
+}
+
+// scrolls
+
+.scrollable::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: transparent;
+  border: @background-color-medium solid 1px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: @background-color-medium;
+  border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: @primary-color;
+}
+
+.project__column.scrollable .ant-card-body::-webkit-scrollbar-track {
+  margin: 8px;
+}
+
+.project__columns {
+  overflow-x: auto;
+  max-width: calc(100vw - 132px);
+  padding-bottom: 12px;
+  scrollbar-color: @primary-color transparent;
+  cursor: grab;
+}
+
+.project__column .ant-card-body {
+  overflow-y: auto;
+  height: fit-content;
+  max-height: calc(100vh - 476px);
+  margin-right: 8px;
+  scrollbar-color: @primary-color transparent;
+}
+
+.project__columns::-webkit-scrollbar {
+  height: 8px;
+}
+
+.project__column .ant-card-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.project__columns::-webkit-scrollbar-track, .project__column .ant-card-body::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: transparent;
+  border: @background-color-medium solid 1px;
+}
+
+.project__column .ant-card-body::-webkit-scrollbar-track {
+  margin: 8px;
+}
+
+.project__columns::-webkit-scrollbar-thumb, .project__column .ant-card-body::-webkit-scrollbar-thumb {
+  background: @background-color-medium;
+  border-radius: 4px;
+}
+
+.project__columns::-webkit-scrollbar-thumb:hover, .project__column .ant-card-body::-webkit-scrollbar-thumb:hover {
+  background: @primary-color;
 }

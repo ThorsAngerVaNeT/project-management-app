@@ -5,11 +5,15 @@ import * as TaskActions from '../actions/task.actions';
 
 export const tasksFeatureKey = 'tasks';
 
-export interface TasksState extends EntityState<ColumnTask> {}
+export interface TasksState extends EntityState<ColumnTask> {
+  currentTaskId: ColumnTask['_id'];
+}
 
 export const adapter: EntityAdapter<ColumnTask> = createEntityAdapter<ColumnTask>({ selectId: (task) => task._id });
 
-export const initialState: TasksState = adapter.getInitialState({});
+export const initialState: TasksState = adapter.getInitialState({
+  currentTaskId: '',
+});
 
 export const reducer = createReducer(
   initialState,
@@ -21,8 +25,17 @@ export const reducer = createReducer(
   on(TaskActions.loadTaskSuccess, (state, { task }) => adapter.setOne(task, state)),
   on(TaskActions.createTaskSuccess, (state, { task }) => adapter.addOne(task, state)),
   on(TaskActions.updateTaskSuccess, (state, { task }) => adapter.updateOne(task, state)),
-  on(TaskActions.updateTasksSetSuccess, (state, { tasks }) => adapter.updateMany(tasks, state)),
+  on(TaskActions.updateTasksSet, (state, { tasksParams }) => {
+    const tasks = tasksParams.map(({ _id: id, ...changes }) => {
+      const { _id, ...originalTask } = { ...state.entities[id] };
+      const task = { id, changes: { ...originalTask, ...changes } };
+
+      return task;
+    });
+    return adapter.updateMany(tasks, state);
+  }),
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
+  on(TaskActions.selectTask, (state, { taskId }): TasksState => ({ ...state, currentTaskId: taskId })),
 );
 
 export const {

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -25,7 +26,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 const MODULES = [
   NzLayoutModule,
@@ -50,12 +53,14 @@ const MODULES = [
   NzSpinModule,
 
   CommonModule,
+  FormsModule,
   ReactiveFormsModule,
+  DragDropModule,
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent],
+  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe],
   imports: [...MODULES],
-  exports: [...MODULES, FooterComponent, HeaderComponent],
+  exports: [...MODULES, FooterComponent, HeaderComponent, SortByOrderPipe],
 })
 export class SharedModule {}
