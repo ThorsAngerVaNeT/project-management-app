@@ -79,13 +79,13 @@ export class StoreFacade {
     this.getTasksByBoard(boardId);
   }
 
-  getBoardsSet(ids: Board['_id'][]): void {
-    this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
-  }
+  // getBoardsSet(ids: Board['_id'][]): void {
+  //   this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
+  // }
 
-  getBoardsByUser(userId: User['_id']): void {
-    this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
-  }
+  // getBoardsByUser(userId: User['_id']): void {
+  //   this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
+  // }
 
   createBoard(board: Omit<BoardParams, 'owner'>): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
