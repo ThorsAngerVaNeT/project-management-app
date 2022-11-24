@@ -4,6 +4,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { map, Subscription } from 'rxjs';
+import { User } from '@users/model/user.model';
 import { createBoardSuccess } from '../../store/actions/board.actions';
 
 @Component({
@@ -24,7 +25,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
     map(([users, { _id }]) => users.filter((user) => user._id !== _id)),
   );
 
-  userId: string = '';
+  userId: User['_id'] = '';
 
   subscription = new Subscription();
 
