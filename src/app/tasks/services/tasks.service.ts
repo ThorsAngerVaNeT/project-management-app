@@ -19,12 +19,6 @@ export class TasksService {
     return `${APIEndpoints.boards}/${boardId}/${APIEndpoints.columns}/${columnId}/${APIEndpoints.tasks}${taskEndpoint}`;
   }
 
-  private completeUsers(task: ColumnTaskParams | ColumnTaskUpdateParams): ColumnTaskParams | ColumnTaskUpdateParams {
-    const { userId, users } = task;
-    if (users.includes(userId)) return task;
-    return { ...task, users: [userId, ...users] };
-  }
-
   public getTasks(boardId: Board['_id'], columnId: Column['_id']): Observable<ColumnTask[]> {
     return this.http.get<ColumnTask[]>(this.getTaskUrl(boardId, columnId));
   }
@@ -56,7 +50,7 @@ export class TasksService {
   }
 
   public createTask(boardId: Board['_id'], columnId: Column['_id'], newTask: ColumnTaskParams): Observable<ColumnTask> {
-    return this.http.post<ColumnTask>(this.getTaskUrl(boardId, columnId), this.completeUsers(newTask));
+    return this.http.post<ColumnTask>(this.getTaskUrl(boardId, columnId), newTask);
   }
 
   public updateTask(
@@ -65,7 +59,7 @@ export class TasksService {
     taskId: ColumnTask['_id'],
     taskParams: ColumnTaskUpdateParams,
   ): Observable<ColumnTask> {
-    return this.http.put<ColumnTask>(this.getTaskUrl(boardId, columnId, taskId), this.completeUsers(taskParams));
+    return this.http.put<ColumnTask>(this.getTaskUrl(boardId, columnId, taskId), taskParams);
   }
 
   public updateTasksSet(listTaskParams: ColumnTaskSetUpdateParams[]): Observable<ColumnTask[]> {
