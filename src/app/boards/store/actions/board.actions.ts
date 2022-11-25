@@ -36,3 +36,12 @@ export const updateBoardFailure = createAction('[Boards] Update Board Failure', 
 export const deleteBoard = createAction('[Boards] Delete Board', props<{ id: Board['_id'] }>());
 export const deleteBoardSuccess = createAction('[Boards] Delete Board Success', props<{ id: Board['_id'] }>());
 export const deleteBoardFailure = createAction('[Boards] Delete Board Failure', props<{ error: unknown }>());
+
+export const loadMainPageData = createAction('[Boards] Load Main Page Data');
+export const loadMainPageDataSuccess = createAction('[Boards] Load Main Page Data Success');
+export const loadMainPageDataFailure = createAction(
+  '[Boards] Load Main Page Data Failure',
+  props<{ error: unknown }>(),
+);
+
+export const preloadImagesCompleted = createAction('[Boards] Preload Images Completed');

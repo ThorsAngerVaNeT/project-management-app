@@ -52,3 +52,8 @@ export const deleteFileBeforeUploadFailure = createAction(
   '[Files] Delete File Before Upload Failure',
   props<{ error: unknown }>(),
 );
+
+export const addFileToStoreBeforeUploadSuccess = createAction(
+  '[Files] Add File To Store Before Upload Success',
+  props<{ file: TaskFile }>(),
+);

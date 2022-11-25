@@ -7,6 +7,7 @@ export const boardsFeatureKey = 'boards';
 
 export interface BoardsState extends EntityState<Board> {
   loading: boolean;
+  loaded: boolean;
 }
 
 const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
@@ -17,19 +18,24 @@ export const initialState: BoardsState = adapter.getInitialState({
   ids: [],
   entities: {},
   loading: false,
+  loaded: false,
 });
 
 export const reducer = createReducer(
   initialState,
 
-  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state, loading: true })),
-  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state, loading: false })),
+  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state })),
+  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state })),
   on(BoardActions.loadBoardSuccess, (state, { board }) => adapter.setOne(board, state)),
   on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   on(BoardActions.createBoardSuccess, (state, { board }) => adapter.addOne(board, state)),
   on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
   on(BoardActions.deleteBoardSuccess, (state, { id }) => adapter.removeOne(id, state)),
+  on(BoardActions.loadMainPageData, (state): BoardsState => ({ ...state, loading: true })),
+  on(BoardActions.loadMainPageDataSuccess, (state): BoardsState => ({ ...state, loading: false, loaded: true })),
+  on(BoardActions.loadMainPageDataFailure, (state): BoardsState => ({ ...state, loading: false, loaded: false })),
+  on(BoardActions.preloadImagesCompleted, (state): BoardsState => ({ ...state, loading: false })),
 );
 
 export const {

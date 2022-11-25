@@ -5,6 +5,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import * as FileActions from '@files/store/actions/file.actions';
+import * as UserActions from '@users/store/actions/user.actions';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class BoardEffects {
@@ -91,6 +94,17 @@ export class BoardEffects {
           catchError((error) => of(BoardActions.deleteBoardFailure({ error }))),
         ),
       ),
+    );
+  });
+
+  loadMainPageData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadMainPageData),
+      concatMap(() => [
+        BoardActions.loadBoards(),
+        UserActions.loadUsers(),
+        FileActions.loadFilesByTask({ taskId: environment.BOARD_COVER_FILE_TASK_ID }),
+      ]),
     );
   });
 }

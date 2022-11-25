@@ -1,5 +1,5 @@
 <div class="main-inner-content">
-  <ng-container *ngIf="(boardsLoading$ | async) === false; else loadingSpinner">
+  <ng-container *ngIf="(boardsLoaded$ | async) === true || (boardsLoading$ | async) === false; else loadingSpinner">
     <app-board-card *ngFor="let board of boards$ | async" [board]="board"></app-board-card>
 
     <nz-card nzHoverable class="new-board-card">

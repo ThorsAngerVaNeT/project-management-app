@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, switchMap, filter } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, map, concatMap, switchMap, filter, mergeMap } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
 import * as FileActions from '../actions/file.actions';
 import { FilesService } from '../../services/files.service';
 import { environment } from '@environments/environment';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import * as BoardActions from '@boards/store/actions/board.actions';
-import { Board } from '@boards/model/board.model';
-
-const generateBoardCoverFilename = (boardId: Board['_id'] | number, filename: string): string =>
-  `${boardId}-${Date.now()}.${filename.split('.').at(-1)}`;
+import * as FileHelpers from './file.helpers';
 
 @Injectable()
 export class FileEffects {
@@ -93,7 +90,11 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.uploadFileSuccess),
       filter(({ file }) => file.taskId === taskId),
-      map(() => FileActions.loadFilesByTask({ taskId })),
+      map(({ file }) => {
+        FileActions.loadFilesSet({ taskFileIds: [file._id] });
+        return FileHelpers.getPreloadImage$(file);
+      }),
+      map(() => BoardActions.preloadImagesCompleted()),
     );
   });
 
@@ -101,14 +102,26 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(BoardActions.createBoardSuccess),
       filter(({ file }) => !!file),
-      map(({ board: { _id: boardId }, file }) =>
+      concatMap(({ board: { _id: boardId }, file }) => {
+        return FileHelpers.fileToBase64(boardId, file);
+      }),
+      concatMap(({ boardId, file, path }) => [
+        FileActions.addFileToStoreBeforeUploadSuccess({
+          file: {
+            _id: '',
+            name: '',
+            boardId,
+            taskId: environment.BOARD_COVER_FILE_TASK_ID,
+            path,
+          },
+        }),
         FileActions.uploadFile({
           boardId,
           taskId: environment.BOARD_COVER_FILE_TASK_ID,
           file,
-          filename: generateBoardCoverFilename(boardId, file.name),
+          filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
         }),
-      ),
+      ]),
     );
   });
 
@@ -132,7 +145,7 @@ export class FileEffects {
                 boardId: `${boardId}`,
                 taskId: environment.BOARD_COVER_FILE_TASK_ID,
                 file,
-                filename: generateBoardCoverFilename(boardId, file.name),
+                filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
               });
         },
       ),
@@ -159,9 +172,17 @@ export class FileEffects {
           boardId: `${boardId}`,
           taskId: environment.BOARD_COVER_FILE_TASK_ID,
           file,
-          filename: generateBoardCoverFilename(boardId, file.name),
+          filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
         }),
       ),
+    );
+  });
+
+  preloadImagesAfterLoadFilesByTaskSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.loadFilesByTaskSuccess),
+      mergeMap(({ files }) => forkJoin(files.map((file) => FileHelpers.getPreloadImage$(file)))),
+      concatMap(() => [BoardActions.preloadImagesCompleted(), BoardActions.loadMainPageDataSuccess()]),
     );
   });
 }

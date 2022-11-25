@@ -11,6 +11,7 @@ import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
 import {
   selectBoardDetailViewModel,
+  selectBoardsLoaded,
   selectBoardsLoading,
   selectBoardsWithUsers,
 } from '@boards/store/selectors/board.selectors';
@@ -58,6 +59,8 @@ export class StoreFacade {
 
   boardsLoading$ = this.store.select(selectBoardsLoading);
 
+  boardsLoaded$ = this.store.select(selectBoardsLoaded);
+
   constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
@@ -91,9 +94,7 @@ export class StoreFacade {
   }
 
   getBoardsAllData(): void {
-    this.getBoardCovers();
-    this.getUsers();
-    this.getBoards();
+    this.store.dispatch(fromBoard.loadMainPageData());
   }
 
   getBoardsSet(ids: Board['_id'][]): void {
@@ -288,5 +289,9 @@ export class StoreFacade {
 
   getBoardCoverStream(boardId: Board['_id']): Observable<string> {
     return this.store.select(selectBoardCoverUrl(boardId));
+  }
+
+  completePreload(): void {
+    this.store.dispatch(fromBoard.preloadImagesCompleted());
   }
 }

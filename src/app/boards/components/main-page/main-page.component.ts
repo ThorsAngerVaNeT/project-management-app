@@ -15,6 +15,8 @@ export class MainPageComponent implements OnInit {
 
   boardsLoading$ = this.storeFacade.boardsLoading$;
 
+  boardsLoaded$ = this.storeFacade.boardsLoaded$;
+
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
