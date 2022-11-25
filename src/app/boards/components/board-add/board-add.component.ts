@@ -27,6 +27,8 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   userId: User['_id'] = '';
 
+  file!: File;
+
   subscription = new Subscription();
 
   constructor(private storeFacade: StoreFacade, private action$: Actions, private modal: NzModalRef) {}
@@ -47,7 +49,6 @@ export class BoardAddComponent implements OnInit, OnDestroy {
     this.boardAddForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
       participants: new FormControl([this.userId], [Validators.required]),
-      image: new FormControl(),
     });
   }
 
@@ -64,7 +65,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
       const { title, participants: users } = this.boardAddForm.value;
 
       this.isLoading = true;
-      this.storeFacade.createBoard({ title, users });
+      this.storeFacade.createBoard({ title, users, file: this.file });
     } else {
       Object.values(this.boardAddForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -77,5 +78,11 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   handleCancel(): void {
     this.modal.destroy();
+  }
+
+  onFileInput(files: FileList | null): void {
+    if (files) {
+      this.file = files.item(0)!;
+    }
   }
 }
