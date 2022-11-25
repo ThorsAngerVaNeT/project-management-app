@@ -1,0 +1,34 @@
+<div>
+  <nz-select
+    class="search__select search__search-field"
+    nzBorderless
+    nzShowSearch
+    nzPlaceHolder="Search"
+    i18n-nzPlaceHolder="@@SearchInputPlaceholder"
+    [nzDropdownRender]="renderTemplate"
+    [nzShowArrow]="false"
+    [nzFilterOption]="nzFilterOption"
+    (nzOnSearch)="search($event)"
+  >
+    <nz-option [nzValue]="null" nzLabel="search result:" i18n-nzLabel="@@inputSearchLabel" nzDisabled></nz-option>
+  </nz-select>
+  <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
+    <nz-option nzValue="byIds" nzLabel="by task number" i18n-nzLabel="@@SearchByIdsLabel"></nz-option>
+    <nz-option nzValue="byKeyWords" nzLabel="by key words" i18n-nzLabel="@@SearchByKeyWordsLabel"></nz-option>
+  </nz-select>
+</div>
+<ng-template #renderTemplate>
+  <div class="search__result-container">
+    <div *ngIf="searchResult$ | async as searchResult">
+      <div *ngFor="let task of searchResult">
+        <a routerLink="/boards/{{ task.boardId }}">
+          <div class="search__result">
+            <span class="search__result-title">{{ task.title }} </span
+            ><span class="search__result-description"> {{ task.description }}</span
+            ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-template>

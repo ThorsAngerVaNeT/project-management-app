@@ -8,6 +8,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
 import { EMPTY_POINT, Point } from '@points/model/point.model';
 import { User } from '@users/model/user.model';
+import { Dictionary } from '@ngrx/entity';
+import { EMPTY_USER } from '@users/store/reducers/user.reducer';
 
 @Component({
   selector: 'app-task-add',
@@ -28,11 +30,9 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskAddForm!: FormGroup;
 
-  user$ = this.storeFacade.user$;
+  userEntities$ = this.storeFacade.userEntities$;
 
-  users$ = this.storeFacade.users$;
-
-  userId: User['_id'] = '';
+  userEntities!: Dictionary<User>;
 
   subscription = new Subscription();
 
@@ -40,12 +40,14 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   points$!: Observable<Point[]>;
 
+  responsibleToParticipants = { _id: '', name: '' };
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
     this.subscription.add(
-      this.user$.subscribe(({ _id }) => {
-        this.userId = _id;
+      this.userEntities$.subscribe((userEntities) => {
+        this.userEntities = userEntities;
       }),
     );
 
@@ -53,18 +55,22 @@ export class TaskAddComponent implements OnInit, OnDestroy {
       title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
       description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
       responsible: new FormControl(null, [Validators.required]),
-      participants: new FormControl([this.userId], [Validators.required]),
+      participants: new FormControl([], [Validators.required]),
     });
 
     if (this.task) {
-      const { title, description, userId: responsible, users } = this.task;
+      const { title, description, userId: responsibleId, users } = this.task;
       const participants = users.map((user) => user._id);
+
+      if (responsibleId) {
+        this.setResponsibleToParticipants(responsibleId);
+      }
 
       this.points$ = this.storeFacade.points$;
 
       this.storeFacade.getPointsByTask(this.task._id);
 
-      this.taskAddForm.setValue({ title, description, responsible, participants });
+      this.taskAddForm.setValue({ title, description, responsible: responsibleId, participants });
     } else {
       this.points$ = this.storeFacade.newTaskPoints$;
     }
@@ -92,6 +98,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   get point(): Point {
     return { ...EMPTY_POINT, taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
+  }
+
+  get users(): User[] {
+    return Object.values(this.userEntities).map((user) => user ?? EMPTY_USER);
   }
 
   handleOk(): void {
@@ -130,5 +140,22 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   handleCancel(): void {
     this.storeFacade.clearNewTaskPoint();
     this.modal.destroy();
+  }
+
+  addResponsibleToParticipants(responsibleId: string): void {
+    if (!responsibleId) return;
+    this.setResponsibleToParticipants(responsibleId);
+
+    const { participants } = this.taskAddForm.value;
+    this.taskAddForm.patchValue({ participants: [...new Set([responsibleId, ...participants])] });
+  }
+
+  setResponsibleToParticipants(responsibleId: string): void {
+    const responsibleUser = this.userEntities[responsibleId];
+
+    if (responsibleUser) {
+      const name = responsibleUser.name ?? '';
+      this.responsibleToParticipants = { _id: responsibleId, name };
+    }
   }
 }

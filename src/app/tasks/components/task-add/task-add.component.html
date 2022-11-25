@@ -1,4 +1,4 @@
-<form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="users$ | async as users">
+<form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="userEntities$ | async as userEntities">
   <nz-form-item>
     <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@TaskTitle">Title</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
@@ -43,6 +43,7 @@
         nzPlaceHolder="Please select a responsible person"
         i18n-nzPlaceHolder="@@CreateTaskResponsiblePlaceHolder"
         formControlName="responsible"
+        (ngModelChange)="addResponsibleToParticipants($event)"
       >
         <nz-option *ngFor="let user of users" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
       </nz-select>
@@ -66,7 +67,18 @@
         i18n-nzPlaceHolder="@@CreateTaskParticipantsPlaceHolder"
         formControlName="participants"
       >
-        <nz-option *ngFor="let user of users" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
+        <nz-option
+          nzLabel="{{ responsibleToParticipants.name }}"
+          nzValue="{{ responsibleToParticipants._id }}"
+          nzHide
+          nzDisabled
+        ></nz-option>
+        <nz-option
+          *ngFor="let user of users"
+          nzLabel="{{ user.name }}"
+          nzValue="{{ user._id }}"
+          [nzDisabled]="user._id === responsibleToParticipants._id"
+        ></nz-option>
       </nz-select>
       <ng-template #participantsErrorTip>
         <ng-container *ngIf="participants?.hasError('required')" i18n="@@TaskParticipantsRequiredErrorTip"
