@@ -6,35 +6,93 @@
     </a>
   </div>
 
-  <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field">
-    <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
-  </nz-input-group>
-  <ng-template #suffixIconSearch>
-    <span nz-icon nzType="search"></span>
-  </ng-template>
-
   <ng-container *ngIf="user$ | async as user">
-    <div class="header__right-group" *ngIf="user._id">
-      <nz-radio-group class="header__lang-switch" nzSize="small">
-        <label nz-radio-button nzValue="RU">RU</label>
-        <label nz-radio-button nzValue="EN">EN</label>
-      </nz-radio-group>
+    <!-- burger drop-down
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu2" class="header__user-menu">
+      <span nz-icon nzType="down"></span>
+    </a>
+    <nz-dropdown-menu #menu2="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>
+          <nz-radio-group class="header__lang-switch" nzSize="small">
+            <label nz-radio-button nzValue="RU">RU</label>
+            <label nz-radio-button nzValue="EN">EN</label>
+          </nz-radio-group>
+        </li>
+        <li nz-menu-item>
+          <nz-input-group [nzSuffix]="suffixIconSearch" class="burger__search-field" *ngIf="user._id">
+            <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
+          </nz-input-group>
+        </li>
+        <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile2</li>
+        <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out2</li>
+      </ul>
+    </nz-dropdown-menu>
 
-      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-        {{ user.name }}
-        <span nz-icon nzType="down"></span>
-      </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile</li>
-          <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out</li>
-        </ul>
-      </nz-dropdown-menu>
+    /burger drop-down -->
+
+    <!-- burger -->
+
+    <div class="burger__toggler">
+      <input type="checkbox" id="burger__id" />
+      <label for="burger__id" id="burger__icon"><span nz-icon nzType="menu"></span> </label>
+
+      <div class="burger__menu">
+        <ng-container *ngIf="user._id">
+          <div class="burger__controls">
+            <nz-radio-group class="header__lang-switch" nzSize="small">
+              <label nz-radio-button nzValue="RU">RU</label>
+              <label nz-radio-button nzValue="EN">EN</label>
+            </nz-radio-group>
+
+            <nz-input-group [nzSuffix]="suffixIconSearch" class="burger__search-field" *ngIf="user._id">
+              <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
+            </nz-input-group>
+          </div>
+
+          <div i18n="@@editProfile" (click)="editProfile()">Edit Profile</div>
+          <div i18n="@@logOut" (click)="signOut()">Log Out</div>
+        </ng-container>
+
+        <ng-container *ngIf="!user._id">
+          <span (click)="signUp()">Sign Up</span>
+          <span (click)="logIn()">Login</span>
+        </ng-container>
+      </div>
     </div>
 
-    <div class="header__welcome_actions" *ngIf="!user._id">
-      <span (click)="signUp()">Sign Up</span>
-      <span (click)="logIn()">Login</span>
+    <!-- / burger -->
+
+    <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field" *ngIf="user._id">
+      <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+
+    <div class="header__right-group-wrapper">
+      <div class="header__right-group" *ngIf="user._id">
+        <nz-radio-group class="header__lang-switch" nzSize="small">
+          <label nz-radio-button nzValue="RU">RU</label>
+          <label nz-radio-button nzValue="EN">EN</label>
+        </nz-radio-group>
+
+        <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
+          {{ user.name }}
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile</li>
+            <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+
+      <div class="header__welcome_actions" *ngIf="!user._id">
+        <span (click)="signUp()">Sign Up</span>
+        <span (click)="logIn()">Login</span>
+      </div>
     </div>
   </ng-container>
 </nz-header>
