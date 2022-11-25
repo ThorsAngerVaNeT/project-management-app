@@ -7,30 +7,6 @@
   </div>
 
   <ng-container *ngIf="user$ | async as user">
-    <!-- burger drop-down
-    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu2" class="header__user-menu">
-      <span nz-icon nzType="down"></span>
-    </a>
-    <nz-dropdown-menu #menu2="nzDropdownMenu">
-      <ul nz-menu>
-        <li nz-menu-item>
-          <nz-radio-group class="header__lang-switch" nzSize="small">
-            <label nz-radio-button nzValue="RU">RU</label>
-            <label nz-radio-button nzValue="EN">EN</label>
-          </nz-radio-group>
-        </li>
-        <li nz-menu-item>
-          <nz-input-group [nzSuffix]="suffixIconSearch" class="burger__search-field" *ngIf="user._id">
-            <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
-          </nz-input-group>
-        </li>
-        <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile2</li>
-        <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out2</li>
-      </ul>
-    </nz-dropdown-menu>
-
-    /burger drop-down -->
-
     <!-- burger -->
 
     <div class="burger__toggler">
@@ -72,6 +48,10 @@
 
     <div class="header__right-group-wrapper">
       <div class="header__right-group" *ngIf="user._id">
+        <button nz-button nz-tooltip nzType="text"><span nz-icon nzType="plus"></span> AddNewBoard</button>
+
+        <a class="header__user-menu"> <span nz-icon nzType="plus"></span> AddNewBoard </a>
+
         <nz-radio-group class="header__lang-switch" nzSize="small">
           <label nz-radio-button nzValue="RU">RU</label>
           <label nz-radio-button nzValue="EN">EN</label>

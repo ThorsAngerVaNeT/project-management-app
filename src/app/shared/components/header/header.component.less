@@ -70,9 +70,10 @@
 
 .header__search-field {
   height: 32px;
-  margin-left: 66px;
+  xmargin-left: 66px;
   background-color: transparent;
-  max-width: 302px;
+  xmax-width: 302px;
+  max-width: 280px;
   width: auto;
 }
 
@@ -83,7 +84,7 @@
 
 .header__user-menu {
   color: @background-color-light;
-  padding-top: 2px;
+  padding-top: 8px;
 }
 
 .header__user-menu:hover{
@@ -135,7 +136,7 @@
   max-width: 302px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: @mobile-max-width) {
   .ant-layout-header {
     padding: 0 16px;
   }
