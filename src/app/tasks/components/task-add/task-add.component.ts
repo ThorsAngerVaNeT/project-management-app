@@ -8,6 +8,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
 import { EMPTY_POINT, Point } from '@points/model/point.model';
 import { User } from '@users/model/user.model';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
   selector: 'app-task-add',
@@ -30,7 +31,9 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   users$ = this.storeFacade.users$;
 
-  users: User[] = [];
+  userEntities$ = this.storeFacade.userEntities$;
+
+  userEntities!: Dictionary<User>;
 
   subscription = new Subscription();
 
@@ -44,8 +47,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.users$.subscribe((users) => {
-        this.users = users;
+      this.userEntities$.subscribe((userEntities) => {
+        this.userEntities = userEntities;
       }),
     );
 
@@ -145,10 +148,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
   }
 
   setResponsibleToParticipants(responsibleId: string): void {
-    const usersFiltered = this.users.filter((user) => user._id === responsibleId);
+    const responsibleUser = this.userEntities[responsibleId];
 
-    if (usersFiltered.length) {
-      const name = usersFiltered[0].name ?? '';
+    if (responsibleUser) {
+      const name = responsibleUser.name ?? '';
       this.responsibleToParticipants = { _id: responsibleId, name };
     }
   }
