@@ -10,21 +10,21 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 export class PointEffects {
   constructor(private actions$: Actions, private pointsService: PointsService, private storeFacade: StoreFacade) {}
 
-  loadPointsSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.loadPointsSet),
-      switchMap(({ ids }) => this.pointsService.getPointsSet(ids)),
-      map((points) => PointActions.loadPointsSetSuccess({ points })),
-    );
-  });
+  // loadPointsSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.loadPointsSet),
+  //     switchMap(({ ids }) => this.pointsService.getPointsSet(ids)),
+  //     map((points) => PointActions.loadPointsSetSuccess({ points })),
+  //   );
+  // });
 
-  loadPointsByUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.loadPointsByUser),
-      switchMap(({ userId }) => this.pointsService.getPointsByUser(userId)),
-      map((points) => PointActions.loadPointsByUserSuccess({ points })),
-    );
-  });
+  // loadPointsByUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.loadPointsByUser),
+  //     switchMap(({ userId }) => this.pointsService.getPointsByUser(userId)),
+  //     map((points) => PointActions.loadPointsByUserSuccess({ points })),
+  //   );
+  // });
 
   loadPointsByTask$ = createEffect(() => {
     return this.actions$.pipe(
@@ -70,20 +70,20 @@ export class PointEffects {
     );
   });
 
-  updatePointsSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.updatePointsSet),
-      concatMap(({ pointsParams }) => this.pointsService.updatePointsSet(pointsParams)),
-      map((points) =>
-        PointActions.updatePointsSetSuccess({
-          points: points.map(({ _id: id, ...changes }) => ({
-            id,
-            changes,
-          })),
-        }),
-      ),
-    );
-  });
+  // updatePointsSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.updatePointsSet),
+  //     concatMap(({ pointsParams }) => this.pointsService.updatePointsSet(pointsParams)),
+  //     map((points) =>
+  //       PointActions.updatePointsSetSuccess({
+  //         points: points.map(({ _id: id, ...changes }) => ({
+  //           id,
+  //           changes,
+  //         })),
+  //       }),
+  //     ),
+  //   );
+  // });
 
   deletePoint$ = createEffect(() => {
     return this.actions$.pipe(
