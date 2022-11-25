@@ -24,6 +24,7 @@ export class TaskItemComponent {
       nzTitle: $localize`:@@EditTaskModalTitle:Edit Task`,
       nzContent: TaskAddComponent,
       nzComponentParams: { task: this.task },
+      nzWidth: 'null',
     });
   }
 
@@ -36,6 +37,7 @@ export class TaskItemComponent {
         this.storeFacade.deleteTask(boardId, columnId, taskId);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 }

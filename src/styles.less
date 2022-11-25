@@ -68,6 +68,11 @@ form .anticon {
   color: @background-color-light;
 }
 
+.ant-modal {
+  max-width: 520px;
+}
+
+
 // scrolls
 
 .scrollable::-webkit-scrollbar-track {
@@ -91,7 +96,7 @@ form .anticon {
 
 .project__columns {
   overflow-x: auto;
-  max-width: calc(100vw - 132px);
+  max-width: calc(100vw - 152px);
   padding-bottom: 12px;
   scrollbar-color: @primary-color transparent;
   cursor: grab;
@@ -130,4 +135,36 @@ form .anticon {
 
 .project__columns::-webkit-scrollbar-thumb:hover, .project__column .ant-card-body::-webkit-scrollbar-thumb:hover {
   background: @primary-color;
+}
+
+// media
+
+@media (max-width: 767px) {
+
+  nz-content {
+    padding: 0 16px;
+  }
+
+  .project__columns {
+    max-width: calc(100vw - 52px);
+  }
+
+  .ant-page-header-heading-title {
+    width: calc(90vw - 152px);
+  }
+}
+
+
+
+@media (max-width: 542px) {
+  .ant-modal {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .ant-modal-body, .ant-modal-confirm .ant-modal-body {
+    padding: 16px;
+  }
+
+
 }

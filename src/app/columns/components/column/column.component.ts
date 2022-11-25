@@ -55,6 +55,7 @@ export class ColumnComponent implements OnInit {
         this.storeFacade.deleteColumn(boardId, columnId);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 
@@ -66,6 +67,7 @@ export class ColumnComponent implements OnInit {
       nzTitle: $localize`:@@CreateTaskModalTitle:Create Task`,
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
+      nzWidth: 'null',
     });
   }
 

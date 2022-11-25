@@ -43,6 +43,7 @@ export class BoardDetailComponent implements OnInit {
       nzTitle: $localize`:@@CreateColumnModalTitle:Create Column`,
       nzContent: ColumnAddComponent,
       nzComponentParams: { boardId: this.boardId, order: this.columnsCount },
+      nzWidth: 'null',
     });
   }
 

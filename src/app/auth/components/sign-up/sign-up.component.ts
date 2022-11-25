@@ -107,6 +107,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.storeFacade.deleteUser(this.user._id);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 

@@ -23,6 +23,7 @@ export class BoardCardComponent {
         this.storeFacade.deleteBoard(this.board._id);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 }
