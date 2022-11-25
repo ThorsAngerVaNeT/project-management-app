@@ -1,4 +1,4 @@
-<nz-card nzHoverable style="width: 300px" [nzCover]="cover" [nzActions]="[actionEllipsis]">
+<nz-card nzHoverable class="board-card" [nzCover]="cover" [nzActions]="[actionEllipsis]">
   <nz-card-meta
     nzTitle="{{ board.title }}"
     nzDescription="Owner: {{ board.owner.name }}"
@@ -6,14 +6,7 @@
   ></nz-card-meta>
 </nz-card>
 <ng-template #cover>
-  <img
-    class="board-cover"
-    width="300"
-    height="182"
-    [src]="boardCoverUrl$ | async"
-    alt=""
-    [routerLink]="['/boards', board._id]"
-  />
+  <img class="board-cover" [src]="boardCoverUrl$ | async" alt="ngPMA Board" [routerLink]="['/boards', board._id]" />
 </ng-template>
 <ng-template #actionEdit>
   <span nz-icon nzType="edit"></span>

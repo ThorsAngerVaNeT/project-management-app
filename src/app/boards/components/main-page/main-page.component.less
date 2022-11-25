@@ -1,3 +1,5 @@
+@import 'variables';
+
 .main-inner-content {
   padding: 24px 0;
   display: flex;
@@ -14,4 +16,10 @@
   justify-content: center;
   gap: 16px;
   text-align: center;
+}
+
+@media (max-width: @mobile-max-width) {
+  .new-board-card {
+    width: 260px;
+  }
 }
