@@ -11,7 +11,7 @@ import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
 import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
-import { TaskFile } from '@files/model/file.model';
+// import { TaskFile } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
 import { Column, ColumnParams, ColumnSetUpdateParams } from '@columns/model/column.model';
 import {
@@ -220,29 +220,29 @@ export class StoreFacade {
     this.store.dispatch(fromTask.deleteTask({ boardId, columnId, taskId }));
   }
 
-  getFilesSet(taskFileIds: TaskFile['_id'][]): void {
-    this.store.dispatch(fromFile.loadFilesSet({ taskFileIds }));
-  }
+  // getFilesSet(taskFileIds: TaskFile['_id'][]): void {
+  //   this.store.dispatch(fromFile.loadFilesSet({ taskFileIds }));
+  // }
 
-  getFilesByUser(userId: User['_id']): void {
-    this.store.dispatch(fromFile.loadFilesByUser({ userId }));
-  }
+  // getFilesByUser(userId: User['_id']): void {
+  //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
+  // }
 
   getFilesByTask(taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
   }
 
-  getFilesByBoard(boardId: Board['_id']): void {
-    this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
-  }
+  // getFilesByBoard(boardId: Board['_id']): void {
+  //   this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
+  // }
 
-  deleteFile(id: TaskFile['_id']): void {
-    this.store.dispatch(fromFile.deleteFile({ id }));
-  }
+  // deleteFile(id: TaskFile['_id']): void {
+  //   this.store.dispatch(fromFile.deleteFile({ id }));
+  // }
 
-  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File, filename = file.name): void {
-    this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file, filename }));
-  }
+  // uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File, filename = file.name): void {
+  //   this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file, filename }));
+  // }
 
   selectTask(taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.selectTask({ taskId }));
