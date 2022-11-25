@@ -5,7 +5,8 @@
   align-items: center;
   padding: 0 64px;
   line-height: 1;
-  background:@secondary-color;
+  background: @secondary-color;
+
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -13,6 +14,12 @@
 
 .ant-layout-header .anticon {
   color: @background-color-light;
+}
+
+.header__left-group,
+.header__right-group {
+  display: flex;
+  gap: 24px;
 }
 
 .header__logo {
@@ -32,12 +39,6 @@
 
 .header__logo img {
   width: 32px;
-}
-
-
-.header__right-group {
-  display: flex;
-  gap: 24px;
 }
 
 .header__lang-switch {
@@ -67,12 +68,9 @@
   color: @primary-light;
 }
 
-
 .header__search-field {
   height: 32px;
-  xmargin-left: 66px;
   background-color: transparent;
-  xmax-width: 302px;
   max-width: 280px;
   width: auto;
 }
@@ -87,7 +85,7 @@
   padding-top: 8px;
 }
 
-.header__user-menu:hover{
+.header__user-menu:hover {
   color: @primary-light;
 }
 
@@ -96,13 +94,15 @@
   gap: 32px;
 }
 
-.header__welcome_actions a, .header__welcome_actions span {
-    color: @background-color-light;
-    cursor: pointer;
+.header__welcome_actions a,
+.header__welcome_actions span {
+  color: @background-color-light;
+  cursor: pointer;
 }
 
-.header__welcome_actions a:hover, .header__welcome_actions span:hover {
-    color: @primary-light;
+.header__welcome_actions a:hover,
+.header__welcome_actions span:hover {
+  color: @primary-light;
 }
 
 

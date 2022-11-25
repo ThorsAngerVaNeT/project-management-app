@@ -1,8 +1,0 @@
-<ng-container *ngIf="(user$ | async)?._id; else loggedOut">
-  <button nz-button nzType="primary" [routerLink]="['/boards']" routerLinkActive="router-link-active">Boards</button>
-  <button nz-button nzType="primary" *ngIf="(user$ | async)?._id" (click)="logout()">Logout</button>
-</ng-container>
-
-<ng-template #loggedOut>
-  <button nz-button nzType="primary" (click)="login()">Login</button>
-</ng-template>

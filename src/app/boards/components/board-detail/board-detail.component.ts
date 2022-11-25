@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -27,15 +27,20 @@ export class BoardDetailComponent implements OnInit {
     }),
   );
 
+  boardCoverUrl$!: Observable<string>;
+
   constructor(private route: ActivatedRoute, private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.storeFacade.getUsers();
-    this.route.params.subscribe((param) => {
-      const { boardId } = param;
-      this.boardId = boardId;
-      this.storeFacade.getBoardAllData(boardId);
-    });
+    this.route.params
+      .subscribe((param) => {
+        const { boardId } = param;
+        this.boardId = boardId;
+        this.storeFacade.getBoardAllData(boardId);
+        this.boardCoverUrl$ = this.storeFacade.getBoardCoverStream(boardId);
+      })
+      .unsubscribe();
   }
 
   addNewColumn(): void {
