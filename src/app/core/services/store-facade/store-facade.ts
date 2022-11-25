@@ -29,7 +29,6 @@ import {
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
-import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +60,7 @@ export class StoreFacade {
 
   boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
 
-  constructor(private store: Store, private modalService: NzModalService) {}
+  constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
     this.store.dispatch(fromAuth.userSignIn({ data }));
@@ -293,9 +292,5 @@ export class StoreFacade {
 
   completePreload(): void {
     this.store.dispatch(fromBoard.preloadImagesCompleted());
-  }
-
-  closeAllModals(): void {
-    this.modalService.closeAll();
   }
 }
