@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from '@auth/components/login/login.component';
 import { SignUpComponent } from '@auth/components/sign-up/sign-up.component';
 import '@angular/localize/init';
+import { BoardAddComponent } from '../../../boards/components/board-add/board-add.component';
 
 @Component({
   selector: 'app-header',
@@ -45,5 +46,9 @@ export class HeaderComponent {
         isEditing: true,
       },
     });
+  }
+
+  showModal(): void {
+    this.modalService.create({ nzContent: BoardAddComponent, nzWidth: 'null' });
   }
 }

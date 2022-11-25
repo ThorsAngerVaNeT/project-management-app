@@ -28,13 +28,14 @@
             <app-search></app-search>
           </div>
 
-          <div i18n="@@editProfile" (click)="editProfile()">Edit Profile</div>
-          <div i18n="@@logOut" (click)="signOut()">Log Out</div>
+          <a i18n="@@AddNewBoard" (click)="showModal()">Add New Board</a>
+          <a i18n="@@editProfile" (click)="editProfile()">Edit Profile</a>
+          <a i18n="@@logOut" (click)="signOut()">Log Out</a>
         </ng-container>
 
-        <ng-container *ngIf="!user._id">
-          <span (click)="signUp()">Sign Up</span>
-          <span (click)="logIn()">Login</span>
+        <ng-container *ngIf="!user._id" class="header__welcome_actions">
+          <a (click)="signUp()">Sign Up</a>
+          <a (click)="logIn()">Login</a>
         </ng-container>
       </div>
     </div>
@@ -43,7 +44,9 @@
 
     <div class="header__right-group-wrapper">
       <div class="header__right-group" *ngIf="user._id">
-        <a class="header__user-menu"> <span nz-icon nzType="plus"></span> AddNewBoard </a>
+        <a class="header__user-menu" i18n="@@AddNewBoard" (click)="showModal()">
+          <span nz-icon nzType="plus"></span> Add New Board
+        </a>
 
         <nz-radio-group class="header__lang-switch" nzSize="small">
           <label nz-radio-button nzValue="RU">RU</label>
@@ -63,8 +66,8 @@
       </div>
 
       <div class="header__welcome_actions" *ngIf="!user._id">
-        <span (click)="signUp()">Sign Up</span>
-        <span (click)="logIn()">Login</span>
+        <span (click)="signUp()" i18n="@@sighUpLink">Sign Up</span>
+        <span (click)="logIn()" i18n="@@logInLink">Login</span>
       </div>
     </div>
   </ng-container>
