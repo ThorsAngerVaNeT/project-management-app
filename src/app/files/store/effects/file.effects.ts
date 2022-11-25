@@ -61,10 +61,31 @@ export class FileEffects {
     );
   });
 
+  addUploadedFileToState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.uploadFile, FileActions.deleteFileBeforeUpload),
+      concatMap(({ fileParams }) => {
+        return FileHelpers.fileToBase64(fileParams);
+      }),
+      map(({ boardId, taskId, file, filename, path }) =>
+        FileActions.addFileToStoreBeforeUploadSuccess({
+          fileToState: {
+            _id: '',
+            name: '',
+            boardId,
+            taskId: environment.BOARD_COVER_FILE_TASK_ID,
+            path,
+          },
+          fileParams: { boardId, taskId, file, filename },
+        }),
+      ),
+    );
+  });
+
   uploadFile$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(FileActions.uploadFile),
-      concatMap(({ boardId, taskId, file, filename }) =>
+      ofType(FileActions.addFileToStoreBeforeUploadSuccess),
+      concatMap(({ fileParams: { boardId, taskId, file, filename } }) =>
         this.filesService.uploadFile(boardId, taskId, file, filename).pipe(
           map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
           catchError((error) => of(FileActions.uploadFileFailure({ error }))),
@@ -90,10 +111,7 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.uploadFileSuccess),
       filter(({ file }) => file.taskId === taskId),
-      map(({ file }) => {
-        FileActions.loadFilesSet({ taskFileIds: [file._id] });
-        return FileHelpers.getPreloadImage$(file);
-      }),
+      map(({ file }) => FileHelpers.getPreloadImage$(file)),
       map(() => BoardActions.preloadImagesCompleted()),
     );
   });
@@ -102,26 +120,16 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(BoardActions.createBoardSuccess),
       filter(({ file }) => !!file),
-      concatMap(({ board: { _id: boardId }, file }) => {
-        return FileHelpers.fileToBase64(boardId, file);
-      }),
-      concatMap(({ boardId, file, path }) => [
-        FileActions.addFileToStoreBeforeUploadSuccess({
-          file: {
-            _id: '',
-            name: '',
+      map(({ board: { _id: boardId }, file }) =>
+        FileActions.uploadFile({
+          fileParams: {
             boardId,
             taskId: environment.BOARD_COVER_FILE_TASK_ID,
-            path,
+            file,
+            filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
           },
         }),
-        FileActions.uploadFile({
-          boardId,
-          taskId: environment.BOARD_COVER_FILE_TASK_ID,
-          file,
-          filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
-        }),
-      ]),
+      ),
     );
   });
 
@@ -139,14 +147,14 @@ export class FileEffects {
           covers,
         ]) => {
           const id = covers[boardId]?._id;
-          return id
-            ? FileActions.deleteFileBeforeUpload({ id, boardId: `${boardId}`, file })
-            : FileActions.uploadFile({
-                boardId: `${boardId}`,
-                taskId: environment.BOARD_COVER_FILE_TASK_ID,
-                file,
-                filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
-              });
+          const fileParams = {
+            boardId: `${boardId}`,
+            taskId: environment.BOARD_COVER_FILE_TASK_ID,
+            file,
+            filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
+          };
+
+          return id ? FileActions.deleteFileBeforeUpload({ id, fileParams }) : FileActions.uploadFile({ fileParams });
         },
       ),
     );
@@ -155,25 +163,11 @@ export class FileEffects {
   deleteFileBeforeUpload$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.deleteFileBeforeUpload),
-      concatMap(({ id: fileId, boardId, file }) =>
+      concatMap(({ id: fileId }) =>
         this.filesService.deleteFile(fileId).pipe(
-          map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id, boardId, file })),
+          map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
           catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
         ),
-      ),
-    );
-  });
-
-  uploadBoardCoverAfterDeleteOldBoardCover$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.deleteFileBeforeUploadSuccess),
-      map(({ boardId, file }) =>
-        FileActions.uploadFile({
-          boardId: `${boardId}`,
-          taskId: environment.BOARD_COVER_FILE_TASK_ID,
-          file,
-          filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
-        }),
       ),
     );
   });

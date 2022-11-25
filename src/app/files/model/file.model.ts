@@ -15,3 +15,7 @@ export interface UploadFileParams {
   file: File;
   filename: string;
 }
+
+export interface UploadFileParamsWithPath extends UploadFileParams {
+  path: string;
+}

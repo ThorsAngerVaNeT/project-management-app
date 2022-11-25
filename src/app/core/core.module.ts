@@ -13,6 +13,7 @@ import { environment } from '@environments/environment';
 import { AuthModule } from '@auth/auth.module';
 import { RouterSerializer } from './store/reducers/router.reducer';
 import { CommonModule } from '@angular/common';
+import { ModalEffects } from './store/effects/modal.effects';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     HttpClientModule,
     StoreModule.forRoot({ router: routerReducer }, {}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ModalEffects]),
     StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,

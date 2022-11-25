@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { Board } from '@boards/model/board.model';
-import { TaskFile } from '../../model/file.model';
+import { TaskFile, UploadFileParams, UploadFileParamsWithPath } from '../../model/file.model';
 
 export const generateBoardCoverFilename = (boardId: Board['_id'] | number, filename: string): string =>
   `${boardId}-${Date.now()}.${filename.split('.').at(-1)}`;
@@ -22,17 +22,14 @@ export const getPreloadImage$ = (file: TaskFile): Observable<HTMLImageElement> =
     };
   });
 
-export const fileToBase64 = (
-  boardId: Board['_id'],
-  file: File,
-): Observable<{ boardId: Board['_id']; path: string; file: File }> =>
+export const fileToBase64 = (fileParams: UploadFileParams): Observable<UploadFileParamsWithPath> =>
   new Observable((subscriber) => {
     const reader = new FileReader();
 
     reader.onloadend = (): void => {
-      subscriber.next({ boardId, path: `${reader.result}`, file });
+      subscriber.next({ ...fileParams, path: `${reader.result}` });
       subscriber.complete();
     };
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileParams.file);
   });
