@@ -40,11 +40,16 @@ export class FilesService {
     return this.http.delete<TaskFile>(`${APIEndpoints.file}/${fileId}`);
   }
 
-  public uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): Observable<TaskFile> {
+  public uploadFile(
+    boardId: Board['_id'],
+    taskId: ColumnTask['_id'],
+    file: File,
+    filename: string = file.name,
+  ): Observable<TaskFile> {
     const formData = new FormData();
     formData.append(APIParams.boardId, boardId);
     formData.append(APIParams.taskId, taskId);
-    formData.append(APIParams.file, file);
+    formData.append(APIParams.file, file, filename);
 
     return this.http.post<TaskFile>(APIEndpoints.file, formData);
   }
