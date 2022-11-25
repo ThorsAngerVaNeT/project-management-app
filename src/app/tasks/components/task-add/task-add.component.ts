@@ -30,8 +30,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskAddForm!: FormGroup;
 
-  // users$ = this.storeFacade.users$;
-
   userEntities$ = this.storeFacade.userEntities$;
 
   userEntities!: Dictionary<User>;
