@@ -9,6 +9,7 @@ import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '.
 import { EMPTY_POINT, Point } from '@points/model/point.model';
 import { User } from '@users/model/user.model';
 import { Dictionary } from '@ngrx/entity';
+import { EMPTY_USER } from '@users/store/reducers/user.reducer';
 
 @Component({
   selector: 'app-task-add',
@@ -29,7 +30,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskAddForm!: FormGroup;
 
-  users$ = this.storeFacade.users$;
+  // users$ = this.storeFacade.users$;
 
   userEntities$ = this.storeFacade.userEntities$;
 
@@ -99,6 +100,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   get point(): Point {
     return { ...EMPTY_POINT, taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
+  }
+
+  get users(): User[] {
+    return Object.values(this.userEntities).map((user) => user ?? EMPTY_USER);
   }
 
   handleOk(): void {
