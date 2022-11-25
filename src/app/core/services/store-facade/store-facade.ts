@@ -174,21 +174,21 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTasks({ boardId, columnId }));
   }
 
-  getTasksSet(ids: ColumnTask['_id'][]): void {
-    this.store.dispatch(fromTask.loadTasksSet({ ids }));
-  }
+  // getTasksSet(ids: ColumnTask['_id'][]): void {
+  //   this.store.dispatch(fromTask.loadTasksSet({ ids }));
+  // }
 
-  getTasksByUser(userId: User['_id']): void {
-    this.store.dispatch(fromTask.loadTasksByUser({ userId }));
-  }
+  // getTasksByUser(userId: User['_id']): void {
+  //   this.store.dispatch(fromTask.loadTasksByUser({ userId }));
+  // }
 
   getTasksByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromTask.loadTasksByBoard({ boardId }));
   }
 
-  getTasksBySearchString(searchString: string): void {
-    this.store.dispatch(fromTask.loadTasksBySearchString({ searchString }));
-  }
+  // getTasksBySearchString(searchString: string): void {
+  //   this.store.dispatch(fromTask.loadTasksBySearchString({ searchString }));
+  // }
 
   getTask(boardId: Board['_id'], columnId: Column['_id'], taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));

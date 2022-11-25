@@ -16,21 +16,21 @@ export class TaskEffects {
     );
   });
 
-  loadTasksSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TaskActions.loadTasksSet),
-      switchMap(({ ids }) => this.tasksService.getTasksSet(ids)),
-      map((tasks) => TaskActions.loadTasksSetSuccess({ tasks })),
-    );
-  });
+  // loadTasksSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TaskActions.loadTasksSet),
+  //     switchMap(({ ids }) => this.tasksService.getTasksSet(ids)),
+  //     map((tasks) => TaskActions.loadTasksSetSuccess({ tasks })),
+  //   );
+  // });
 
-  loadTasksByUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TaskActions.loadTasksByUser),
-      switchMap(({ userId }) => this.tasksService.getTasksByUser(userId)),
-      map((tasks) => TaskActions.loadTasksByUserSuccess({ tasks })),
-    );
-  });
+  // loadTasksByUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TaskActions.loadTasksByUser),
+  //     switchMap(({ userId }) => this.tasksService.getTasksByUser(userId)),
+  //     map((tasks) => TaskActions.loadTasksByUserSuccess({ tasks })),
+  //   );
+  // });
 
   loadTasksByBoard$ = createEffect(() => {
     return this.actions$.pipe(
@@ -40,13 +40,13 @@ export class TaskEffects {
     );
   });
 
-  loadTasksBySearchString$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(TaskActions.loadTasksBySearchString),
-      switchMap(({ searchString }) => this.tasksService.getTasksBySearchString(searchString)),
-      map((tasks) => TaskActions.loadTasksBySearchStringSuccess({ tasks })),
-    );
-  });
+  // loadTasksBySearchString$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TaskActions.loadTasksBySearchString),
+  //     switchMap(({ searchString }) => this.tasksService.getTasksBySearchString(searchString)),
+  //     map((tasks) => TaskActions.loadTasksBySearchStringSuccess({ tasks })),
+  //   );
+  // });
 
   loadTask$ = createEffect(() => {
     return this.actions$.pipe(
