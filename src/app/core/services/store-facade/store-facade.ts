@@ -20,7 +20,7 @@ import {
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
-import { selectAllUsers } from '@users/store/selectors/user.selectors';
+import { selectAllUsers, selectUsersEntities } from '@users/store/selectors/user.selectors';
 import * as fromPoint from '@points/store/actions/point.actions';
 import {
   selectNewTaskAllPoints,
@@ -29,6 +29,8 @@ import {
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
+import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
+import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +45,8 @@ export class StoreFacade {
   boardDetail$ = this.store.select(BoardSelectors.selectBoardDetailViewModel);
 
   users$ = this.store.select(selectAllUsers);
+
+  userEntities$ = this.store.select(selectUsersEntities);
 
   points$ = this.store.select(selectPointsByCurrentTask);
 
@@ -59,6 +63,8 @@ export class StoreFacade {
   cachedBoards$ = this.store.select(BoardSelectors.selectCachedBoards);
 
   boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
+
+  searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
   constructor(private store: Store) {}
 
@@ -292,5 +298,9 @@ export class StoreFacade {
 
   completePreload(): void {
     this.store.dispatch(fromBoard.preloadImagesCompleted());
+  }
+
+  searchTask(searchString: string, searchType: string): void {
+    this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
   }
 }

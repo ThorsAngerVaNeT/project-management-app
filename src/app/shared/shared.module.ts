@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -29,6 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { SearchComponent } from './components/search/search.component';
+import { SearchResultEffects } from '@tasks/store/effects/search-result.effects';
+import * as fromSearchResult from '@tasks/store/reducers/search-result.reducer';
 
 const MODULES = [
   NzLayoutModule,
@@ -57,11 +63,17 @@ const MODULES = [
   FormsModule,
   ReactiveFormsModule,
   DragDropModule,
+  FormsModule,
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe],
-  imports: [...MODULES],
-  exports: [...MODULES, FooterComponent, HeaderComponent, SortByOrderPipe],
+  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe, SearchComponent],
+  imports: [
+    ...MODULES,
+    RouterModule,
+    EffectsModule.forFeature([SearchResultEffects]),
+    StoreModule.forFeature(fromSearchResult.tasksFeatureKey, fromSearchResult.reducer),
+  ],
+  exports: [...MODULES, FooterComponent, HeaderComponent, SearchComponent, SortByOrderPipe],
 })
 export class SharedModule {}

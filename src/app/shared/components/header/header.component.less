@@ -5,7 +5,7 @@
   align-items: center;
   padding: 0 64px;
   line-height: 64px;
-  background:@secondary-color;
+  background: @secondary-color;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -13,6 +13,12 @@
 
 .ant-layout-header .anticon {
   color: @background-color-light;
+}
+
+.header__left-group,
+.header__right-group {
+  display: flex;
+  gap: 24px;
 }
 
 .header__logo {
@@ -24,18 +30,12 @@
   font-size: larger;
 
   a {
-    color : @background-color-light;
+    color: @background-color-light;
   }
 }
 
 .header__logo img {
   width: 32px;
-}
-
-
-.header__right-group {
-  display: flex;
-  gap: 24px;
 }
 
 .header__lang-switch {
@@ -65,24 +65,11 @@
   color: @primary-light;
 }
 
-
-.header__search-field {
-  height: 32px;
-  width: 302px;
-  margin-left: 66px;
-  background-color: transparent;
-}
-
-.header__search-field input {
-  background-color: transparent;
-  color: @primary-light;
-}
-
 .header__user-menu {
   color: @background-color-light;
 }
 
-.header__user-menu:hover{
+.header__user-menu:hover {
   color: @primary-light;
 }
 
@@ -91,11 +78,13 @@
   gap: 32px;
 }
 
-.header__welcome_actions a, .header__welcome_actions span {
-    color: @background-color-light;
-    cursor: pointer;
+.header__welcome_actions a,
+.header__welcome_actions span {
+  color: @background-color-light;
+  cursor: pointer;
 }
 
-.header__welcome_actions a:hover, .header__welcome_actions span:hover {
-    color: @primary-light;
+.header__welcome_actions a:hover,
+.header__welcome_actions span:hover {
+  color: @primary-light;
 }
