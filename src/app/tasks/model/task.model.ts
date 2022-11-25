@@ -37,6 +37,7 @@ export interface ColumnTaskSetUpdateParams {
 export interface ColumnTaskWithUsers extends Omit<ColumnTask, 'users'> {
   user: User;
   users: User[];
+  selected: boolean;
 }
 
 export interface ColumnTasksWithColumnId {

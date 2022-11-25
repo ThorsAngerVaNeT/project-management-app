@@ -1,17 +1,13 @@
 <nz-header>
-  <div class="header__logo">
-    <a href="./">
-      <img src="assets/images/ngpma.png" alt="ngPMA logo" />
-      ngPMA
-    </a>
+  <div class="header__left-group">
+    <div class="header__logo">
+      <a href="./">
+        <img src="assets/images/ngpma.png" alt="ngPMA logo" />
+        ngPMA
+      </a>
+    </div>
+    <app-search></app-search>
   </div>
-
-  <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field">
-    <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
-  </nz-input-group>
-  <ng-template #suffixIconSearch>
-    <span nz-icon nzType="search"></span>
-  </ng-template>
 
   <ng-container *ngIf="user$ | async as user">
     <div class="header__right-group" *ngIf="user._id">

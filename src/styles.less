@@ -56,11 +56,11 @@ form .anticon {
   color: @error-color;
 }
 
-.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
   display: inline-block;
   margin-right: 4px;
   color: @error-color;
-  content: "*";
+  content: '*';
 }
 
 .ant-btn-dangerous:hover {
@@ -113,7 +113,8 @@ form .anticon {
   width: 8px;
 }
 
-.project__columns::-webkit-scrollbar-track, .project__column .ant-card-body::-webkit-scrollbar-track {
+.project__columns::-webkit-scrollbar-track,
+.project__column .ant-card-body::-webkit-scrollbar-track {
   border-radius: 4px;
   background: transparent;
   border: @background-color-medium solid 1px;
@@ -123,11 +124,17 @@ form .anticon {
   margin: 8px;
 }
 
-.project__columns::-webkit-scrollbar-thumb, .project__column .ant-card-body::-webkit-scrollbar-thumb {
+.project__columns::-webkit-scrollbar-thumb,
+.project__column .ant-card-body::-webkit-scrollbar-thumb {
   background: @background-color-medium;
   border-radius: 4px;
 }
 
-.project__columns::-webkit-scrollbar-thumb:hover, .project__column .ant-card-body::-webkit-scrollbar-thumb:hover {
+.project__columns::-webkit-scrollbar-thumb:hover,
+.project__column .ant-card-body::-webkit-scrollbar-thumb:hover {
   background: @primary-color;
+}
+
+.search__select .ant-select-arrow {
+  color: @primary-light;
 }
