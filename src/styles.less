@@ -140,15 +140,10 @@ form .anticon {
   background: @primary-color;
 }
 
-.search__select .ant-select-arrow {
-  color: @primary-light;
-}
-
-
 
 // media
 
-@media (max-width: @mobile-max-width) {
+@media (max-width: @tablet-max-width) {
 
   nz-content {
     padding: 0 16px;
@@ -157,6 +152,9 @@ form .anticon {
   .project__columns {
     max-width: calc(100vw - 52px);
   }
+}
+
+@media (max-width: @mobile-max-width) {
 
   .ant-page-header-heading-title {
     width: calc(90vw - 152px);
