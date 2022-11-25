@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BoardEffects } from './store/effects/board.effects';
 import * as fromBoard from './store/reducers/board.reducer';
 import { UsersModule } from '@users/users.module';
+import { FilesModule } from '../files/files.module';
 
 @NgModule({
   declarations: [MainPageComponent, BoardDetailComponent, BoardAddComponent, BoardCardComponent],
@@ -23,6 +24,7 @@ import { UsersModule } from '@users/users.module';
     StoreModule.forFeature(fromBoard.boardsFeatureKey, fromBoard.reducer),
     EffectsModule.forFeature([BoardEffects]),
     UsersModule,
+    FilesModule,
   ],
 })
 export class BoardsModule {}

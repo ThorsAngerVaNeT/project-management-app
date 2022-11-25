@@ -31,7 +31,7 @@ export const loadFilesByBoardFailure = createAction('[Files] Load Files By Board
 
 export const uploadFile = createAction(
   '[Files] Add File',
-  props<{ boardId: Board['_id']; taskId: ColumnTask['_id']; file: File }>(),
+  props<{ boardId: Board['_id']; taskId: ColumnTask['_id']; file: File; filename: string }>(),
 );
 export const uploadFileSuccess = createAction('[Files] Add File Success', props<{ file: TaskFile }>());
 export const uploadFileFailure = createAction('[Files] Add File Failure', props<{ error: unknown }>());

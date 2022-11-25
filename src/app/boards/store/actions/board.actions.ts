@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Board, BoardParams } from '../../model/board.model';
+import { Board, BoardParams, BoardParamsWithImage } from '../../model/board.model';
 // import { User } from '@users/model/user.model';
 
 export const loadBoards = createAction('[Boards] Load Boards');
@@ -15,8 +15,8 @@ export const loadBoardSuccess = createAction('[Boards] Load Board Success', prop
 // export const loadBoardsByUser = createAction('[Boards] Load BoardsByUser', props<{ userId: User['_id'] }>());
 // export const loadBoardsByUserSuccess = createAction('[Boards] Load BoardsByUser Success', props<{ boards: Board[] }>());
 
-export const createBoard = createAction('[Boards] Create Board', props<{ board: Omit<BoardParams, 'owner'> }>());
-export const createBoardSuccess = createAction('[Boards] Create Board Success', props<{ board: Board }>());
+export const createBoard = createAction('[Boards] Create Board', props<{ board: BoardParamsWithImage }>());
+export const createBoardSuccess = createAction('[Boards] Create Board Success', props<{ board: Board; file: File }>());
 
 export const updateBoard = createAction('[Boards] Update Board', props<{ id: string; board: BoardParams }>());
 export const updateBoardSuccess = createAction('[Boards] Update Board Success', props<{ board: Update<Board> }>());

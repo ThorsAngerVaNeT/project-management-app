@@ -50,12 +50,7 @@
       >Board Image
     </nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
-      <nz-upload nzType="drag" nzListType="picture" [nzMultiple]="false">
-        <p class="ant-upload-drag-icon">
-          <span nz-icon nzType="file-image"></span>
-        </p>
-        <p class="ant-upload-text" i18n="@@Upload">Drag or click to upload</p>
-      </nz-upload>
+      <input type="file" #fileInput (change)="onFileInput(fileInput.files)" aria-label="" />
     </nz-form-control>
   </nz-form-item>
 
