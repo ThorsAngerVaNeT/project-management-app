@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
+import { EntityState, Update } from '@ngrx/entity';
 import { Board, BoardParamsWithImage } from '../../model/board.model';
 import { User } from '@users/model/user.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadBoards = createAction('[Boards] Load Boards');
 export const loadBoardsSuccess = createAction('[Boards] Load Boards Success', props<{ boards: Board[] }>());
@@ -35,7 +36,10 @@ export const updateBoardFailure = createAction('[Boards] Update Board Failure', 
 
 export const deleteBoard = createAction('[Boards] Delete Board', props<{ id: Board['_id'] }>());
 export const deleteBoardSuccess = createAction('[Boards] Delete Board Success', props<{ id: Board['_id'] }>());
-export const deleteBoardFailure = createAction('[Boards] Delete Board Failure', props<{ error: unknown }>());
+export const deleteBoardFailure = createAction(
+  '[Boards] Delete Board Failure',
+  props<{ error: HttpErrorResponse; boardsState: EntityState<Board> }>(),
+);
 
 export const loadMainPageData = createAction('[Boards] Load Main Page Data');
 export const loadMainPageDataSuccess = createAction('[Boards] Load Main Page Data Success');

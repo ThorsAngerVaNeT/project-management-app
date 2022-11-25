@@ -9,12 +9,7 @@ import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
-import {
-  selectBoardDetailViewModel,
-  selectBoardsLoaded,
-  selectBoardsLoading,
-  selectBoardsWithUsers,
-} from '@boards/store/selectors/board.selectors';
+import * as BoardSelectors from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile, UploadFileParams } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
@@ -44,9 +39,9 @@ export class StoreFacade {
 
   token$ = this.store.select(selectToken);
 
-  boards$ = this.store.select(selectBoardsWithUsers);
+  boards$ = this.store.select(BoardSelectors.selectBoardsWithUsers);
 
-  boardDetail$ = this.store.select(selectBoardDetailViewModel);
+  boardDetail$ = this.store.select(BoardSelectors.selectBoardDetailViewModel);
 
   users$ = this.store.select(selectAllUsers);
 
@@ -58,9 +53,13 @@ export class StoreFacade {
 
   boardCovers$ = this.store.select(selectBoardCovers);
 
-  boardsLoading$ = this.store.select(selectBoardsLoading);
+  boardsLoading$ = this.store.select(BoardSelectors.selectBoardsLoading);
 
-  boardsLoaded$ = this.store.select(selectBoardsLoaded);
+  boardEntities$ = this.store.select(BoardSelectors.selectBoardEntities);
+
+  cachedBoards$ = this.store.select(BoardSelectors.selectCachedBoards);
+
+  boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
 
   constructor(private store: Store, private modalService: NzModalService) {}
 

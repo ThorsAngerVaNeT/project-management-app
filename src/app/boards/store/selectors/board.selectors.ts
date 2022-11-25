@@ -50,3 +50,5 @@ export const selectBoardDetailViewModel = createSelector(
 export const selectBoardsLoading = createSelector(selectBoardsState, (state) => state.loading);
 
 export const selectBoardsLoaded = createSelector(selectBoardsState, (state) => state.loaded);
+
+export const selectCachedBoards = createSelector(selectBoardsState, (state) => state.cachedBoards);

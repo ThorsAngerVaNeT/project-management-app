@@ -13,10 +13,11 @@ import { retry, catchError } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { StoreFacade } from '../../services/store-facade/store-facade';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private storeFacade: StoreFacade, private router: Router) {}
+  constructor(private storeFacade: StoreFacade, private router: Router, private notification: NzNotificationService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -30,7 +31,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.storeFacade.signOut();
             this.router.navigateByUrl('/');
           } else {
-            return error;
+            this.notification.create('error', 'Something went wrong...', error.message);
           }
         }),
       ),

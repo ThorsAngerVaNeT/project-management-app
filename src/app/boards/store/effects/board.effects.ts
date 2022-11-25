@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 import * as FileActions from '@files/store/actions/file.actions';
 import * as UserActions from '@users/store/actions/user.actions';
 import { environment } from '@environments/environment';
 
 @Injectable()
 export class BoardEffects {
-  constructor(private actions$: Actions, private boardsService: BoardsService) {}
+  constructor(private actions$: Actions, private boardsService: BoardsService, private storeFacade: StoreFacade) {}
 
   loadBoards$ = createEffect(() => {
     return this.actions$.pipe(
@@ -87,10 +88,13 @@ export class BoardEffects {
   deleteBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.deleteBoard),
-      concatMap(({ id }) =>
+      concatLatestFrom(() => this.storeFacade.cachedBoards$),
+      concatMap(([{ id }, boardsState]) =>
         this.boardsService.deleteBoard(id).pipe(
           map(() => BoardActions.deleteBoardSuccess({ id })),
-          catchError((error) => of(BoardActions.deleteBoardFailure({ error }))),
+          catchError((error) => {
+            return of(BoardActions.deleteBoardFailure({ error, boardsState }));
+          }),
         ),
       ),
     );
