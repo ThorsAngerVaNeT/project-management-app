@@ -34,8 +34,8 @@
         </ng-container>
 
         <ng-container *ngIf="!user._id" class="header__welcome_actions">
-          <a (click)="signUp()">Sign Up</a>
-          <a (click)="logIn()">Login</a>
+          <a (click)="signUp()" i18n="@@sighUpLink">Sign Up</a>
+          <a [routerLink]="['/auth/login']" i18n="@@logInLink">Login</a>
         </ng-container>
       </div>
     </div>
@@ -67,7 +67,7 @@
 
       <div class="header__welcome_actions" *ngIf="!user._id">
         <span (click)="signUp()" i18n="@@sighUpLink">Sign Up</span>
-        <span (click)="logIn()" i18n="@@logInLink">Login</span>
+        <span [routerLink]="['/auth/login']" i18n="@@logInLink">Login</span>
       </div>
     </div>
   </ng-container>

@@ -3,7 +3,6 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
-import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Subscription } from 'rxjs';
 import { userSignInSuccess } from '../../store/actions/user.actions';
 
@@ -22,12 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(
-    private storeFacade: StoreFacade,
-    private action$: Actions,
-    private modal: NzModalRef,
-    private router: Router,
-  ) {}
+  constructor(private storeFacade: StoreFacade, private action$: Actions, private router: Router) {}
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
@@ -38,7 +32,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.action$.pipe(ofType(userSignInSuccess)).subscribe(() => {
         this.router.navigate(['/boards']);
-        this.handleCancel();
       }),
     );
   }
@@ -68,9 +61,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  handleCancel(): void {
-    this.modal.destroy();
   }
 }
