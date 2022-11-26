@@ -62,7 +62,7 @@ export class BoardCardComponent implements OnInit {
     if (this.isOwner || this.isParticipant) return;
     this.modalService.info({
       nzTitle: $localize`:@@AccessDeniedModalTitle:Access Denied`,
-      nzContent: $localize`:@@AccessDeniedModalContent:You are not the participant of this board!`,
+      nzContent: $localize`:@@AccessDeniedModalContent:Sorry, but you're not a participant of this board. Please contact the owner to get access!`,
     });
   }
 
