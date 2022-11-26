@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 
 import { PointEffects } from './point.effects';
@@ -13,7 +14,7 @@ describe('PointEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [PointEffects, provideMockActions(() => actions$)],
+      providers: [PointEffects, provideMockActions(() => actions$), provideMockStore()],
     });
 
     effects = TestBed.inject(PointEffects);

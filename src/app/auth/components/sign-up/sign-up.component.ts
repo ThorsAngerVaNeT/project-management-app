@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { Actions, ofType } from '@ngrx/effects';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription, tap } from 'rxjs';
-import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
-import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import '@angular/localize/init';
-import { User } from '../../../users/model/user.model';
+import { User } from '@users/model/user.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,19 +14,13 @@ import { User } from '../../../users/model/user.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  isVisible = true;
-
-  isSaving = false;
-
-  isDeleting = false;
-
   @Input() buttonText?: string;
 
   @Input() isEditing?: boolean;
 
-  signUpForm!: FormGroup;
+  isLoading = false;
 
-  subscription = new Subscription();
+  signUpForm!: FormGroup;
 
   user$ = this.storeFacade.user$.pipe(
     tap((user) => {
@@ -40,12 +31,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   user!: User;
 
-  constructor(
-    private storeFacade: StoreFacade,
-    private action$: Actions,
-    private modal: NzModalRef,
-    private modalService: NzModalService,
-  ) {}
+  authLoading$ = this.storeFacade.authLoading$;
+
+  authError$ = this.storeFacade.authError$;
+
+  subscription = new Subscription();
+
+  isDeletingDisabled = false;
+
+  isEditingDisabled = false;
+
+  constructor(private storeFacade: StoreFacade, private modal: NzModalRef, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -58,23 +54,31 @@ export class SignUpComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess, deleteUserSuccess)).subscribe(() => {
-        this.handleCancel();
+      this.authLoading$.subscribe((isLoading) => {
+        this.isLoading = isLoading;
+        if (!isLoading) {
+          this.isEditingDisabled = false;
+          this.isDeletingDisabled = false;
+        }
       }),
     );
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
-        this.isSaving = false;
-        this.login?.setErrors({ userAlreadyExists: true });
-        console.log(this.signUpForm);
+      this.authError$.subscribe((error) => {
+        if (error) {
+          this.login?.setErrors({ required: false });
+        }
       }),
     );
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   submitForm(): void {
     if (this.signUpForm.valid) {
-      this.isSaving = true;
+      this.isDeletingDisabled = true;
       if (this.isEditing) {
         this.editUser();
       } else {
@@ -100,11 +104,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(): void {
+    this.isEditingDisabled = true;
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
       nzOnOk: () => {
-        this.isDeleting = true;
         this.storeFacade.deleteUser(this.user._id);
       },
       nzOkDanger: true,
@@ -121,10 +125,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   get password(): AbstractControl | null {
     return this.signUpForm.get('password');
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   handleCancel(): void {

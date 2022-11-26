@@ -5,6 +5,9 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import * as BoardActions from '../actions/board.actions';
 import { BoardsService } from '../../services/boards.service';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import * as FileActions from '@files/store/actions/file.actions';
+import * as UserActions from '@users/store/actions/user.actions';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class BoardEffects {
@@ -61,10 +64,9 @@ export class BoardEffects {
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),
-      concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(([action, { _id: owner }]) =>
-        this.boardsService.createBoard({ ...action.board, owner }).pipe(
-          map((board) => BoardActions.createBoardSuccess({ board })),
+      concatMap(({ board: { file, ...boardParams } }) =>
+        this.boardsService.createBoard({ ...boardParams }).pipe(
+          map((board) => BoardActions.createBoardSuccess({ board, file })),
           catchError((error) => of(BoardActions.createBoardFailure({ error }))),
         ),
       ),
@@ -74,9 +76,9 @@ export class BoardEffects {
   updateBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.updateBoard),
-      concatMap((action) =>
-        this.boardsService.updateBoard(`${action.id}`, action.board).pipe(
-          map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes } })),
+      concatMap(({ boardId, board: { file, ...boardParams } }) =>
+        this.boardsService.updateBoard(boardId, boardParams).pipe(
+          map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes }, file })),
           catchError((error) => of(BoardActions.updateBoardFailure({ error }))),
         ),
       ),
@@ -86,12 +88,26 @@ export class BoardEffects {
   deleteBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.deleteBoard),
-      concatMap(({ id }) =>
+      concatLatestFrom(() => this.storeFacade.cachedBoards$),
+      concatMap(([{ id }, boardsState]) =>
         this.boardsService.deleteBoard(id).pipe(
           map(() => BoardActions.deleteBoardSuccess({ id })),
-          catchError((error) => of(BoardActions.deleteBoardFailure({ error }))),
+          catchError((error) => {
+            return of(BoardActions.deleteBoardFailure({ error, boardsState }));
+          }),
         ),
       ),
+    );
+  });
+
+  loadMainPageData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadMainPageData),
+      concatMap(() => [
+        BoardActions.loadBoards(),
+        UserActions.loadUsers(),
+        FileActions.loadFilesByTask({ taskId: environment.BOARD_COVER_FILE_TASK_ID }),
+      ]),
     );
   });
 }

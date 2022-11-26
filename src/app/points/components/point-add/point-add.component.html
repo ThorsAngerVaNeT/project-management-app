@@ -1,0 +1,41 @@
+<nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+  <nz-input-group [nzAddOnAfter]="suffixButtons">
+    <input
+      nz-input
+      placeholder="Checkpoint Title"
+      i18n-placeholder="@@CheckpointTitleInputPlaceholder"
+      nzSize="small"
+      [formControl]="pointControl"
+    />
+
+    <ng-template #titleErrorTip>
+      <ng-container *ngIf="pointControl.hasError('required')" i18n="@@CreatePointTitleRequiredErrorTip">
+        Please provide a title
+      </ng-container>
+      <ng-container *ngIf="pointControl.hasError('maxlength')" i18n="@@CreatePointTitleMinlengthErrorTip"
+        >Title should be 1-255 characters long</ng-container
+      >
+    </ng-template>
+  </nz-input-group>
+  <ng-template #suffixButtons>
+    <span
+      nz-icon
+      nz-tooltip
+      nzTooltipTitle="Save"
+      i18n-nzTooltipTitle="@@SaveButtonTooltip"
+      nzType="check-circle"
+      (click)="point._id ? updateTitle() : addPoint()"
+    ></span>
+    <ng-container *ngIf="point._id">
+      <nz-divider nzType="vertical"></nz-divider>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="Cancel"
+        i18n-nzTooltipTitle="@@CancelButtonTooltip"
+        nzType="close-circle"
+        (click)="cancelEdit()"
+      ></span>
+    </ng-container>
+  </ng-template>
+</nz-form-control>

@@ -1,25 +1,61 @@
-<nz-card nzHoverable style="width: 300px" [nzCover]="coverTemplate3" [nzActions]="[actionEllipsis]">
-  <nz-card-meta
-    nzTitle="{{ board.title }}"
-    nzDescription="Owner: {{ board.owner.name }}"
-    [routerLink]="['/boards', board._id]"
-  ></nz-card-meta>
-</nz-card>
-<ng-template #coverTemplate3>
-  <img
-    alt="example"
-    width="300"
-    height="182"
-    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-    [routerLink]="['/boards', board._id]"
-  />
-</ng-template>
-<ng-template #actionSetting>
-  <span nz-icon nzType="setting"></span>
-</ng-template>
-<ng-template #actionEdit>
-  <span nz-icon nzType="edit"></span>
-</ng-template>
-<ng-template #actionEllipsis>
-  <span nz-icon nzType="delete" (click)="removeBoard()"></span>
-</ng-template>
+<ng-container *ngIf="user$ | async as user">
+  <nz-card
+    nzHoverable
+    style="width: 300px"
+    [nzCover]="coverTemplate3"
+    [nzActions]="
+      isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee, actionEdit] : [actionLock]
+    "
+    (click)="showInfo()"
+  >
+    <nz-card-meta
+      nzTitle="{{ board.title }}"
+      nzDescription="Owner: {{ board.owner.name }}"
+      [routerLink]="routerLink"
+    ></nz-card-meta>
+  </nz-card>
+  <ng-template #coverTemplate3>
+    <img class="board-cover" width="300" height="182" [src]="boardCoverUrl$ | async" alt="" [routerLink]="routerLink" />
+  </ng-template>
+  <ng-template #actionSee>
+    <span
+      nz-icon
+      nzType="eye"
+      nzTheme="outline"
+      nz-tooltip
+      nzTooltipTitle="Open the Board"
+      i18n-nzTooltipTitle="@@OpenBoard"
+      [routerLink]="['/boards', board._id]"
+    ></span>
+  </ng-template>
+  <ng-template #actionEdit>
+    <span
+      nz-icon
+      nzType="edit"
+      nz-tooltip
+      nzTooltipTitle="Edit the Board"
+      i18n-nzTooltipTitle="@@EditBoard"
+      (click)="editBoard()"
+    ></span>
+  </ng-template>
+  <ng-template #actionEllipsis>
+    <span
+      nz-icon
+      nzType="delete"
+      nz-tooltip
+      nzTooltipTitle="Delete the Board"
+      i18n-nzTooltipTitle="@@DeleteBoard"
+      (click)="removeBoard()"
+    ></span>
+  </ng-template>
+  <ng-template #actionLock>
+    <span
+      nz-icon
+      nzTheme="twotone"
+      nz-tooltip
+      nzTooltipTitle="Access Denied"
+      i18n-nzTooltipTitle="@@AccessDenied"
+      nzType="lock"
+    ></span>
+  </ng-template>
+</ng-container>

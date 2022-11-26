@@ -34,7 +34,7 @@ describe('TasksListComponent', () => {
 
     const mockTasksWithColumnId: ColumnTasksWithColumnId = {
       columnId: mockTaskArray[0].columnId,
-      tasks: mockTaskArray.map((task) => ({ ...task, user: mockUser1, users: [mockUser2] })),
+      tasks: mockTaskArray.map((task) => ({ ...task, user: mockUser1, users: [mockUser2], selected: false })),
     };
 
     fixture = TestBed.createComponent(TasksListComponent);

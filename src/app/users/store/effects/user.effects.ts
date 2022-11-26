@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from '../actions/user.actions';
-import * as AuthActions from '@auth/store/actions/user.actions';
+import * as AuthActions from '@auth/store/actions/auth.actions';
 import { UsersService } from '../../services/users.service';
 
 @Injectable()
@@ -49,13 +49,6 @@ export class UserEffects {
       concatMap(({ id }) => this.userService.deleteUser(id)),
       map((user$) => UserActions.deleteUserSuccess({ id: user$._id })),
       catchError((error) => of(UserActions.deleteUserFailed({ error }))),
-    );
-  });
-
-  userSignOut$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.deleteUserSuccess),
-      map(() => AuthActions.userSignOut()),
     );
   });
 }

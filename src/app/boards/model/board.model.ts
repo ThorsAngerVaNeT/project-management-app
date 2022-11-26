@@ -25,3 +25,7 @@ export interface BoardDetailViewModel {
   board: BoardWithUsers | null;
   columns: ColumnWithTasks[];
 }
+
+export interface BoardParamsWithImage extends BoardParams {
+  file: File;
+}

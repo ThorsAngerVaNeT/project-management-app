@@ -1,10 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Observable, Subscription } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '../../model/task.model';
+import { EMPTY_POINT, Point } from '@points/model/point.model';
+import { User } from '@users/model/user.model';
+import { Dictionary } from '@ngrx/entity';
+import { EMPTY_USER } from '@users/store/reducers/user.reducer';
 
 @Component({
   selector: 'app-task-add',
@@ -12,7 +17,7 @@ import { ColumnTaskParams, ColumnTaskUpdateParams, ColumnTaskWithUsers } from '.
   styleUrls: ['./task-add.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskAddComponent implements OnInit {
+export class TaskAddComponent implements OnInit, OnDestroy {
   @Input() task!: ColumnTaskWithUsers;
 
   isVisible = true;
@@ -25,23 +30,54 @@ export class TaskAddComponent implements OnInit {
 
   taskAddForm!: FormGroup;
 
-  users$ = this.storeFacade.users$;
+  userEntities$ = this.storeFacade.userEntities$;
+
+  userEntities!: Dictionary<User>;
+
+  subscription = new Subscription();
+
+  pointsLoading$ = this.storeFacade.pointsLoading$;
+
+  points$!: Observable<Point[]>;
+
+  responsibleToParticipants = { _id: '', name: '' };
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.userEntities$.subscribe((userEntities) => {
+        this.userEntities = userEntities;
+      }),
+    );
+
     this.taskAddForm = new FormGroup({
       title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
       description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
       responsible: new FormControl(null, [Validators.required]),
-      participants: new FormControl([]),
+      participants: new FormControl([], [Validators.required]),
     });
 
     if (this.task) {
-      const { title, description, userId: responsible, users } = this.task;
+      const { title, description, userId: responsibleId, users } = this.task;
       const participants = users.map((user) => user._id);
-      this.taskAddForm.setValue({ title, description, responsible, participants });
+
+      if (responsibleId) {
+        this.setResponsibleToParticipants(responsibleId);
+      }
+
+      this.points$ = this.storeFacade.points$;
+
+      this.storeFacade.getPointsByTask(this.task._id);
+
+      this.taskAddForm.setValue({ title, description, responsible: responsibleId, participants });
+    } else {
+      this.points$ = this.storeFacade.newTaskPoints$;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   get title(): AbstractControl | null {
@@ -54,6 +90,18 @@ export class TaskAddComponent implements OnInit {
 
   get responsible(): AbstractControl | null {
     return this.taskAddForm.get('responsible');
+  }
+
+  get participants(): AbstractControl | null {
+    return this.taskAddForm.get('participants');
+  }
+
+  get point(): Point {
+    return { ...EMPTY_POINT, taskId: this.task?._id ?? '', boardId: this.boardId ?? this.task.boardId };
+  }
+
+  get users(): User[] {
+    return Object.values(this.userEntities).map((user) => user ?? EMPTY_USER);
   }
 
   handleOk(): void {
@@ -77,7 +125,8 @@ export class TaskAddComponent implements OnInit {
 
         this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
       }
-      this.handleCancel();
+
+      this.modal.destroy();
     } else {
       Object.values(this.taskAddForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -89,6 +138,24 @@ export class TaskAddComponent implements OnInit {
   }
 
   handleCancel(): void {
+    this.storeFacade.clearNewTaskPoint();
     this.modal.destroy();
+  }
+
+  addResponsibleToParticipants(responsibleId: string): void {
+    if (!responsibleId) return;
+    this.setResponsibleToParticipants(responsibleId);
+
+    const { participants } = this.taskAddForm.value;
+    this.taskAddForm.patchValue({ participants: [...new Set([responsibleId, ...participants])] });
+  }
+
+  setResponsibleToParticipants(responsibleId: string): void {
+    const responsibleUser = this.userEntities[responsibleId];
+
+    if (responsibleUser) {
+      const name = responsibleUser.name ?? '';
+      this.responsibleToParticipants = { _id: responsibleId, name };
+    }
   }
 }

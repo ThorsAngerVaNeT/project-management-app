@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { map, Subscription } from 'rxjs';
-import { createBoardSuccess } from '../../store/actions/board.actions';
+import { map, Observable, Subscription } from 'rxjs';
+import { User } from '@users/model/user.model';
+import { BoardWithUsers } from '../../model/board.model';
+import { TaskFile } from '@files/model/file.model';
 
 @Component({
   selector: 'app-board-add',
@@ -13,6 +15,8 @@ import { createBoardSuccess } from '../../store/actions/board.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardAddComponent implements OnInit, OnDestroy {
+  board!: BoardWithUsers;
+
   boardAddForm!: FormGroup;
 
   isLoading = false;
@@ -24,11 +28,17 @@ export class BoardAddComponent implements OnInit, OnDestroy {
     map(([users, { _id }]) => users.filter((user) => user._id !== _id)),
   );
 
-  userId: string = '';
+  userId: User['_id'] = '';
+
+  file!: File;
+
+  covers$!: Observable<{ [keyof: string]: TaskFile }>;
+
+  boardCoverFile!: TaskFile;
 
   subscription = new Subscription();
 
-  constructor(private storeFacade: StoreFacade, private action$: Actions, private modal: NzModalRef) {}
+  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -37,15 +47,19 @@ export class BoardAddComponent implements OnInit, OnDestroy {
       }),
     );
 
-    this.subscription.add(
-      this.action$.pipe(ofType(createBoardSuccess)).subscribe(() => {
-        this.handleCancel();
-      }),
-    );
-
     this.boardAddForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
-      participants: new FormControl([this.userId], [Validators.required]),
+      title: new FormControl(this.board ? this.board.title : '', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(40),
+      ]),
+      participants: new FormControl(
+        [
+          this.userId,
+          ...(this.board ? this.board.users.map((user) => user._id).filter((id) => id !== this.userId) : []),
+        ],
+        [Validators.required],
+      ),
       image: new FormControl(),
     });
   }
@@ -61,9 +75,19 @@ export class BoardAddComponent implements OnInit, OnDestroy {
   handleOk(): void {
     if (this.boardAddForm.valid) {
       const { title, participants: users } = this.boardAddForm.value;
+      const file = this.file;
 
       this.isLoading = true;
-      this.storeFacade.createBoard({ title, users });
+      if (this.board) {
+        const {
+          _id: boardId,
+          owner: { _id: owner },
+        } = this.board;
+
+        this.storeFacade.updateBoard(boardId, { owner, title, users, file });
+      } else {
+        this.storeFacade.createBoard({ owner: this.userId, title, users, file });
+      }
     } else {
       Object.values(this.boardAddForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -76,5 +100,11 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   handleCancel(): void {
     this.modal.destroy();
+  }
+
+  onFileInput(files: FileList | null): void {
+    if (files) {
+      this.file = files.item(0)!;
+    }
   }
 }

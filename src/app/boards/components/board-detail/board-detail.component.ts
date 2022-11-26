@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { map } from 'rxjs';
-import { ColumnComponent } from '@columns/components/column/column.component';
+import { map, Observable, Subscription } from 'rxjs';
 import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ColumnAddComponent } from '@columns/components/column-add/column-add.component';
+import '@angular/localize/init';
 
 @Component({
   selector: 'app-board',
@@ -14,9 +16,7 @@ import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.mo
   styleUrls: ['./board-detail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardDetailComponent implements OnInit {
-  @ViewChild('newColumnPlaceholder', { read: ViewContainerRef }) newColumnPlaceholder!: ViewContainerRef;
-
+export class BoardDetailComponent implements OnInit, OnDestroy {
   boardId!: string;
 
   columnsCount!: number;
@@ -28,21 +28,34 @@ export class BoardDetailComponent implements OnInit {
     }),
   );
 
-  constructor(private route: ActivatedRoute, private storeFacade: StoreFacade) {}
+  boardCoverUrl$!: Observable<string>;
+
+  subscription = new Subscription();
+
+  constructor(private route: ActivatedRoute, private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.storeFacade.getUsers();
-    this.route.params.subscribe((param) => {
-      const { boardId } = param;
-      this.boardId = boardId;
-      this.storeFacade.getBoardAllData(boardId);
-    });
+    this.subscription.add(
+      this.route.params.subscribe((param) => {
+        const { boardId } = param;
+        this.boardId = boardId;
+        this.storeFacade.getBoardAllData(boardId);
+        this.boardCoverUrl$ = this.storeFacade.getBoardCoverStream(boardId);
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   addNewColumn(): void {
-    const componentRef = this.newColumnPlaceholder.createComponent(ColumnComponent);
-    componentRef.instance.componentRef = componentRef;
-    componentRef.setInput('column', { boardId: this.boardId, order: this.columnsCount });
+    this.modalService.create({
+      nzTitle: $localize`:@@CreateColumnModalTitle:Create Column`,
+      nzContent: ColumnAddComponent,
+      nzComponentParams: { boardId: this.boardId, order: this.columnsCount },
+    });
   }
 
   public trackById(index: number, item: ColumnWithTasks): string {

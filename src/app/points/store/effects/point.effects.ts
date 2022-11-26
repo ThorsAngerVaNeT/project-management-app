@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as PointActions from '../actions/point.actions';
 import { PointsService } from '../../services/points.service';
+import * as TaskActions from '@tasks/store/actions/task.actions';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class PointEffects {
-  constructor(private actions$: Actions, private pointsService: PointsService) {}
+  constructor(private actions$: Actions, private pointsService: PointsService, private storeFacade: StoreFacade) {}
 
   loadPointsSet$ = createEffect(() => {
     return this.actions$.pipe(
@@ -57,6 +59,26 @@ export class PointEffects {
     );
   });
 
+  createPointForLatestTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskActions.createTaskSuccess),
+      concatLatestFrom(() => this.storeFacade.newTaskPoints$),
+      concatMap(
+        ([
+          {
+            task: { _id: taskId },
+          },
+          newTaskPoints,
+        ]) => [
+          ...newTaskPoints.map(({ _id, ...pointParams }) =>
+            PointActions.createPoint({ point: { ...pointParams, taskId } }),
+          ),
+          PointActions.clearNewTaskPoint(),
+        ],
+      ),
+    );
+  });
+
   updatePoint$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.updatePoint),
@@ -85,6 +107,15 @@ export class PointEffects {
           catchError((error) => of(PointActions.updatePointsSetFailure({ error }))),
         ),
       ),
+    );
+  });
+
+  deletePoint$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PointActions.deletePoint),
+      concatMap(({ pointId }) => this.pointsService.deletePoint(pointId)),
+      map(({ _id: pointId }) => PointActions.deletePointSuccess({ pointId })),
+      catchError((error) => of(PointActions.deletePointFailure({ error }))),
     );
   });
 }

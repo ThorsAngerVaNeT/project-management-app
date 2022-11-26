@@ -1,9 +1,12 @@
 <nz-header>
-  <div class="header__logo">
-    <a href="./">
-      <img src="assets/images/ngpma.png" alt="ngPMA logo" />
-      ngPMA
-    </a>
+  <div class="header__left-group">
+    <div class="header__logo">
+      <a href="./">
+        <img src="assets/images/ngpma.png" alt="ngPMA logo" />
+        ngPMA
+      </a>
+    </div>
+    <app-search></app-search>
   </div>
 
   <ng-container *ngIf="user$ | async as user">

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromAuth from '@auth/store/actions/user.actions';
-import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
-import { Board, BoardParams } from '@boards/model/board.model';
+import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
+import * as fromAuth from '@auth/store/actions/auth.actions';
+import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
+import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
-import { selectBoardDetailViewModel, selectBoardsWithUsers } from '@boards/store/selectors/board.selectors';
+import * as BoardSelectors from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
-import { TaskFile } from '@files/model/file.model';
+import { TaskFile, UploadFileParams } from '@files/model/file.model';
 import * as fromColumn from '@columns/store/actions/column.actions';
 import { Column, ColumnParams, ColumnSetUpdateParams, ColumnsSetParams } from '@columns/model/column.model';
 import {
@@ -18,7 +20,17 @@ import {
   ColumnTaskSetUpdateParams,
   ColumnTaskUpdateParams,
 } from '@tasks/model/task.model';
-import { selectAllUsers } from '@users/store/selectors/user.selectors';
+import { selectAllUsers, selectUsersEntities } from '@users/store/selectors/user.selectors';
+import * as fromPoint from '@points/store/actions/point.actions';
+import {
+  selectNewTaskAllPoints,
+  selectPointsByCurrentTask,
+  selectPointsLoading,
+} from '@points/store/selectors/point.selectors';
+import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
+import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
+import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
+import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +40,35 @@ export class StoreFacade {
 
   token$ = this.store.select(selectToken);
 
-  boards$ = this.store.select(selectBoardsWithUsers);
+  boards$ = this.store.select(BoardSelectors.selectBoardsWithUsers);
 
-  boardDetail$ = this.store.select(selectBoardDetailViewModel);
+  boardDetail$ = this.store.select(BoardSelectors.selectBoardDetailViewModel);
 
   users$ = this.store.select(selectAllUsers);
+
+  userEntities$ = this.store.select(selectUsersEntities);
+
+  points$ = this.store.select(selectPointsByCurrentTask);
+
+  newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
+
+  pointsLoading$ = this.store.select(selectPointsLoading);
+
+  boardCovers$ = this.store.select(selectBoardCovers);
+
+  boardsLoading$ = this.store.select(BoardSelectors.selectBoardsLoading);
+
+  boardEntities$ = this.store.select(BoardSelectors.selectBoardEntities);
+
+  cachedBoards$ = this.store.select(BoardSelectors.selectCachedBoards);
+
+  boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
+
+  searchResult$ = this.store.select(selectSearchResultsWithUsers);
+
+  authLoading$ = this.store.select(selectAuthLoading);
+
+  authError$ = this.store.select(selectAuthError);
 
   constructor(private store: Store) {}
 
@@ -64,6 +100,11 @@ export class StoreFacade {
     this.getBoard(boardId);
     this.getColumns(boardId);
     this.getTasksByBoard(boardId);
+    this.getFilesByBoard(boardId);
+  }
+
+  getBoardsAllData(): void {
+    this.store.dispatch(fromBoard.loadMainPageData());
   }
 
   getBoardsSet(ids: Board['_id'][]): void {
@@ -74,12 +115,12 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
   }
 
-  createBoard(board: Omit<BoardParams, 'owner'>): void {
+  createBoard(board: BoardParamsWithImage): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
 
-  updateBoard(id: Board['_id'], board: BoardParams): void {
-    this.store.dispatch(fromBoard.updateBoard({ id, board }));
+  updateBoard(boardId: Board['_id'], board: BoardParamsWithImage): void {
+    this.store.dispatch(fromBoard.updateBoard({ boardId, board }));
   }
 
   deleteBoard(id: Board['_id']): void {
@@ -166,8 +207,13 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
   }
 
-  createTask(boardId: Board['_id'], columnId: Column['_id'], taskParams: ColumnTaskParams): void {
-    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams }));
+  createTask(
+    boardId: Board['_id'],
+    columnId: Column['_id'],
+    taskParams: ColumnTaskParams,
+    pointsParams: PointParams[] = [],
+  ): void {
+    this.store.dispatch(fromTask.createTask({ boardId, columnId, taskParams, pointsParams }));
   }
 
   updateTask(
@@ -207,7 +253,59 @@ export class StoreFacade {
     this.store.dispatch(fromFile.deleteFile({ id }));
   }
 
-  uploadFile(boardId: Board['_id'], taskId: ColumnTask['_id'], file: File): void {
-    this.store.dispatch(fromFile.uploadFile({ boardId, taskId, file }));
+  uploadFile(fileParams: UploadFileParams): void {
+    this.store.dispatch(fromFile.uploadFile({ fileParams }));
+  }
+
+  selectTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromTask.selectTask({ taskId }));
+  }
+
+  getPointsByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromPoint.loadPointsByTask({ taskId }));
+  }
+
+  createPoint(point: PointParams): void {
+    this.store.dispatch(fromPoint.createPoint({ point }));
+  }
+
+  updatePoint(pointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updatePoint({ pointId, pointParams }));
+  }
+
+  deletePoint(pointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deletePoint({ pointId }));
+  }
+
+  addNewTaskPoint(newTaskPointId: Point['_id'], point: Point): void {
+    this.store.dispatch(fromPoint.addNewTaskPoint({ newTaskPointId, point }));
+  }
+
+  updateNewTaskPoint(newTaskPointId: Point['_id'], pointParams: PointUpdateParams): void {
+    this.store.dispatch(fromPoint.updateNewTaskPoint({ newTaskPointId, pointParams }));
+  }
+
+  deleteNewTaskPoint(newTaskPointId: Point['_id']): void {
+    this.store.dispatch(fromPoint.deleteNewTaskPoint({ newTaskPointId }));
+  }
+
+  clearNewTaskPoint(): void {
+    this.store.dispatch(fromPoint.clearNewTaskPoint());
+  }
+
+  getBoardCovers(): void {
+    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  }
+
+  getBoardCoverStream(boardId: Board['_id']): Observable<string> {
+    return this.store.select(selectBoardCoverUrl(boardId));
+  }
+
+  completePreload(): void {
+    this.store.dispatch(fromBoard.preloadImagesCompleted());
+  }
+
+  searchTask(searchString: string, searchType: string): void {
+    this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
   }
 }
