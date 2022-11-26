@@ -57,6 +57,7 @@ export const createTask = createAction(
   }>(),
 );
 export const createTaskSuccess = createAction('[Tasks] Add Task Success', props<{ task: ColumnTask }>());
+export const createTaskFailure = createAction('[Tasks] Add Task Failure', props<{ error: unknown }>());
 
 export const updateTask = createAction(
   '[Tasks] Update Task',
@@ -68,6 +69,7 @@ export const updateTask = createAction(
   }>(),
 );
 export const updateTaskSuccess = createAction('[Tasks] Update Task Success', props<{ task: Update<ColumnTask> }>());
+export const updateTaskFailure = createAction('[Tasks] Update Task Failure', props<{ error: unknown }>());
 
 export const updateTasksSet = createAction(
   '[Tasks] Update Tasks Set',

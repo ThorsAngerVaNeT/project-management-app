@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import * as AuthActions from '@auth/store/actions/auth.actions';
 import * as BoardActions from '@boards/store/actions/board.actions';
 import * as ColumnActions from '@columns/store/actions/column.actions';
+import * as TaskActions from '@tasks/store/actions/task.actions';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
 
@@ -21,6 +22,10 @@ export class ModalEffects {
           BoardActions.updateBoardFailure,
           ColumnActions.createColumnSuccess,
           ColumnActions.createColumnFailure,
+          TaskActions.createTaskSuccess,
+          TaskActions.createTaskFailure,
+          TaskActions.updateTaskSuccess,
+          TaskActions.updateTaskFailure,
         ),
         tap(() => {
           this.modalService.closeAll();

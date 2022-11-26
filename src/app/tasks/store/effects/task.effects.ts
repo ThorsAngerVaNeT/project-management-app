@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, switchMap } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import * as TaskActions from '../actions/task.actions';
 import { TasksService } from '../../services/tasks.service';
 
@@ -61,6 +62,7 @@ export class TaskEffects {
       ofType(TaskActions.createTask),
       concatMap(({ boardId, columnId, taskParams }) => this.tasksService.createTask(boardId, columnId, taskParams)),
       map((task) => TaskActions.createTaskSuccess({ task })),
+      catchError((error) => of(TaskActions.createTaskFailure({ error }))),
     );
   });
 
@@ -71,6 +73,7 @@ export class TaskEffects {
         this.tasksService.updateTask(boardId, columnId, taskId, taskParams),
       ),
       map(({ _id: id, ...changes }) => TaskActions.updateTaskSuccess({ task: { id, changes } })),
+      catchError((error) => of(TaskActions.updateTaskFailure({ error }))),
     );
   });
 
