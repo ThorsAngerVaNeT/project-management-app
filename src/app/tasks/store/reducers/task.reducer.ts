@@ -7,12 +7,14 @@ export const tasksFeatureKey = 'tasks';
 
 export interface TasksState extends EntityState<ColumnTask> {
   currentTaskId: ColumnTask['_id'];
+  loading: boolean;
 }
 
 export const adapter: EntityAdapter<ColumnTask> = createEntityAdapter<ColumnTask>({ selectId: (task) => task._id });
 
 export const initialState: TasksState = adapter.getInitialState({
   currentTaskId: '',
+  loading: false,
 });
 
 export const reducer = createReducer(
@@ -23,8 +25,14 @@ export const reducer = createReducer(
   on(TaskActions.loadTasksByBoardSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
   // on(TaskActions.loadTasksBySearchStringSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
   on(TaskActions.loadTaskSuccess, (state, { task }) => adapter.setOne(task, state)),
+  on(TaskActions.createTask, (state): TasksState => ({ ...state, loading: true })),
   on(TaskActions.createTaskSuccess, (state, { task }) => adapter.addOne(task, state)),
+  on(TaskActions.createTaskSuccess, (state): TasksState => ({ ...state, loading: false })),
+  on(TaskActions.createTaskFailure, (state): TasksState => ({ ...state, loading: false })),
+  on(TaskActions.updateTask, (state): TasksState => ({ ...state, loading: true })),
   on(TaskActions.updateTaskSuccess, (state, { task }) => adapter.updateOne(task, state)),
+  on(TaskActions.updateTaskSuccess, (state): TasksState => ({ ...state, loading: false })),
+  on(TaskActions.updateTaskFailure, (state): TasksState => ({ ...state, loading: false })),
   on(TaskActions.updateTasksSet, (state, { tasksParams }) => {
     const tasks = tasksParams.map(({ _id: id, ...changes }) => {
       const { _id, ...originalTask } = { ...state.entities[id] };

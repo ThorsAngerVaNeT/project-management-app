@@ -5,7 +5,9 @@ import { Column } from '../../model/column.model';
 
 export const columnsFeatureKey = 'columns';
 
-export interface ColumnsState extends EntityState<Column> {}
+export interface ColumnsState extends EntityState<Column> {
+  loading: boolean;
+}
 
 export const adapter: EntityAdapter<Column> = createEntityAdapter<Column>({
   selectId: (column: Column) => column._id,
@@ -14,6 +16,7 @@ export const adapter: EntityAdapter<Column> = createEntityAdapter<Column>({
 export const initialState: ColumnsState = adapter.getInitialState({
   ids: [],
   entities: {},
+  loading: false,
 });
 
 export const reducer = createReducer(
@@ -22,7 +25,10 @@ export const reducer = createReducer(
   on(ColumnActions.loadColumnSuccess, (state, { column }) => adapter.setOne(column, state)),
   // on(ColumnActions.loadColumnsSetSuccess, (state, { columns }) => adapter.setAll(columns, state)),
   // on(ColumnActions.loadColumnsByUserSuccess, (state, { columns }) => adapter.setAll(columns, state)),
+  on(ColumnActions.createColumn, (state): ColumnsState => ({ ...state, loading: true })),
   on(ColumnActions.createColumnSuccess, (state, { column }) => adapter.addOne(column, state)),
+  on(ColumnActions.createColumnSuccess, (state): ColumnsState => ({ ...state, loading: false })),
+  on(ColumnActions.createColumnFailure, (state): ColumnsState => ({ ...state, loading: false })),
   // on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
   on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
   on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),

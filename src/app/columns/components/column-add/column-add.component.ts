@@ -18,7 +18,7 @@ export class ColumnAddComponent implements OnInit {
 
   titleControl!: FormControl;
 
-  isLoading = false;
+  isLoading$ = this.storeFacade.columnIsLoading$;
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
@@ -28,8 +28,6 @@ export class ColumnAddComponent implements OnInit {
 
   handleOk(): void {
     if (this.titleControl.valid) {
-      this.isLoading = true;
-
       const { boardId, order } = this;
       this.storeFacade.createColumn(boardId, { title: this.titleControl.value, order });
     } else if (this.titleControl.invalid) {

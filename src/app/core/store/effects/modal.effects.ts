@@ -17,15 +17,10 @@ export class ModalEffects {
       return this.actions$.pipe(
         ofType(
           BoardActions.createBoardSuccess,
-          BoardActions.createBoardFailure,
           BoardActions.updateBoardSuccess,
-          BoardActions.updateBoardFailure,
           ColumnActions.createColumnSuccess,
-          ColumnActions.createColumnFailure,
           TaskActions.createTaskSuccess,
-          TaskActions.createTaskFailure,
           TaskActions.updateTaskSuccess,
-          TaskActions.updateTaskFailure,
         ),
         tap(() => {
           this.modalService.closeAll();

@@ -30,6 +30,8 @@ import { Point, PointParams, PointUpdateParams } from '@points/model/point.model
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
+import { selectTaskIsLoading } from '@tasks/store/selectors/task.selectors';
+import { selectColumnIsLoading } from '@columns/store/selectors/column.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +70,10 @@ export class StoreFacade {
   authLoading$ = this.store.select(selectAuthLoading);
 
   authError$ = this.store.select(selectAuthError);
+
+  columnIsLoading$ = this.store.select(selectColumnIsLoading);
+
+  taskIsLoading$ = this.store.select(selectTaskIsLoading);
 
   constructor(private store: Store) {}
 

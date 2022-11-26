@@ -42,7 +42,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   responsibleToParticipants = { _id: '', name: '' };
 
-  isLoading = false;
+  isLoading$ = this.storeFacade.taskIsLoading$;
 
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
@@ -108,8 +108,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   handleOk(): void {
     if (this.taskAddForm.valid) {
-      this.isLoading = true;
-
       const { title, description, responsible: userId, participants: users } = this.taskAddForm.value;
 
       if (this.task) {
