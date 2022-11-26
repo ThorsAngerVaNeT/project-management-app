@@ -19,7 +19,7 @@
 <div class="technologies">
   <div class="technologies__list">
     <nz-card *ngFor="let item of technologies">
-      {{ item.name }}
+      <a href="{{ item.link }}">{{ item.name }}</a>
       <img style="padding: 8px" src="{{ item.logo }}" />
     </nz-card>
   </div>

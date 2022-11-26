@@ -18,24 +18,28 @@ export class WelcomeComponent implements OnInit {
     {
       name: 'Angular',
       logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZB5SrZsa18VII7DoPQ34x_vsYFeCgW1PzTA&usqp=CAU',
+      link: 'https://angular.io/',
     },
     {
       name: 'TypeScript',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/800px-Typescript_logo_2020.svg.png',
+      link: 'https://www.typescriptlang.org/',
     },
     {
       name: 'NG Zorro (AntD)',
       logo: 'https://img.alicdn.com/tfs/TB1g.mWZAL0gK0jSZFtXXXQCXXa-200-200.svg',
+      link: 'https://www.typescriptlang.org/',
     },
     {
       name: 'NGRX',
       logo: 'https://ngrx.io/assets/images/badge.svg',
+      link: 'https://ngrx.io/',
     },
   ];
 
   developers = [
     {
-      name: 'Thorsangervanet',
+      name: 'ThorsAngerVaNeT',
       about:
         'Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD',
       github: 'https://github.com/thorsangervanet',
