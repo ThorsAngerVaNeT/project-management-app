@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
 import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
@@ -8,7 +8,7 @@ import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
-import { SignInParams, User, UserParams } from '@users/model/user.model';
+import { SignInParams, TokenPayload, User, UserParams } from '@users/model/user.model';
 import * as BoardSelectors from '@boards/store/selectors/board.selectors';
 import * as fromFile from '@files/store/actions/file.actions';
 import { TaskFile, UploadFileParams } from '@files/model/file.model';
@@ -31,6 +31,7 @@ import { Point, PointParams, PointUpdateParams } from '@points/model/point.model
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,24 @@ export class StoreFacade {
   authLoading$ = this.store.select(selectAuthLoading);
 
   authError$ = this.store.select(selectAuthError);
+
+  isLoggedIn$ = this.user$.pipe(
+    filter((user) => user?._id !== undefined),
+    map((user) => {
+      if (user._id === '') {
+        return false;
+      }
+
+      const { exp } = this.decodeToken(user.token);
+
+      if (exp * 1000 <= Date.now()) {
+        this.signOut();
+        return false;
+      }
+
+      return true;
+    }),
+  );
 
   constructor(private store: Store) {}
 
@@ -307,5 +326,9 @@ export class StoreFacade {
 
   searchTask(searchString: string, searchType: string): void {
     this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
+  }
+
+  public decodeToken(token: string): TokenPayload {
+    return jwt_decode<TokenPayload>(token);
   }
 }
