@@ -87,6 +87,7 @@ export class StoreFacade {
 
         return true;
       } catch {
+        this.signOut();
         return false;
       }
     }),
