@@ -37,6 +37,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
+  isDeletingDisabled = false;
+
+  isEditingDisabled = false;
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef, private modalService: NzModalService) {}
 
   ngOnInit(): void {
@@ -52,6 +56,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authLoading$.subscribe((isLoading) => {
         this.isLoading = isLoading;
+        if (!isLoading) {
+          this.isEditingDisabled = false;
+          this.isDeletingDisabled = false;
+        }
       }),
     );
 
@@ -70,6 +78,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.signUpForm.valid) {
+      this.isDeletingDisabled = true;
       if (this.isEditing) {
         this.editUser();
       } else {
@@ -95,6 +104,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(): void {
+    this.isEditingDisabled = true;
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
