@@ -55,9 +55,14 @@ export class BoardCardComponent implements OnInit {
   }
 
   showInfo(): void {
+    if (this.isOwner || this.isParticipant) return;
     this.modalService.info({
       nzTitle: $localize`:@@AccessDeniedModalTitle:Access Denied`,
       nzContent: $localize`:@@AccessDeniedModalContent:You are not the participant of this board!`,
     });
+  }
+
+  get routerLink(): string[] | null {
+    return this.isOwner || this.isParticipant ? ['/boards', this.board._id] : null;
   }
 }
