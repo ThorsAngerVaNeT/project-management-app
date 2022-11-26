@@ -43,7 +43,8 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["deepmerge"]
           },
           "configurations": {
             "production": {

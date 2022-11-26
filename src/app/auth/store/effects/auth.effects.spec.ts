@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 
-import { UserEffects } from './user.effects';
+import { UserEffects } from './auth.effects';
 
 describe('UserEffects', () => {
   let actions$: Observable<Action>;

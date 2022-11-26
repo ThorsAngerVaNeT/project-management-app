@@ -7,8 +7,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import AuthRoutingModule from './auth.route.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { UserEffects } from './store/effects/user.effects';
-import { userReducer, userMetaReducers } from './store/reducers/user.reducer';
+import { UserEffects } from './store/effects/auth.effects';
+import { userReducer, userMetaReducers } from './store/reducers/auth.reducer';
 import { UsersModule } from '../users/users.module';
 
 @NgModule({
