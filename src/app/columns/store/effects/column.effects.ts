@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as ColumnActions from '../actions/column.actions';
 import { ColumnsService } from '../../services/columns.service';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class ColumnEffects {
-  constructor(private actions$: Actions, private columnsService: ColumnsService) {}
+  constructor(private actions$: Actions, private columnsService: ColumnsService, private storeFacade: StoreFacade) {}
 
   loadColumns$ = createEffect(() => {
     return this.actions$.pipe(
@@ -55,14 +56,19 @@ export class ColumnEffects {
   updateColumnsSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.updateColumnsSet),
-      switchMap(({ columnsParams }) => this.columnsService.updateColumnsSet(columnsParams)),
-      map((columns) =>
-        ColumnActions.updateColumnsSetSuccess({
-          columns: columns.map(({ _id: id, ...changes }) => ({
-            id,
-            changes,
-          })),
-        }),
+      concatLatestFrom(() => this.storeFacade.cachedColumns$),
+      switchMap(([{ columnsParams }, columnsState]) =>
+        this.columnsService.updateColumnsSet(columnsParams).pipe(
+          map((columns) =>
+            ColumnActions.updateColumnsSetSuccess({
+              columns: columns.map(({ _id: id, ...changes }) => ({
+                id,
+                changes,
+              })),
+            }),
+          ),
+          catchError((error) => of(ColumnActions.updateColumnsSetFailure({ error, columnsState }))),
+        ),
       ),
     );
   });

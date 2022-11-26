@@ -7,6 +7,7 @@ export const columnsFeatureKey = 'columns';
 
 export interface ColumnsState extends EntityState<Column> {
   loading: boolean;
+  cachedColumns: EntityState<Column>;
 }
 
 export const adapter: EntityAdapter<Column> = createEntityAdapter<Column>({
@@ -17,6 +18,10 @@ export const initialState: ColumnsState = adapter.getInitialState({
   ids: [],
   entities: {},
   loading: false,
+  cachedColumns: {
+    ids: [],
+    entities: {},
+  },
 });
 
 export const reducer = createReducer(
@@ -31,7 +36,7 @@ export const reducer = createReducer(
   on(ColumnActions.createColumnFailure, (state): ColumnsState => ({ ...state, loading: false })),
   // on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
   on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
-  on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),
+
   on(ColumnActions.updateColumnsSet, (state, { columnsParams }) => {
     const columns = columnsParams.map(({ _id: id, ...changes }) => {
       const { _id, ...originalColumn } = { ...state.entities[id] };
@@ -39,8 +44,17 @@ export const reducer = createReducer(
 
       return column;
     });
-    return adapter.updateMany(columns, state);
+    return adapter.updateMany(columns, {
+      ...state,
+      cachedColumns: { ids: state.ids.slice(), entities: { ...state.entities } },
+    });
   }),
+  on(ColumnActions.updateColumnsSetSuccess, (state, { columns }) => adapter.updateMany(columns, state)),
+  on(
+    ColumnActions.updateColumnsSetFailure,
+    (state, { columnsState: { ids, entities } }): ColumnsState => ({ ...state, ids, entities }),
+  ),
+
   on(ColumnActions.deleteColumnSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );
 

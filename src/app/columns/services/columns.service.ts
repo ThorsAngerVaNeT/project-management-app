@@ -51,7 +51,7 @@ export class ColumnsService {
   }
 
   public updateColumnsSet(listColumnParams: ColumnSetUpdateParams[]): Observable<Column[]> {
-    return this.http.patch<Column[]>(APIEndpoints.columnsSet, listColumnParams);
+    return this.http.patch<Column[]>(APIEndpoints.columnsSet + '1', listColumnParams);
   }
 
   public deleteColumn(boardId: Board['_id'], columnId: Column['_id']): Observable<Column> {

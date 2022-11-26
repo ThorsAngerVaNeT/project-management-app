@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
+import { EntityState, Update } from '@ngrx/entity';
 import { Column, ColumnParams, ColumnSetUpdateParams } from '../../model/column.model';
 import { Board } from '@boards/model/board.model';
 // import { User } from '@users/model/user.model';
@@ -45,6 +45,10 @@ export const updateColumnsSet = createAction(
 export const updateColumnsSetSuccess = createAction(
   '[Columns] Update ColumnsSet Success',
   props<{ columns: Update<Column>[] }>(),
+);
+export const updateColumnsSetFailure = createAction(
+  '[Columns] Update ColumnsSet Failure',
+  props<{ error: unknown; columnsState: EntityState<Column> }>(),
 );
 
 export const deleteColumn = createAction(

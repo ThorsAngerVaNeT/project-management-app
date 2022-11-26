@@ -31,7 +31,7 @@ import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/f
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 import { selectTaskIsLoading } from '@tasks/store/selectors/task.selectors';
-import { selectColumnIsLoading } from '@columns/store/selectors/column.selectors';
+import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -74,6 +74,8 @@ export class StoreFacade {
   columnIsLoading$ = this.store.select(selectColumnIsLoading);
 
   taskIsLoading$ = this.store.select(selectTaskIsLoading);
+
+  cachedColumns$ = this.store.select(selectCachedColumns);
 
   constructor(private store: Store) {}
 

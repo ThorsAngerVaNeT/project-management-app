@@ -5,6 +5,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { ColumnEffects } from './column.effects';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('ColumnEffects', () => {
   let actions$: Observable<Actions>;
@@ -13,7 +14,7 @@ describe('ColumnEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ColumnEffects, provideMockActions(() => actions$)],
+      providers: [ColumnEffects, provideMockStore(), provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(ColumnEffects);

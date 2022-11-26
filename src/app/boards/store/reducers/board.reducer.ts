@@ -40,14 +40,14 @@ export const reducer = createReducer(
     adapter.removeOne(id, { ...state, cachedBoards: { ids: state.ids.slice(), entities: { ...state.entities } } }),
   ),
   on(BoardActions.deleteBoardSuccess, (state, { id }) => adapter.removeOne(id, state)),
-  on(BoardActions.loadMainPageData, (state): BoardsState => ({ ...state, loading: true })),
-  on(BoardActions.loadMainPageDataSuccess, (state): BoardsState => ({ ...state, loading: false, loaded: true })),
-  on(BoardActions.loadMainPageDataFailure, (state): BoardsState => ({ ...state, loading: false, loaded: false })),
-  on(BoardActions.preloadImagesCompleted, (state): BoardsState => ({ ...state, loading: false })),
   on(
     BoardActions.deleteBoardFailure,
     (state, { boardsState: { ids, entities } }): BoardsState => ({ ...state, ids, entities }),
   ),
+  on(BoardActions.loadMainPageData, (state): BoardsState => ({ ...state, loading: true })),
+  on(BoardActions.loadMainPageDataSuccess, (state): BoardsState => ({ ...state, loading: false, loaded: true })),
+  on(BoardActions.loadMainPageDataFailure, (state): BoardsState => ({ ...state, loading: false, loaded: false })),
+  on(BoardActions.preloadImagesCompleted, (state): BoardsState => ({ ...state, loading: false })),
 );
 
 export const {
