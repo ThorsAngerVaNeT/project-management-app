@@ -8,16 +8,16 @@
   />
 
   <ng-template #titleErrorTip>
-    <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateColumnTitleRequiredErrorTip">
-      Please provide a title
-    </ng-container>
-    <ng-container *ngIf="titleControl.hasError('maxlength')" i18n="@@CreateColumnTitleMaxlengthErrorTip">
-      Title should be 1-20 characters long
+    <ng-container *ngIf="titleControl.hasError('required')">{{
+      'CreateColumnTitleRequiredErrorTip' | translate
+    }}</ng-container>
+    <ng-container *ngIf="titleControl.hasError('maxlength')"
+      >{{ 'CreateColumnTitleMaxlengthErrorTip' | translate }}
     </ng-container>
   </ng-template>
 </nz-form-control>
 
 <ng-template [nzModalFooter]>
-  <button nz-button (click)="handleCancel()" i18n="@@CancelButtonText">Cancel</button>
-  <button nz-button nzType="primary" (click)="handleOk()" i18n="@@SaveButtonText">Save</button>
+  <button nz-button (click)="handleCancel()">{{ 'CancelButtonText' | translate }}</button>
+  <button nz-button nzType="primary" (click)="handleOk()">{{ 'SaveButtonText' | translate }}</button>
 </ng-template>

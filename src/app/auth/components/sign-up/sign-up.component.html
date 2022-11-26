@@ -1,41 +1,26 @@
-<div i18n="@@passwordRequirements">
-  <p>Please provide login (more than two characters), name and a strong password.</p>
-  <p>For your safety password should be:</p>
-  <ul>
-    <li>at least 8 characters</li>
-    <li>both uppercase and lowercase letters</li>
-    <li>both letters and numbers</li>
-    <li>contain at least one special character, e.g., ! @ # ? ]</li>
-  </ul>
-</div>
+<div [innerHTML]="'passwordRequirements' | translate"></div>
 <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm" *ngIf="user$ | async">
   <nz-form-item>
     <nz-form-control [nzErrorTip]="loginErrorTip">
       <nz-input-group nzPrefixIcon="login">
-        <input type="text" nz-input formControlName="login" placeholder="Login" i18n-placeholder="@@loginPlaceholder" />
+        <input type="text" nz-input formControlName="login" placeholder="{{ 'loginPlaceholder' | translate }}" />
       </nz-input-group>
       <ng-template #loginErrorTip>
-        <ng-container *ngIf="login?.hasError('required')" i18n="@@loginRequiredErrorTip"
-          >Please provide a login</ng-container
-        >
-        <ng-container *ngIf="login?.hasError('minlength')" i18n="@@loginMinlengthErrorTip"
-          >Login should be at least two characters long</ng-container
-        >
-        <ng-container *ngIf="login?.hasError('userAlreadyExists')" i18n="@@userAlreadyExistsErrorTip"
-          >This user login already exists, please provide a new one</ng-container
-        >
+        <ng-container *ngIf="login?.hasError('required')">{{ 'loginRequiredErrorTip' | translate }}</ng-container>
+        <ng-container *ngIf="login?.hasError('minlength')">{{ 'loginMinlengthErrorTip' | translate }}</ng-container>
+        <ng-container *ngIf="login?.hasError('userAlreadyExists')">{{
+          'userAlreadyExistsErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzErrorTip]="nameErrorTip">
       <nz-input-group nzPrefixIcon="user">
-        <input type="text" nz-input formControlName="name" placeholder="Name" i18n-placeholder="@@namePlaceholder" />
+        <input type="text" nz-input formControlName="name" placeholder="{{ 'namePlaceholder' | translate }}" />
       </nz-input-group>
       <ng-template #nameErrorTip>
-        <ng-container *ngIf="name?.hasError('required')" i18n="@@nameRequiredErrorTip"
-          >Please provide a name</ng-container
-        >
+        <ng-container *ngIf="name?.hasError('required')">{{ 'nameRequiredErrorTip' | translate }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -46,17 +31,12 @@
           type="password"
           nz-input
           formControlName="password"
-          placeholder="Password"
-          i18n-placeholder="@@passwordPlaceholder"
+          placeholder="{{ 'passwordPlaceholder' | translate }}"
         />
       </nz-input-group>
       <ng-template #passwordErrorTip>
-        <ng-container *ngIf="password?.hasError('required')" i18n="@@passwordRequiredErrorTip"
-          >Please provide a password</ng-container
-        >
-        <ng-container *ngIf="password?.hasError('pattern')" i18n="@@passwordPatternErrorTip"
-          >Please check if your password complies with requirements above</ng-container
-        >
+        <ng-container *ngIf="password?.hasError('required')">{{ 'passwordRequiredErrorTip' | translate }}</ng-container>
+        <ng-container *ngIf="password?.hasError('pattern')">{{ 'passwordPatternErrorTip' | translate }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -72,15 +52,14 @@
   </nz-form-item>
 </form>
 <div class="delete-block" *ngIf="isEditing">
-  <div i18n="@@deleteUserText">Delete your user account</div>
+  <div>{{ 'deleteUserText' | translate }}</div>
   <button
     nz-button
     nzDanger
     [nzLoading]="isLoading && !isDeletingDisabled"
-    i18n="@@deleteUserButton"
     (click)="deleteUser()"
     [disabled]="isDeletingDisabled"
   >
-    Delete Forever
+    {{ 'deleteUserButton' | translate }}
   </button>
 </div>

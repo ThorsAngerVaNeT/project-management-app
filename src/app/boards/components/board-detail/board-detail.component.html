@@ -5,8 +5,9 @@
       <nz-page-header-title>{{ board.title }}</nz-page-header-title>
     </nz-page-header>
 
-    <div class="board-participants" i18n="@@BoardDetailParticipants">
-      Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
+    <div class="board-participants">
+      {{ 'BoardDetailParticipants' | translate }}:
+      <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
     </div>
 
     <div
@@ -27,10 +28,9 @@
       <button
         nz-button
         nz-tooltip
-        i18n-nzTooltipTitle="@@AddNewColumn"
         nzType="primary"
         nzShape="circle"
-        nzTooltipTitle="Add New Column"
+        nzTooltipTitle="{{ 'AddNewColumn' | translate }}"
         nzTooltipPlacement="bottom"
         nzTooltipColor="#203c56"
         (click)="addNewColumn()"

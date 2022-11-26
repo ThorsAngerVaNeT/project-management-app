@@ -10,24 +10,25 @@
   </div>
 
   <ng-container *ngIf="user$ | async as user">
-    <div class="header__right-group" *ngIf="user._id">
+    <div class="header__right-group">
       <app-language-switcher></app-language-switcher>
-
-      <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-        {{ user.name }}
-        <span nz-icon nzType="down"></span>
-      </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile</li>
-          <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out</li>
-        </ul>
-      </nz-dropdown-menu>
+      <ng-container *ngIf="user._id">
+        <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
+          {{ user.name }}
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="editProfile()">{{ 'editProfile' | translate }}</li>
+            <li nz-menu-item (click)="signOut()">{{ 'logOut' | translate }}</li>
+          </ul>
+        </nz-dropdown-menu>
+      </ng-container>
     </div>
 
     <div class="header__welcome_actions" *ngIf="!user._id">
-      <span (click)="signUp()" i18n="@@SignUpModalTitle">Sign Up</span>
-      <span (click)="logIn()" i18n="@@LoginModalTitle">Login</span>
+      <span (click)="signUp()">{{ 'SignUpModalTitle' | translate }}</span>
+      <span (click)="logIn()">{{ 'LoginModalTitle' | translate }}</span>
     </div>
   </ng-container>
 </nz-header>

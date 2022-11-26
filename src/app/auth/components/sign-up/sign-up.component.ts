@@ -4,8 +4,8 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription, tap } from 'rxjs';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
-import '@angular/localize/init';
 import { User } from '@users/model/user.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -41,7 +41,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   isEditingDisabled = false;
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modal: NzModalRef,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -107,7 +112,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.isEditingDisabled = true;
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteYourAccount:your account` },
+      nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteYourAccount') },
       nzOnOk: () => {
         this.storeFacade.deleteUser(this.user._id);
       },

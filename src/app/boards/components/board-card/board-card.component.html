@@ -10,8 +10,7 @@
   >
     <nz-card-meta
       nzTitle="{{ board.title }}"
-      nzDescription="Owner {{ board.owner.name }}"
-      i18n-nzDescription="@@Owner"
+      nzDescription="{{ 'Owner' | translate }} {{ board.owner.name }}"
       [routerLink]="routerLink"
     ></nz-card-meta>
   </nz-card>
@@ -24,39 +23,23 @@
       nzType="eye"
       nzTheme="outline"
       nz-tooltip
-      nzTooltipTitle="Open the Board"
-      i18n-nzTooltipTitle="@@OpenBoard"
+      nzTooltipTitle="{{ 'OpenBoard' | translate }}"
       [routerLink]="['/boards', board._id]"
     ></span>
   </ng-template>
   <ng-template #actionEdit>
-    <span
-      nz-icon
-      nzType="edit"
-      nz-tooltip
-      nzTooltipTitle="Edit the Board"
-      i18n-nzTooltipTitle="@@EditBoard"
-      (click)="editBoard()"
-    ></span>
+    <span nz-icon nzType="edit" nz-tooltip nzTooltipTitle="{{ 'EditBoard' | translate }}" (click)="editBoard()"></span>
   </ng-template>
   <ng-template #actionEllipsis>
     <span
       nz-icon
       nzType="delete"
       nz-tooltip
-      nzTooltipTitle="Delete the Board"
-      i18n-nzTooltipTitle="@@DeleteBoard"
+      nzTooltipTitle="{{ 'DeleteBoard' | translate }}"
       (click)="removeBoard()"
     ></span>
   </ng-template>
   <ng-template #actionLock>
-    <span
-      nz-icon
-      nzTheme="twotone"
-      nz-tooltip
-      nzTooltipTitle="Access Denied"
-      i18n-nzTooltipTitle="@@AccessDenied"
-      nzType="lock"
-    ></span>
+    <span nz-icon nzTheme="twotone" nz-tooltip nzTooltipTitle="{{ 'AccessDenied' | translate }}" nzType="lock"></span>
   </ng-template>
 </ng-container>
