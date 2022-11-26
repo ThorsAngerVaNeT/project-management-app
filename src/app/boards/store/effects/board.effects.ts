@@ -49,9 +49,10 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),
       concatMap(({ board: { file, ...boardParams } }) =>
-        this.boardsService
-          .createBoard({ ...boardParams })
-          .pipe(map((board) => BoardActions.createBoardSuccess({ board, file }))),
+        this.boardsService.createBoard({ ...boardParams }).pipe(
+          map((board) => BoardActions.createBoardSuccess({ board, file })),
+          catchError((error) => of(BoardActions.createBoardFailure({ error }))),
+        ),
       ),
     );
   });
@@ -60,9 +61,10 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.updateBoard),
       concatMap(({ boardId, board: { file, ...boardParams } }) =>
-        this.boardsService
-          .updateBoard(boardId, boardParams)
-          .pipe(map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes }, file }))),
+        this.boardsService.updateBoard(boardId, boardParams).pipe(
+          map(({ _id: id, ...changes }) => BoardActions.updateBoardSuccess({ board: { id, changes }, file })),
+          catchError((error) => of(BoardActions.updateBoardFailure({ error }))),
+        ),
       ),
     );
   });

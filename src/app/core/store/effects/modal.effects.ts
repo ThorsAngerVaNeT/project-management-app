@@ -13,7 +13,12 @@ export class ModalEffects {
   closeAllModals$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(BoardActions.createBoardSuccess, BoardActions.updateBoardSuccess),
+        ofType(
+          BoardActions.createBoardSuccess,
+          BoardActions.createBoardFailure,
+          BoardActions.updateBoardSuccess,
+          BoardActions.updateBoardFailure,
+        ),
         tap(() => {
           this.modalService.closeAll();
         }),
