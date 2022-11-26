@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { SearchComponent } from './search.component';
 
@@ -19,6 +20,7 @@ describe('SearchComponent', () => {
           },
         },
       ],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

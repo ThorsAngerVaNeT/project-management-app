@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockColumn1 } from '@mocks/mock-columns/mock-columns';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { ColumnComponent } from './column.component';
@@ -15,6 +16,7 @@ describe('ColumnComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ColumnComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
