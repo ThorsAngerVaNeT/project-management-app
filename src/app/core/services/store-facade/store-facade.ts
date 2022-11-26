@@ -30,7 +30,7 @@ import { Point, PointParams, PointUpdateParams } from '@points/model/point.model
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
-import { selectTaskIsLoading } from '@tasks/store/selectors/task.selectors';
+import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/task.selectors';
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 
 @Injectable({
@@ -76,6 +76,8 @@ export class StoreFacade {
   taskIsLoading$ = this.store.select(selectTaskIsLoading);
 
   cachedColumns$ = this.store.select(selectCachedColumns);
+
+  cachedTasks$ = this.store.select(selectCachedTasks);
 
   constructor(private store: Store) {}
 

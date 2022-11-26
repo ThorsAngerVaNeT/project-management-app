@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
+import { EntityState, Update } from '@ngrx/entity';
 import {
   ColumnTask,
   ColumnTaskParams,
@@ -72,12 +72,16 @@ export const updateTaskSuccess = createAction('[Tasks] Update Task Success', pro
 export const updateTaskFailure = createAction('[Tasks] Update Task Failure', props<{ error: unknown }>());
 
 export const updateTasksSet = createAction(
-  '[Tasks] Update Tasks Set',
+  '[Tasks] Update TasksSet',
   props<{ tasksParams: ColumnTaskSetUpdateParams[] }>(),
 );
 export const updateTasksSetSuccess = createAction(
-  '[Tasks] Update Tasks Success',
+  '[Tasks] Update TasksSet Success',
   props<{ tasks: Update<ColumnTask>[] }>(),
+);
+export const updateTasksSetFailure = createAction(
+  '[Columns] Update TasksSet Failure',
+  props<{ error: unknown; tasksState: EntityState<ColumnTask> }>(),
 );
 
 export const deleteTask = createAction(

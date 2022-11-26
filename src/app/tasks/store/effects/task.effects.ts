@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as TaskActions from '../actions/task.actions';
 import { TasksService } from '../../services/tasks.service';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
 export class TaskEffects {
-  constructor(private actions$: Actions, private tasksService: TasksService) {}
+  constructor(private actions$: Actions, private tasksService: TasksService, private storeFacade: StoreFacade) {}
 
   loadTasks$ = createEffect(() => {
     return this.actions$.pipe(
@@ -80,14 +81,19 @@ export class TaskEffects {
   updateTasksSet$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TaskActions.updateTasksSet),
-      concatMap(({ tasksParams }) => this.tasksService.updateTasksSet(tasksParams)),
-      map((tasks) =>
-        TaskActions.updateTasksSetSuccess({
-          tasks: tasks.map(({ _id: id, ...changes }) => ({
-            id,
-            changes,
-          })),
-        }),
+      concatLatestFrom(() => this.storeFacade.cachedTasks$),
+      concatMap(([{ tasksParams }, tasksState]) =>
+        this.tasksService.updateTasksSet(tasksParams).pipe(
+          map((tasks) =>
+            TaskActions.updateTasksSetSuccess({
+              tasks: tasks.map(({ _id: id, ...changes }) => ({
+                id,
+                changes,
+              })),
+            }),
+          ),
+          catchError((error) => of(TaskActions.updateTasksSetFailure({ error, tasksState }))),
+        ),
       ),
     );
   });

@@ -8,6 +8,7 @@ export const tasksFeatureKey = 'tasks';
 export interface TasksState extends EntityState<ColumnTask> {
   currentTaskId: ColumnTask['_id'];
   loading: boolean;
+  cachedTasks: EntityState<ColumnTask>;
 }
 
 export const adapter: EntityAdapter<ColumnTask> = createEntityAdapter<ColumnTask>({ selectId: (task) => task._id });
@@ -15,6 +16,10 @@ export const adapter: EntityAdapter<ColumnTask> = createEntityAdapter<ColumnTask
 export const initialState: TasksState = adapter.getInitialState({
   currentTaskId: '',
   loading: false,
+  cachedTasks: {
+    ids: [],
+    entities: {},
+  },
 });
 
 export const reducer = createReducer(
@@ -33,6 +38,7 @@ export const reducer = createReducer(
   on(TaskActions.updateTaskSuccess, (state, { task }) => adapter.updateOne(task, state)),
   on(TaskActions.updateTaskSuccess, (state): TasksState => ({ ...state, loading: false })),
   on(TaskActions.updateTaskFailure, (state): TasksState => ({ ...state, loading: false })),
+
   on(TaskActions.updateTasksSet, (state, { tasksParams }) => {
     const tasks = tasksParams.map(({ _id: id, ...changes }) => {
       const { _id, ...originalTask } = { ...state.entities[id] };
@@ -40,8 +46,16 @@ export const reducer = createReducer(
 
       return task;
     });
-    return adapter.updateMany(tasks, state);
+    return adapter.updateMany(tasks, {
+      ...state,
+      cachedTasks: { ids: state.ids.slice(), entities: { ...state.entities } },
+    });
   }),
+  on(
+    TaskActions.updateTasksSetFailure,
+    (state, { tasksState: { ids, entities } }): TasksState => ({ ...state, ids, entities }),
+  ),
+
   on(TaskActions.deleteTask, (state, { taskId }) => adapter.removeOne(taskId, state)),
   on(TaskActions.selectTask, (state, { taskId }): TasksState => ({ ...state, currentTaskId: taskId })),
 );
