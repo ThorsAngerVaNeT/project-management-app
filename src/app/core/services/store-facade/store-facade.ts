@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { environment } from '@environments/environment';
+// import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
 import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
@@ -10,7 +10,7 @@ import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, User, UserParams } from '@users/model/user.model';
 import * as BoardSelectors from '@boards/store/selectors/board.selectors';
-import * as fromFile from '@files/store/actions/file.actions';
+// import * as fromFile from '@files/store/actions/file.actions';
 import * as fromColumn from '@columns/store/actions/column.actions';
 import { Column, ColumnParams, ColumnSetUpdateParams } from '@columns/model/column.model';
 import {
@@ -109,7 +109,7 @@ export class StoreFacade {
     this.getBoard(boardId);
     this.getColumns(boardId);
     this.getTasksByBoard(boardId);
-    this.getFilesByBoard(boardId);
+    // this.getFilesByBoard(boardId);
   }
 
   getBoardsAllData(): void {
@@ -250,13 +250,13 @@ export class StoreFacade {
   //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
   // }
 
-  getFilesByTask(taskId: ColumnTask['_id']): void {
-    this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
-  }
+  // getFilesByTask(taskId: ColumnTask['_id']): void {
+  //   this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
+  // }
 
-  getFilesByBoard(boardId: Board['_id']): void {
-    this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
-  }
+  // getFilesByBoard(boardId: Board['_id']): void {
+  //   this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
+  // }
 
   // deleteFile(id: TaskFile['_id']): void {
   //   this.store.dispatch(fromFile.deleteFile({ id }));
@@ -302,9 +302,9 @@ export class StoreFacade {
     this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 
-  getBoardCovers(): void {
-    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
-  }
+  // getBoardCovers(): void {
+  //   this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  // }
 
   getBoardCoverStream(boardId: Board['_id']): Observable<string> {
     return this.store.select(selectBoardCoverUrl(boardId));

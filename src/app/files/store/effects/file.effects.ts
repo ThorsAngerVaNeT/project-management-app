@@ -34,16 +34,17 @@ export class FileEffects {
       ofType(FileActions.loadFilesByTask),
       switchMap(({ taskId }) => this.filesService.getFilesByTask(taskId)),
       map((files) => FileActions.loadFilesByTaskSuccess({ files })),
+      catchError((error) => of(BoardActions.loadMainPageDataFailure({ error }))),
     );
   });
 
-  loadFilesByBoard$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.loadFilesByBoard),
-      switchMap(({ boardId }) => this.filesService.getFilesByBoard(boardId)),
-      map((files) => FileActions.loadFilesByBoardSuccess({ files })),
-    );
-  });
+  // loadFilesByBoard$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(FileActions.loadFilesByBoard),
+  //     switchMap(({ boardId }) => this.filesService.getFilesByBoard(boardId)),
+  //     map((files) => FileActions.loadFilesByBoardSuccess({ files })),
+  //   );
+  // });
 
   addUploadedFileToState$ = createEffect(() => {
     return this.actions$.pipe(
