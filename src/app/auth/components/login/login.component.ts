@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
 import { Subscription } from 'rxjs';
-import { userSignInSuccess } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignInSuccess)).subscribe(() => {
+      this.action$.pipe(ofType()).subscribe(() => {
         this.router.navigate(['/boards']);
       }),
     );

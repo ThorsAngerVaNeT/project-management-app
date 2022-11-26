@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Actions, ofType } from '@ngrx/effects';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription, tap } from 'rxjs';
-import { deleteUserSuccess, updateUserFailed, updateUserSuccess } from '@users/store/actions/user.actions';
-import { userSignUpFailure, userSignUpSuccess } from '../../store/actions/user.actions';
+import { updateUserFailed } from '@users/store/actions/user.actions';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import '@angular/localize/init';
 import { User } from '../../../users/model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,10 +22,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
   isSaving = false;
 
   isDeleting = false;
-
-  @Input() buttonText?: string;
-
-  @Input() isEditing?: boolean;
 
   signUpForm!: FormGroup;
 
@@ -43,14 +39,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
   constructor(
     private storeFacade: StoreFacade,
     private action$: Actions,
-    private modal: NzModalRef,
     private modalService: NzModalService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      login: new FormControl(this.user ? this.user.login : '', [Validators.required, Validators.minLength(2)]),
+      name: new FormControl(this.user ? this.user.name : '', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', [
         Validators.required,
         Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
@@ -58,13 +54,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.action$.pipe(ofType(userSignUpSuccess, updateUserSuccess, deleteUserSuccess)).subscribe(() => {
-        this.handleCancel();
-      }),
-    );
-
-    this.subscription.add(
-      this.action$.pipe(ofType(userSignUpFailure, updateUserFailed)).subscribe(() => {
+      this.action$.pipe(ofType(updateUserFailed)).subscribe(() => {
         this.isSaving = false;
         this.login?.setErrors({ userAlreadyExists: true });
       }),
@@ -74,11 +64,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.signUpForm.valid) {
       this.isSaving = true;
-      if (this.isEditing) {
+      if (this.user._id) {
         this.editUser();
       } else {
         this.signUp();
       }
+      this.router.navigate(['/boards']);
     } else {
       Object.values(this.signUpForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -125,9 +116,5 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  handleCancel(): void {
-    this.modal.destroy();
   }
 }

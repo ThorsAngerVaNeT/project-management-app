@@ -29,12 +29,12 @@
           </div>
 
           <a i18n="@@AddNewBoard" (click)="showModal()">Add New Board</a>
-          <a i18n="@@editProfile" (click)="editProfile()">Edit Profile</a>
+          <a i18n="@@editProfile" [routerLink]="['/auth/sign-up']">Edit Profile</a>
           <a i18n="@@logOut" (click)="signOut()">Log Out</a>
         </ng-container>
 
         <ng-container *ngIf="!user._id" class="header__welcome_actions">
-          <a (click)="signUp()" i18n="@@sighUpLink">Sign Up</a>
+          <a [routerLink]="['/auth/sign-up']" i18n="@@sighUpLink">Sign Up</a>
           <a [routerLink]="['/auth/login']" i18n="@@logInLink">Login</a>
         </ng-container>
       </div>
@@ -59,14 +59,14 @@
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item i18n="@@editProfile" (click)="editProfile()">Edit Profile</li>
+            <li nz-menu-item i18n="@@editProfile" [routerLink]="['/auth/sign-up']">Edit Profile</li>
             <li nz-menu-item i18n="@@logOut" (click)="signOut()">Log Out</li>
           </ul>
         </nz-dropdown-menu>
       </div>
 
       <div class="header__welcome_actions" *ngIf="!user._id">
-        <span (click)="signUp()" i18n="@@sighUpLink">Sign Up</span>
+        <span [routerLink]="['/auth/sign-up']" i18n="@@sighUpLink">Sign Up</span>
         <span [routerLink]="['/auth/login']" i18n="@@logInLink">Login</span>
       </div>
     </div>
