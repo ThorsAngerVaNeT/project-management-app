@@ -65,7 +65,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .technologies nz-card {
@@ -98,15 +98,24 @@ h2 {
 
 
 .developers{
-  width: 70%;
-  padding: 24px;
-  background-color: #fff;
-  border-radius: 4px;
-  margin-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
 }
 
-.developers__image {
-  width: 300px;
-  border: 1px solid @background-color-medium;
-  border-radius: 4px;
+.developers .business-card{
+  width: 260px;
+}
+
+
+
+a {
+  color: @primary-color;
+}
+
+
+a:hover {
+  color: @primary-light;
 }
