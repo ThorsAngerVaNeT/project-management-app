@@ -29,8 +29,8 @@
     </div>
 
     <div class="header__welcome_actions" *ngIf="!user._id">
-      <span (click)="signUp()">Sign Up</span>
-      <span (click)="logIn()">Login</span>
+      <span (click)="signUp()" i18n="@@SignUpModalTitle">Sign Up</span>
+      <span (click)="logIn()" i18n="@@LoginModalTitle">Login</span>
     </div>
   </ng-container>
 </nz-header>

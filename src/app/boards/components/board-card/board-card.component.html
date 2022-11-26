@@ -10,7 +10,8 @@
   >
     <nz-card-meta
       nzTitle="{{ board.title }}"
-      nzDescription="Owner: {{ board.owner.name }}"
+      nzDescription="Owner {{ board.owner.name }}"
+      i18n-nzDescription="@@Owner"
       [routerLink]="routerLink"
     ></nz-card-meta>
   </nz-card>

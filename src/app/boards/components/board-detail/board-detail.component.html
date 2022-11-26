@@ -5,7 +5,7 @@
       <nz-page-header-title>{{ board.title }}</nz-page-header-title>
     </nz-page-header>
 
-    <div class="board-participants">
+    <div class="board-participants" i18n="@@BoardDetailParticipants">
       Participants: <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
     </div>
 

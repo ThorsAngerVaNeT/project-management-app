@@ -83,7 +83,8 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "localize": ["ru"]
             }
           },
           "defaultConfiguration": "production"

@@ -8,6 +8,10 @@
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
       <target>Вход</target></trans-unit>
       <trans-unit id="loginPlaceholder" datatype="html">
         <source>Login</source>
@@ -30,7 +34,7 @@
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">19,21</context>
         </context-group>
-      <target>Пожалуйста укажите логин</target></trans-unit>
+      <target>Пожалуйста, укажите логин</target></trans-unit>
       <trans-unit id="loginMinlengthErrorTip" datatype="html">
         <source>Login should be at least two characters long</source>
         <context-group purpose="location">
@@ -63,8 +67,8 @@
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">55,57</context>
         </context-group>
-      <target>Пожалуйста введите пароль</target></trans-unit>
-      <trans-unit id="passwordPatternErrorTip" datatype="html">
+      <target>Пожалуйста, введите пароль</target></trans-unit>
+      <trans-unit id="passwordLoginPatternErrorTip" datatype="html">
         <source>Please check your password for typos</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
@@ -74,7 +78,7 @@
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">58,60</context>
         </context-group>
-      <target>Пожалуйста проверьте правильность ввода пароля</target></trans-unit>
+      <target>Пожалуйста, проверьте правильность ввода пароля</target></trans-unit>
       <trans-unit id="LogInButton" datatype="html">
         <source>Log In</source>
         <context-group purpose="location">
@@ -88,14 +92,14 @@
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">2,11</context>
         </context-group>
-      <target>Пожалуйста введите логин и пароль. Надежный пароль должен: состоять минимум из 8 символов, включать заглавные, строчные буквы и цифры, а также содержать как минимум один специальный символ (! @ # ? ]  и т.д.)</target></trans-unit>
+      <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>Пожалуйста, введите логин (длиннее двух символов), имя и пароль.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>Надежный пароль должен:<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>состоять минимум из 8 символов<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>включать заглавные и строчные буквы<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>буквы и цифры<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>а также содержать как минимум один специальный символ (! @ # ? ]  и т.д.)<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/> </target></trans-unit>
       <trans-unit id="userAlreadyExistsErrorTip" datatype="html">
         <source>This user login already exists, please provide a new one</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">25,27</context>
         </context-group>
-      <target>Пользователь с таким логином уже существует, пожалуйста придумай новый логин</target></trans-unit>
+      <target>Пользователь с таким логином уже существует. Пожалуйста, придумайте новый логин</target></trans-unit>
       <trans-unit id="namePlaceholder" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
@@ -109,18 +113,14 @@
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
           <context context-type="linenumber">37,39</context>
         </context-group>
-      <target>Пожалуйста укажите имя</target></trans-unit>
-      <trans-unit id="SignUpButton" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ buttonText }}"/> </source>
+      <target>Пожалуйста, укажите имя</target></trans-unit>
+      <trans-unit id="passwordPatternErrorTip" datatype="html">
+        <source>Please check if your password complies with requirements above</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">71,73</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      <target></target></trans-unit>
+      <target>Пожалуйста, убедитесь что Ваш пароль соответствует требованиям, указанным выше</target></trans-unit>
       <trans-unit id="deleteUserText" datatype="html">
         <source>Delete your user account</source>
         <context-group purpose="location">
@@ -159,7 +159,7 @@
           <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
           <context context-type="linenumber">37,39</context>
         </context-group>
-      <target>Пожалуйста введите заголовок</target></trans-unit>
+      <target>Пожалуйста, введите заголовок</target></trans-unit>
       <trans-unit id="CreateBoardTitleMinlengthErrorTip" datatype="html">
         <source>Title should be 2-40 characters long</source>
         <context-group purpose="location">
@@ -180,7 +180,7 @@
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
           <context context-type="linenumber">26,27</context>
         </context-group>
-      <target>Пожалуйста выберите участников</target></trans-unit>
+      <target>Пожалуйста, выберите участников</target></trans-unit>
       <trans-unit id="CreateBoardImageTooltip" datatype="html">
         <source>What do you want to see on board cover</source>
         <context-group purpose="location">
@@ -188,6 +188,13 @@
           <context context-type="linenumber">46,47</context>
         </context-group>
       <target>Выберите обложку для вашей доски</target></trans-unit>
+      <trans-unit id="BoardImage" datatype="html">
+        <source>Board Image </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">49,51</context>
+        </context-group>
+      <target>Обложка доски</target></trans-unit>
       <trans-unit id="CreateBoardCancelText" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
@@ -202,6 +209,13 @@
           <context context-type="linenumber">58,60</context>
         </context-group>
       <target>Сохранить</target></trans-unit>
+      <trans-unit id="Owner" datatype="html">
+        <source>Owner <x id="INTERPOLATION" equiv-text="{{ board.owner.name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      <target>Владелец <x id="INTERPOLATION" equiv-text="{{ board.owner.name }}"/></target></trans-unit>
       <trans-unit id="OpenBoard" datatype="html">
         <source>Open the Board</source>
         <context-group purpose="location">
@@ -257,7 +271,14 @@
           <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.ts</context>
           <context context-type="linenumber">65</context>
         </context-group>
-      <target>К сожалению вы не являетесь участником этой доски. Пожалуйста свяжитесь с владельцем для получения доступа</target></trans-unit>
+      <target>К сожалению вы не являетесь участником этой доски. Пожалуйста, свяжитесь с владельцем для получения доступа</target></trans-unit>
+      <trans-unit id="BoardDetailParticipants" datatype="html">
+        <source> Participants: <x id="START_TAG_NZ_TAG" ctype="x-nz_tag" equiv-text="&lt;nz-tag class=&quot;user-tag&quot; *ngFor=&quot;let user of board.users&quot;&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/nz-t"/><x id="CLOSE_TAG_NZ_TAG" ctype="x-nz_tag" equiv-text="&lt;/di"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+      <target>Участники: <x id="START_TAG_NZ_TAG" ctype="x-nz_tag" equiv-text="&lt;nz-tag class=&quot;user-tag&quot; *ngFor=&quot;let user of board.users&quot;&gt;"/><x id="INTERPOLATION" equiv-text="&lt;/nz-t"/><x id="CLOSE_TAG_NZ_TAG" ctype="x-nz_tag" equiv-text="&lt;/di"/></target></trans-unit>
       <trans-unit id="AddNewColumn" datatype="html">
         <source>Add New Column</source>
         <context-group purpose="location">
@@ -304,7 +325,7 @@
           <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
           <context context-type="linenumber">11,13</context>
         </context-group>
-      <target>Пожалуйста укажите заголовок</target></trans-unit>
+      <target>Пожалуйста, укажите заголовок</target></trans-unit>
       <trans-unit id="CreateColumnTitleMaxlengthErrorTip" datatype="html">
         <source> Title should be 1-20 characters long </source>
         <context-group purpose="location">
@@ -396,7 +417,7 @@
           <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
           <context context-type="linenumber">12,14</context>
         </context-group>
-      <target>Пожалуйста укажите заголовок</target></trans-unit>
+      <target>Пожалуйста, укажите заголовок</target></trans-unit>
       <trans-unit id="CreatePointTitleMinlengthErrorTip" datatype="html">
         <source>Title should be 1-255 characters long</source>
         <context-group purpose="location">
@@ -456,8 +477,19 @@
       <trans-unit id="SignUpModalTitle" datatype="html">
         <source>Sign Up</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
           <context context-type="linenumber">27,24</context>
+        </context-group>
+      <target>Регистрация</target></trans-unit>
+      <trans-unit id="SignUpButton" datatype="html">
+        <source>Sign Up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       <target>Зарегистрироваться</target></trans-unit>
       <trans-unit id="EditProfileModalTitle" datatype="html">
@@ -515,7 +547,7 @@
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">8,10</context>
         </context-group>
-      <target>Пожалуйста укажите заголовок</target></trans-unit>
+      <target>Пожалуйста, укажите заголовок</target></trans-unit>
       <trans-unit id="TaskTitleMinlengthErrorTip" datatype="html">
         <source>Title should be 2-40 characters long</source>
         <context-group purpose="location">
@@ -536,7 +568,7 @@
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">27,29</context>
         </context-group>
-      <target>Пожалуйста укажите описание</target></trans-unit>
+      <target>Пожалуйста, укажите описание</target></trans-unit>
       <trans-unit id="TaskDescriptionMaxlengthErrorTip" datatype="html">
         <source>Description should be no more than 255 characters long</source>
         <context-group purpose="location">
@@ -557,14 +589,14 @@
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">43,44</context>
         </context-group>
-      <target>Пожалуйста укажите ответственного</target></trans-unit>
+      <target>Пожалуйста, укажите ответственного</target></trans-unit>
       <trans-unit id="TaskResponsibleRequiredErrorTip" datatype="html">
         <source>Please provide a responsible (task owner)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">53,56</context>
         </context-group>
-      <target>Пожалуйста укажите ответственного (владельца задачи)</target></trans-unit>
+      <target>Пожалуйста, укажите ответственного (владельца задачи)</target></trans-unit>
       <trans-unit id="CreateTaskParticipants" datatype="html">
         <source>Participants</source>
         <context-group purpose="location">
@@ -578,14 +610,14 @@
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">66,67</context>
         </context-group>
-      <target>Пожалуйста выберите участников</target></trans-unit>
+      <target>Пожалуйста, выберите участников</target></trans-unit>
       <trans-unit id="TaskParticipantsRequiredErrorTip" datatype="html">
         <source>Please provide the participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
           <context context-type="linenumber">85,88</context>
         </context-group>
-      <target>Пожалуйста укажите участников</target></trans-unit>
+      <target>Пожалуйста, укажите участников</target></trans-unit>
       <trans-unit id="CreateTaskChecklist" datatype="html">
         <source>Task Checklist</source>
         <context-group purpose="location">
