@@ -25,6 +25,9 @@ export class MainPageComponent implements OnInit {
   }
 
   showModal(): void {
-    this.modalService.create({ nzContent: BoardAddComponent });
+    this.modalService.create({
+      nzTitle: $localize`:@@CreateBoardModalTitle:Create Board`,
+      nzContent: BoardAddComponent,
+    });
   }
 }

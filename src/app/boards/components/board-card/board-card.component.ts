@@ -40,7 +40,11 @@ export class BoardCardComponent implements OnInit {
   }
 
   editBoard(): void {
-    this.modalService.create({ nzContent: BoardAddComponent, nzComponentParams: { board: this.board } });
+    this.modalService.create({
+      nzTitle: $localize`:@@EditBoardModalTitle:Edit Board`,
+      nzContent: BoardAddComponent,
+      nzComponentParams: { board: this.board },
+    });
   }
 
   removeBoard(): void {
