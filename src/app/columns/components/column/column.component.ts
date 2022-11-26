@@ -27,7 +27,7 @@ export class ColumnComponent implements OnInit {
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
-    this.titleControl = new FormControl('', Validators.required);
+    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   }
 
   toggleEdit(): void {

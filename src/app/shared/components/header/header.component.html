@@ -54,7 +54,7 @@
         </nz-radio-group>
 
         <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-          {{ user.name }}
+          <span class="header__user-name">{{ user.name }}</span>
           <span nz-icon nzType="down"></span>
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu">

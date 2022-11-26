@@ -2,7 +2,7 @@
   <h1 class="auth-heading">{{ user._id ? 'Edit Profile' : 'Sign Up' }}</h1>
 
   <div class="password-requirements" i18n="@@passwordRequirements">
-    <p>Please provide login (more than two characters), name and a strong password.</p>
+    <p>Please provide login (2-20), name and a strong password.</p>
     <p>For your safety password should be:</p>
     <ul>
       <li>at least 8 characters</li>
@@ -44,6 +44,11 @@
         <ng-template #nameErrorTip>
           <ng-container *ngIf="name?.hasError('required')" i18n="@@nameRequiredErrorTip"
             >Please provide a name</ng-container
+          >
+          <ng-container
+            *ngIf="name?.hasError('maxlength') || name?.hasError('minlength')"
+            i18n="@@nameMinlengthErrorTip"
+            >Name should be 2-20 characters long</ng-container
           >
         </ng-template>
       </nz-form-control>

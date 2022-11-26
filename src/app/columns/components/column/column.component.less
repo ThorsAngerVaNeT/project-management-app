@@ -15,6 +15,10 @@
 .title-to-input h3 {
   margin: 0;
   line-height: 32px;
+  
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .title-to-input h3:hover {
@@ -43,4 +47,11 @@
 
 .ant-card-head {
   background-color: @background-color-xlight;
+}
+
+@media (max-width: @tablet-max-width) {
+  .project__column {
+    width: 260px;
+    min-width: auto;
+  }
 }
