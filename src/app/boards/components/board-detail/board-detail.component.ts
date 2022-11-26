@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ColumnAddComponent } from '@columns/components/column-add/column-add.component';
+import '@angular/localize/init';
 
 @Component({
   selector: 'app-board',
@@ -15,7 +16,7 @@ import { ColumnAddComponent } from '@columns/components/column-add/column-add.co
   styleUrls: ['./board-detail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardDetailComponent implements OnInit {
+export class BoardDetailComponent implements OnInit, OnDestroy {
   boardId!: string;
 
   columnsCount!: number;
@@ -29,18 +30,24 @@ export class BoardDetailComponent implements OnInit {
 
   boardCoverUrl$!: Observable<string>;
 
+  subscription = new Subscription();
+
   constructor(private route: ActivatedRoute, private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.storeFacade.getUsers();
-    this.route.params
-      .subscribe((param) => {
+    this.subscription.add(
+      this.route.params.subscribe((param) => {
         const { boardId } = param;
         this.boardId = boardId;
         this.storeFacade.getBoardAllData(boardId);
         this.boardCoverUrl$ = this.storeFacade.getBoardCoverStream(boardId);
-      })
-      .unsubscribe();
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   addNewColumn(): void {
