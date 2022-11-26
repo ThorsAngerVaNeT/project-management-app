@@ -11,10 +11,7 @@
 
   <ng-container *ngIf="user$ | async as user">
     <div class="header__right-group" *ngIf="user._id">
-      <nz-radio-group class="header__lang-switch" nzSize="small">
-        <label nz-radio-button nzValue="RU">RU</label>
-        <label nz-radio-button nzValue="EN">EN</label>
-      </nz-radio-group>
+      <app-language-switcher></app-language-switcher>
 
       <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
         {{ user.name }}
