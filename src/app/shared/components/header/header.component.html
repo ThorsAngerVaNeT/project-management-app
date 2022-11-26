@@ -10,13 +10,6 @@
   </div>
 
   <ng-container *ngIf="user$ | async as user">
-    <nz-input-group [nzSuffix]="suffixIconSearch" class="header__search-field" *ngIf="user._id">
-      <input type="text" nz-input placeholder="Search" i18n-placeholder="@@inputSearchPlaceholder" />
-    </nz-input-group>
-    <ng-template #suffixIconSearch>
-      <span nz-icon nzType="search"></span>
-    </ng-template>
-
     <div class="header__right-group" *ngIf="user._id">
       <nz-radio-group class="header__lang-switch" nzSize="small">
         <label nz-radio-button nzValue="RU">RU</label>
