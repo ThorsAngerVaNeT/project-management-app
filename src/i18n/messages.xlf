@@ -2,286 +2,637 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="SignInModalTitle" datatype="html">
+      <trans-unit id="LoginModalTitle" datatype="html">
         <source>Login</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="userNameErrorTip" datatype="html">
-        <source>Please provide your username</source>
+      <trans-unit id="loginPlaceholder" datatype="html">
+        <source>Login</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="userNamePlaceholder" datatype="html">
-        <source>Username</source>
+      <trans-unit id="loginRequiredErrorTip" datatype="html">
+        <source>Please provide a login</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">19,21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="passwordErrorTip" datatype="html">
-        <source>Please provide your password</source>
+      <trans-unit id="loginMinlengthErrorTip" datatype="html">
+        <source>Login should be at least two characters long</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordPlaceholder" datatype="html">
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="passwordRequiredErrorTip" datatype="html">
+        <source>Please provide a password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">55,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="passwordPatternErrorTip" datatype="html">
+        <source>Please check your password for typos</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">58,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="LogInButton" datatype="html">
         <source>Log In</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/login/login.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="SignUpModalTitle" datatype="html">
-        <source>Sign Up</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordRequirements" datatype="html">
-        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>To sign up please provide username (more than two characters) and a strong password.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>For your safety password should be:<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>at least 8 characters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both uppercase and lowercase letters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both letters and numbers<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>contain at least one special character, e.g., ! @ # ? ]<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/></source>
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>Please provide login (more than two characters), name and a strong password.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>For your safety password should be:<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>at least 8 characters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both uppercase and lowercase letters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>both letters and numbers<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li&gt;"/>contain at least one special character, e.g., ! @ # ? ]<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li&gt;"/><x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">11,18</context>
+          <context context-type="linenumber">2,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="userAlreadyExistsErrorTip" datatype="html">
+        <source>This user login already exists, please provide a new one</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="namePlaceholder" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nameRequiredErrorTip" datatype="html">
+        <source>Please provide a name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="SignUpButton" datatype="html">
-        <source>Sign Up</source>
+        <source> <x id="INTERPOLATION" equiv-text="{{ buttonText }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">71,73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateBoardModalTitle" datatype="html">
-        <source>Create Board</source>
+      <trans-unit id="deleteUserText" datatype="html">
+        <source>Delete your user account</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">76,78</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateBoardCancelText" datatype="html">
-        <source>Cancel</source>
+      <trans-unit id="deleteUserButton" datatype="html">
+        <source> Delete Forever </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.html</context>
+          <context context-type="linenumber">85,88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="itemToDeleteYourAccount" datatype="html">
+        <source>your account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/components/sign-up/sign-up.component.ts</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardTitle" datatype="html">
         <source>Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">3,4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateBoardnzErrorTip" datatype="html">
-        <source>Title is required</source>
+      <trans-unit id="CreateBoardTitleRequiredErrorTip" datatype="html">
+        <source>Please provide a title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardTitleMinlengthErrorTip" datatype="html">
+        <source>Title should be 2-40 characters long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">14,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardParticipants" datatype="html">
         <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardTeamMembers" datatype="html">
         <source>Please select team members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateBoardImageTooltip" datatype="html">
         <source>What do you want to see on board cover</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardCancelText" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardOkText" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
+          <context context-type="linenumber">58,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="OpenBoard" datatype="html">
+        <source>Open the Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditBoard" datatype="html">
+        <source>Edit the Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DeleteBoard" datatype="html">
+        <source>Delete the Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AccessDenied" datatype="html">
+        <source>Access Denied</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditBoardModalTitle" datatype="html">
+        <source>Edit Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.ts</context>
+          <context context-type="linenumber">44,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="itemToDeleteThisBoard" datatype="html">
+        <source>this board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.ts</context>
           <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Upload" datatype="html">
-        <source>Drag or click to upload</source>
+      <trans-unit id="AccessDeniedModalTitle" datatype="html">
+        <source>Access Denied</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board-add/board-add.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.ts</context>
+          <context context-type="linenumber">64,63</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="AddNewTask1" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      <trans-unit id="AccessDeniedModalContent" datatype="html">
+        <source>Sorry, but you&apos;re not a participant of this board. Please contact the owner to get access!</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AddNewTask2" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="sourcefile">src/app/boards/components/board-card/board-card.component.ts</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewColumn" datatype="html">
         <source>Add New Column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.html</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateColumnModalTitle" datatype="html">
+        <source>Create Column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/board-detail/board-detail.component.ts</context>
+          <context context-type="linenumber">55,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewBoard" datatype="html">
         <source>Add New Board</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/boards/components/main-page/main-page.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateBoardModalTitle" datatype="html">
+        <source>Create Board</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/boards/components/main-page/main-page.component.ts</context>
+          <context context-type="linenumber">29,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2424494401750416921" datatype="html">
+        <source>Column Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">Column Title</note>
+      </trans-unit>
+      <trans-unit id="CreateColumnTitleRequiredErrorTip" datatype="html">
+        <source> Please provide a title </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateColumnTitleMaxlengthErrorTip" datatype="html">
+        <source> Title should be 1-20 characters long </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CancelButtonText" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SaveButtonText" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column-add/column-add.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditColumnTitleTooltip" datatype="html">
+        <source>Edit column title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DeleteColumnTooltip" datatype="html">
+        <source>Delete column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SaveButtonTooltip" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CancelButtonTooltip" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="AddNewTask" datatype="html">
         <source>Add New Task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/columns/components/column/column.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="itemToDeleteThisColumn" datatype="html">
+        <source>this column</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskModalTitle" datatype="html">
+        <source>Create Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/columns/components/column/column.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CheckpointTitleInputPlaceholder" datatype="html">
+        <source>Checkpoint Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreatePointTitleRequiredErrorTip" datatype="html">
+        <source> Please provide a title </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
+          <context context-type="linenumber">12,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreatePointTitleMinlengthErrorTip" datatype="html">
+        <source>Title should be 1-255 characters long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-add/point-add.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CheckPointTooltip" datatype="html">
+        <source>Check/Uncheck checkpoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-item/point-item.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditPointTooltip" datatype="html">
+        <source>Edit checkpoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-item/point-item.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DeletePointTooltip" datatype="html">
+        <source>Delete checkpoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/points/components/point-item/point-item.component.html</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirmationTitle" datatype="html">
-        <source> Are you sure?</source>
+        <source>Are you sure?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.html</context>
+          <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirmationText" datatype="html">
-        <source> Are you sure you want to delete</source>
+        <source>Are you sure you want to delete <x id="INTERPOLATION" equiv-text="{{ itemToDelete }}"/>?</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.ts</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="inputSearchPlaceholder" datatype="html">
-        <source>Search</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="sourcefile">src/app/shared/components/confirmation/confirmation.component.html</context>
+          <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
       <trans-unit id="editProfile" datatype="html">
         <source>Edit Profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="logOut" datatype="html">
         <source>Log Out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/header/header.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">26,28</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskModalTitle" datatype="html">
-        <source>Create Task</source>
+      <trans-unit id="SignUpModalTitle" datatype="html">
+        <source>Sign Up</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
+          <context context-type="linenumber">27,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskCancelText" datatype="html">
-        <source>Cancel</source>
+      <trans-unit id="EditProfileModalTitle" datatype="html">
+        <source>Edit Profile</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
+          <context context-type="linenumber">42,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditProfileSaveButton" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/header/header.component.ts</context>
+          <context context-type="linenumber">44,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SearchInputPlaceholder" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/search/search.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskTitle" datatype="html">
-        <source>Title</source>
+      <trans-unit id="inputSearchLabel" datatype="html">
+        <source>search result:</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">src/app/shared/components/search/search.component.html</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskErrorTip" datatype="html">
-        <source>Title is required</source>
+      <trans-unit id="SearchByIdsLabel" datatype="html">
+        <source>by task number</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="sourcefile">src/app/shared/components/search/search.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskDescription" datatype="html">
+      <trans-unit id="SearchByKeyWordsLabel" datatype="html">
+        <source>by key words</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/search/search.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskTitle" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskTitleRequiredErrorTip" datatype="html">
+        <source>Please provide a title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskTitleMinlengthErrorTip" datatype="html">
+        <source>Title should be 2-40 characters long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskDescription" datatype="html">
         <source>Description</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">21,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskResponsible" datatype="html">
+      <trans-unit id="TaskDescriptionRequiredErrorTip" datatype="html">
+        <source>Please provide a description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">27,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskDescriptionMaxlengthErrorTip" datatype="html">
+        <source>Description should be no more than 255 characters long</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">30,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskResponsible" datatype="html">
         <source>Responsible</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskResponsiblePlaceHolder" datatype="html">
-        <source>Please select responsible person</source>
+        <source>Please select a responsible person</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskResponsibleRequiredErrorTip" datatype="html">
+        <source>Please provide a responsible (task owner)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">53,56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskParticipants" datatype="html">
         <source>Participants</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">61,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskParticipantsPlaceHolder" datatype="html">
         <source>Please select team members</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="TaskParticipantsRequiredErrorTip" datatype="html">
+        <source>Please provide the participants</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="CreateTaskChecklist" datatype="html">
         <source>Task Checklist</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="CreateTaskAddSubTask" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span nz-icon nzType=&quot;plus&quot;&gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> Add Subtask </source>
+      <trans-unit id="CreateTaskCancelText" datatype="html">
+        <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
-          <context context-type="linenumber">89,91</context>
+          <context context-type="linenumber">105,106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CreateTaskOkText" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-add/task-add.component.html</context>
+          <context context-type="linenumber">106,108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditTaskTooltip" datatype="html">
+        <source>Edit task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="DeleteTaskTooltip" datatype="html">
+        <source>Delete task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="EditTaskModalTitle" datatype="html">
+        <source>Edit Task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-item/task-item.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="itemToDeleteThisTask" datatype="html">
+        <source>&apos;this task</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/tasks/components/task-item/task-item.component.ts</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
     </body>
