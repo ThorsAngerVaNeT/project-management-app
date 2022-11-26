@@ -36,7 +36,6 @@ export const reducer = createReducer(
   // on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   on(BoardActions.createBoardSuccess, (state, { board }) => adapter.addOne(board, state)),
   on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
-  on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
   on(BoardActions.deleteBoard, (state, { id }) =>
     adapter.removeOne(id, { ...state, cachedBoards: { ids: state.ids.slice(), entities: { ...state.entities } } }),
   ),

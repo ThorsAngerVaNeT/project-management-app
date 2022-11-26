@@ -33,7 +33,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.router.navigateByUrl('/');
           } else {
             if (!request.url.includes(APIEndpoints.auth)) {
-              this.notification.create('error', 'Something went wrong...', error.message);
+              this.notification.create(
+                'error',
+                'Error',
+                `Something went wrong...
+              Please try later.
+              See console for details.`,
+              );
             }
             return error;
           }

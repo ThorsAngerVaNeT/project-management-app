@@ -18,11 +18,6 @@ export class ErrorHandlerService implements ErrorHandler {
       errorMessage += error.message;
     }
 
-    this.ngZone.run(() =>
-      this.modalService.error({
-        nzTitle: 'ERROR',
-        nzContent: errorMessage,
-      }),
-    );
+    console.log(errorMessage);
   }
 }
