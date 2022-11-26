@@ -1,5 +1,5 @@
 import { Action, ActionReducer, createReducer, MetaReducer, on } from '@ngrx/store';
-import * as AuthActions from '../actions/user.actions';
+import * as AuthActions from '../actions/auth.actions';
 import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface UserState {

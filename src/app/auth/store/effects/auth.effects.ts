@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
-import * as AuthActions from '../actions/user.actions';
+import * as AuthActions from '../actions/auth.actions';
 import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
