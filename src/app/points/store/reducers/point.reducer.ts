@@ -30,6 +30,7 @@ export const reducer = createReducer(
   // on(PointActions.loadPointsSetSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
   // on(PointActions.loadPointsByUserSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
   on(PointActions.loadPointsByTaskSuccess, (state, { points }) => adapter.setAll(points, { ...state, loading: false })),
+  on(PointActions.loadPointsByTaskFailure, (state): PointsState => ({ ...state, loading: false })),
   on(PointActions.createPointSuccess, (state, { point }) => adapter.addOne(point, state)),
   on(PointActions.updatePointSuccess, (state, { point }) => adapter.updateOne(point, state)),
   // on(PointActions.updatePointsSetSuccess, (state, { points }) => adapter.updateMany(points, state)),

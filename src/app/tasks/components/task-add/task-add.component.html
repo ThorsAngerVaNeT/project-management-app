@@ -103,7 +103,13 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()" i18n="@@CreateTaskCancelText">Cancel</button>
-    <button nz-button nzType="primary" [nzLoading]="isLoading$ | async" (click)="handleOk()" i18n="@@CreateTaskOkText">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="taskIsLoading$ | async"
+      (click)="handleOk()"
+      i18n="@@CreateTaskOkText"
+    >
       Save
     </button>
   </ng-template>

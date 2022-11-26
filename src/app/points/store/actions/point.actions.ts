@@ -18,6 +18,7 @@ export const loadPointsByTaskSuccess = createAction(
   '[Point] Load Points By Task Success',
   props<{ points: Point[] }>(),
 );
+export const loadPointsByTaskFailure = createAction('[Point] Load Points By Task Failure', props<{ error: unknown }>());
 
 export const createPoint = createAction('[Point] Create Point', props<{ point: PointParams }>());
 export const createPointSuccess = createAction('[Point] Create Point Success', props<{ point: Point }>());

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { map, concatMap, switchMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import * as PointActions from '../actions/point.actions';
 import { PointsService } from '../../services/points.service';
 import * as TaskActions from '@tasks/store/actions/task.actions';
@@ -31,6 +32,7 @@ export class PointEffects {
       ofType(PointActions.loadPointsByTask),
       switchMap(({ taskId }) => this.pointsService.getPointsByTask(taskId)),
       map((points) => PointActions.loadPointsByTaskSuccess({ points })),
+      catchError((error) => of(PointActions.loadPointsByTaskFailure({ error }))),
     );
   });
 
