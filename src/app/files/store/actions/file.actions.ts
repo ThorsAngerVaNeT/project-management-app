@@ -31,6 +31,7 @@ export const uploadFileFailure = createAction('[Files] Add File Failure', props<
 
 // export const deleteFile = createAction('[Files] Delete File', props<{ id: TaskFile['_id'] }>());
 // export const deleteFileSuccess = createAction('[Files] Delete File Success', props<{ id: TaskFile['_id'] }>());
+// export const deleteFileFailure = createAction('[Files] Delete File Failure', props<{ error: unknown }>());
 
 export const deleteFileBeforeUpload = createAction(
   '[Files] Delete File Before Upload',
@@ -40,10 +41,10 @@ export const deleteFileBeforeUploadSuccess = createAction(
   '[Files] Delete File Before Upload Success',
   props<{ id: TaskFile['_id'] }>(),
 );
-export const deleteFileBeforeUploadFailure = createAction(
-  '[Files] Delete File Before Upload Failure',
-  props<{ error: unknown }>(),
-);
+// export const deleteFileBeforeUploadFailure = createAction(
+//   '[Files] Delete File Before Upload Failure',
+//   props<{ error: unknown }>(),
+// );
 
 export const addFileToStoreBeforeUploadSuccess = createAction(
   '[Files] Add File To Store Before Upload Success',

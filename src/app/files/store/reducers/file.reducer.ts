@@ -25,7 +25,7 @@ export const reducer = createReducer(
     FileActions.loadFilesByBoardSuccess,
     (state, { files }) => adapter.setAll(files, state),
   ),
-  // on(FileActions.addFileToStoreBeforeUploadSuccess, (state, { fileToState }) => adapter.addOne(fileToState, state)),
+  on(FileActions.addFileToStoreBeforeUploadSuccess, (state, { fileToState }) => adapter.addOne(fileToState, state)),
   on(FileActions.uploadFileSuccess, (state, { file }) => adapter.addOne(file, state)),
   on(FileActions.uploadFileSuccess, FileActions.uploadFileFailure, (state) => adapter.removeOne('', state)),
 );

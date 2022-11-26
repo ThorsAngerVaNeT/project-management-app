@@ -70,18 +70,19 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.addFileToStoreBeforeUploadSuccess),
       concatMap(({ fileParams: { boardId, taskId, file, filename } }) =>
-        this.filesService.uploadFile(boardId, taskId, file, filename).pipe(
-          map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
-          catchError((error) => of(FileActions.uploadFileFailure({ error }))),
-        ),
+        this.filesService.uploadFile(boardId, taskId, file, filename),
       ),
+      map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
+      catchError((error) => of(FileActions.uploadFileFailure({ error }))),
     );
   });
 
   // deleteFile$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(FileActions.deleteFile),
-  //     concatMap(({ id }) => this.filesService.deleteFile(id).pipe(map(() => FileActions.deleteFileSuccess({ id })))),
+  //     concatMap(({ id }) => this.filesService.deleteFile(id)),
+  //     map(({ _id: id }) => FileActions.deleteFileSuccess({ id })),
+  //     // catchError((error) => of(FileActions.deleteFileFailure({ error }))),
   //   );
   // });
 
@@ -142,12 +143,9 @@ export class FileEffects {
   deleteFileBeforeUpload$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.deleteFileBeforeUpload),
-      concatMap(({ id: fileId }) =>
-        this.filesService.deleteFile(fileId).pipe(
-          map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
-          catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
-        ),
-      ),
+      concatMap(({ id: fileId }) => this.filesService.deleteFile(fileId)),
+      map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
+      // catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
     );
   });
 
