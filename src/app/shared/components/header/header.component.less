@@ -122,7 +122,6 @@
 }
 
 .burger__menu {
-  display: none;
   position: absolute;
   top: 64px;
   right: 0;
@@ -168,23 +167,12 @@
   .header__right-group-wrapper {
     display: none;
   }
+}
+
+@media (max-width: @mobile-max-width) {
   .burger__toggler {
     display: flex;
   }
-
-  #burger__id{
-    display: none;
-  }
-
-  #burger__id:checked ~ .burger__menu {
-    display: flex;
-  }
-
-  #burger__id:checked ~ #burger__icon {
-    transform: rotate(90deg);
-    transition: all 0.3s;
-  }
-
 }
 
 //  /burger

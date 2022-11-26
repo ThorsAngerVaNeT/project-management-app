@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import '@angular/localize/init';
 import { BoardAddComponent } from '@boards/components/board-add/board-add.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +11,20 @@ import { BoardAddComponent } from '@boards/components/board-add/board-add.compon
   styleUrls: ['./header.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   user$ = this.storeFacade.user$;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  burgerVisible = false;
+
+  constructor(private storeFacade: StoreFacade, private modalService: NzModalService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe(() => (this.burgerVisible = false));
+  }
+
+  burgerToggle(): void {
+    this.burgerVisible = !this.burgerVisible;
+  }
 
   signOut(): void {
     this.storeFacade.signOut();

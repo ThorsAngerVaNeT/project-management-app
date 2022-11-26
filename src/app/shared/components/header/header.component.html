@@ -14,10 +14,9 @@
     <!-- burger -->
 
     <div class="burger__toggler">
-      <input type="checkbox" id="burger__id" />
-      <label for="burger__id" id="burger__icon"><span nz-icon nzType="menu"></span> </label>
+      <span (click)="burgerToggle()" for="burger__id" id="burger__icon"><span nz-icon nzType="menu"></span></span>
 
-      <div class="burger__menu">
+      <div class="burger__menu" *ngIf="burgerVisible">
         <ng-container *ngIf="user._id">
           <div class="burger__controls">
             <nz-radio-group class="header__lang-switch" nzSize="small">
