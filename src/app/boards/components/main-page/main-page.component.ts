@@ -13,6 +13,10 @@ import { BoardAddComponent } from '../board-add/board-add.component';
 export class MainPageComponent implements OnInit {
   boards$ = this.storeFacade.boards$;
 
+  boardsLoading$ = this.storeFacade.boardsLoading$;
+
+  boardsLoaded$ = this.storeFacade.boardsLoaded$;
+
   constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
 
   ngOnInit(): void {
@@ -20,6 +24,9 @@ export class MainPageComponent implements OnInit {
   }
 
   showModal(): void {
-    this.modalService.create({ nzContent: BoardAddComponent });
+    this.modalService.create({
+      nzTitle: $localize`:@@CreateBoardModalTitle:Create Board`,
+      nzContent: BoardAddComponent,
+    });
   }
 }

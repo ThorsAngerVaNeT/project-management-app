@@ -18,12 +18,16 @@ export const initialState: FilesState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  // on(FileActions.loadFilesSetSuccess, (state, { files }) => adapter.setAll(files, state)),
-  // on(FileActions.loadFilesByUserSuccess, (state, { files }) => adapter.setAll(files, state)),
-  on(FileActions.loadFilesByTaskSuccess, (state, { files }) => adapter.setAll(files, state)),
-  // on(FileActions.loadFilesByBoardSuccess, (state, { files }) => adapter.setAll(files, state)),
+  on(
+    // FileActions.loadFilesSetSuccess,
+    // FileActions.loadFilesByUserSuccess,
+    FileActions.loadFilesByTaskSuccess,
+    FileActions.loadFilesByBoardSuccess,
+    (state, { files }) => adapter.setAll(files, state),
+  ),
+  // on(FileActions.addFileToStoreBeforeUploadSuccess, (state, { fileToState }) => adapter.addOne(fileToState, state)),
   on(FileActions.uploadFileSuccess, (state, { file }) => adapter.addOne(file, state)),
-  // on(FileActions.deleteFileSuccess, (state, { id }) => adapter.removeOne(id, state)),
+  on(FileActions.uploadFileSuccess, FileActions.uploadFileFailure, (state) => adapter.removeOne('', state)),
 );
 
 export const {

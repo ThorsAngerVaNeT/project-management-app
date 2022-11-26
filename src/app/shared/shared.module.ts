@@ -31,6 +31,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultEffects } from '@tasks/store/effects/search-result.effects';
 import * as fromSearchResult from '@tasks/store/reducers/search-result.reducer';
@@ -56,6 +57,7 @@ const MODULES = [
   NzCardModule,
   NzModalModule,
   NzSpinModule,
+  NzNotificationModule,
 
   CommonModule,
   FormsModule,

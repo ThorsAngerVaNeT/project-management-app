@@ -1,5 +1,5 @@
-import { userSignIn } from '../actions/user.actions';
-import { userReducer, initialState } from './user.reducer';
+import { userSignIn } from '../actions/auth.actions';
+import { userReducer, initialState } from './auth.reducer';
 
 describe('User Reducer', () => {
   describe('an unknown action', () => {
