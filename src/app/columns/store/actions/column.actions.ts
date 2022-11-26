@@ -27,6 +27,7 @@ export const createColumn = createAction(
   props<{ boardId: Board['_id']; column: ColumnParams }>(),
 );
 export const createColumnSuccess = createAction('[Columns] Add Column Success', props<{ column: Column }>());
+export const createColumnFailure = createAction('[Columns] Add Column Failure', props<{ error: unknown }>());
 
 // export const createColumnsSet = createAction('[Columns] Add ColumnsSet', props<{ columns: ColumnsSetParams[] }>());
 // export const createColumnsSetSuccess = createAction('[Columns] Add ColumnsSet Success', props<{ columns: Column[] }>());
