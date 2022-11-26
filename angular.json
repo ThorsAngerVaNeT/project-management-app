@@ -20,14 +20,6 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "i18n": {
-        "sourceLocale": "en",
-        "locales": {
-          "ru": {
-            "translation": "src/i18n/messages.ru.xlf"
-          }
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -52,8 +44,7 @@
               "includePaths": ["src"]
             },
             "scripts": [],
-            "allowedCommonJsDependencies": ["deepmerge"],
-            "localize": true
+            "allowedCommonJsDependencies": ["deepmerge"]
           },
           "configurations": {
             "production": {
@@ -83,8 +74,7 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "localize": ["ru"]
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
