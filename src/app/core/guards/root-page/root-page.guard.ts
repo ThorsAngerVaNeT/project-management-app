@@ -15,7 +15,7 @@ export class RootPageGuard implements CanActivate {
 
   constructor(private router: Router, private storeFacade: StoreFacade) {}
 
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Observable<boolean | UrlTree> {
     return this.isLoggedIn$;
   }
 }
