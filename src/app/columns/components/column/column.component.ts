@@ -68,6 +68,8 @@ export class ColumnComponent implements OnInit {
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
       nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 

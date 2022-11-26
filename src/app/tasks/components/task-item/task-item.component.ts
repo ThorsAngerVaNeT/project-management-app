@@ -25,6 +25,8 @@ export class TaskItemComponent {
       nzContent: TaskAddComponent,
       nzComponentParams: { task: this.task },
       nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 
