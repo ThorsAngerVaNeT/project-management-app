@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
 import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
@@ -72,20 +72,23 @@ export class StoreFacade {
   authError$ = this.store.select(selectAuthError);
 
   isLoggedIn$ = this.user$.pipe(
-    filter((user) => user?._id !== undefined),
     map((user) => {
-      if (user._id === '') {
+      try {
+        if (!user?.token) {
+          return false;
+        }
+
+        const { exp } = this.decodeToken(user.token);
+
+        if (exp * 1000 <= Date.now()) {
+          this.signOut();
+          return false;
+        }
+
+        return true;
+      } catch {
         return false;
       }
-
-      const { exp } = this.decodeToken(user.token);
-
-      if (exp * 1000 <= Date.now()) {
-        this.signOut();
-        return false;
-      }
-
-      return true;
     }),
   );
 
