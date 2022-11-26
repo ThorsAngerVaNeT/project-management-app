@@ -61,14 +61,14 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <button nz-button nzType="primary" i18n="@@SignUpButton" [nzLoading]="isSaving" [disabled]="!signUpForm.valid">
+    <button nz-button nzType="primary" i18n="@@SignUpButton" [nzLoading]="isLoading" [disabled]="!signUpForm.valid">
       {{ buttonText }}
     </button>
   </nz-form-item>
 </form>
 <div class="delete-block" *ngIf="isEditing">
   <div i18n="@@deleteUserText">Delete your user account</div>
-  <button nz-button nzDanger [nzLoading]="isDeleting" i18n="@@deleteUserButton" (click)="deleteUser()">
+  <button nz-button nzDanger [nzLoading]="isLoading" i18n="@@deleteUserButton" (click)="deleteUser()">
     Delete Forever
   </button>
 </div>

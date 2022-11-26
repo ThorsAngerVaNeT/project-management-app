@@ -7,6 +7,8 @@ export interface UserState {
   name: string;
   login: string;
   token: string;
+  loading: boolean;
+  error: string;
 }
 
 export const initialState: UserState = {
@@ -14,17 +16,36 @@ export const initialState: UserState = {
   name: '',
   login: '',
   token: '',
+  loading: false,
+  error: '',
 };
 
 export const userReducer = createReducer(
   initialState,
-  on(AuthActions.userSignIn, (state: UserState, { data: { login } }): UserState => ({ ...state, login })),
+  on(AuthActions.userSignIn, (state: UserState, { data: { login } }): UserState => ({ ...state, login, error: '' })),
   on(
     AuthActions.userSignInSuccess,
-    (state: UserState, { token, payload: { id, login } }): UserState => ({ ...state, token, _id: id, login }),
+    (state: UserState, { token, payload: { id, login } }): UserState => ({
+      ...state,
+      token,
+      _id: id,
+      login,
+      error: '',
+    }),
   ),
   on(AuthActions.userSignOut, (): UserState => ({ ...initialState })),
-  on(AuthActions.userSignUpSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
+  on(
+    AuthActions.userSignUp,
+    (state: UserState, { data: { name, login } }): UserState => ({ ...state, name, login, loading: true, error: '' }),
+  ),
+  on(
+    AuthActions.userSignUpSuccess,
+    (state: UserState, { user }): UserState => ({ ...state, ...user, loading: false, error: '' }),
+  ),
+  on(
+    AuthActions.userSignUpFailure,
+    (state: UserState, { error }): UserState => ({ ...state, loading: false, error: error.error.message }),
+  ),
   on(AuthActions.userGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
 
   on(AuthActions.userUpdateGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),

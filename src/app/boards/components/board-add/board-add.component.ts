@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/effects';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { map, Observable, Subscription } from 'rxjs';
 import { User } from '@users/model/user.model';
-import { createBoardSuccess } from '../../store/actions/board.actions';
 import { BoardWithUsers } from '../../model/board.model';
 import { TaskFile } from '@files/model/file.model';
 
@@ -39,18 +38,12 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(private storeFacade: StoreFacade, private action$: Actions, private modal: NzModalRef) {}
+  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
     this.subscription.add(
       this.user$.subscribe(({ _id }) => {
         this.userId = _id;
-      }),
-    );
-
-    this.subscription.add(
-      this.action$.pipe(ofType(createBoardSuccess)).subscribe(() => {
-        this.handleCancel();
       }),
     );
 

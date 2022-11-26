@@ -51,11 +51,4 @@ export class UserEffects {
       catchError((error) => of(UserActions.deleteUserFailed({ error }))),
     );
   });
-
-  userSignOut$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.deleteUserSuccess),
-      map(() => AuthActions.userSignOut()),
-    );
-  });
 }

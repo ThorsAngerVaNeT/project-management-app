@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/user.actions';
-import { selectToken, selectUser } from '@auth/store/selectors/user.selectors';
+import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/user.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
@@ -66,6 +66,10 @@ export class StoreFacade {
 
   searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
+  authLoading$ = this.store.select(selectAuthLoading);
+
+  authError$ = this.store.select(selectAuthError);
+
   constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
@@ -96,6 +100,7 @@ export class StoreFacade {
     this.getBoard(boardId);
     this.getColumns(boardId);
     this.getTasksByBoard(boardId);
+    this.getFilesByBoard(boardId);
   }
 
   getBoardsAllData(): void {

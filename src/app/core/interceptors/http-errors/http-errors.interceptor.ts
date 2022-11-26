@@ -14,6 +14,7 @@ import { environment } from '@environments/environment';
 import { StoreFacade } from '../../services/store-facade/store-facade';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { APIEndpoints } from '../../enums/api-endpoints.enum';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -31,7 +32,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             this.storeFacade.signOut();
             this.router.navigateByUrl('/');
           } else {
-            this.notification.create('error', 'Something went wrong...', error.message);
+            if (!request.url.includes(APIEndpoints.auth)) {
+              this.notification.create('error', 'Something went wrong...', error.message);
+            }
+            return error;
           }
         }),
       ),

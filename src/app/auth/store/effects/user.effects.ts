@@ -22,9 +22,11 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(AuthActions.userSignUp),
       exhaustMap(({ data }) =>
-        this.authService.signUp(data).pipe(map((user) => AuthActions.userSignUpSuccess({ data, user }))),
+        this.authService.signUp(data).pipe(
+          map((user) => AuthActions.userSignUpSuccess({ data, user })),
+          catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
+        ),
       ),
-      catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
     );
   });
 
