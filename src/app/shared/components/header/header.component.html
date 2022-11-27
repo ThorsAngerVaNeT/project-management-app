@@ -9,8 +9,6 @@
   </div>
 
   <ng-container *ngIf="user$ | async as user">
-    <app-search class="header__search-field" *ngIf="user._id"></app-search>
-
     <!-- burger -->
 
     <div class="burger__toggler">
@@ -36,6 +34,10 @@
         </ng-container>
 
         <ng-container *ngIf="!user._id" class="header__welcome_actions">
+          <nz-radio-group class="header__lang-switch" nzSize="small">
+            <label nz-radio-button nzValue="RU">RU</label>
+            <label nz-radio-button nzValue="EN">EN</label>
+          </nz-radio-group>
           <a [routerLink]="['/auth/sign-up']" i18n="@@sighUpLink">Sign Up</a>
           <a [routerLink]="['/auth/login']" i18n="@@logInLink">Login</a>
         </ng-container>
@@ -43,6 +45,8 @@
     </div>
 
     <!-- / burger -->
+
+    <app-search class="header__search-field" *ngIf="user._id"></app-search>
 
     <div class="header__right-group-wrapper">
       <div class="header__right-group" *ngIf="user._id">
@@ -68,6 +72,10 @@
       </div>
 
       <div class="header__welcome_actions" *ngIf="!user._id">
+        <nz-radio-group class="header__lang-switch" nzSize="small">
+          <label nz-radio-button nzValue="RU">RU</label>
+          <label nz-radio-button nzValue="EN">EN</label>
+        </nz-radio-group>
         <span [routerLink]="['/auth/sign-up']" i18n="@@sighUpLink">Sign Up</span>
         <span [routerLink]="['/auth/login']" i18n="@@logInLink">Login</span>
       </div>
