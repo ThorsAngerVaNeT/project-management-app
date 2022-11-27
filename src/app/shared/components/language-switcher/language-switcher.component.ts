@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Subscription } from 'rxjs';
+import { Locales } from '../../../core/store/reducers/language.reducer';
 
 @Component({
   selector: 'app-language-switcher',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSwitcherComponent implements OnInit, OnDestroy {
-  language!: 'ru' | 'en';
+  language!: Locales;
 
   localizationValue$ = this.storeFacade.localizationValue$;
 
@@ -33,7 +34,7 @@ export class LanguageSwitcherComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onChange(value: 'ru' | 'en'): void {
+  onChange(value: Locales): void {
     this.storeFacade.changeLanguage(value);
   }
 }

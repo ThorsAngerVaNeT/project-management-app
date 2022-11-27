@@ -33,6 +33,7 @@ import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 import * as fromLanguage from '../../store/actions/language.actions';
 import { selectLocalizationValue } from '../../store/selectors/language.selectors';
+import { Locales } from '../../store/reducers/language.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -317,7 +318,7 @@ export class StoreFacade {
     this.store.dispatch(fromLanguage.initLocalization());
   }
 
-  changeLanguage(language: 'ru' | 'en'): void {
+  changeLanguage(language: Locales): void {
     this.store.dispatch(fromLanguage.changeLanguage({ language }));
   }
 }

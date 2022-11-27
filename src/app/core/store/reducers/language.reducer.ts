@@ -2,8 +2,10 @@ import { Action, ActionReducer, createReducer, MetaReducer, on } from '@ngrx/sto
 import { localStorageSync } from 'ngrx-store-localstorage';
 import * as LanguageActions from '../actions/language.actions';
 
+export type Locales = 'ru' | 'en';
+
 export interface LanguageState {
-  language: 'ru' | 'en';
+  language: Locales;
 }
 
 export const initialState: LanguageState = {
