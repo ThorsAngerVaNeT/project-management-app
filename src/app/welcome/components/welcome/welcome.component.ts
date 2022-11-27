@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-welcome',
@@ -7,13 +6,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
   styleUrls: ['./welcome.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WelcomeComponent implements OnInit {
-  constructor(private storeFacade: StoreFacade) {}
-
-  ngOnInit(): void {
-    this.storeFacade.getUsers();
-  }
-
+export class WelcomeComponent {
   technologies = [
     {
       name: 'Angular',
