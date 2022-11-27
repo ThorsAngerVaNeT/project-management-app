@@ -19,8 +19,8 @@ export class HttpNoContentInterceptor implements HttpInterceptor {
           // eslint-disable-next-line @typescript-eslint/no-throw-literal
           throw new HttpErrorResponse({
             error: 'Not found',
-            status: 500,
-            statusText: 'Warning',
+            status: 404,
+            statusText: 'Error: Record was not found!',
             url: response.url ?? '',
           });
         }
