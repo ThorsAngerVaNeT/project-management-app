@@ -92,5 +92,8 @@
   "itemToDeleteThisTask": "'this task",
   "ConfirmOkButton": "Ok",
   "ConfirmCancelButton": "Cancel",
-  "itemToDeleteThisCheckpoint": "this check point"
+  "itemToDeleteThisCheckpoint": "this check point",
+  "errTitle": "Something went wrong...",
+  "errTextHttpError": "Please try later",
+  "errTextHttp401Error": "Login or password is incorrect"
 }

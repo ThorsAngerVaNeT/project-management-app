@@ -1,4 +1,4 @@
-<h1 class="auth-heading">Login</h1>
+<h1 class="auth-heading">{{ 'LoginModalTitle' | translate }}</h1>
 <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="logInForm">
   <nz-form-item>{{ authError$ | async }} </nz-form-item>
   <nz-form-item>
