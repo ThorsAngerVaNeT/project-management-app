@@ -51,11 +51,11 @@
         [nzLoading]="isLoading && !isEditingDisabled"
         [disabled]="!signUpForm.valid && isEditingDisabled"
       >
-        {{ buttonText }}
+        {{ user._id ? 'Save' : 'Sign Up' }}
       </button>
     </nz-form-item>
   </form>
-  <div class="delete-block" *ngIf="isEditing">
+  <div class="delete-block" *ngIf="user._id">
     <div>{{ 'deleteUserText' | translate }}</div>
     <button
       nz-button

@@ -71,6 +71,7 @@ export class BoardCardComponent implements OnInit {
     this.modalService.info({
       nzTitle: this.translateService.instant('AccessDeniedModalTitle'),
       nzContent: this.translateService.instant('AccessDeniedModalContent'),
+      nzWidth: 'null',
     });
   }
 

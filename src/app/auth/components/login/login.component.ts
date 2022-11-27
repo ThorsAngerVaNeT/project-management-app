@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   logInForm!: FormGroup;
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
+  constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({

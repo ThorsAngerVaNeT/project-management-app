@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-
-//import '@angular/localize/init';
-
-// import { Router } from '@angular/router';
-
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { Subscription, tap } from 'rxjs';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { User } from '@users/model/user.model';
@@ -48,7 +43,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   constructor(
     private storeFacade: StoreFacade,
-    private modal: NzModalRef,
     private modalService: NzModalService,
     private translateService: TranslateService,
   ) {}
