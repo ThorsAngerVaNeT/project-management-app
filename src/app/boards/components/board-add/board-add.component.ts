@@ -103,7 +103,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   onFileInput(files: FileList | null): void {
     if (files) {
-      this.file = files.item(0)!;
+      this.file = files[0];
     }
   }
 }
