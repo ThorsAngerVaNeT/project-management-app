@@ -1,0 +1,53 @@
+<div class="hero">
+  <div class="hero__headline">
+    <h1>ngPMA</h1>
+    <h2>Be a Lord of the Board</h2>
+    <p>Organize your work in a visual intuitive way using ngPMA application features:</p>
+    <p>
+      Boards | Columns | Tasks | Checklists
+      <span class="hero-divider" nz-icon nzType="plus"></span> Drag&Drop | Access Rights | Search
+    </p>
+  </div>
+
+  <div class="hero__image">
+    <img src="assets/images/scrshot.png" />
+  </div>
+</div>
+
+<h2>Technologies</h2>
+
+<div class="technologies">
+  <div class="technologies__list">
+    <nz-card *ngFor="let item of technologies">
+      <a href="{{ item.link }}">{{ item.name }}</a>
+      <a href="{{ item.link }}"><img style="padding: 8px" src="{{ item.logo }}" /></a>
+    </nz-card>
+  </div>
+</div>
+
+<h2>Course</h2>
+
+<div class="course">
+  <a href="https://rs.school/angular/"><img src="https://rollingscopes.com/images/logo_rs2.svg" /></a>
+  <p>
+    Developed as a certificate project by students of <a href="https://rs.school/angular/">Angular 2022Q3 Course</a> at
+    the <a href="https://rs.school/">RSSchool</a>.
+  </p>
+  <p>
+    <a href="https://rs.school/">RSSchool</a> is an education program conducted by
+    <a href="https://rollingscopes.com/">The Rolling Scopes developer community </a> since 2013.
+  </p>
+</div>
+
+<h2>Developers</h2>
+
+<div class="developers">
+  <ng-container *ngFor="let item of developers">
+    <nz-card class="business-card" nzTitle="{{ item.name }}" [nzExtra]="extraTemplate">
+      {{ item.about }}
+    </nz-card>
+    <ng-template #extraTemplate>
+      <a href="{{ item.github }}"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+    </ng-template>
+  </ng-container>
+</div>
