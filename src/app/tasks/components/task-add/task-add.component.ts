@@ -42,6 +42,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   responsibleToParticipants = { _id: '', name: '' };
 
+  taskIsLoading$ = this.storeFacade.taskIsLoading$;
+
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
@@ -125,8 +127,6 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
         this.storeFacade.createTask(this.boardId, this.columnId, taskParams);
       }
-
-      this.modal.destroy();
     } else {
       Object.values(this.taskAddForm.controls).forEach((control) => {
         if (control.invalid) {

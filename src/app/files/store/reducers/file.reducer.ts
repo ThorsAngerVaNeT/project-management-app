@@ -19,8 +19,8 @@ export const initialState: FilesState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(
-    FileActions.loadFilesSetSuccess,
-    FileActions.loadFilesByUserSuccess,
+    // FileActions.loadFilesSetSuccess,
+    // FileActions.loadFilesByUserSuccess,
     FileActions.loadFilesByTaskSuccess,
     FileActions.loadFilesByBoardSuccess,
     (state, { files }) => adapter.setAll(files, state),

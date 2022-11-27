@@ -6,8 +6,9 @@ import * as BoardActions from '../actions/board.actions';
 export const boardsFeatureKey = 'boards';
 
 export interface BoardsState extends EntityState<Board> {
-  loading: boolean;
-  loaded: boolean;
+  boardsLoading: boolean;
+  boardsLoaded: boolean;
+  boardLoading: boolean;
   cachedBoards: EntityState<Board>;
 }
 
@@ -18,8 +19,9 @@ const adapter: EntityAdapter<Board> = createEntityAdapter<Board>({
 export const initialState: BoardsState = adapter.getInitialState({
   ids: [],
   entities: {},
-  loading: false,
-  loaded: false,
+  boardsLoading: false,
+  boardsLoaded: false,
+  boardLoading: false,
   cachedBoards: {
     ids: [],
     entities: {},
@@ -32,23 +34,32 @@ export const reducer = createReducer(
   on(BoardActions.loadBoards, (state): BoardsState => ({ ...state })),
   on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state })),
   on(BoardActions.loadBoardSuccess, (state, { board }) => adapter.setOne(board, state)),
-  on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
-  on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
+  // on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
+  // on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
+  on(BoardActions.createBoard, (state): BoardsState => ({ ...state, boardLoading: true })),
   on(BoardActions.createBoardSuccess, (state, { board }) => adapter.addOne(board, state)),
+  on(BoardActions.createBoardFailure, (state): BoardsState => ({ ...state, boardLoading: false })),
+  on(BoardActions.updateBoard, (state): BoardsState => ({ ...state, boardLoading: true })),
   on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
-  on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
+  on(BoardActions.updateBoardFailure, (state): BoardsState => ({ ...state, boardLoading: false })),
   on(BoardActions.deleteBoard, (state, { id }) =>
     adapter.removeOne(id, { ...state, cachedBoards: { ids: state.ids.slice(), entities: { ...state.entities } } }),
   ),
   on(BoardActions.deleteBoardSuccess, (state, { id }) => adapter.removeOne(id, state)),
-  on(BoardActions.loadMainPageData, (state): BoardsState => ({ ...state, loading: true })),
-  on(BoardActions.loadMainPageDataSuccess, (state): BoardsState => ({ ...state, loading: false, loaded: true })),
-  on(BoardActions.loadMainPageDataFailure, (state): BoardsState => ({ ...state, loading: false, loaded: false })),
-  on(BoardActions.preloadImagesCompleted, (state): BoardsState => ({ ...state, loading: false })),
   on(
     BoardActions.deleteBoardFailure,
-    (state, { boardsState: { ids, entities } }): BoardsState => ({ ...state, ids, entities }),
+    (state, { boardsState: { ids, entities } }): BoardsState => ({ ...state, ids, entities, boardLoading: true }),
   ),
+  on(BoardActions.loadMainPageData, (state): BoardsState => ({ ...state, boardsLoading: true })),
+  on(
+    BoardActions.loadMainPageDataSuccess,
+    (state): BoardsState => ({ ...state, boardsLoading: false, boardsLoaded: true }),
+  ),
+  on(
+    BoardActions.loadMainPageDataFailure,
+    (state): BoardsState => ({ ...state, boardsLoading: false, boardsLoaded: false }),
+  ),
+  on(BoardActions.preloadImagesCompleted, (state): BoardsState => ({ ...state, boardsLoading: false })),
 );
 
 export const {

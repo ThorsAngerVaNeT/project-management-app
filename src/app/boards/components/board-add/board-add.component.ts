@@ -19,7 +19,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   boardAddForm!: FormGroup;
 
-  isLoading = false;
+  isLoading$ = this.storeFacade.boardIsLoading$;
 
   user$ = this.storeFacade.user$;
 
@@ -77,7 +77,6 @@ export class BoardAddComponent implements OnInit, OnDestroy {
       const { title, participants: users } = this.boardAddForm.value;
       const file = this.file;
 
-      this.isLoading = true;
       if (this.board) {
         const {
           _id: boardId,

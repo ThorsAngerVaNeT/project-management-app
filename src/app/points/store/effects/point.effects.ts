@@ -11,51 +11,36 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 export class PointEffects {
   constructor(private actions$: Actions, private pointsService: PointsService, private storeFacade: StoreFacade) {}
 
-  loadPointsSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.loadPointsSet),
-      switchMap(({ ids }) =>
-        this.pointsService.getPointsSet(ids).pipe(
-          map((points) => PointActions.loadPointsSetSuccess({ points })),
-          catchError((error) => of(PointActions.loadPointsSetFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadPointsSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.loadPointsSet),
+  //     switchMap(({ ids }) => this.pointsService.getPointsSet(ids)),
+  //     map((points) => PointActions.loadPointsSetSuccess({ points })),
+  //   );
+  // });
 
-  loadPointsByUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.loadPointsByUser),
-      switchMap(({ userId }) =>
-        this.pointsService.getPointsByUser(userId).pipe(
-          map((points) => PointActions.loadPointsByUserSuccess({ points })),
-          catchError((error) => of(PointActions.loadPointsByUserFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadPointsByUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.loadPointsByUser),
+  //     switchMap(({ userId }) => this.pointsService.getPointsByUser(userId)),
+  //     map((points) => PointActions.loadPointsByUserSuccess({ points })),
+  //   );
+  // });
 
   loadPointsByTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.loadPointsByTask),
-      switchMap(({ taskId }) =>
-        this.pointsService.getPointsByTask(taskId).pipe(
-          map((points) => PointActions.loadPointsByTaskSuccess({ points })),
-          catchError((error) => of(PointActions.loadPointsByTaskFailure({ error }))),
-        ),
-      ),
+      switchMap(({ taskId }) => this.pointsService.getPointsByTask(taskId)),
+      map((points) => PointActions.loadPointsByTaskSuccess({ points })),
+      catchError((error) => of(PointActions.loadPointsByTaskFailure({ error }))),
     );
   });
 
   createPoint$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.createPoint),
-      concatMap(({ point: pointParams }) =>
-        this.pointsService.createPoint(pointParams).pipe(
-          map((point) => PointActions.createPointSuccess({ point })),
-          catchError((error) => of(PointActions.createPointFailure({ error }))),
-        ),
-      ),
+      concatMap(({ point: pointParams }) => this.pointsService.createPoint(pointParams)),
+      map((point) => PointActions.createPointSuccess({ point })),
     );
   });
 
@@ -82,40 +67,31 @@ export class PointEffects {
   updatePoint$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.updatePoint),
-      concatMap(({ pointId, pointParams }) =>
-        this.pointsService.updatePoint(pointId, pointParams).pipe(
-          map(({ _id: id, ...changes }) => PointActions.updatePointSuccess({ point: { id, changes } })),
-          catchError((error) => of(PointActions.updatePointFailure({ error }))),
-        ),
-      ),
+      concatMap(({ pointId, pointParams }) => this.pointsService.updatePoint(pointId, pointParams)),
+      map(({ _id: id, ...changes }) => PointActions.updatePointSuccess({ point: { id, changes } })),
     );
   });
 
-  updatePointsSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(PointActions.updatePointsSet),
-      concatMap(({ pointsParams }) =>
-        this.pointsService.updatePointsSet(pointsParams).pipe(
-          map((points) =>
-            PointActions.updatePointsSetSuccess({
-              points: points.map(({ _id: id, ...changes }) => ({
-                id,
-                changes,
-              })),
-            }),
-          ),
-          catchError((error) => of(PointActions.updatePointsSetFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // updatePointsSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(PointActions.updatePointsSet),
+  //     concatMap(({ pointsParams }) => this.pointsService.updatePointsSet(pointsParams)),
+  //     map((points) =>
+  //       PointActions.updatePointsSetSuccess({
+  //         points: points.map(({ _id: id, ...changes }) => ({
+  //           id,
+  //           changes,
+  //         })),
+  //       }),
+  //     ),
+  //   );
+  // });
 
   deletePoint$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(PointActions.deletePoint),
       concatMap(({ pointId }) => this.pointsService.deletePoint(pointId)),
       map(({ _id: pointId }) => PointActions.deletePointSuccess({ pointId })),
-      catchError((error) => of(PointActions.deletePointFailure({ error }))),
     );
   });
 }

@@ -50,7 +50,7 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()">{{ 'CreateBoardCancelText' | translate }}</button>
-    <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="handleOk()">
+    <button nz-button nzType="primary" [nzLoading]="isLoading$ | async" (click)="handleOk()">
       {{ 'CreateBoardOkText' | translate }}
     </button>
   </ng-template>

@@ -7,4 +7,5 @@ export const environment = {
   SEARCH_DEBOUNCE_TIME: 500,
   locales: ['en', 'ru'],
   defaultLocale: 'en',
+  DEFAULT_HTTP_TIMEOUT: 30000,
 };

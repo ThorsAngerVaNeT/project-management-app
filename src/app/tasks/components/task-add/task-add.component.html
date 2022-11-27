@@ -102,6 +102,8 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()">{{ 'CreateTaskCancelText' | translate }}</button>
-    <button nz-button nzType="primary" (click)="handleOk()">{{ 'CreateTaskOkText' | translate }}</button>
+    <button nz-button nzType="primary" [nzLoading]="taskIsLoading$ | async" (click)="handleOk()">
+      {{ 'CreateTaskOkText' | translate }}
+    </button>
   </ng-template>
 </form>

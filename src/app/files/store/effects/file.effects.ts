@@ -13,53 +13,38 @@ import * as FileHelpers from './file.helpers';
 export class FileEffects {
   constructor(private actions$: Actions, private filesService: FilesService, private storeFacade: StoreFacade) {}
 
-  loadFilesSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.loadFilesSet),
-      switchMap(({ taskFileIds }) =>
-        this.filesService.getFilesSet(taskFileIds).pipe(
-          map((files) => FileActions.loadFilesSetSuccess({ files })),
-          catchError((error) => of(FileActions.loadFilesSetFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadFilesSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(FileActions.loadFilesSet),
+  //     switchMap(({ taskFileIds }) => this.filesService.getFilesSet(taskFileIds)),
+  //     map((files) => FileActions.loadFilesSetSuccess({ files })),
+  //   );
+  // });
 
-  loadFilesByUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.loadFilesByUser),
-      switchMap(({ userId }) =>
-        this.filesService.getFilesByUser(userId).pipe(
-          map((files) => FileActions.loadFilesByUserSuccess({ files })),
-          catchError((error) => of(FileActions.loadFilesByUserFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadFilesByUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(FileActions.loadFilesByUser),
+  //     switchMap(({ userId }) => this.filesService.getFilesByUser(userId)),
+  //     map((files) => FileActions.loadFilesByUserSuccess({ files })),
+  //   );
+  // });
 
   loadFilesByTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByTask),
-      switchMap(({ taskId }) =>
-        this.filesService.getFilesByTask(taskId).pipe(
-          map((files) => FileActions.loadFilesByTaskSuccess({ files })),
-          catchError((error) => of(FileActions.loadFilesByTaskFailure({ error }))),
-        ),
-      ),
+      switchMap(({ taskId }) => this.filesService.getFilesByTask(taskId)),
+      map((files) => FileActions.loadFilesByTaskSuccess({ files })),
+      catchError((error) => of(BoardActions.loadMainPageDataFailure({ error }))),
     );
   });
 
-  loadFilesByBoard$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.loadFilesByBoard),
-      switchMap(({ boardId }) =>
-        this.filesService.getFilesByBoard(boardId).pipe(
-          map((files) => FileActions.loadFilesByBoardSuccess({ files })),
-          catchError((error) => of(FileActions.loadFilesByBoardFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadFilesByBoard$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(FileActions.loadFilesByBoard),
+  //     switchMap(({ boardId }) => this.filesService.getFilesByBoard(boardId)),
+  //     map((files) => FileActions.loadFilesByBoardSuccess({ files })),
+  //   );
+  // });
 
   addUploadedFileToState$ = createEffect(() => {
     return this.actions$.pipe(
@@ -86,25 +71,21 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.addFileToStoreBeforeUploadSuccess),
       concatMap(({ fileParams: { boardId, taskId, file, filename } }) =>
-        this.filesService.uploadFile(boardId, taskId, file, filename).pipe(
-          map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
-          catchError((error) => of(FileActions.uploadFileFailure({ error }))),
-        ),
+        this.filesService.uploadFile(boardId, taskId, file, filename),
       ),
+      map((newFile) => FileActions.uploadFileSuccess({ file: newFile })),
+      catchError((error) => of(FileActions.uploadFileFailure({ error }))),
     );
   });
 
-  deleteFile$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FileActions.deleteFile),
-      concatMap(({ id }) =>
-        this.filesService.deleteFile(id).pipe(
-          map(() => FileActions.deleteFileSuccess({ id })),
-          catchError((error) => of(FileActions.deleteFileFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // deleteFile$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(FileActions.deleteFile),
+  //     concatMap(({ id }) => this.filesService.deleteFile(id)),
+  //     map(({ _id: id }) => FileActions.deleteFileSuccess({ id })),
+  //     // catchError((error) => of(FileActions.deleteFileFailure({ error }))),
+  //   );
+  // });
 
   loadFilesByTaskAfterCreateBoardSuccess$ = createEffect(() => {
     const taskId = environment.BOARD_COVER_FILE_TASK_ID;
@@ -163,12 +144,9 @@ export class FileEffects {
   deleteFileBeforeUpload$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.deleteFileBeforeUpload),
-      concatMap(({ id: fileId }) =>
-        this.filesService.deleteFile(fileId).pipe(
-          map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
-          catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
-        ),
-      ),
+      concatMap(({ id: fileId }) => this.filesService.deleteFile(fileId)),
+      map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
+      // catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
     );
   });
 

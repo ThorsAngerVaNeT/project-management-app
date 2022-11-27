@@ -16,50 +16,34 @@ export class BoardEffects {
   loadBoards$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoards),
-      switchMap(() =>
-        this.boardsService.getBoards().pipe(
-          map((boards) => BoardActions.loadBoardsSuccess({ boards })),
-          catchError((error) => of(BoardActions.loadBoardsFailure({ error }))),
-        ),
-      ),
+      switchMap(() => this.boardsService.getBoards()),
+      map((boards) => BoardActions.loadBoardsSuccess({ boards })),
     );
   });
 
   loadBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.loadBoard),
-      switchMap(({ id }) =>
-        this.boardsService.getBoard(id).pipe(
-          map((board) => BoardActions.loadBoardSuccess({ board })),
-          catchError((error) => of(BoardActions.loadBoardFailure({ error }))),
-        ),
-      ),
+      switchMap(({ id }) => this.boardsService.getBoard(id)),
+      map((board) => BoardActions.loadBoardSuccess({ board })),
     );
   });
 
-  loadBoardsSet$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(BoardActions.loadBoardsSet),
-      switchMap(({ ids }) =>
-        this.boardsService.getBoardsSet(ids).pipe(
-          map((boards) => BoardActions.loadBoardsSetSuccess({ boards })),
-          catchError((error) => of(BoardActions.loadBoardsSetFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadBoardsSet$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(BoardActions.loadBoardsSet),
+  //     switchMap(({ ids }) => this.boardsService.getBoardsSet(ids)),
+  //     map((boards) => BoardActions.loadBoardsSetSuccess({ boards })),
+  //   );
+  // });
 
-  loadBoardsByUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(BoardActions.loadBoardsByUser),
-      switchMap(({ userId }) =>
-        this.boardsService.getBoardsByUser(userId).pipe(
-          map((boards) => BoardActions.loadBoardsByUserSuccess({ boards })),
-          catchError((error) => of(BoardActions.loadBoardsByUserFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // loadBoardsByUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(BoardActions.loadBoardsByUser),
+  //     switchMap(({ userId }) => this.boardsService.getBoardsByUser(userId)),
+  //     map((boards) => BoardActions.loadBoardsByUserSuccess({ boards })),
+  //   );
+  // });
 
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
