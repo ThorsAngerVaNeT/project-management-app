@@ -1,2 +1,2 @@
-<ng-template [nzModalTitle] i18n="@@confirmationTitle">Are you sure?</ng-template>
-<ng-container i18n="@@confirmationText">Are you sure you want to delete {{ itemToDelete }}?</ng-container>
+<ng-template [nzModalTitle]>{{ 'confirmationTitle' | translate }}</ng-template>
+<ng-container>{{ 'confirmationText' | translate }} {{ itemToDelete }}?</ng-container>

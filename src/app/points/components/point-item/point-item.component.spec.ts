@@ -5,6 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { mockPoint1 } from '@mocks/mock-points/mock-points';
 
 import { PointItemComponent } from './point-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PointItemComponent', () => {
   let component: PointItemComponent;
@@ -14,6 +15,7 @@ describe('PointItemComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [PointItemComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
+      imports: [TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PointItemComponent);

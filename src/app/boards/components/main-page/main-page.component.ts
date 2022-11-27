@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import '@angular/localize/init';
+
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { BoardAddComponent } from '../board-add/board-add.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-page',
@@ -17,7 +18,11 @@ export class MainPageComponent implements OnInit {
 
   boardsLoaded$ = this.storeFacade.boardsLoaded$;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.storeFacade.getBoardsAllData();
@@ -25,7 +30,7 @@ export class MainPageComponent implements OnInit {
 
   showModal(): void {
     this.modalService.create({
-      nzTitle: $localize`:@@CreateBoardModalTitle:Create Board`,
+      nzTitle: this.translateService.instant('CreateBoardModalTitle'),
       nzContent: BoardAddComponent,
     });
   }

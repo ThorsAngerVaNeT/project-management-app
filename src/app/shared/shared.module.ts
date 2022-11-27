@@ -35,6 +35,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultEffects } from '@tasks/store/effects/search-result.effects';
 import * as fromSearchResult from '@tasks/store/reducers/search-result.reducer';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 
 const MODULES = [
   NzLayoutModule,
@@ -64,10 +66,18 @@ const MODULES = [
   ReactiveFormsModule,
   DragDropModule,
   FormsModule,
+  TranslateModule,
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe, SearchComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    ConfirmationComponent,
+    SortByOrderPipe,
+    SearchComponent,
+    LanguageSwitcherComponent,
+  ],
   imports: [
     ...MODULES,
     RouterModule,

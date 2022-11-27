@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import jwt_decode from 'jwt-decode';
 
 import { APIEndpoints } from '@core/enums/api-endpoints.enum';
-import { SignInParams, UserParams, APIToken, User, TokenPayload } from '@users/model/user.model';
+import { SignInParams, UserParams, APIToken, User } from '@users/model/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +17,5 @@ export class AuthService {
 
   public signUp(authParams: UserParams): Observable<User> {
     return this.http.post<User>(APIEndpoints.signUp, authParams);
-  }
-
-  public decodeToken(token: string): TokenPayload {
-    return jwt_decode<TokenPayload>(token);
   }
 }

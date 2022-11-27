@@ -9,6 +9,7 @@ import { BoardDetailComponent } from './board-detail.component';
 import { of } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Overlay } from '@angular/cdk/overlay';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('BoardDetailComponent', () => {
   let component: BoardDetailComponent;
@@ -35,6 +36,7 @@ describe('BoardDetailComponent', () => {
         NzModalService,
         Overlay,
       ],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
