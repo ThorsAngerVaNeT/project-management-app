@@ -16,14 +16,16 @@ import { CommonModule } from '@angular/common';
 import { ModalEffects } from './store/effects/modal.effects';
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { HttpLoaderFactory, MissingTranslationService } from './helpers/translate.helpers';
+import { LanguageEffects } from './store/effects/language.effects';
+import { languageMetaReducers, languageReducer } from './store/reducers/language.reducer';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot({ router: routerReducer }, {}),
-    EffectsModule.forRoot([ModalEffects]),
+    StoreModule.forRoot({ router: routerReducer, language: languageReducer }, { metaReducers: languageMetaReducers }),
+    EffectsModule.forRoot([ModalEffects, LanguageEffects]),
     StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,
