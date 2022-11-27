@@ -73,7 +73,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
       } else {
         this.signUp();
       }
-      this.router.navigate(['/boards']);
     } else {
       Object.values(this.signUpForm.controls).forEach((control) => {
         if (control.invalid) {

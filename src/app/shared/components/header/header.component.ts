@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import '@angular/localize/init';
@@ -16,7 +16,12 @@ export class HeaderComponent implements OnInit {
 
   burgerVisible = false;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService, private router: Router) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private router: Router,
+    private elementRef: ElementRef,
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe(() => (this.burgerVisible = false));
@@ -32,5 +37,10 @@ export class HeaderComponent implements OnInit {
 
   showModal(): void {
     this.modalService.create({ nzContent: BoardAddComponent, nzWidth: 'null' });
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeClickedOutsideBurger(event: Event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) this.burgerVisible = false;
   }
 }

@@ -28,11 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: new FormControl('', [Validators.required]),
     });
 
-    this.subscription.add(
-      this.action$.pipe(ofType()).subscribe(() => {
-        this.router.navigate(['/boards']);
-      }),
-    );
+    this.subscription.add(this.action$.pipe(ofType()).subscribe(() => {}));
   }
 
   submitForm(): void {

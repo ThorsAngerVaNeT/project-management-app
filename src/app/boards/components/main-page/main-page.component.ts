@@ -21,6 +21,11 @@ export class MainPageComponent implements OnInit {
   }
 
   showModal(): void {
-    this.modalService.create({ nzContent: BoardAddComponent, nzWidth: 'null' });
+    this.modalService.create({
+      nzContent: BoardAddComponent,
+      nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
+    });
   }
 }
