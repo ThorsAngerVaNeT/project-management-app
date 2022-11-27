@@ -22,10 +22,13 @@ export class LanguageEffects {
     { dispatch: false },
   );
 
-  changeLanguage$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(LanguageActions.changeLanguage),
-      switchMap(({ language }) => this.translateService.use(language)),
-    );
-  });
+  changeLanguage$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(LanguageActions.changeLanguage),
+        switchMap(({ language }) => this.translateService.use(language)),
+      );
+    },
+    { dispatch: false },
+  );
 }
