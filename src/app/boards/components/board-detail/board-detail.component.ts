@@ -8,7 +8,8 @@ import { BoardDetailViewModel } from '../../model/board.model';
 import { ColumnSetUpdateParams, ColumnWithTasks } from '@columns/model/column.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ColumnAddComponent } from '@columns/components/column-add/column-add.component';
-import '@angular/localize/init';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board',
@@ -32,7 +33,12 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.storeFacade.getUsers();
@@ -52,7 +58,7 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
 
   addNewColumn(): void {
     this.modalService.create({
-      nzTitle: $localize`:@@CreateColumnModalTitle:Create Column`,
+      nzTitle: this.translateService.instant('CreateColumnModalTitle'),
       nzContent: ColumnAddComponent,
       nzComponentParams: { boardId: this.boardId, order: this.columnsCount },
     });

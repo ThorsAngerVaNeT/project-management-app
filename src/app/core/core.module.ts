@@ -1,6 +1,6 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlerService } from './services/error-handler/error-handler.service';
 import { HttpBaseInterceptor } from './interceptors/http-base/http-base.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
@@ -14,17 +14,30 @@ import { AuthModule } from '@auth/auth.module';
 import { RouterSerializer } from './store/reducers/router.reducer';
 import { CommonModule } from '@angular/common';
 import { ModalEffects } from './store/effects/modal.effects';
+import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
+import { HttpLoaderFactory, MissingTranslationService } from './helpers/translate.helpers';
+import { LanguageEffects } from './store/effects/language.effects';
+import { languageMetaReducers, languageReducer } from './store/reducers/language.reducer';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot({ router: routerReducer }, {}),
-    EffectsModule.forRoot([ModalEffects]),
+    StoreModule.forRoot({ router: routerReducer, language: languageReducer }, { metaReducers: languageMetaReducers }),
+    EffectsModule.forRoot([ModalEffects, LanguageEffects]),
     StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationService },
+      useDefaultLang: false,
+    }),
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },

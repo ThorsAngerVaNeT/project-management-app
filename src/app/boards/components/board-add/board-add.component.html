@@ -1,30 +1,27 @@
 <form nz-form class="content-form" [formGroup]="boardAddForm">
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@CreateBoardTitle">Title</nz-form-label>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">{{ 'CreateBoardTitle' | translate }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
       <input nz-input formControlName="title" id="title" />
 
       <ng-template #titleErrorTip>
-        <ng-container *ngIf="title?.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip"
-          >Please provide a title</ng-container
-        >
-        <ng-container
-          *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')"
-          i18n="@@CreateBoardTitleMinlengthErrorTip"
-          >Title should be 2-40 characters long</ng-container
-        >
+        <ng-container *ngIf="title?.hasError('required')">{{
+          'CreateBoardTitleRequiredErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
+          'CreateBoardTitleMinlengthErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants" i18n="@@CreateBoardParticipants"
-      >Participants</nz-form-label
-    >
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants">{{
+      'CreateBoardParticipants' | translate
+    }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24">
       <nz-select
         nzMode="multiple"
-        nzPlaceHolder="Please select team members"
-        i18n-nzPlaceHolder="@@CreateBoardTeamMembers"
+        nzPlaceHolder="{{ 'CreateBoardTeamMembers' | translate }}"
         formControlName="participants"
       >
         <nz-option
@@ -43,9 +40,8 @@
       [nzSm]="7"
       [nzXs]="24"
       nzFor="boardCoverImage"
-      nzTooltipTitle="What do you want to see on board cover"
-      i18n-nzTooltipTitle="@@CreateBoardImageTooltip"
-      >Board Image
+      nzTooltipTitle="{{ 'CreateBoardImageTooltip' | translate }}"
+      >{{ 'BoardImage' | translate }}
     </nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
       <input type="file" #fileInput (change)="onFileInput(fileInput.files)" aria-label="" />
@@ -53,9 +49,9 @@
   </nz-form-item>
 
   <ng-template [nzModalFooter]>
-    <button nz-button (click)="handleCancel()" i18n="@@CreateBoardCancelText">Cancel</button>
-    <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="handleOk()" i18n="@@CreateBoardOkText">
-      Save
+    <button nz-button (click)="handleCancel()">{{ 'CreateBoardCancelText' | translate }}</button>
+    <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="handleOk()">
+      {{ 'CreateBoardOkText' | translate }}
     </button>
   </ng-template>
 </form>

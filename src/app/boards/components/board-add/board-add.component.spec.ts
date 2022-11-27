@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
 
@@ -22,6 +23,7 @@ describe('BoardAddComponent', () => {
         NzModalService,
         { provide: NzModalRef, useValue: {} },
       ],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

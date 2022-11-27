@@ -5,7 +5,8 @@ import { ConfirmationComponent } from '@shared/components/confirmation/confirmat
 import { BoardWithUsers } from '../../model/board.model';
 import { Observable, tap } from 'rxjs';
 import { BoardAddComponent } from '../board-add/board-add.component';
-import '@angular/localize/init';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board-card',
@@ -33,7 +34,11 @@ export class BoardCardComponent implements OnInit {
 
   isParticipant = false;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.boardCoverUrl$ = this.storeFacade.getBoardCoverStream(this.board._id);
@@ -41,7 +46,7 @@ export class BoardCardComponent implements OnInit {
 
   editBoard(): void {
     this.modalService.create({
-      nzTitle: $localize`:@@EditBoardModalTitle:Edit Board`,
+      nzTitle: this.translateService.instant('EditBoardModalTitle'),
       nzContent: BoardAddComponent,
       nzComponentParams: { board: this.board },
     });
@@ -50,7 +55,9 @@ export class BoardCardComponent implements OnInit {
   removeBoard(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteThisBoard:this board` },
+      nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteThisBoard') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
         this.storeFacade.deleteBoard(this.board._id);
       },
@@ -61,8 +68,8 @@ export class BoardCardComponent implements OnInit {
   showInfo(): void {
     if (this.isOwner || this.isParticipant) return;
     this.modalService.info({
-      nzTitle: $localize`:@@AccessDeniedModalTitle:Access Denied`,
-      nzContent: $localize`:@@AccessDeniedModalContent:Sorry, but you're not a participant of this board. Please contact the owner to get access!`,
+      nzTitle: this.translateService.instant('AccessDeniedModalTitle'),
+      nzContent: this.translateService.instant('AccessDeniedModalContent'),
     });
   }
 

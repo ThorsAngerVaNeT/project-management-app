@@ -1,11 +1,6 @@
 <ng-template #title>
   <div class="title-to-input" nzAlign="center">
-    <h3
-      nz-tooltip
-      nzTooltipTitle="Edit column title"
-      i18n-nzTooltipTitle="@@EditColumnTitleTooltip"
-      (click)="toggleEdit()"
-    >
+    <h3 nz-tooltip nzTooltipTitle="{{ 'EditColumnTitleTooltip' | translate }}" (click)="toggleEdit()">
       {{ column.title }}
       <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
@@ -13,8 +8,7 @@
       nz-icon
       nzType="delete"
       nz-tooltip
-      nzTooltipTitle="Delete column"
-      i18n-nzTooltipTitle="@@DeleteColumnTooltip"
+      nzTooltipTitle="{{ 'DeleteColumnTooltip' | translate }}"
       class="anticon anticon-delete ng-star-inserted action-icon"
       (click)="deleteColumn()"
     ></span>
@@ -25,18 +19,12 @@
   <div class="title-to-input">
     <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
       <nz-input-group [nzAddOnAfter]="suffixButtons">
-        <input
-          nz-input
-          placeholder="Column Title"
-          i18n-placeholder="Column Title"
-          nzSize="small"
-          [formControl]="titleControl"
-        />
+        <input nz-input placeholder="{{ 'ColumnTitle' | translate }}" nzSize="small" [formControl]="titleControl" />
 
         <ng-template #titleErrorTip>
-          <ng-container *ngIf="titleControl.hasError('required')" i18n="@@CreateBoardTitleRequiredErrorTip">
-            Please provide a title
-          </ng-container>
+          <ng-container *ngIf="titleControl.hasError('required')">{{
+            'CreateBoardTitleRequiredErrorTip' | translate
+          }}</ng-container>
         </ng-template>
       </nz-input-group>
     </nz-form-control>
@@ -44,8 +32,7 @@
       <span
         nz-icon
         nz-tooltip
-        nzTooltipTitle="Save"
-        i18n-nzTooltipTitle="@@SaveButtonTooltip"
+        nzTooltipTitle="{{ 'SaveButtonTooltip' | translate }}"
         nzType="check-circle"
         (click)="updateColumn()"
       ></span>
@@ -53,8 +40,7 @@
       <span
         nz-icon
         nz-tooltip
-        nzTooltipTitle="Cancel"
-        i18n-nzTooltipTitle="@@CancelButtonTooltip"
+        nzTooltipTitle="{{ 'CancelButtonTooltip' | translate }}"
         nzType="close-circle"
         (click)="toggleEdit()"
       ></span>
@@ -73,12 +59,11 @@
 
 <ng-template #actionAdd>
   <button
-    i18n-nzTooltipTitle="@@AddNewTask"
     nz-button
     nz-tooltip
     nzType="default"
     nzShape="circle"
-    nzTooltipTitle="Add New Task"
+    nzTooltipTitle="{{ 'AddNewTask' | translate }}"
     nzTooltipPlacement="bottom"
     nzTooltipColor="#203c56"
     [disabled]="!column._id"
