@@ -44,7 +44,14 @@
       >{{ 'BoardImage' | translate }}
     </nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
-      <input type="file" #fileInput (change)="onFileInput(fileInput.files)" aria-label="" />
+      <input
+        type="file"
+        formControlName="image"
+        #fileInput
+        (change)="onFileInput(fileInput.files)"
+        aria-label=""
+        accept="{{ allowedFileTypes }}"
+      />
     </nz-form-control>
   </nz-form-item>
 

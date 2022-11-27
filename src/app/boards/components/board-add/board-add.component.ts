@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { concatLatestFrom } from '@ngrx/effects';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { map, Observable, Subscription } from 'rxjs';
 import { User } from '@users/model/user.model';
 import { BoardWithUsers } from '../../model/board.model';
@@ -38,7 +38,9 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
+  allowedFileTypes = ['image/png', 'image/jpeg'];
+
+  constructor(private storeFacade: StoreFacade, private modal: NzModalRef, private modalService: NzModalService) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -103,7 +105,16 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   onFileInput(files: FileList | null): void {
     if (files) {
-      this.file = files[0];
+      const file = files[0];
+      if (!file || this.allowedFileTypes.includes(file.type)) {
+        this.file = files[0];
+      } else {
+        this.modalService.error({
+          nzTitle: 'Wrong file format',
+          nzContent: 'Only *.png and *.jpg files are allowed!',
+        });
+        this.boardAddForm.get('image')?.reset();
+      }
     }
   }
 }
