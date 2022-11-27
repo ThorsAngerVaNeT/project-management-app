@@ -5,6 +5,8 @@ import { ErrorHandlerService } from './services/error-handler/error-handler.serv
 import { HttpBaseInterceptor } from './interceptors/http-base/http-base.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-errors/http-errors.interceptor';
 import { HttpTokenInterceptor } from './interceptors/http-token/http-token.interceptor';
+import { HttpNoContentInterceptor } from './interceptors/http-nocontent/http-nocontent.interceptor';
+import { HttpTimeoutInterceptor } from './interceptors/http-timeout/http-timeout.interceptor';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -31,6 +33,8 @@ import { ModalEffects } from './store/effects/modal.effects';
     { provide: HTTP_INTERCEPTORS, useClass: HttpBaseInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTimeoutInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpNoContentInterceptor, multi: true },
   ],
 })
 export class CoreModule {}
