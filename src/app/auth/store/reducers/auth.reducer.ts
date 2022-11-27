@@ -53,7 +53,7 @@ export const userReducer = createReducer(
   ),
   on(
     AuthActions.userSignUpFailure,
-    (state: AuthState, { error }): AuthState => ({ ...state, loading: false, error: error.error.message }),
+    (state: AuthState, { error }): AuthState => ({ ...state, loading: false, error: `${error}` }),
   ),
   on(AuthActions.userGetInfoSuccess, (state: AuthState, { user }): AuthState => ({ ...state, ...user })),
   on(

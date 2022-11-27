@@ -14,12 +14,6 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  // isSaving = false;
-
-  // isDeleting = false;
-
-  isLoading = false;
-
   signUpForm!: FormGroup;
 
   user!: User;
@@ -31,7 +25,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     }),
   );
 
-  authLoading$ = this.storeFacade.authLoading$;
+  isLoading$ = this.storeFacade.authIsLoading$;
 
   authError$ = this.storeFacade.authError$;
 
@@ -61,23 +55,23 @@ export class SignUpComponent implements OnInit, OnDestroy {
       ]),
     });
 
-    this.subscription.add(
-      this.authLoading$.subscribe((isLoading) => {
-        this.isLoading = isLoading;
-        if (!isLoading) {
-          this.isEditingDisabled = false;
-          this.isDeletingDisabled = false;
-        }
-      }),
-    );
+    // this.subscription.add(
+    //   this.authLoading$.subscribe((isLoading) => {
+    //     this.isLoading = isLoading;
+    //     if (!isLoading) {
+    //       this.isEditingDisabled = false;
+    //       this.isDeletingDisabled = false;
+    //     }
+    //   }),
+    // );
 
-    this.subscription.add(
-      this.authError$.subscribe((error) => {
-        if (error) {
-          this.login?.setErrors({ required: false });
-        }
-      }),
-    );
+    // this.subscription.add(
+    //   this.authError$.subscribe((error) => {
+    //     if (error) {
+    //       this.login?.setErrors({ required: false });
+    //     }
+    //   }),
+    // );
   }
 
   ngOnDestroy(): void {
@@ -87,7 +81,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.signUpForm.valid) {
       this.isDeletingDisabled = true;
-      if (this.user) {
+      if (this.user._id) {
         this.editUser();
       } else {
         this.signUp();

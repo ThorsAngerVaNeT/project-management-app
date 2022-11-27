@@ -39,9 +39,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 this.storeFacade.signOut();
                 return error;
               case HttpStatusCode.Conflict:
-                return error;
-              default:
-                break;
+                return new Error(this.translateService.instant('errTextHttp409Error'));
             }
           }
           if (!request.url.includes(APIEndpoints.auth)) {
