@@ -67,7 +67,7 @@
   "EditProfileModalTitle": "Редактировать профиль",
   "EditProfileSaveButton": "Сохранить",
   "SearchInputPlaceholder": "Поиск",
-  "inputSearchLabel": "результаты поиска:",
+  "inputSearchLabel": "результаты поиска",
   "SearchByIdsLabel": "по номеру задачи",
   "SearchByKeyWordsLabel": "по ключевым словам",
   "TaskTitle": "Заголовок",
