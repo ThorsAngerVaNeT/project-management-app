@@ -34,3 +34,7 @@ export const selectTasksOfCurrentBoardByColumns = createSelector(
 );
 
 export const selectCurrentTaskId = createSelector(selectTaskState, (state) => state.currentTaskId);
+
+export const selectTaskIsLoading = createSelector(selectTaskState, (state) => state.loading);
+
+export const selectCachedTasks = createSelector(selectTaskState, (state) => state.cachedTasks);

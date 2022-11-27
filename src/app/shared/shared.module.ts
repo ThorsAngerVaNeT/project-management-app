@@ -23,6 +23,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -30,10 +31,12 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SortByOrderPipe } from './pipes/sort-by-order/sort-by-order.pipe';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultEffects } from '@tasks/store/effects/search-result.effects';
 import * as fromSearchResult from '@tasks/store/reducers/search-result.reducer';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 
 const MODULES = [
   NzLayoutModule,
@@ -56,16 +59,25 @@ const MODULES = [
   NzCardModule,
   NzModalModule,
   NzSpinModule,
+  NzNotificationModule,
 
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
   DragDropModule,
   FormsModule,
+  TranslateModule,
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, ConfirmationComponent, SortByOrderPipe, SearchComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    ConfirmationComponent,
+    SortByOrderPipe,
+    SearchComponent,
+    LanguageSwitcherComponent,
+  ],
   imports: [
     ...MODULES,
     RouterModule,

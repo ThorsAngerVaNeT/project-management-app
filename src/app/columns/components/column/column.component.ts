@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ComponentRef, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import '@angular/localize/init';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { ColumnTasksWithColumnId } from '@tasks/model/task.model';
 import { ColumnWithTasks } from '../../model/column.model';
 import { TaskAddComponent } from '@tasks/components/task-add/task-add.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-column',
@@ -24,7 +24,11 @@ export class ColumnComponent implements OnInit {
 
   isEditState = false;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
@@ -49,7 +53,9 @@ export class ColumnComponent implements OnInit {
   deleteColumn(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: $localize`:@@itemToDeleteThisColumn:this column` },
+      nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteThisColumn') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
         const { boardId, _id: columnId } = this.column;
         this.storeFacade.deleteColumn(boardId, columnId);
@@ -64,7 +70,7 @@ export class ColumnComponent implements OnInit {
 
     this.storeFacade.selectTask('');
     this.modalService.create({
-      nzTitle: $localize`:@@CreateTaskModalTitle:Create Task`,
+      nzTitle: this.translateService.instant('CreateTaskModalTitle'),
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
       nzWidth: 'null',

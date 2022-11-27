@@ -1,19 +1,26 @@
-<div class="main-inner-content" *ngIf="boards$ | async as boards">
-  <app-board-card *ngFor="let board of boards" [board]="board"></app-board-card>
+<div class="main-inner-content">
+  <ng-container *ngIf="(boardsLoaded$ | async) === true || (boardsLoading$ | async) === false; else loadingSpinner">
+    <app-board-card *ngFor="let board of boards$ | async" [board]="board"></app-board-card>
 
-  <nz-card nzHoverable class="new-board-card">
-    <button
-      nz-button
-      nz-tooltip
-      nzType="primary"
-      nzShape="circle"
-      nzTooltipTitle="Add New Board"
-      i18n-nzTooltipTitle="@@AddNewBoard"
-      nzTooltipPlacement="bottom"
-      nzTooltipColor="#203c56"
-      (click)="showModal()"
-    >
-      <span nz-icon nzType="plus"></span>
-    </button>
-  </nz-card>
+    <nz-card nzHoverable class="new-board-card">
+      <button
+        nz-button
+        nz-tooltip
+        nzType="primary"
+        nzShape="circle"
+        nzTooltipTitle="{{ 'AddNewBoard' | translate }}"
+        nzTooltipPlacement="bottom"
+        nzTooltipColor="#203c56"
+        (click)="showModal()"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+    </nz-card>
+  </ng-container>
+
+  <ng-template #loadingSpinner>
+    <div class="spinner-wrapper">
+      <nz-spin class="spinner" nzSimple [nzSize]="'large'"></nz-spin>
+    </div>
+  </ng-template>
 </div>

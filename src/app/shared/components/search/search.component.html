@@ -3,18 +3,17 @@
     class="search__select search__search-field"
     nzBorderless
     nzShowSearch
-    nzPlaceHolder="Search"
-    i18n-nzPlaceHolder="@@SearchInputPlaceholder"
+    nzPlaceHolder="{{ 'SearchInputPlaceholder' | translate }}"
     [nzDropdownRender]="renderTemplate"
     [nzShowArrow]="false"
     [nzFilterOption]="nzFilterOption"
     (nzOnSearch)="search($event)"
   >
-    <nz-option [nzValue]="null" nzLabel="search result:" i18n-nzLabel="@@inputSearchLabel" nzDisabled></nz-option>
+    <nz-option [nzValue]="null" nzLabel="{{ 'inputSearchLabel' | translate }}:" nzDisabled></nz-option>
   </nz-select>
   <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
-    <nz-option nzValue="byIds" nzLabel="by task number" i18n-nzLabel="@@SearchByIdsLabel"></nz-option>
-    <nz-option nzValue="byKeyWords" nzLabel="by key words" i18n-nzLabel="@@SearchByKeyWordsLabel"></nz-option>
+    <nz-option nzValue="byIds" nzLabel="{{ 'SearchByIdsLabel' | translate }}"></nz-option>
+    <nz-option nzValue="byKeyWords" nzLabel="{{ 'SearchByKeyWordsLabel' | translate }}"></nz-option>
   </nz-select>
 </div>
 <ng-template #renderTemplate>

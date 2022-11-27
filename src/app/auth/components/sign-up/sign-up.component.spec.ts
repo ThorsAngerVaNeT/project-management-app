@@ -6,6 +6,7 @@ import { ScannedActionsSubject } from '@ngrx/store';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 import { SignUpComponent } from './sign-up.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -21,6 +22,7 @@ describe('SignUpComponent', () => {
         provideMockStore(),
       ],
       declarations: [SignUpComponent],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

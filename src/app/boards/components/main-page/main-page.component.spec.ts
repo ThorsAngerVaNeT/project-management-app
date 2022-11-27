@@ -6,6 +6,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { MainPageComponent } from './main-page.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Overlay } from '@angular/cdk/overlay';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -15,6 +16,7 @@ describe('MainPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [MainPageComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

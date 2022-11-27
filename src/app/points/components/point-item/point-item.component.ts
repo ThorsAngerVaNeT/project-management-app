@@ -3,6 +3,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { Point } from '../../model/point.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-point-item',
@@ -17,7 +18,11 @@ export class PointItemComponent implements OnInit {
 
   isEdit = false;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.isChecked = this.point.done;
@@ -45,7 +50,9 @@ export class PointItemComponent implements OnInit {
   deletePoint(): void {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
-      nzComponentParams: { itemToDelete: 'this check point' },
+      nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteThisCheckpoint') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () =>
         this.point.taskId
           ? this.storeFacade.deletePoint(this.point._id)

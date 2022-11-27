@@ -23,3 +23,7 @@ export const selectCurrentBoardColumns = createSelector(
       });
   },
 );
+
+export const selectColumnIsLoading = createSelector(selectColumnState, (state) => state.loading);
+
+export const selectCachedColumns = createSelector(selectColumnState, (state) => state.cachedColumns);

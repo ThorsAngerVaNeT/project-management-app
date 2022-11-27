@@ -7,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { mockUser1, mockUser2 } from '@mocks/mock-users/mock-users';
 
 import { TaskItemComponent } from './task-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('TaskItemComponent', () => {
   let component: TaskItemComponent;
@@ -16,6 +17,7 @@ describe('TaskItemComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [TaskItemComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
+      imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

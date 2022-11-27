@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
-import * as AuthActions from '../actions/user.actions';
+import * as AuthActions from '../actions/auth.actions';
 import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
@@ -22,9 +22,11 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(AuthActions.userSignUp),
       exhaustMap(({ data }) =>
-        this.authService.signUp(data).pipe(map((user) => AuthActions.userSignUpSuccess({ data, user }))),
+        this.authService.signUp(data).pipe(
+          map((user) => AuthActions.userSignUpSuccess({ data, user })),
+          catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
+        ),
       ),
-      catchError((error) => of(AuthActions.userSignUpFailure({ error }))),
     );
   });
 
@@ -41,7 +43,7 @@ export class UserEffects {
       exhaustMap((action) =>
         this.authService.signIn(action.data).pipe(
           map((token) => {
-            const payload = this.authService.decodeToken(token);
+            const payload = this.storeFacade.decodeToken(token);
             return AuthActions.userSignInSuccess({ token, payload });
           }),
           catchError((error) => of(AuthActions.userSignInFailure({ error }))),

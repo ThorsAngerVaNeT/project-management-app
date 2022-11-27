@@ -14,7 +14,6 @@ export class ErrorHandlerService implements ErrorHandler {
       errorMessage += error.message;
     }
 
-    // todo alert from ng-zorro
-    console.error(errorMessage);
+    console.log(errorMessage);
   }
 }

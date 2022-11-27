@@ -3,6 +3,7 @@ import { Board } from '@boards/model/board.model';
 import { TaskFile } from '../../model/file.model';
 import * as fromFile from '../reducers/file.reducer';
 import { environment } from '@environments/environment';
+import { getFileUrl } from '../effects/file.helpers';
 
 export const selectFileState = createFeatureSelector<fromFile.FilesState>(fromFile.filesFeatureKey);
 
@@ -28,5 +29,5 @@ export const selectBoardCoverUrl = (
       return environment.BOARD_COVER_DEFAULT_IMAGE_URL;
     }
 
-    return `${environment.API_URL}${covers[boardId].path}`;
+    return covers[boardId].path.startsWith('data:image/') ? covers[boardId].path : getFileUrl(covers[boardId].path);
   });

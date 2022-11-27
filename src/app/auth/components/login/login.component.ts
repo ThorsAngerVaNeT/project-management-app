@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { Actions, ofType } from '@ngrx/effects';
-import { Subscription } from 'rxjs';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-login',
@@ -11,24 +9,20 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   isVisible = true;
 
   isLoading = false;
 
   logInForm!: FormGroup;
 
-  subscription = new Subscription();
-
-  constructor(private storeFacade: StoreFacade, private action$: Actions, private router: Router) {}
+  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
       login: new FormControl('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', [Validators.required]),
     });
-
-    this.subscription.add(this.action$.pipe(ofType()).subscribe(() => {}));
   }
 
   submitForm(): void {
@@ -52,9 +46,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   get password(): AbstractControl | null {
     return this.logInForm.get('password');
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

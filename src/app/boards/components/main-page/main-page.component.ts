@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import '@angular/localize/init';
+
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { BoardAddComponent } from '../board-add/board-add.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-page',
@@ -13,15 +14,23 @@ import { BoardAddComponent } from '../board-add/board-add.component';
 export class MainPageComponent implements OnInit {
   boards$ = this.storeFacade.boards$;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  boardsLoading$ = this.storeFacade.boardsLoading$;
+
+  boardsLoaded$ = this.storeFacade.boardsLoaded$;
+
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.storeFacade.getBoardsAllData();
-    this.storeFacade.getUsers();
   }
 
   showModal(): void {
     this.modalService.create({
+      nzTitle: this.translateService.instant('CreateBoardModalTitle'),
       nzContent: BoardAddComponent,
       nzWidth: 'null',
       nzClassName: 'form-scrollable',

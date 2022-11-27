@@ -1,47 +1,47 @@
 <form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="userEntities$ | async as userEntities">
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title" i18n="@@TaskTitle">Title</nz-form-label>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">{{ 'TaskTitle' | translate }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
-      <input nz-input id="title" formControlName="title" />
+      <input nz-input id="title" formControlName="title" placeholder="{{ 'CreateTaskTitlePlaceHolder' | translate }}" />
       <ng-template #titleErrorTip>
-        <ng-container *ngIf="title?.hasError('required')" i18n="@@TaskTitleRequiredErrorTip"
-          >Please provide a title</ng-container
-        >
-        <ng-container
-          *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')"
-          i18n="@@TaskTitleMinlengthErrorTip"
-          >Title should be 2-40 characters long</ng-container
-        >
+        <ng-container *ngIf="title?.hasError('required')">{{ 'TaskTitleRequiredErrorTip' | translate }}</ng-container>
+        <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
+          'TaskTitleMinlengthErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="description" i18n="@@TaskDescription"
-      >Description</nz-form-label
-    >
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="description">{{
+      'TaskDescription' | translate
+    }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="descriptionErrorTip">
-      <textarea nz-input rows="2" formControlName="description"></textarea>
+      <textarea
+        nz-input
+        rows="2"
+        formControlName="description"
+        placeholder="{{ 'CreateTaskDescriptionPlaceHolder' | translate }}"
+      ></textarea>
       <ng-template #descriptionErrorTip>
-        <ng-container *ngIf="description?.hasError('required')" i18n="@@TaskDescriptionRequiredErrorTip"
-          >Please provide a description</ng-container
-        >
-        <ng-container *ngIf="description?.hasError('maxlength')" i18n="@@TaskDescriptionMaxlengthErrorTip"
-          >Description should be no more than 255 characters long</ng-container
-        >
+        <ng-container *ngIf="description?.hasError('required')">{{
+          'TaskDescriptionRequiredErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="description?.hasError('maxlength')">{{
+          'TaskDescriptionMaxlengthErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="responsible" i18n="@@TaskResponsible"
-      >Responsible</nz-form-label
-    >
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="responsible">{{
+      'TaskResponsible' | translate
+    }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="responsibleErrorTip">
       <nz-select
         nzMode="default"
-        nzPlaceHolder="Please select a responsible person"
-        i18n-nzPlaceHolder="@@CreateTaskResponsiblePlaceHolder"
+        nzPlaceHolder="{{ 'CreateTaskResponsiblePlaceHolder' | translate }}"
         formControlName="responsible"
         (ngModelChange)="addResponsibleToParticipants($event)"
       >
@@ -49,22 +49,21 @@
       </nz-select>
 
       <ng-template #responsibleErrorTip>
-        <ng-container *ngIf="responsible?.hasError('required')" i18n="@@TaskResponsibleRequiredErrorTip"
-          >Please provide a responsible (task owner)</ng-container
-        >
+        <ng-container *ngIf="responsible?.hasError('required')">{{
+          'TaskResponsibleRequiredErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="participants" i18n="@@CreateTaskParticipants"
-      >Participants</nz-form-label
-    >
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="participants">{{
+      'CreateTaskParticipants' | translate
+    }}</nz-form-label>
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="participantsErrorTip">
       <nz-select
         nzMode="multiple"
-        nzPlaceHolder="Please select team members"
-        i18n-nzPlaceHolder="@@CreateTaskParticipantsPlaceHolder"
+        nzPlaceHolder="{{ 'CreateTaskParticipantsPlaceHolder' | translate }}"
         formControlName="participants"
       >
         <nz-option
@@ -81,14 +80,14 @@
         ></nz-option>
       </nz-select>
       <ng-template #participantsErrorTip>
-        <ng-container *ngIf="participants?.hasError('required')" i18n="@@TaskParticipantsRequiredErrorTip"
-          >Please provide the participants</ng-container
-        >
+        <ng-container *ngIf="participants?.hasError('required')">{{
+          'TaskParticipantsRequiredErrorTip' | translate
+        }}</ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-divider nzText="Task Checklist" i18n-nzText="@@CreateTaskChecklist"></nz-divider>
+  <nz-divider nzText="{{ 'CreateTaskChecklist' | translate }}"></nz-divider>
 
   <nz-form-item>
     <ng-container *ngIf="(pointsLoading$ | async) === false; else loadingSpinner">
@@ -102,7 +101,9 @@
   <app-point-add [point]="point"></app-point-add>
 
   <ng-template [nzModalFooter]>
-    <button nz-button (click)="handleCancel()" i18n="@@CreateTaskCancelText">Cancel</button>
-    <button nz-button nzType="primary" (click)="handleOk()" i18n="@@CreateTaskOkText">Save</button>
+    <button nz-button (click)="handleCancel()">{{ 'CreateTaskCancelText' | translate }}</button>
+    <button nz-button nzType="primary" [nzLoading]="taskIsLoading$ | async" (click)="handleOk()">
+      {{ 'CreateTaskOkText' | translate }}
+    </button>
   </ng-template>
 </form>

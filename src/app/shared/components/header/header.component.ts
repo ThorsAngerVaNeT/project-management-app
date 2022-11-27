@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import '@angular/localize/init';
 import { BoardAddComponent } from '@boards/components/board-add/board-add.component';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
     private modalService: NzModalService,
     private router: Router,
     private elementRef: ElementRef,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
