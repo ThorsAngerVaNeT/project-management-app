@@ -35,7 +35,7 @@ export class BoardsService {
   }
 
   public updateBoard(boardId: Board['_id'], boardParams: BoardParams): Observable<Board> {
-    return this.http.put<Board>(`${APIEndpoints.boards}/${boardId}`, boardParams);
+    return this.http.put<Board>(`${APIEndpoints.boards}/${boardId}1`, boardParams);
   }
 
   public deleteBoard(boardId: Board['_id']): Observable<Board> {

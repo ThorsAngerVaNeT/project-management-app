@@ -79,6 +79,8 @@ export class StoreFacade {
 
   cachedTasks$ = this.store.select(selectCachedTasks);
 
+  boardIsLoading$ = this.store.select(BoardSelectors.selectBoardIsLoading);
+
   constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
