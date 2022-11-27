@@ -49,6 +49,18 @@ export class UserEffects {
     );
   });
 
+  userSignInSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.userSignInSuccess),
+        tap(() => {
+          this.router.navigate(['/boards']);
+        }),
+      );
+    },
+    { dispatch: false },
+  );
+
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
