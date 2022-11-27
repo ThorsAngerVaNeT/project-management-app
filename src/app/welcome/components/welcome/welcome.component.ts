@@ -21,19 +21,25 @@ export class WelcomeComponent implements OnInit {
       link: 'https://angular.io/',
     },
     {
+      name: 'NgRx',
+      logo: 'https://ngrx.io/assets/images/badge.svg',
+      link: 'https://ngrx.io/',
+    },
+    {
       name: 'TypeScript',
       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/800px-Typescript_logo_2020.svg.png',
       link: 'https://www.typescriptlang.org/',
     },
     {
       name: 'NG Zorro (AntD)',
-      logo: 'https://img.alicdn.com/tfs/TB1g.mWZAL0gK0jSZFtXXXQCXXa-200-200.svg',
-      link: 'https://www.typescriptlang.org/',
+      logo: 'https://ng.ant.design/assets/img/logo.svg',
+      link: 'https://ng.ant.design/docs/introduce/en',
     },
+
     {
-      name: 'NGRX',
-      logo: 'https://ngrx.io/assets/images/badge.svg',
-      link: 'https://ngrx.io/',
+      name: 'RxJS',
+      logo: 'https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png',
+      link: 'https://rxjs.dev',
     },
   ];
 
@@ -41,7 +47,7 @@ export class WelcomeComponent implements OnInit {
     {
       name: 'ThorsAngerVaNeT',
       about:
-        'Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD',
+        'Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD, deployed backend',
       github: 'https://github.com/thorsangervanet',
     },
     {

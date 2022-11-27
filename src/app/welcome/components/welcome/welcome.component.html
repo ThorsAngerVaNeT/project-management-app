@@ -20,7 +20,7 @@
   <div class="technologies__list">
     <nz-card *ngFor="let item of technologies">
       <a href="{{ item.link }}">{{ item.name }}</a>
-      <img style="padding: 8px" src="{{ item.logo }}" />
+      <a href="{{ item.link }}"><img style="padding: 8px" src="{{ item.logo }}" /></a>
     </nz-card>
   </div>
 </div>
@@ -42,10 +42,12 @@
 <h2>Developers</h2>
 
 <div class="developers">
-  <nz-card *ngFor="let item of developers" class="business-card" nzTitle="{{ item.name }}" [nzExtra]="extraTemplate">
-    {{ item.about }}
-  </nz-card>
-  <ng-template #extraTemplate>
-    <a><span nz-icon nzType="github"></span></a>
-  </ng-template>
+  <ng-container *ngFor="let item of developers">
+    <nz-card class="business-card" nzTitle="{{ item.name }}" [nzExtra]="extraTemplate">
+      {{ item.about }}
+    </nz-card>
+    <ng-template #extraTemplate>
+      <a href="{{ item.github }}"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+    </ng-template>
+  </ng-container>
 </div>
