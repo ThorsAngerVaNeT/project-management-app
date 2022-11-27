@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
-import '@angular/localize/init';
 
 @Injectable({
   providedIn: 'root',
