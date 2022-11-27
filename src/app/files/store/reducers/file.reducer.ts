@@ -5,7 +5,9 @@ import { TaskFile } from '../../model/file.model';
 
 export const filesFeatureKey = 'files';
 
-export interface FilesState extends EntityState<TaskFile> {}
+export interface FilesState extends EntityState<TaskFile> {
+  oldCoverId: TaskFile['_id'];
+}
 
 export const adapter: EntityAdapter<TaskFile> = createEntityAdapter<TaskFile>({
   selectId: (file: TaskFile) => file._id,
@@ -14,6 +16,7 @@ export const adapter: EntityAdapter<TaskFile> = createEntityAdapter<TaskFile>({
 export const initialState: FilesState = adapter.getInitialState({
   ids: [],
   entities: [],
+  oldCoverId: '',
 });
 
 export const reducer = createReducer(
@@ -28,6 +31,8 @@ export const reducer = createReducer(
   on(FileActions.addFileToStoreBeforeUploadSuccess, (state, { fileToState }) => adapter.addOne(fileToState, state)),
   on(FileActions.uploadFileSuccess, (state, { file }) => adapter.addOne(file, state)),
   on(FileActions.uploadFileSuccess, FileActions.uploadFileFailure, (state) => adapter.removeOne('', state)),
+  on(FileActions.addOldCoverFileId, (state, { oldCoverId }): FilesState => ({ ...state, oldCoverId })),
+  on(FileActions.deleteFileSuccess, (state): FilesState => ({ ...state, oldCoverId: '' })),
 );
 
 export const {

@@ -27,7 +27,7 @@ import {
   selectPointsLoading,
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
-import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
+import { selectBoardCovers, selectBoardCoverUrl, selectOldCoverId } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 import jwt_decode from 'jwt-decode';
@@ -74,6 +74,8 @@ export class StoreFacade {
   authLoading$ = this.store.select(selectAuthLoading);
 
   authError$ = this.store.select(selectAuthError);
+
+  oldCoverId$ = this.store.select(selectOldCoverId);
 
   isLoggedIn$ = this.user$.pipe(
     map((user) => {

@@ -8,6 +8,7 @@ import { environment } from '@environments/environment';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import * as BoardActions from '@boards/store/actions/board.actions';
 import * as FileHelpers from './file.helpers';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class FileEffects {
@@ -48,7 +49,7 @@ export class FileEffects {
 
   addUploadedFileToState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(FileActions.uploadFile, FileActions.deleteFileBeforeUpload),
+      ofType(FileActions.uploadFile),
       concatMap(({ fileParams }) => {
         return FileHelpers.fileToBase64(fileParams);
       }),
@@ -114,12 +115,12 @@ export class FileEffects {
     );
   });
 
-  deleteBoardCoverAfterUpdateBoardSuccess$ = createEffect(() => {
+  uploadBoardCoverAfterUpdateBoardSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.updateBoardSuccess),
       filter(({ file }) => !!file),
       concatLatestFrom(() => this.storeFacade.boardCovers$),
-      map(
+      concatMap(
         ([
           {
             board: { id: boardId },
@@ -127,7 +128,7 @@ export class FileEffects {
           },
           covers,
         ]) => {
-          const id = covers[boardId]?._id;
+          const oldCoverId = covers[boardId]?._id;
           const fileParams = {
             boardId: `${boardId}`,
             taskId: environment.BOARD_COVER_FILE_TASK_ID,
@@ -135,18 +136,24 @@ export class FileEffects {
             filename: FileHelpers.generateBoardCoverFilename(boardId, file.name),
           };
 
-          return id ? FileActions.deleteFileBeforeUpload({ id, fileParams }) : FileActions.uploadFile({ fileParams });
+          const actions: Action[] = [FileActions.uploadFile({ fileParams })];
+
+          if (oldCoverId) {
+            actions.push(FileActions.addOldCoverFileId({ oldCoverId }));
+          }
+
+          return actions;
         },
       ),
     );
   });
 
-  deleteFileBeforeUpload$ = createEffect(() => {
+  deleteOldBoardCover$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(FileActions.deleteFileBeforeUpload),
-      concatMap(({ id: fileId }) => this.filesService.deleteFile(fileId)),
-      map(({ _id: id }) => FileActions.deleteFileBeforeUploadSuccess({ id })),
-      // catchError((error) => of(FileActions.deleteFileBeforeUploadFailure({ error }))),
+      ofType(FileActions.uploadFileSuccess),
+      concatLatestFrom(() => this.storeFacade.oldCoverId$),
+      filter(([, id]) => !!id),
+      map(([, id]) => FileActions.deleteFile({ id })),
     );
   });
 
