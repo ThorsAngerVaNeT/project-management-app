@@ -7,7 +7,7 @@
   "passwordRequiredErrorTip": "Пожалуйста, введите пароль",
   "passwordLoginPatternErrorTip": "Пожалуйста, проверьте правильность ввода пароля",
   "LogInButton": "Войти",
-  "passwordRequirements": "<p>Пожалуйста, введите логин (длиннее двух символов), имя и надёжный пароль.</p><p>Надёжный пароль должен:</p><ul><li>состоять минимум из 8 символов</li><li>включать заглавные и строчные буквы</li><li>буквы и цифры</li><li>а также содержать как минимум один специальный символ (! @ # ? ]  и т.д.)</li></ul>",
+  "passwordRequirements": "<p>Пожалуйста, введите логин (длиннее двух символов), имя и надёжный пароль.</p><p>Надёжный пароль должен:</p><ul><li>состоять минимум из 8 символов</li><li>включать заглавные и строчные буквы</li><li>включать буквы и цифры</li><li>а также содержать как минимум один специальный символ (! @ # ? ]  и т.д.)</li></ul>",
   "userAlreadyExistsErrorTip": "Пользователь с таким логином уже существует. Пожалуйста, придумайте новый логин",
   "namePlaceholder": "Имя",
   "nameRequiredErrorTip": "Пожалуйста, укажите имя",
@@ -67,9 +67,9 @@
   "EditProfileModalTitle": "Редактировать профиль",
   "EditProfileSaveButton": "Сохранить",
   "SearchInputPlaceholder": "Поиск",
-  "inputSearchLabel": "результаты поика:",
+  "inputSearchLabel": "результаты поиска:",
   "SearchByIdsLabel": "по номеру задачи",
-  "SearchByKeyWordsLabel": "по ключевому слову",
+  "SearchByKeyWordsLabel": "по ключевым словам",
   "TaskTitle": "Заголовок",
   "TaskTitleRequiredErrorTip": "Пожалуйста, укажите заголовок",
   "TaskTitleMinlengthErrorTip": "Заголовок должен содержать от 2 до 40 символов",
@@ -88,5 +88,8 @@
   "EditTaskTooltip": "Редактировать задачу",
   "DeleteTaskTooltip": "Удалить задачу",
   "EditTaskModalTitle": "Редактировать задачу",
-  "itemToDeleteThisTask": "эту задачу"
+  "itemToDeleteThisTask": "эту задачу",
+  "ConfirmOkButton": "Ок",
+  "ConfirmCancelButton": "Отмена",
+  "itemToDeleteThisCheckpoint": "этот чек-поинт"
 }

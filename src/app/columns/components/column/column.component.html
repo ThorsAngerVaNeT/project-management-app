@@ -1,6 +1,6 @@
 <ng-template #title>
   <div class="title-to-input" nzAlign="center">
-    <h3 nz-tooltip nzTooltipTitle="{{ 'DeleteColumnTooltip' | translate }}" (click)="toggleEdit()">
+    <h3 nz-tooltip nzTooltipTitle="{{ 'EditColumnTitleTooltip' | translate }}" (click)="toggleEdit()">
       {{ column.title }}
       <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
     </h3>
@@ -8,7 +8,7 @@
       nz-icon
       nzType="delete"
       nz-tooltip
-      nzTooltipTitle="{{ 'EditColumnTitleTooltip' | translate }}"
+      nzTooltipTitle="{{ 'DeleteColumnTooltip' | translate }}"
       class="anticon anticon-delete ng-star-inserted action-icon"
       (click)="deleteColumn()"
     ></span>

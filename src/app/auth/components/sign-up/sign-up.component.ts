@@ -113,6 +113,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteYourAccount') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
         this.storeFacade.deleteUser(this.user._id);
       },

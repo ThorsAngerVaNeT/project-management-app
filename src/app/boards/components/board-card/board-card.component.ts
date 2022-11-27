@@ -56,6 +56,8 @@ export class BoardCardComponent implements OnInit {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteThisBoard') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
         this.storeFacade.deleteBoard(this.board._id);
       },

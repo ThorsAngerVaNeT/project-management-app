@@ -35,6 +35,8 @@ export class TaskItemComponent {
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteThisTask') },
+      nzOkText: this.translateService.instant('ConfirmOkButton'),
+      nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
         const { boardId, columnId, _id: taskId } = this.task;
         this.storeFacade.deleteTask(boardId, columnId, taskId);

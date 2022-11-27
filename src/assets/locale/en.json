@@ -88,5 +88,8 @@
   "EditTaskTooltip": "Edit task",
   "DeleteTaskTooltip": "Delete task",
   "EditTaskModalTitle": "Edit Task",
-  "itemToDeleteThisTask": "'this task"
+  "itemToDeleteThisTask": "'this task",
+  "ConfirmOkButton": "Ok",
+  "ConfirmCancelButton": "Cancel",
+  "itemToDeleteThisCheckpoint": "this check point"
 }
