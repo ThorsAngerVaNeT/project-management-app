@@ -79,14 +79,14 @@ export class FileEffects {
     );
   });
 
-  // deleteFile$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(FileActions.deleteFile),
-  //     concatMap(({ id }) => this.filesService.deleteFile(id)),
-  //     map(({ _id: id }) => FileActions.deleteFileSuccess({ id })),
-  //     // catchError((error) => of(FileActions.deleteFileFailure({ error }))),
-  //   );
-  // });
+  deleteFile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.deleteFile),
+      concatMap(({ id }) => this.filesService.deleteFile(id)),
+      map(({ _id: id }) => FileActions.deleteFileSuccess({ id })),
+      // catchError((error) => of(FileActions.deleteFileFailure({ error }))),
+    );
+  });
 
   loadFilesByTaskAfterCreateBoardSuccess$ = createEffect(() => {
     const taskId = environment.BOARD_COVER_FILE_TASK_ID;
