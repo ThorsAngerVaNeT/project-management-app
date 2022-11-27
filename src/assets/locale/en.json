@@ -33,6 +33,7 @@
   "itemToDeleteThisBoard": "this board",
   "AccessDeniedModalTitle": "Access Denied",
   "AccessDeniedModalContent": "Sorry, but you're not a participant of this board. Please contact the owner to get access!",
+  "AccessDeniedRedirect": "Sorry, but you're not a participant of this board. Please contact the owner to get access. You were redirected to the Boards Page.",
   "BoardDetailParticipants": "Participants",
   "AddNewColumn": "Add New Column",
   "CreateColumnModalTitle": "Create Column",
