@@ -25,23 +25,28 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(environment.RETRY_HTTP_COUNT),
       catchError((error) =>
         throwError(() => {
-          if (
-            error instanceof HttpErrorResponse &&
-            (error.status === HttpStatusCode.Unauthorized || error.status === HttpStatusCode.Forbidden)
-          ) {
-            this.storeFacade.signOut();
-            this.router.navigateByUrl('/');
-          } else {
-            if (!request.url.includes(APIEndpoints.auth)) {
-              this.notification.create(
-                'error',
-                'Something went wrong...',
-                `Please try later.
-                ${error.message}`,
-              );
+          if (error instanceof HttpErrorResponse) {
+            switch (error.status) {
+              case HttpStatusCode.Unauthorized:
+                return new Error('login or password is incorrect');
+              case HttpStatusCode.Forbidden:
+                this.storeFacade.signOut();
+                return error;
+              case HttpStatusCode.Conflict:
+                return error;
+              default:
+                break;
             }
-            return error;
           }
+          if (!request.url.includes(APIEndpoints.auth)) {
+            this.notification.create(
+              'error',
+              'Something went wrong...',
+              `Please try later.
+                ${error.message}`,
+            );
+          }
+          return error;
         }),
       ),
     );
