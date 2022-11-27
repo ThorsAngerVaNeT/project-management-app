@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '@environments/environment';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-language-switcher',
@@ -8,17 +8,32 @@ import { environment } from '@environments/environment';
   styleUrls: ['./language-switcher.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LanguageSwitcherComponent implements OnInit {
-  language = environment.defaultLocale;
+export class LanguageSwitcherComponent implements OnInit, OnDestroy {
+  language!: 'ru' | 'en';
 
-  constructor(private translateService: TranslateService) {}
+  localizationValue$ = this.storeFacade.localizationValue$;
+
+  subscription = new Subscription();
+
+  constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
-    this.translateService.use(environment.defaultLocale);
-    this.translateService.addLangs(environment.locales);
+    this.storeFacade.initLocalization();
+
+    this.subscription.add(
+      this.localizationValue$.subscribe((language) => {
+        this.language = language;
+      }),
+    );
+
+    this.onChange(this.language);
   }
 
-  onChange(value: string): void {
-    this.translateService.use(value);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  onChange(value: 'ru' | 'en'): void {
+    this.storeFacade.changeLanguage(value);
   }
 }

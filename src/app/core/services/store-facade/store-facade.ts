@@ -31,6 +31,8 @@ import { Point, PointParams, PointUpdateParams } from '@points/model/point.model
 import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
+import * as fromLanguage from '../../store/actions/language.actions';
+import { selectLocalizationValue } from '../../store/selectors/language.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +71,8 @@ export class StoreFacade {
   authLoading$ = this.store.select(selectAuthLoading);
 
   authError$ = this.store.select(selectAuthError);
+
+  localizationValue$ = this.store.select(selectLocalizationValue);
 
   constructor(private store: Store) {}
 
@@ -307,5 +311,13 @@ export class StoreFacade {
 
   searchTask(searchString: string, searchType: string): void {
     this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
+  }
+
+  initLocalization(): void {
+    this.store.dispatch(fromLanguage.initLocalization());
+  }
+
+  changeLanguage(language: 'ru' | 'en'): void {
+    this.store.dispatch(fromLanguage.changeLanguage({ language }));
   }
 }
