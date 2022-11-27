@@ -7,7 +7,7 @@ export const userSignInSuccess = createAction(
   '[Auth] User Sign In Success',
   props<{ token: string; payload: TokenPayload }>(),
 );
-export const userSignInFailure = createAction('[Auth] User Sign In Failure', props<{ error: unknown }>());
+export const userSignInFailure = createAction('[Auth] User Sign In Failure', props<{ error: HttpErrorResponse }>());
 
 export const userSignOut = createAction('[Auth] User Sign Out');
 

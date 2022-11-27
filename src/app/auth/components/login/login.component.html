@@ -31,6 +31,6 @@
   </nz-form-item>
 
   <nz-form-item>
-    <button nz-button nzType="primary" [nzLoading]="isLoading">{{ 'LogInButton' | translate }}</button>
+    <button nz-button nzType="primary" [nzLoading]="isLoading$ | async">{{ 'LogInButton' | translate }}</button>
   </nz-form-item>
 </form>

@@ -40,15 +40,12 @@ export class UserEffects {
   userSignIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userSignIn),
-      exhaustMap((action) =>
-        this.authService.signIn(action.data).pipe(
-          map((token) => {
-            const payload = this.storeFacade.decodeToken(token);
-            return AuthActions.userSignInSuccess({ token, payload });
-          }),
-          catchError((error) => of(AuthActions.userSignInFailure({ error }))),
-        ),
-      ),
+      exhaustMap((action) => this.authService.signIn(action.data)),
+      map((token) => {
+        const payload = this.storeFacade.decodeToken(token);
+        return AuthActions.userSignInSuccess({ token, payload });
+      }),
+      catchError((error) => of(AuthActions.userSignInFailure({ error }))),
     );
   });
 

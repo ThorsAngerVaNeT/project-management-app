@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 // import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
-import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
+import * as authSelectors from '@auth/store/selectors/auth.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
@@ -41,9 +41,9 @@ import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selec
   providedIn: 'root',
 })
 export class StoreFacade {
-  user$ = this.store.select(selectUser);
+  user$ = this.store.select(authSelectors.selectUser);
 
-  token$ = this.store.select(selectToken);
+  token$ = this.store.select(authSelectors.selectToken);
 
   boards$ = this.store.select(BoardSelectors.selectBoardsWithUsers);
 
@@ -71,9 +71,11 @@ export class StoreFacade {
 
   searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
-  authLoading$ = this.store.select(selectAuthLoading);
+  authLoading$ = this.store.select(authSelectors.selectAuthLoading);
 
-  authError$ = this.store.select(selectAuthError);
+  authError$ = this.store.select(authSelectors.selectAuthError);
+
+  authIsLoading$ = this.store.select(authSelectors.selectAuthIsLoading);
 
   isLoggedIn$ = this.user$.pipe(
     map((user) => {
