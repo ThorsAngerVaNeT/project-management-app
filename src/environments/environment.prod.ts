@@ -5,4 +5,5 @@ export const environment = {
   BOARD_COVER_FILE_TASK_ID: 'board-cover',
   BOARD_COVER_DEFAULT_IMAGE_URL: './assets/images/board-cover.png',
   SEARCH_DEBOUNCE_TIME: 500,
+  DEFAULT_HTTP_TIMEOUT: 30000,
 };
