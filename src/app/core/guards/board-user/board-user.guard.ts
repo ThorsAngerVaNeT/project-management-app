@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router, UrlTree } from '@angular/router';
 import { concatLatestFrom } from '@ngrx/effects';
+import { TranslateService } from '@ngx-translate/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { map, Observable } from 'rxjs';
 import { StoreFacade } from '../../services/store-facade/store-facade';
@@ -19,15 +20,20 @@ export class BoardUserGuard implements CanActivate, CanLoad {
 
       this.notification.create(
         'warning',
-        'Access Denied',
-        'You tried to take access to the board where you are not a participant. You were redirected to the Boards Page!',
+        this.translateService.instant('AccessDenied'),
+        this.translateService.instant('AccessDeniedRedirect'),
       );
 
       return this.router.parseUrl('/boards');
     }),
   );
 
-  constructor(private router: Router, private storeFacade: StoreFacade, private notification: NzNotificationService) {}
+  constructor(
+    private router: Router,
+    private storeFacade: StoreFacade,
+    private notification: NzNotificationService,
+    private translateService: TranslateService,
+  ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.isBoardUser$;
