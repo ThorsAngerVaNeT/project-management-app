@@ -84,6 +84,7 @@ export class StoreFacade {
     map((user) => {
       try {
         if (!user?.token) {
+          this.clearUserState();
           return false;
         }
 
@@ -363,5 +364,9 @@ export class StoreFacade {
 
   changeLanguage(language: Locales): void {
     this.store.dispatch(fromLanguage.changeLanguage({ language }));
+  }
+
+  clearUserState(): void {
+    this.store.dispatch(fromAuth.clearUserState());
   }
 }

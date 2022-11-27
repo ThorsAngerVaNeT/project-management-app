@@ -34,7 +34,7 @@ export const userReducer = createReducer(
       error: '',
     }),
   ),
-  on(AuthActions.userSignOut, (): UserState => ({ ...initialState })),
+  on(AuthActions.userSignOut, AuthActions.clearUserState, (): UserState => ({ ...initialState })),
   on(
     AuthActions.userSignUp,
     (state: UserState, { data: { name, login } }): UserState => ({ ...state, name, login, loading: true, error: '' }),
@@ -58,7 +58,7 @@ export const userReducer = createReducer(
   ),
   on(
     UserActions.updateUserFailed,
-    (state: UserState, { error }): UserState => ({ ...state, loading: false, error: error.error.message }),
+    (state: UserState, { error }): UserState => ({ ...state, loading: false, error: error?.error.message }),
   ),
   on(AuthActions.userUpdateGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
 );

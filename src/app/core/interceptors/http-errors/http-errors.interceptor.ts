@@ -30,7 +30,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             (error.status === HttpStatusCode.Unauthorized || error.status === HttpStatusCode.Forbidden)
           ) {
             this.storeFacade.signOut();
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/welcome');
           } else {
             if (!request.url.includes(APIEndpoints.auth)) {
               this.notification.create(

@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth/auth.guard';
 import { RootPageGuard } from './core/guards/root-page/root-page.guard';
 
-import { ConfirmationComponent } from './shared/components/confirmation/confirmation.component';
-
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'boards',
+    pathMatch: 'full',
+  },
+  {
+    path: 'welcome',
     loadChildren: () => import('./welcome/welcome.module').then((m) => m.WelcomeModule),
     canActivate: [RootPageGuard],
   },
@@ -18,9 +21,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
   },
-  { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then((m) => m.TasksModule) },
-  { path: 'confirm', component: ConfirmationComponent },
-  { path: '**', redirectTo: '/' },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

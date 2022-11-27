@@ -69,7 +69,7 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthActions.userSignOut),
-        tap(() => this.router.navigateByUrl('/')),
+        tap(() => this.router.navigateByUrl('/welcome')),
       );
     },
     { dispatch: false },
