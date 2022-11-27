@@ -35,10 +35,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             if (!request.url.includes(APIEndpoints.auth)) {
               this.notification.create(
                 'error',
-                'Error',
-                `Something went wrong...
-              Please try later.
-              See console for details.`,
+                'Something went wrong...',
+                `Please try later.
+                ${error.message}`,
               );
             }
             return error;
