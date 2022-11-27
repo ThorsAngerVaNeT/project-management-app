@@ -31,8 +31,8 @@ export const initialState: BoardsState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state })),
-  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state })),
+  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state, boardsLoaded: false })),
+  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state, boardsLoaded: true })),
   on(BoardActions.loadBoardSuccess, (state, { board }) => adapter.setOne(board, state)),
   // on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   // on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),

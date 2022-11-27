@@ -36,6 +36,7 @@ import { selectLocalizationValue } from '../../store/selectors/language.selector
 import { Locales } from '../../store/reducers/language.reducer';
 import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/task.selectors';
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
+import { selectBoardId } from '../../store/selectors/router.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +77,8 @@ export class StoreFacade {
   authError$ = this.store.select(selectAuthError);
 
   oldCoverId$ = this.store.select(selectOldCoverId);
+
+  boardId$ = this.store.select(selectBoardId);
 
   isLoggedIn$ = this.user$.pipe(
     map((user) => {
