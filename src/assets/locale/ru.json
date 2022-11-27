@@ -92,5 +92,7 @@
   "itemToDeleteThisTask": "эту задачу",
   "ConfirmOkButton": "Ок",
   "ConfirmCancelButton": "Отмена",
-  "itemToDeleteThisCheckpoint": "этот чек-поинт"
+  "itemToDeleteThisCheckpoint": "этот чек-поинт",
+  "errTitle": "Что-то пошло не так...",
+  "errTextHttpError": "Попробуйте повторить еще раз позднее"
 }
