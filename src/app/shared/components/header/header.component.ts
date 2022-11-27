@@ -3,7 +3,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from '@auth/components/login/login.component';
 import { SignUpComponent } from '@auth/components/sign-up/sign-up.component';
-import '@angular/localize/init';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,11 @@ import '@angular/localize/init';
 export class HeaderComponent {
   user$ = this.storeFacade.user$;
 
-  constructor(private storeFacade: StoreFacade, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   signOut(): void {
     this.storeFacade.signOut();
@@ -24,9 +28,9 @@ export class HeaderComponent {
     this.modalService.create({
       nzContent: SignUpComponent,
       nzFooter: null,
-      nzTitle: $localize`:@@SignUpModalTitle:Sign Up`,
+      nzTitle: this.translateService.instant('SignUpModalTitle'),
       nzComponentParams: {
-        buttonText: $localize`:@@SignUpButton:Sign Up`,
+        buttonText: this.translateService.instant('SignUpButton'),
       },
     });
   }
@@ -39,9 +43,9 @@ export class HeaderComponent {
     this.modalService.create({
       nzContent: SignUpComponent,
       nzFooter: null,
-      nzTitle: $localize`:@@EditProfileModalTitle:Edit Profile`,
+      nzTitle: this.translateService.instant('EditProfileModalTitle'),
       nzComponentParams: {
-        buttonText: $localize`:@@EditProfileSaveButton:Save`,
+        buttonText: this.translateService.instant('EditProfileSaveButton'),
         isEditing: true,
       },
     });

@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { PointAddComponent } from './point-add.component';
+import { LanguageSwitcherComponent } from './language-switcher.component';
 
-describe('PointAddComponent', () => {
-  let component: PointAddComponent;
-  let fixture: ComponentFixture<PointAddComponent>;
+describe('LanguageSwitcherComponent', () => {
+  let component: LanguageSwitcherComponent;
+  let fixture: ComponentFixture<LanguageSwitcherComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PointAddComponent],
+      declarations: [LanguageSwitcherComponent],
       imports: [TranslateModule.forRoot()],
       providers: [provideMockStore()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PointAddComponent);
+    fixture = TestBed.createComponent(LanguageSwitcherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

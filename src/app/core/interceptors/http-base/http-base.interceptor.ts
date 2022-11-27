@@ -7,10 +7,10 @@ import { environment } from '@environments/environment';
 @Injectable()
 export class HttpBaseInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const clonedRequest = request.clone({
-      url: `${environment.API_URL}${request.url}`,
-    });
+    if (!request.url.includes('/assets/')) {
+      request = request.clone({ url: `${environment.API_URL}${request.url}` });
+    }
 
-    return next.handle(clonedRequest);
+    return next.handle(request);
   }
 }

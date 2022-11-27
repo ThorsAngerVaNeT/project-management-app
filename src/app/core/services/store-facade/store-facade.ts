@@ -32,6 +32,9 @@ import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/f
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 import jwt_decode from 'jwt-decode';
+import * as fromLanguage from '../../store/actions/language.actions';
+import { selectLocalizationValue } from '../../store/selectors/language.selectors';
+import { Locales } from '../../store/reducers/language.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -92,6 +95,8 @@ export class StoreFacade {
       }
     }),
   );
+
+  localizationValue$ = this.store.select(selectLocalizationValue);
 
   constructor(private store: Store) {}
 
@@ -334,5 +339,13 @@ export class StoreFacade {
 
   public decodeToken(token: string): TokenPayload {
     return jwt_decode<TokenPayload>(token);
+  }
+
+  initLocalization(): void {
+    this.store.dispatch(fromLanguage.initLocalization());
+  }
+
+  changeLanguage(language: Locales): void {
+    this.store.dispatch(fromLanguage.changeLanguage({ language }));
   }
 }
