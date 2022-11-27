@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, repeat, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/auth.actions';
@@ -46,6 +46,7 @@ export class UserEffects {
         return AuthActions.userSignInSuccess({ token, payload });
       }),
       catchError((error) => of(AuthActions.userSignInFailure({ error }))),
+      repeat(),
     );
   });
 
