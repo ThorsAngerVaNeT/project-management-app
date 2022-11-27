@@ -27,7 +27,7 @@ export class TaskItemComponent {
     this.modalService.create({
       nzTitle: this.translateService.instant('EditTaskModalTitle'),
       nzContent: TaskAddComponent,
-      nzComponentParams: { task: this.task },
+      nzComponentParams: { task: this.task, boardId: this.task.boardId },
     });
   }
 
