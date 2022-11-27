@@ -92,5 +92,7 @@
   "itemToDeleteThisTask": "эту задачу",
   "ConfirmOkButton": "Ок",
   "ConfirmCancelButton": "Отмена",
-  "itemToDeleteThisCheckpoint": "этот чек-поинт"
+  "itemToDeleteThisCheckpoint": "этот чек-поинт",
+  "WrongFileFormatErrorTitle": "Неверный формат файла",
+  "WrongFileFormatErrorContent": "Разрешаются только *.png и *.jpg файлы!"
 }

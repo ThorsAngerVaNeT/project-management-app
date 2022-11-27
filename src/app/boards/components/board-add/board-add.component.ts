@@ -7,6 +7,7 @@ import { map, Observable, Subscription } from 'rxjs';
 import { User } from '@users/model/user.model';
 import { BoardWithUsers } from '../../model/board.model';
 import { TaskFile } from '@files/model/file.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board-add',
@@ -40,7 +41,12 @@ export class BoardAddComponent implements OnInit, OnDestroy {
 
   allowedFileTypes = ['image/png', 'image/jpeg'];
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef, private modalService: NzModalService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modal: NzModalRef,
+    private modalService: NzModalService,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -110,8 +116,8 @@ export class BoardAddComponent implements OnInit, OnDestroy {
         this.file = files[0];
       } else {
         this.modalService.error({
-          nzTitle: 'Wrong file format',
-          nzContent: 'Only *.png and *.jpg files are allowed!',
+          nzTitle: this.translateService.instant('WrongFileFormatErrorTitle'),
+          nzContent: this.translateService.instant('WrongFileFormatErrorContent'),
         });
         this.boardAddForm.get('image')?.reset();
       }

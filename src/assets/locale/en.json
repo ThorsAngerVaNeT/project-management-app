@@ -92,5 +92,7 @@
   "itemToDeleteThisTask": "'this task",
   "ConfirmOkButton": "Ok",
   "ConfirmCancelButton": "Cancel",
-  "itemToDeleteThisCheckpoint": "this check point"
+  "itemToDeleteThisCheckpoint": "this check point",
+  "WrongFileFormatErrorTitle": "Wrong file format",
+  "WrongFileFormatErrorContent": "Only *.png and *.jpg files are allowed!"
 }
