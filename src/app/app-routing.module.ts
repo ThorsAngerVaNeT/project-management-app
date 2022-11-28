@@ -4,6 +4,7 @@ import { AuthGuard } from '@core/guards/auth/auth.guard';
 import { RootPageGuard } from './core/guards/root-page/root-page.guard';
 
 import { ConfirmationComponent } from './shared/components/confirmation/confirmation.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
   },
   { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then((m) => m.TasksModule) },
   { path: 'confirm', component: ConfirmationComponent },
-  { path: '**', redirectTo: '/' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
