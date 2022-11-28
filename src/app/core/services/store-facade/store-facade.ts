@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-// import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
 import * as authSelectors from '@auth/store/selectors/auth.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
@@ -152,14 +151,6 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadMainPageData());
   }
 
-  // getBoardsSet(ids: Board['_id'][]): void {
-  //   this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
-  // }
-
-  // getBoardsByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
-  // }
-
   createBoard(board: BoardParamsWithImage): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
@@ -176,14 +167,6 @@ export class StoreFacade {
     this.store.dispatch(fromColumn.loadColumns({ boardId }));
   }
 
-  // getColumnsSet(columnId: Column['_id'][]): void {
-  //   this.store.dispatch(fromColumn.loadColumnsSet({ columnId }));
-  // }
-
-  // getColumnsByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromColumn.loadColumnsByUser({ userId }));
-  // }
-
   getColumn(boardId: Board['_id'], columnId: Column['_id']): void {
     this.store.dispatch(fromColumn.loadColumn({ boardId, columnId }));
   }
@@ -191,10 +174,6 @@ export class StoreFacade {
   createColumn(boardId: Board['_id'], column: ColumnParams): void {
     this.store.dispatch(fromColumn.createColumn({ boardId, column }));
   }
-
-  // createColumnsSet(columns: ColumnsSetParams[]): void {
-  //   this.store.dispatch(fromColumn.createColumnsSet({ columns }));
-  // }
 
   updateColumn(boardId: Board['_id'], columnId: Column['_id'], column: ColumnParams): void {
     this.store.dispatch(fromColumn.updateColumn({ boardId, columnId, column }));
@@ -212,14 +191,6 @@ export class StoreFacade {
     this.store.dispatch(fromUser.loadUsers());
   }
 
-  // getUser(id: User['_id']): void {
-  //   this.store.dispatch(fromUser.loadUser({ id }));
-  // }
-
-  // createUser(user: UserParams): void {
-  //   this.store.dispatch(fromUser.createUser({ user }));
-  // }
-
   updateUser(userId: User['_id'], user: UserParams): void {
     this.store.dispatch(fromUser.updateUser({ userId, user }));
   }
@@ -232,21 +203,9 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTasks({ boardId, columnId }));
   }
 
-  // getTasksSet(ids: ColumnTask['_id'][]): void {
-  //   this.store.dispatch(fromTask.loadTasksSet({ ids }));
-  // }
-
-  // getTasksByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromTask.loadTasksByUser({ userId }));
-  // }
-
   getTasksByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromTask.loadTasksByBoard({ boardId }));
   }
-
-  // getTasksBySearchString(searchString: string): void {
-  //   this.store.dispatch(fromTask.loadTasksBySearchString({ searchString }));
-  // }
 
   getTask(boardId: Board['_id'], columnId: Column['_id'], taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
@@ -278,14 +237,6 @@ export class StoreFacade {
     this.store.dispatch(fromTask.deleteTask({ boardId, columnId, taskId }));
   }
 
-  // getFilesSet(taskFileIds: TaskFile['_id'][]): void {
-  //   this.store.dispatch(fromFile.loadFilesSet({ taskFileIds }));
-  // }
-
-  // getFilesByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
-  // }
-
   getFilesByTask(taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
   }
@@ -293,14 +244,6 @@ export class StoreFacade {
   getFilesByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
   }
-
-  // deleteFile(id: TaskFile['_id']): void {
-  //   this.store.dispatch(fromFile.deleteFile({ id }));
-  // }
-
-  // uploadFile(fileParams: UploadFileParams): void {
-  //   this.store.dispatch(fromFile.uploadFile({ fileParams }));
-  // }
 
   selectTask(taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.selectTask({ taskId }));

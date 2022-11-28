@@ -5,7 +5,6 @@ import { catchError, concatMap, exhaustMap, map, repeat, tap } from 'rxjs/operat
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/auth.actions';
-// import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class UserEffects {
     private actions$: Actions,
     private authService: AuthService,
     private usersService: UsersService,
-    private storeFacade: StoreFacade, // private router: Router,
+    private storeFacade: StoreFacade,
   ) {}
 
   userSignUp$ = createEffect(() => {

@@ -35,14 +35,6 @@ export class ColumnEffects {
     );
   });
 
-  // createColumnsSet$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(ColumnActions.createColumnsSet),
-  //     concatMap(({ columns: columnsParams }) => this.columnsService.createColumnsSet(columnsParams)),
-  //     map((columns) => ColumnActions.createColumnsSetSuccess({ columns })),
-  //   );
-  // });
-
   updateColumn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.updateColumn),

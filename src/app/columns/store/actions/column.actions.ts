@@ -2,19 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import { EntityState, Update } from '@ngrx/entity';
 import { Column, ColumnParams, ColumnSetUpdateParams } from '../../model/column.model';
 import { Board } from '@boards/model/board.model';
-// import { User } from '@users/model/user.model';
 
 export const loadColumns = createAction('[Columns] Load Columns', props<{ boardId: Board['_id'] }>());
 export const loadColumnsSuccess = createAction('[Columns] Load Columns Success', props<{ columns: Column[] }>());
-
-// export const loadColumnsSet = createAction('[Columns] Load ColumnsSet', props<{ columnId: Column['_id'][] }>());
-// export const loadColumnsSetSuccess = createAction('[Columns] Load ColumnsSet Success', props<{ columns: Column[] }>());
-
-// export const loadColumnsByUser = createAction('[Columns] Load ColumnsByUser', props<{ userId: User['_id'] }>());
-// export const loadColumnsByUserSuccess = createAction(
-//   '[Columns] Load ColumnsByUser Success',
-//   props<{ columns: Column[] }>(),
-// );
 
 export const loadColumn = createAction(
   '[Column] Load Columns',
@@ -28,9 +18,6 @@ export const createColumn = createAction(
 );
 export const createColumnSuccess = createAction('[Columns] Add Column Success', props<{ column: Column }>());
 export const createColumnFailure = createAction('[Columns] Add Column Failure', props<{ error: unknown }>());
-
-// export const createColumnsSet = createAction('[Columns] Add ColumnsSet', props<{ columns: ColumnsSetParams[] }>());
-// export const createColumnsSetSuccess = createAction('[Columns] Add ColumnsSet Success', props<{ columns: Column[] }>());
 
 export const updateColumn = createAction(
   '[Columns] Update Column',

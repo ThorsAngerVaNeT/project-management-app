@@ -1,4 +1,3 @@
-// import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { SignInParams, TokenPayload, User, UserParams } from '@users/model/user.model';
 
@@ -18,8 +17,6 @@ export const userSignUpFailure = createAction('[Auth] User Sign Up Failure', pro
 export const userGetInfo = createAction('[Auth] User Get Info');
 export const userGetInfoSuccess = createAction('[Auth] User Get Info Success', props<{ user: User }>());
 export const userGetInfoFailure = createAction('[Auth] User Get Info Failure', props<{ error: unknown }>());
-
-// export const getUsers = createAction('[Auth] Get Users', props<{ users: User[] }>());
 
 export const userUpdateGetInfoSuccess = createAction(
   '[Auth] Update User Info After SignUp Success',
