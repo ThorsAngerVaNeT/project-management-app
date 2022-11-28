@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { UserEffects } from './user.effects';
+import { TranslateModule } from '@ngx-translate/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Overlay } from '@angular/cdk/overlay';
 
 describe('UserEffects', () => {
   let actions$: Observable<Action>;
@@ -13,8 +16,8 @@ describe('UserEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [UserEffects, provideMockStore(), provideMockActions(() => actions$)],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [UserEffects, provideMockStore(), provideMockActions(() => actions$), NzNotificationService, Overlay],
     });
 
     effects = TestBed.inject(UserEffects);
