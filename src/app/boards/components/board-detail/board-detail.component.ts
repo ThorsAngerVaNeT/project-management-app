@@ -33,8 +33,6 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  isDraggable = true;
-
   constructor(
     private route: ActivatedRoute,
     private storeFacade: StoreFacade,
@@ -83,9 +81,5 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
 
   private getColumnSetUpdateParams(columns: ColumnWithTasks[]): ColumnSetUpdateParams[] {
     return columns.map(({ _id }, index) => ({ _id, order: index }));
-  }
-
-  setIsDraggable(value: boolean): void {
-    this.isDraggable = value;
   }
 }

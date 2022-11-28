@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ComponentRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentRef, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -18,8 +18,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class ColumnComponent implements OnInit {
   @Input() column!: ColumnWithTasks;
 
-  @Output() isDraggable = new EventEmitter<boolean>();
-
   componentRef!: ComponentRef<ColumnComponent>;
 
   titleControl!: FormControl;
@@ -38,7 +36,6 @@ export class ColumnComponent implements OnInit {
 
   toggleEdit(): void {
     this.isEditState = !this.isEditState;
-    this.isDraggable.emit(!this.isEditState);
     if (this.isEditState) {
       this.titleControl.setValue(this.column.title);
     }
