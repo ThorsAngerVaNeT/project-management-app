@@ -205,13 +205,13 @@ export class StoreFacade {
     this.store.dispatch(fromUser.loadUsers());
   }
 
-  getUser(id: User['_id']): void {
-    this.store.dispatch(fromUser.loadUser({ id }));
-  }
+  // getUser(id: User['_id']): void {
+  //   this.store.dispatch(fromUser.loadUser({ id }));
+  // }
 
-  createUser(user: UserParams): void {
-    this.store.dispatch(fromUser.createUser({ user }));
-  }
+  // createUser(user: UserParams): void {
+  //   this.store.dispatch(fromUser.createUser({ user }));
+  // }
 
   updateUser(userId: User['_id'], user: UserParams): void {
     this.store.dispatch(fromUser.updateUser({ userId, user }));

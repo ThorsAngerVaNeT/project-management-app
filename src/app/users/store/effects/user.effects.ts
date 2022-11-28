@@ -16,7 +16,6 @@ export class UserEffects {
       ofType(UserActions.loadUsers),
       switchMap(() => this.userService.getUsers()),
       map((users) => UserActions.loadUsersSuccess({ users })),
-      catchError((error) => of(UserActions.loadUsersFailed({ error }))),
     );
   });
 
