@@ -4,7 +4,7 @@ import { UsersModule } from '@users/users.module';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
-import WelcomeRoutingModule from './welcome.route.module';
+import WelcomeRoutingModule from './welcome-routing.module';
 
 @NgModule({
   declarations: [WelcomeComponent],
