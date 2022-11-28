@@ -25,3 +25,5 @@ export const userUpdateGetInfoSuccess = createAction(
   '[Auth] Update User Info After SignUp Success',
   props<{ user: User }>(),
 );
+
+export const userCleanErrorMessage = createAction('[Auth] User Clean Error Message');
