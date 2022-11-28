@@ -99,5 +99,6 @@
   "errTitle": "Something went wrong...",
   "errTextHttpError": "Please try later",
   "errTextHttp401Error": "Login or password is incorrect",
-  "errTextHttp409Error": "This login already exists"
+  "errTextHttp409Error": "This login already exists",
+  "errUnknown": "Unknown Error"
 }

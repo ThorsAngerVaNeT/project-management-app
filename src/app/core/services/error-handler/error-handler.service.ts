@@ -10,7 +10,7 @@ export class ErrorHandlerService implements ErrorHandler {
   constructor(private notification: NzNotificationService, private translateService: TranslateService) {}
 
   handleError(error: Error | HttpErrorResponse): void {
-    let errorMessage = 'Unknown Error: ';
+    let errorMessage = `${this.translateService.instant('errUnknown')}: `;
 
     if (!(error instanceof HttpErrorResponse)) {
       errorMessage += error?.message;
