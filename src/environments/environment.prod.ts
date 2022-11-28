@@ -8,4 +8,5 @@ export const environment = {
   locales: ['en', 'ru'],
   defaultLocale: 'en',
   DEFAULT_HTTP_TIMEOUT: 30000,
+  JWT_PATTERN: /^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
 };
