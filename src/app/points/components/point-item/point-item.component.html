@@ -5,6 +5,7 @@
   nz-tooltip
   nzTooltipTitle="{{ 'CheckPointTooltip' | translate }}"
   *ngIf="!isEdit; else editTitle"
+  title="{{ point.title }}"
   >{{ point.title }}</label
 >
 
