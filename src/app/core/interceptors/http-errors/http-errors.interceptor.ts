@@ -51,7 +51,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               'error',
               this.translateService.instant('errTitle'),
               `${this.translateService.instant('errTextHttpError')}.
-              ${error.message}`,
+              ${error?.error.message ?? error?.message}`,
             );
           }
           return error;
