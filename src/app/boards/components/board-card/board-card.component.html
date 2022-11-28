@@ -3,9 +3,7 @@
     nzHoverable
     class="board-card"
     [nzCover]="cover"
-    [nzActions]="
-      isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee, actionEdit] : [actionLock]
-    "
+    [nzActions]="isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee] : [actionLock]"
     (click)="showInfo()"
   >
     <nz-card-meta
