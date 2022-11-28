@@ -14,7 +14,7 @@ export class RouterEffects {
     () => {
       return this.actions$.pipe(
         ofType(RouterActions.redirectToBoard),
-        tap(() => this.router.navigateByUrl('/board')),
+        tap(() => this.router.navigateByUrl('/boards')),
       );
     },
     { dispatch: false },
