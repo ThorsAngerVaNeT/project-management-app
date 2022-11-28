@@ -22,6 +22,14 @@ export class PointAddComponent implements OnInit {
     this.pointControl = new FormControl(this.point?.title, [Validators.required, Validators.maxLength(255)]);
   }
 
+  submitHandler(): void {
+    if (this.point._id) {
+      this.updateTitle();
+    } else {
+      this.addPoint();
+    }
+  }
+
   addPoint(): void {
     if (this.pointControl.valid) {
       const { taskId, boardId } = this.point;
