@@ -12,6 +12,8 @@ import { SearchTypes } from '@core/enums/search-types.enums';
 export class SearchComponent {
   searchResult$ = this.storeFacade.searchResult$;
 
+  isLoading$ = this.storeFacade.searchResultIsLoading$;
+
   nzFilterOption = (): boolean => true;
 
   searchType: string = SearchTypes.byKeyWords;

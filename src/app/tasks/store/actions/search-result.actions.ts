@@ -9,3 +9,4 @@ export const searchTaskSuccess = createAction(
   '[Search Result] Search Task Success',
   props<{ searchResult: ColumnTask[] }>(),
 );
+export const searchTaskFailure = createAction('[Search Result] Search Task Failure');

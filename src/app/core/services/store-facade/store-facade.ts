@@ -21,15 +21,11 @@ import {
 } from '@tasks/model/task.model';
 import { selectAllUsers, selectUsersEntities } from '@users/store/selectors/user.selectors';
 import * as fromPoint from '@points/store/actions/point.actions';
-import {
-  selectNewTaskAllPoints,
-  selectPointsByCurrentTask,
-  selectPointsLoading,
-} from '@points/store/selectors/point.selectors';
+import * as pointSelectors from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 import { selectBoardCovers, selectBoardCoverUrl, selectOldCoverId } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
-import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
+import * as searchResultSelectors from '@tasks/store/selectors/search-result.selectors';
 import jwt_decode from 'jwt-decode';
 import * as fromLanguage from '../../store/actions/language.actions';
 import { selectLocalizationValue } from '../../store/selectors/language.selectors';
@@ -55,11 +51,11 @@ export class StoreFacade {
 
   userEntities$ = this.store.select(selectUsersEntities);
 
-  points$ = this.store.select(selectPointsByCurrentTask);
+  points$ = this.store.select(pointSelectors.selectPointsByCurrentTask);
 
-  newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
+  newTaskPoints$ = this.store.select(pointSelectors.selectNewTaskAllPoints);
 
-  pointsLoading$ = this.store.select(selectPointsLoading);
+  pointsLoading$ = this.store.select(pointSelectors.selectPointsLoading);
 
   boardCovers$ = this.store.select(selectBoardCovers);
 
@@ -71,7 +67,9 @@ export class StoreFacade {
 
   boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
 
-  searchResult$ = this.store.select(selectSearchResultsWithUsers);
+  searchResult$ = this.store.select(searchResultSelectors.selectSearchResultsWithUsers);
+
+  searchResultIsLoading$ = this.store.select(searchResultSelectors.selectSearchResultIsLoading);
 
   selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
 
