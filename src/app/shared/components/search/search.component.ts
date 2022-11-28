@@ -27,4 +27,8 @@ export class SearchComponent {
   public search(searchString: string): void {
     if (searchString) this.storeFacade.searchTask(searchString, this.searchType);
   }
+
+  public clearSearch(): void {
+    this.storeFacade.clearSearchTask();
+  }
 }

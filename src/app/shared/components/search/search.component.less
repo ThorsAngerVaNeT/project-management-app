@@ -1,5 +1,9 @@
 @import 'variables';
 
+.search__group {
+  position: relative;
+}
+
 .search__select {
   height: 32px;
   background-color: transparent;
@@ -7,7 +11,7 @@
   border: solid 1px @background-color-medium;
 }
 
-.search__group:hover  .search__select {
+.search__group:hover .search__select {
   color: @primary-light;
   border: solid 1px @primary-light;
 }
@@ -40,6 +44,17 @@
   color: @background-color-light;
 }
 
+.search__clear-search {
+  position: absolute;
+  cursor: pointer;
+  right: 165px;
+  top: 8px;
+  color: @background-color-medium;
+}
+.search__clear-search:hover {
+  color: @primary-light;
+}
+
 @media (max-width: @tablet-max-width) {
   .search__search-field {
     width: 200px;
@@ -47,7 +62,7 @@
 }
 
 @media (max-width: @mobile-max-width) {
-  .search__group{
+  .search__group {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -63,5 +78,9 @@
   .search__search-type {
     border-radius: 4px;
     width: 270px;
+  }
+
+  .search__clear-search {
+    right: 5px;
   }
 }
