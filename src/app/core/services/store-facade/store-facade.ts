@@ -297,6 +297,10 @@ export class StoreFacade {
     this.store.dispatch(fromSearchResult.searchTask({ searchString, searchType }));
   }
 
+  clearSearchTask(): void {
+    this.store.dispatch(fromSearchResult.clearSearchTask());
+  }
+
   public decodeToken(token: string): TokenPayload {
     return jwt_decode<TokenPayload>(token);
   }

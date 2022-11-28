@@ -10,3 +10,5 @@ export const searchTaskSuccess = createAction(
   props<{ searchResult: ColumnTask[] }>(),
 );
 export const searchTaskFailure = createAction('[Search Result] Search Task Failure');
+
+export const clearSearchTask = createAction('[Search Result] Clear Search Task');

@@ -11,6 +11,15 @@
   >
     <nz-option [nzValue]="null" nzLabel="{{ 'inputSearchLabel' | translate }}:" nzDisabled></nz-option>
   </nz-select>
+  <span
+    class="search__clear-search"
+    title="{{ 'clearSearch' | translate }}"
+    nz-icon
+    nzType="close-circle"
+    nzTheme="outline"
+    (click)="clearSearch()"
+  ></span>
+
   <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
     <nz-option nzValue="byIds" nzLabel="{{ 'SearchByIdsLabel' | translate }}"></nz-option>
     <nz-option nzValue="byKeyWords" nzLabel="{{ 'SearchByKeyWordsLabel' | translate }}"></nz-option>

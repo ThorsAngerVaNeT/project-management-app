@@ -21,6 +21,7 @@ export const reducer = createReducer(
   on(TaskActions.searchTaskSuccess, (state, { searchResult }) => adapter.setAll(searchResult, state)),
   on(TaskActions.searchTaskSuccess, (state): SearchResult => ({ ...state, loading: false })),
   on(TaskActions.searchTaskFailure, (state): SearchResult => ({ ...state, loading: false })),
+  on(TaskActions.clearSearchTask, (): SearchResult => ({ ...initialState })),
 );
 
 export const {
