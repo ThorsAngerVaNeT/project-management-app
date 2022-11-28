@@ -36,6 +36,7 @@ import { selectLocalizationValue } from '../../store/selectors/language.selector
 import { Locales } from '../../store/reducers/language.reducer';
 import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/task.selectors';
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
+import * as fromRouter from '../../store/actions/router.action';
 
 @Injectable({
   providedIn: 'root',
@@ -360,5 +361,17 @@ export class StoreFacade {
 
   changeLanguage(language: Locales): void {
     this.store.dispatch(fromLanguage.changeLanguage({ language }));
+  }
+
+  redirectToBoard(): void {
+    this.store.dispatch(fromRouter.redirectToBoard());
+  }
+
+  redirectToRoot(): void {
+    this.store.dispatch(fromRouter.redirectToRoot());
+  }
+
+  redirectToWelcome(): void {
+    this.store.dispatch(fromRouter.redirectToWelcome());
   }
 }
