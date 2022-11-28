@@ -74,10 +74,6 @@ export class StoreFacade {
 
   selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
 
-  authError$ = this.store.select(authSelectors.selectAuthError);
-
-  authIsLoading$ = this.store.select(authSelectors.selectAuthIsLoading);
-
   isLoggedIn$ = this.user$.pipe(
     map((user) => {
       try {

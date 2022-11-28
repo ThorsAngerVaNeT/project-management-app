@@ -25,9 +25,7 @@ export class SignUpComponent implements OnInit {
     }),
   );
 
-  isLoading$ = this.storeFacade.authIsLoading$;
-
-  authError$ = this.storeFacade.authError$;
+  authViewModel$ = this.storeFacade.selectAuthViewModel$;
 
   activeButton = '';
 
