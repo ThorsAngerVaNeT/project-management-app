@@ -102,4 +102,10 @@ export class SignUpComponent implements OnInit {
       ? this.translateService.instant('editProfile')
       : this.translateService.instant('SignUpModalTitle');
   }
+
+  get btnSubmitCaption(): string {
+    return this.user._id
+      ? this.translateService.instant('SaveButtonText')
+      : this.translateService.instant('SignUpButton');
+  }
 }

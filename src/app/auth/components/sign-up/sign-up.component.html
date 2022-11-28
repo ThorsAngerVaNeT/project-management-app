@@ -57,7 +57,7 @@
           [nzLoading]="auth.isLoading && activeButton === 'submit'"
           [disabled]="!signUpForm.valid && auth.isLoading"
         >
-          {{ user._id ? 'Save' : 'Sign Up' }}
+          {{ btnSubmitCaption }}
         </button>
       </nz-form-item>
     </form>
