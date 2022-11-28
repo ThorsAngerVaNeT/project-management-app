@@ -28,6 +28,4 @@ export const userUpdateGetInfoSuccess = createAction(
 
 export const clearUserState = createAction('[Auth] Clear User State');
 
-export const setCurrentUserId = createAction('[Auth] Set Current User Id', props<{ id: User['_id'] }>());
-
 export const userCleanErrorMessage = createAction('[Auth] User Clean Error Message');

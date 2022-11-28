@@ -372,10 +372,6 @@ export class StoreFacade {
     this.store.dispatch(fromAuth.clearUserState());
   }
 
-  setCurrentUserId(id: User['_id']): void {
-    this.store.dispatch(fromAuth.setCurrentUserId({ id }));
-  }
-
   redirectToBoard(): void {
     this.store.dispatch(fromRouter.redirectToBoard());
   }
