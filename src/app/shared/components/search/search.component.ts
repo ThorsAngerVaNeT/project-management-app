@@ -25,6 +25,6 @@ export class SearchComponent {
   }
 
   public search(searchString: string): void {
-    this.storeFacade.searchTask(searchString, this.searchType);
+    if (searchString) this.storeFacade.searchTask(searchString, this.searchType);
   }
 }
