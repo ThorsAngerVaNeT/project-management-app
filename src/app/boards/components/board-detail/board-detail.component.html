@@ -19,24 +19,11 @@
       (cdkDropListDropped)="drop($event)"
       cdkDropListGroup
     >
-      <div *ngFor="let column of columns | sortByOrder; trackBy: trackById">
-        <app-column
-          *ngIf="!isDraggable"
-          class="column-item-wrapper"
-          [column]="column"
-          (isDraggable)="setIsDraggable($event)"
-        ></app-column>
-        <app-column
-          *ngIf="isDraggable"
-          class="column-item-wrapper"
-          [column]="column"
-          (isDraggable)="setIsDraggable($event)"
-          cdkDrag
-        ></app-column>
+      <div class="column-item-wrapper" *ngFor="let column of columns | sortByOrder; trackBy: trackById" cdkDrag>
+        <app-column [column]="column"></app-column>
       </div>
 
       <ng-template #newColumnPlaceholder></ng-template>
-
       <button
         nz-button
         nz-tooltip
