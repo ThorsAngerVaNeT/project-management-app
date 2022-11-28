@@ -2,7 +2,6 @@
 
 Be a Lord of the Board
 Organize your work in a visual intuitive way using ngPMA application features:
-
 Boards | Columns | Tasks | Checklists + Drag&Drop | Access Rights | Search
 
 ## Technologies
