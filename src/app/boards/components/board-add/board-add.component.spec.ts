@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -22,6 +23,7 @@ describe('BoardAddComponent', () => {
         provideMockActions(() => actions$),
         NzModalService,
         { provide: NzModalRef, useValue: {} },
+        Overlay,
       ],
       imports: [TranslateModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

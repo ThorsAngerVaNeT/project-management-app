@@ -9,6 +9,8 @@ export const selectFileState = createFeatureSelector<fromFile.FilesState>(fromFi
 
 export const selectAllFiles = createSelector(selectFileState, fromFile.selectAllFiles);
 
+export const selectOldCoverId = createSelector(selectFileState, (state) => state.oldCoverId);
+
 export const selectBoardCovers = createSelector(selectAllFiles, (files) => {
   const initialValue: { [keyof: Board['_id']]: TaskFile } = {};
   const taskId = environment.BOARD_COVER_FILE_TASK_ID;

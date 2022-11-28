@@ -31,8 +31,8 @@ export const initialState: BoardsState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
 
-  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state })),
-  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state })),
+  on(BoardActions.loadBoards, (state): BoardsState => ({ ...state, boardsLoaded: false })),
+  on(BoardActions.loadBoardsSuccess, (state, { boards }) => adapter.setAll(boards, { ...state, boardsLoaded: true })),
   on(BoardActions.loadBoardSuccess, (state, { board }) => adapter.setOne(board, state)),
   // on(BoardActions.loadBoardsSetSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   // on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
@@ -40,7 +40,9 @@ export const reducer = createReducer(
   on(BoardActions.createBoardSuccess, (state, { board }) => adapter.addOne(board, state)),
   on(BoardActions.createBoardFailure, (state): BoardsState => ({ ...state, boardLoading: false })),
   on(BoardActions.updateBoard, (state): BoardsState => ({ ...state, boardLoading: true })),
-  on(BoardActions.updateBoardSuccess, (state, { board }) => adapter.updateOne(board, state)),
+  on(BoardActions.updateBoardSuccess, (state, { board }) =>
+    adapter.updateOne(board, { ...state, boardLoading: false }),
+  ),
   on(BoardActions.updateBoardFailure, (state): BoardsState => ({ ...state, boardLoading: false })),
   on(BoardActions.deleteBoard, (state, { id }) =>
     adapter.removeOne(id, { ...state, cachedBoards: { ids: state.ids.slice(), entities: { ...state.entities } } }),

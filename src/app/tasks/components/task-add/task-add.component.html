@@ -1,3 +1,10 @@
+<ng-template [nzModalTitle] *ngIf="task">
+  {{ 'EditTaskModalTitle' | translate }}
+  <span nz-tooltip nzTooltipTitle="id: {{ task._id }}">
+    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+  </span>
+</ng-template>
+
 <form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="userEntities$ | async as userEntities">
   <nz-form-item>
     <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">{{ 'TaskTitle' | translate }}</nz-form-label>
