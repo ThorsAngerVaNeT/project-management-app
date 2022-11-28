@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { UserEffects } from './user.effects';
 
@@ -13,7 +14,7 @@ describe('UserEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserEffects, provideMockActions(() => actions$)],
+      providers: [UserEffects, provideMockStore(), provideMockActions(() => actions$)],
     });
 
     effects = TestBed.inject(UserEffects);
