@@ -10,7 +10,7 @@ import * as fromUser from '@users/store/actions/user.actions';
 import * as fromTask from '@tasks/store/actions/task.actions';
 import { SignInParams, TokenPayload, User, UserParams } from '@users/model/user.model';
 import * as BoardSelectors from '@boards/store/selectors/board.selectors';
-// import * as fromFile from '@files/store/actions/file.actions';
+import * as fromFile from '@files/store/actions/file.actions';
 import * as fromColumn from '@columns/store/actions/column.actions';
 import { Column, ColumnParams, ColumnSetUpdateParams } from '@columns/model/column.model';
 import {
@@ -27,7 +27,7 @@ import {
   selectPointsLoading,
 } from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
-import { selectBoardCovers, selectBoardCoverUrl } from '@files/store/selectors/file.selectors';
+import { selectBoardCovers, selectBoardCoverUrl, selectOldCoverId } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
 import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
 import jwt_decode from 'jwt-decode';
@@ -36,6 +36,7 @@ import { selectLocalizationValue } from '../../store/selectors/language.selector
 import { Locales } from '../../store/reducers/language.reducer';
 import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/task.selectors';
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
+import { selectBoardId } from '../../store/selectors/router.selector';
 import * as fromRouter from '../../store/actions/router.action';
 
 @Injectable({
@@ -73,6 +74,10 @@ export class StoreFacade {
   searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
   selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
+
+  oldCoverId$ = this.store.select(selectOldCoverId);
+
+  boardId$ = this.store.select(selectBoardId);
 
   isLoggedIn$ = this.user$.pipe(
     map((user) => {
@@ -138,7 +143,7 @@ export class StoreFacade {
     this.getBoard(boardId);
     this.getColumns(boardId);
     this.getTasksByBoard(boardId);
-    // this.getFilesByBoard(boardId);
+    this.getFilesByBoard(boardId);
   }
 
   getBoardsAllData(): void {
@@ -283,9 +288,9 @@ export class StoreFacade {
   //   this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
   // }
 
-  // getFilesByBoard(boardId: Board['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
-  // }
+  getFilesByBoard(boardId: Board['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
+  }
 
   // deleteFile(id: TaskFile['_id']): void {
   //   this.store.dispatch(fromFile.deleteFile({ id }));

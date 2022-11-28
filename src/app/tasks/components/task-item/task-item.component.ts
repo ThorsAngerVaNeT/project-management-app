@@ -25,9 +25,8 @@ export class TaskItemComponent {
   editTask(): void {
     this.storeFacade.selectTask(this.task._id);
     this.modalService.create({
-      nzTitle: this.translateService.instant('EditTaskModalTitle'),
       nzContent: TaskAddComponent,
-      nzComponentParams: { task: this.task },
+      nzComponentParams: { task: this.task, boardId: this.task.boardId },
       nzWidth: 'null',
       nzClassName: 'form-scrollable',
       nzStyle: { top: '40px' },

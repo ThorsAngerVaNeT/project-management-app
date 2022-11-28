@@ -1,20 +1,38 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router, UrlTree } from '@angular/router';
-import { concatLatestFrom } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { map, Observable } from 'rxjs';
+import { concatMap, filter, map, Observable, take, tap } from 'rxjs';
+import { AuthState } from '@auth/store/reducers/auth.reducer';
+import { Board } from '@boards/model/board.model';
 import { StoreFacade } from '../../services/store-facade/store-facade';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardUserGuard implements CanActivate, CanLoad {
-  isBoardUser$ = this.storeFacade.user$.pipe(
-    concatLatestFrom(() => this.storeFacade.boardDetail$),
-    map(([{ _id: userId }, { board }]) => {
-      const userIds = board?.users.map((boardUser) => boardUser._id);
-      if (board?.owner._id === userId || userIds?.includes(userId)) {
+  user!: AuthState;
+
+  boardId!: Board['_id'];
+
+  isBoardUser$ = this.checkStore().pipe(
+    concatMap(() => this.storeFacade.user$),
+    concatMap((user) => {
+      this.user = user;
+      return this.storeFacade.boardId$;
+    }),
+    concatMap((boardId) => {
+      this.boardId = boardId;
+      return this.storeFacade.boardEntities$;
+    }),
+    map((boardEntities) => {
+      const board = boardEntities[this.boardId];
+
+      if (!board) {
+        return this.router.parseUrl('/404');
+      }
+
+      if (board?.owner === this.user._id || board?.users?.includes(this.user._id)) {
         return true;
       }
 
@@ -24,7 +42,8 @@ export class BoardUserGuard implements CanActivate, CanLoad {
         this.translateService.instant('AccessDeniedRedirect'),
       );
 
-      return this.router.parseUrl('/boards');
+      this.router.navigateByUrl('/boards');
+      return false;
     }),
   );
 
@@ -41,5 +60,17 @@ export class BoardUserGuard implements CanActivate, CanLoad {
 
   canLoad(): Observable<boolean | UrlTree> {
     return this.isBoardUser$;
+  }
+
+  checkStore(): Observable<boolean> {
+    return this.storeFacade.boardsLoaded$.pipe(
+      tap((loaded) => {
+        if (!loaded) {
+          this.storeFacade.getBoards();
+        }
+      }),
+      filter((loaded) => loaded),
+      take(1),
+    );
   }
 }

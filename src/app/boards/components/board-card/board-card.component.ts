@@ -49,6 +49,7 @@ export class BoardCardComponent implements OnInit {
       nzTitle: this.translateService.instant('EditBoardModalTitle'),
       nzContent: BoardAddComponent,
       nzComponentParams: { board: this.board },
+      nzWidth: 'null',
     });
   }
 

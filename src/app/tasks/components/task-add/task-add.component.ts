@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, switchMap } from 'rxjs';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
@@ -30,7 +30,23 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskAddForm!: FormGroup;
 
-  userEntities$ = this.storeFacade.userEntities$;
+  userEntities$ = this.storeFacade.userEntities$.pipe(
+    switchMap((usersEntities) => {
+      return this.storeFacade.boardEntities$.pipe(
+        map((boards) => {
+          const board = boards[this.boardId];
+          if (board && board.users) {
+            const users = Object.entries(usersEntities).filter(
+              ([, user]) => user && user._id && board.users.includes(user._id),
+            );
+            return Object.fromEntries(users);
+          }
+
+          return usersEntities;
+        }),
+      );
+    }),
+  );
 
   userEntities!: Dictionary<User>;
 

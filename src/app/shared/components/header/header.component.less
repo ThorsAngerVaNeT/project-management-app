@@ -6,7 +6,6 @@
   padding: 0 64px;
   line-height: 1;
   background: @secondary-color;
-
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -23,6 +22,7 @@
 .header__right-group {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
 .header__logo {
@@ -46,7 +46,8 @@
 
 .header__user-menu {
   color: @background-color-light;
-  padding-top: 2px;
+  display: flex;
+  align-items: center;
 }
 
 .header__user-name {
@@ -55,6 +56,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  height: 18px;
 }
 
 .header__user-menu .anticon {
@@ -69,6 +71,7 @@
 .header__welcome_actions {
   display: flex;
   gap: 32px;
+  align-items: center;
 }
 
 .header__welcome_actions a,
@@ -81,10 +84,6 @@
 .header__welcome_actions span:hover {
   color: @primary-light;
 }
-
-
-// burger
-
 
 .burger__toggler {
   display: none;
@@ -149,5 +148,3 @@
     display: flex;
   }
 }
-
-//  /burger
