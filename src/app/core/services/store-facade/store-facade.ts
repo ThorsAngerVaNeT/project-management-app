@@ -374,4 +374,8 @@ export class StoreFacade {
   redirectToWelcome(): void {
     this.store.dispatch(fromRouter.redirectToWelcome());
   }
+
+  clearErrorMessage(): void {
+    this.store.dispatch(fromAuth.userCleanErrorMessage());
+  }
 }
