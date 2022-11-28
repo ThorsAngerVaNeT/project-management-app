@@ -116,5 +116,6 @@
   "errTextHttp409Error": "This login already exists",
   "errUnknown": "Unknown Error",
   "successTitle": "Success",
-  "successTextProfileUpdate": "Your profile has been updated!"
+  "successTextProfileUpdate": "Your profile has been updated!",
+  "clearSearch": "Clear search"
 }

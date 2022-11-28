@@ -116,5 +116,6 @@
   "errTextHttp409Error": "Такой логин уже существует",
   "errUnknown": "Неизвестная ошибка",
   "successTitle": "Успешно",
-  "successTextProfileUpdate": "Ваш профиль был обновлен!"
+  "successTextProfileUpdate": "Ваш профиль был обновлен!",
+  "clearSearch": "Очистить поиск"
 }

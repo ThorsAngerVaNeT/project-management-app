@@ -34,6 +34,23 @@
 
 .search__result-container {
   padding: 0 10px 0 10px;
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: transparent;
+  border: @background-color-medium solid 1px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: @background-color-medium;
+  border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: @primary-color;
 }
 
 .search__result-description {
