@@ -61,10 +61,11 @@ export const userReducer = createReducer(
     (state: UserState, { error }): UserState => ({ ...state, loading: false, error: error?.error.message }),
   ),
   on(AuthActions.userUpdateGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
+  on(AuthActions.setCurrentUserId, (state: UserState, { id }): UserState => ({ ...state, _id: id })),
 );
 
 export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {
-  return localStorageSync({ keys: ['_id', 'name', 'login', 'token'], rehydrate: true })(reducer);
+  return localStorageSync({ keys: ['token'], rehydrate: true })(reducer);
 };
 
 export const userMetaReducers: MetaReducer[] = [localStorageSyncReducer];

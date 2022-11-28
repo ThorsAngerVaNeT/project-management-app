@@ -80,24 +80,24 @@ export class StoreFacade {
 
   boardId$ = this.store.select(selectBoardId);
 
-  isLoggedIn$ = this.user$.pipe(
-    map((user) => {
+  isLoggedIn$ = this.token$.pipe(
+    map((token) => {
       try {
-        if (!user?.token) {
-          this.clearUserState();
+        if (!token) {
           return false;
         }
 
-        const { exp } = this.decodeToken(user.token);
+        const { exp, id } = this.decodeToken(token);
 
         if (exp * 1000 <= Date.now()) {
-          this.signOut();
-          return false;
+          throw new Error('Token expired');
         }
+
+        this.setCurrentUserId(id);
 
         return true;
       } catch {
-        this.signOut();
+        this.clearUserState();
         return false;
       }
     }),
@@ -368,5 +368,9 @@ export class StoreFacade {
 
   clearUserState(): void {
     this.store.dispatch(fromAuth.clearUserState());
+  }
+
+  setCurrentUserId(id: User['_id']): void {
+    this.store.dispatch(fromAuth.setCurrentUserId({ id }));
   }
 }
