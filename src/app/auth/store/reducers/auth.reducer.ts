@@ -69,6 +69,9 @@ export const userReducer = createReducer(
     (state: AuthState, { error }): AuthState => ({ ...state, loading: false, error: error.error.message }),
   ),
   on(AuthActions.userUpdateGetInfoSuccess, (state: AuthState, { user }): AuthState => ({ ...state, ...user })),
+  on(UserActions.deleteUser, (state: AuthState): AuthState => ({ ...state, loading: true })),
+  on(UserActions.deleteUserSuccess, (): AuthState => ({ ...initialState })),
+  on(UserActions.deleteUserFailed, (state: AuthState): AuthState => ({ ...state, loading: false })),
 );
 
 export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {

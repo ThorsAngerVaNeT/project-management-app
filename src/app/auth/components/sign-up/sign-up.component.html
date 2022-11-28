@@ -49,7 +49,7 @@
       <button
         nz-button
         nzType="primary"
-        [nzLoading]="isLoading$ | async"
+        [nzLoading]="(isLoading$ | async) && activeButton === 'submit'"
         [disabled]="!signUpForm.valid && (isLoading$ | async)"
       >
         {{ user._id ? 'Save' : 'Sign Up' }}
@@ -58,7 +58,13 @@
   </form>
   <div class="delete-block" *ngIf="user._id">
     <div>{{ 'deleteUserText' | translate }}</div>
-    <button nz-button nzDanger [nzLoading]="isLoading$ | async" (click)="deleteUser()" [disabled]="isLoading$ | async">
+    <button
+      nz-button
+      nzDanger
+      [nzLoading]="(isLoading$ | async) && activeButton === 'delete'"
+      (click)="deleteUser()"
+      [disabled]="isLoading$ | async"
+    >
       {{ 'deleteUserButton' | translate }}
     </button>
   </div>

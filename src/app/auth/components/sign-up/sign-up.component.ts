@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { Subscription, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ConfirmationComponent } from '@shared/components/confirmation/confirmation.component';
 import { User } from '@users/model/user.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./sign-up.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
 
   user!: User;
@@ -29,11 +29,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   authError$ = this.storeFacade.authError$;
 
-  subscription = new Subscription();
-
-  isDeletingDisabled = false;
-
-  isEditingDisabled = false;
+  activeButton = '';
 
   constructor(
     private storeFacade: StoreFacade,
@@ -54,37 +50,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
         Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'),
       ]),
     });
-
-    // this.subscription.add(
-    //   this.authLoading$.subscribe((isLoading) => {
-    //     this.isLoading = isLoading;
-    //     if (!isLoading) {
-    //       this.isEditingDisabled = false;
-    //       this.isDeletingDisabled = false;
-    //     }
-    //   }),
-    // );
-
-    // this.subscription.add(
-    //   this.authError$.subscribe((error) => {
-    //     if (error) {
-    //       this.login?.setErrors({ required: false });
-    //     }
-    //   }),
-    // );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   submitForm(): void {
     if (this.signUpForm.valid) {
-      this.isDeletingDisabled = true;
+      this.activeButton = 'submit';
+
       if (this.user._id) {
-        this.editUser();
+        this.storeFacade.updateUser(this.user._id, this.signUpForm.value);
       } else {
-        this.signUp();
+        const { name, login, password } = this.signUpForm.value;
+        this.storeFacade.signUp({ name, login, password });
       }
     } else {
       Object.values(this.signUpForm.controls).forEach((control) => {
@@ -96,23 +72,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
     }
   }
 
-  signUp(): void {
-    const { name, login, password } = this.signUpForm.value;
-    this.storeFacade.signUp({ name, login, password });
-  }
-
-  editUser(): void {
-    this.storeFacade.updateUser(this.user._id, this.signUpForm.value);
-  }
-
   deleteUser(): void {
-    this.isEditingDisabled = true;
     this.modalService.confirm({
       nzContent: ConfirmationComponent,
       nzComponentParams: { itemToDelete: this.translateService.instant('itemToDeleteYourAccount') },
       nzOkText: this.translateService.instant('ConfirmOkButton'),
       nzCancelText: this.translateService.instant('ConfirmCancelButton'),
       nzOnOk: () => {
+        this.activeButton = 'delete';
         this.storeFacade.deleteUser(this.user._id);
       },
       nzOkDanger: true,
