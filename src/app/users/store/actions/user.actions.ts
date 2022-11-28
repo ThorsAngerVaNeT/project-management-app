@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import { User, UserParams } from '../../model/user.model';
-import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadUsers = createAction('[Users] Load Users');
 export const loadUsersSuccess = createAction('[Users] Load Users Success', props<{ users: User[] }>());
@@ -21,7 +20,7 @@ export const updateUserSuccess = createAction(
   '[Users] Update User Success (state users)',
   props<{ user: Update<User> }>(),
 );
-export const updateUserFailed = createAction('[Users] Update User Failed', props<{ error: HttpErrorResponse }>());
+export const updateUserFailed = createAction('[Users] Update User Failed', props<{ error: unknown }>());
 
 export const changeAfterUserUpdateSuccess = createAction(
   '[Users] Update User State (user & users) After User Update Success',

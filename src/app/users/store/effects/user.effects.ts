@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, repeat, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from '../actions/user.actions';
 import * as AuthActions from '@auth/store/actions/auth.actions';
@@ -26,6 +26,7 @@ export class UserEffects {
       concatMap(({ userId, user }) => this.userService.updateUser(userId, user)),
       map(({ _id: id, ...changes }) => UserActions.updateUserSuccess({ user: { id, changes } })),
       catchError((error) => of(UserActions.updateUserFailed({ error }))),
+      repeat(),
     );
   });
 
@@ -50,6 +51,7 @@ export class UserEffects {
       concatMap(({ id }) => this.userService.deleteUser(id)),
       map((user$) => UserActions.deleteUserSuccess({ id: user$._id })),
       catchError((error) => of(UserActions.deleteUserFailed({ error }))),
+      repeat(),
     );
   });
 
