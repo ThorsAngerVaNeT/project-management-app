@@ -47,12 +47,24 @@
 <h2>{{ 'MainDevelopers' | translate }}</h2>
 
 <div class="developers">
-  <ng-container *ngFor="let item of developers">
-    <nz-card class="business-card" nzTitle="{{ item.name }}" [nzExtra]="extraTemplate">
-      {{ item.about }}
-    </nz-card>
-    <ng-template #extraTemplate>
-      <a href="{{ item.github }}"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
-    </ng-template>
-  </ng-container>
+  <nz-card class="business-card" nzTitle="ThorsAngerVaNeT" [nzExtra]="extraTemplate1">
+    {{ 'ThorsAngerVaNeT' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate1>
+    <a href="https://github.com/thorsangervanet"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="Ogimly" [nzExtra]="extraTemplate2">
+    {{ 'Ogimly' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate2>
+    <a href="https://github.com/ogimly"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="022022" [nzExtra]="extraTemplate3">
+    {{ '022022' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate3>
+    <a href="https://github.com/022022"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
 </div>

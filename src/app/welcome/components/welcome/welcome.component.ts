@@ -8,8 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeComponent {
-  constructor(private translateService: TranslateService) {}
-
   technologies = [
     {
       name: 'Angular',
@@ -39,21 +37,5 @@ export class WelcomeComponent {
     },
   ];
 
-  developers = [
-    {
-      name: 'ThorsAngerVaNeT',
-      about: this.translateService.instant('ThorsAngerVaNeT'),
-      github: 'https://github.com/thorsangervanet',
-    },
-    {
-      name: 'Ogimly',
-      about: this.translateService.instant('Ogimly'),
-      github: 'https://github.com/ogimly',
-    },
-    {
-      name: '022022',
-      about: this.translateService.instant('022022'),
-      github: 'https://github.com/022022',
-    },
-  ];
+  constructor(private translateService: TranslateService) {}
 }
