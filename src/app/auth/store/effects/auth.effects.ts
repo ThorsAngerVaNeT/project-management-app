@@ -82,7 +82,7 @@ export class UserEffects {
         ofType(AuthActions.userSignOut),
         tap(() => {
           localStorage.setItem('token', '');
-          this.storeFacade.redirectToRoot();
+          this.storeFacade.redirectToWelcome();
         }),
       );
     },
