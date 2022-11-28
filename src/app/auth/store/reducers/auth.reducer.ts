@@ -55,7 +55,7 @@ export const userReducer = createReducer(
     AuthActions.userSignUpFailure,
     (state: AuthState, { error }): AuthState => ({ ...state, loading: false, error: `${error}` }),
   ),
-  on(AuthActions.userGetInfoSuccess, (state: AuthState, { user }): AuthState => ({ ...state, ...user })),
+  // on(AuthActions.userGetInfoSuccess, (state: AuthState, { user }): AuthState => ({ ...state, ...user })),
   on(
     UserActions.updateUser,
     (state: AuthState, { user }): AuthState => ({ ...state, ...user, loading: true, error: '' }),

@@ -122,9 +122,9 @@ export class StoreFacade {
     this.store.dispatch(fromAuth.userSignUp({ data }));
   }
 
-  getUserInfo(): void {
-    this.store.dispatch(fromAuth.userGetInfo());
-  }
+  // getUserInfo(): void {
+  //   this.store.dispatch(fromAuth.userGetInfo());
+  // }
 
   getBoards(): void {
     this.store.dispatch(fromBoard.loadBoards());

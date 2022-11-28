@@ -25,10 +25,10 @@ export const updateUserFailed = createAction('[Users] Update User Failed', props
 //   '[Users] Update User State (user & users) After User Update Success',
 //   props<{ user: Update<User> }>(),
 // );
-export const userGetInfoSuccess = createAction(
-  '[Users] Update Info (state user) After User Update Success',
-  props<{ user: Update<User> }>(),
-);
+// export const userGetInfoSuccess = createAction(
+//   '[Users] Update Info (state user) After User Update Success',
+//   props<{ user: Update<User> }>(),
+// );
 
 export const deleteUser = createAction('[Users] Delete User', props<{ id: User['_id'] }>());
 export const deleteUserSuccess = createAction('[Users] Delete User Success', props<{ id: User['_id'] }>());

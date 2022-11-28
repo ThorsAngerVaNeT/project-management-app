@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, repeat, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, repeat, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/auth.actions';
@@ -61,18 +61,18 @@ export class UserEffects {
     { dispatch: false },
   );
 
-  getUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
-      concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(([, state]) =>
-        this.usersService.getUser(state._id).pipe(
-          map((user) => AuthActions.userGetInfoSuccess({ user })),
-          catchError((error) => of(AuthActions.userGetInfoFailure({ error }))),
-        ),
-      ),
-    );
-  });
+  // getUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
+  //     concatLatestFrom(() => this.storeFacade.user$),
+  //     concatMap(([, state]) =>
+  //       this.usersService.getUser(state._id).pipe(
+  //         map((user) => AuthActions.userGetInfoSuccess({ user })),
+  //         catchError((error) => of(AuthActions.userGetInfoFailure({ error }))),
+  //       ),
+  //     ),
+  //   );
+  // });
 
   userSignOut$ = createEffect(
     () => {
