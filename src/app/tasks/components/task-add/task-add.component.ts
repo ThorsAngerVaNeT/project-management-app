@@ -34,7 +34,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     switchMap((usersEntities) => {
       return this.storeFacade.boardEntities$.pipe(
         map((boards) => {
-          const board = boards[this.boardId];
+          const board = boards[this.boardId ?? this.task.boardId];
           if (board && board.users) {
             const users = Object.entries(usersEntities).filter(
               ([, user]) => user && user._id && board.users.includes(user._id),
