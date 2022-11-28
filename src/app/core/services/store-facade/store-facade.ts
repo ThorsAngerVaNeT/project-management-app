@@ -33,7 +33,7 @@ import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/t
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 import { selectBoardId } from '../../store/selectors/router.selector';
 import * as fromRouter from '../../store/actions/router.action';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -84,7 +84,7 @@ export class StoreFacade {
           return false;
         }
 
-        if (!/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/.test(token)) {
+        if (!environment.JWT_PATTERN.test(token)) {
           throw new Error('invalid token');
         }
 
@@ -311,10 +311,6 @@ export class StoreFacade {
 
   clearUserState(): void {
     this.store.dispatch(fromAuth.clearUserState());
-  }
-
-  setCurrentUserId(id: User['_id']): void {
-    this.store.dispatch(fromAuth.setCurrentUserId({ id }));
   }
 
   redirectToBoard(): void {

@@ -74,5 +74,4 @@ export const userReducer = createReducer(
   on(UserActions.deleteUserSuccess, (): AuthState => ({ ...initialState })),
   on(UserActions.deleteUserFailed, (state: AuthState): AuthState => ({ ...state, loading: false })),
   on(AuthActions.userCleanErrorMessage, (state: AuthState): AuthState => ({ ...state, error: '' })),
-  on(AuthActions.setCurrentUserId, (state: AuthState, { id }): AuthState => ({ ...state, _id: id })),
 );
