@@ -1,6 +1,6 @@
 <h1 class="auth-heading">{{ 'LoginModalTitle' | translate }}</h1>
 <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="logInForm">
-  <nz-form-item>{{ authError$ | async }} </nz-form-item>
+  <nz-form-item class="ant-form-item-explain-error">{{ authError$ | async }} </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzErrorTip]="loginErrorTip">
       <nz-input-group nzPrefixIcon="login">

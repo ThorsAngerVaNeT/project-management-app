@@ -2,7 +2,7 @@
   <h1 class="auth-heading">{{ user._id ? 'Edit Profile' : 'Sign Up' }}</h1>
   <div class="password-requirements" [innerHTML]="'passwordRequirements' | translate"></div>
   <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
-    <nz-form-item>{{ authError$ | async }} </nz-form-item>
+    <nz-form-item class="ant-form-item-explain-error">{{ authError$ | async }} </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzErrorTip]="loginErrorTip">
         <nz-input-group nzPrefixIcon="login">
