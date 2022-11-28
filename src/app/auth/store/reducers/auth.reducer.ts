@@ -1,7 +1,6 @@
-import { Action, ActionReducer, createReducer, MetaReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../actions/auth.actions';
 import * as UserActions from '@users/store/actions/user.actions';
-import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface AuthState {
   _id: string;
@@ -12,11 +11,13 @@ export interface AuthState {
   error: string;
 }
 
+const getTokenFromLocalStorage = (): string => `${localStorage.getItem('token')}`;
+
 export const initialState: AuthState = {
   _id: '',
   name: '',
   login: '',
-  token: '',
+  token: getTokenFromLocalStorage(),
   loading: false,
   error: '',
 };
@@ -42,7 +43,7 @@ export const userReducer = createReducer(
     AuthActions.userSignInFailure,
     (state: AuthState, { error }): AuthState => ({ ...state, loading: false, error: `${error}` }),
   ),
-  on(AuthActions.userSignOut, (): AuthState => ({ ...initialState })),
+  on(AuthActions.userSignOut, AuthActions.clearUserState, (): AuthState => ({ ...initialState, token: '' })),
   on(
     AuthActions.userSignUp,
     (state: AuthState, { data: { name, login } }): AuthState => ({ ...state, name, login, loading: true, error: '' }),
@@ -73,10 +74,5 @@ export const userReducer = createReducer(
   on(UserActions.deleteUserSuccess, (): AuthState => ({ ...initialState })),
   on(UserActions.deleteUserFailed, (state: AuthState): AuthState => ({ ...state, loading: false })),
   on(AuthActions.userCleanErrorMessage, (state: AuthState): AuthState => ({ ...state, error: '' })),
+  on(AuthActions.setCurrentUserId, (state: AuthState, { id }): AuthState => ({ ...state, _id: id })),
 );
-
-export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {
-  return localStorageSync({ keys: ['_id', 'name', 'login', 'token'], rehydrate: true })(reducer);
-};
-
-export const userMetaReducers: MetaReducer[] = [localStorageSyncReducer];

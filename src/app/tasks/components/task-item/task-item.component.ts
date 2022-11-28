@@ -26,7 +26,7 @@ export class TaskItemComponent {
     this.storeFacade.selectTask(this.task._id);
     this.modalService.create({
       nzContent: TaskAddComponent,
-      nzComponentParams: { task: this.task, boardId: this.task.boardId },
+      nzComponentParams: { task: this.task },
       nzWidth: 'null',
       nzClassName: 'form-scrollable',
       nzStyle: { top: '40px' },

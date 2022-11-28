@@ -66,7 +66,7 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(UserActions.deleteUserSuccess),
-        tap(() => this.storeFacade.redirectToRoot()),
+        tap(() => this.storeFacade.redirectToWelcome()),
       );
     },
     { dispatch: false },

@@ -34,6 +34,7 @@ import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/t
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 import { selectBoardId } from '../../store/selectors/router.selector';
 import * as fromRouter from '../../store/actions/router.action';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -77,23 +78,26 @@ export class StoreFacade {
 
   boardId$ = this.store.select(selectBoardId);
 
-  isLoggedIn$ = this.user$.pipe(
-    map((user) => {
+  isLoggedIn$ = this.token$.pipe(
+    map((token) => {
       try {
-        if (!user?.token) {
+        if (!token) {
           return false;
         }
 
-        const { exp } = this.decodeToken(user.token);
+        if (!/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/.test(token)) {
+          throw new Error('invalid token');
+        }
+
+        const { exp } = this.decodeToken(token);
 
         if (exp * 1000 <= Date.now()) {
-          this.signOut();
-          return false;
+          throw new Error('Token expired');
         }
 
         return true;
       } catch {
-        this.signOut();
+        this.clearUserState();
         return false;
       }
     }),
@@ -125,9 +129,9 @@ export class StoreFacade {
     this.store.dispatch(fromAuth.userSignUp({ data }));
   }
 
-  // getUserInfo(): void {
-  //   this.store.dispatch(fromAuth.userGetInfo());
-  // }
+  getUserInfo(): void {
+    this.store.dispatch(fromAuth.userGetInfo());
+  }
 
   getBoards(): void {
     this.store.dispatch(fromBoard.loadBoards());
@@ -282,9 +286,9 @@ export class StoreFacade {
   //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
   // }
 
-  // getFilesByTask(taskId: ColumnTask['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
-  // }
+  getFilesByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
+  }
 
   getFilesByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
@@ -334,9 +338,9 @@ export class StoreFacade {
     this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 
-  // getBoardCovers(): void {
-  //   this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
-  // }
+  getBoardCovers(): void {
+    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  }
 
   getBoardCoverStream(boardId: Board['_id']): Observable<string> {
     return this.store.select(selectBoardCoverUrl(boardId));
@@ -360,6 +364,14 @@ export class StoreFacade {
 
   changeLanguage(language: Locales): void {
     this.store.dispatch(fromLanguage.changeLanguage({ language }));
+  }
+
+  clearUserState(): void {
+    this.store.dispatch(fromAuth.clearUserState());
+  }
+
+  setCurrentUserId(id: User['_id']): void {
+    this.store.dispatch(fromAuth.setCurrentUserId({ id }));
   }
 
   redirectToBoard(): void {
