@@ -87,13 +87,11 @@ export class StoreFacade {
           return false;
         }
 
-        const { exp, id } = this.decodeToken(token);
+        const { exp } = this.decodeToken(token);
 
         if (exp * 1000 <= Date.now()) {
           throw new Error('Token expired');
         }
-
-        this.setCurrentUserId(id);
 
         return true;
       } catch {

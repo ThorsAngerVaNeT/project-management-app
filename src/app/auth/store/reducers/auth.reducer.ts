@@ -1,7 +1,6 @@
-import { Action, ActionReducer, createReducer, MetaReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../actions/auth.actions';
 import * as UserActions from '@users/store/actions/user.actions';
-import { localStorageSync } from 'ngrx-store-localstorage';
 
 export interface UserState {
   _id: string;
@@ -12,11 +11,13 @@ export interface UserState {
   error: string;
 }
 
+const getTokenFromLocalStorage = (): string => `${localStorage.getItem('token')}`;
+
 export const initialState: UserState = {
   _id: '',
   name: '',
   login: '',
-  token: '',
+  token: getTokenFromLocalStorage(),
   loading: false,
   error: '',
 };
@@ -34,7 +35,7 @@ export const userReducer = createReducer(
       error: '',
     }),
   ),
-  on(AuthActions.userSignOut, AuthActions.clearUserState, (): UserState => ({ ...initialState })),
+  on(AuthActions.userSignOut, AuthActions.clearUserState, (): UserState => ({ ...initialState, token: '' })),
   on(
     AuthActions.userSignUp,
     (state: UserState, { data: { name, login } }): UserState => ({ ...state, name, login, loading: true, error: '' }),
@@ -63,9 +64,3 @@ export const userReducer = createReducer(
   on(AuthActions.userUpdateGetInfoSuccess, (state: UserState, { user }): UserState => ({ ...state, ...user })),
   on(AuthActions.setCurrentUserId, (state: UserState, { id }): UserState => ({ ...state, _id: id })),
 );
-
-export const localStorageSyncReducer = (reducer: ActionReducer<Action>): ActionReducer<Action> => {
-  return localStorageSync({ keys: ['token'], rehydrate: true })(reducer);
-};
-
-export const userMetaReducers: MetaReducer[] = [localStorageSyncReducer];

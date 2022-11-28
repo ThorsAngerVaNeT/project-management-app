@@ -18,7 +18,6 @@ const routes: Routes = [
   {
     path: 'boards',
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
-    canActivate: [AuthGuard],
     canLoad: [AuthGuard],
   },
   { path: '**', redirectTo: '/404' },

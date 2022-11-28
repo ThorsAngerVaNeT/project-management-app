@@ -8,7 +8,7 @@ import AuthRoutingModule from './auth.route.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { UserEffects } from './store/effects/auth.effects';
-import { userReducer, userMetaReducers } from './store/reducers/auth.reducer';
+import { userReducer } from './store/reducers/auth.reducer';
 import { UsersModule } from '../users/users.module';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { UsersModule } from '../users/users.module';
   imports: [
     SharedModule,
     AuthRoutingModule,
-    StoreModule.forFeature('user', userReducer, { metaReducers: userMetaReducers }),
+    StoreModule.forFeature('user', userReducer),
     EffectsModule.forFeature([UserEffects]),
     UsersModule,
   ],

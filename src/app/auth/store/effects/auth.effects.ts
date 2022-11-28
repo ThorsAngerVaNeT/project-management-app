@@ -44,6 +44,7 @@ export class UserEffects {
         this.authService.signIn(action.data).pipe(
           map((token) => {
             const payload = this.storeFacade.decodeToken(token);
+            localStorage.setItem('token', token);
             return AuthActions.userSignInSuccess({ token, payload });
           }),
           catchError((error) => of(AuthActions.userSignInFailure({ error }))),
@@ -55,13 +56,14 @@ export class UserEffects {
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
-      concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(([, state]) =>
-        this.usersService.getUser(state._id).pipe(
+      concatLatestFrom(() => this.storeFacade.token$),
+      concatMap(([, token]) => {
+        const { id } = this.storeFacade.decodeToken(token);
+        return this.usersService.getUser(id).pipe(
           map((user) => AuthActions.userGetInfoSuccess({ user })),
           catchError((error) => of(AuthActions.userGetInfoFailure({ error }))),
-        ),
-      ),
+        );
+      }),
     );
   });
 
@@ -69,7 +71,10 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthActions.userSignOut),
-        tap(() => this.router.navigateByUrl('/welcome')),
+        tap(() => {
+          localStorage.setItem('token', '');
+          this.router.navigateByUrl('/welcome');
+        }),
       );
     },
     { dispatch: false },
