@@ -6,10 +6,18 @@ import * as UserActions from '../actions/user.actions';
 import * as AuthActions from '@auth/store/actions/auth.actions';
 import { UsersService } from '../../services/users.service';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private userService: UsersService, private storeFacade: StoreFacade) {}
+  constructor(
+    private actions$: Actions,
+    private userService: UsersService,
+    private storeFacade: StoreFacade,
+    private notification: NzNotificationService,
+    private translateService: TranslateService,
+  ) {}
 
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
@@ -59,6 +67,22 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.deleteUserSuccess),
         tap(() => this.storeFacade.redirectToRoot()),
+      );
+    },
+    { dispatch: false },
+  );
+
+  updateUserSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.updateUserSuccess),
+        tap(() =>
+          this.notification.create(
+            'success',
+            this.translateService.instant('successTitle'),
+            this.translateService.instant('successTextProfileUpdate'),
+          ),
+        ),
       );
     },
     { dispatch: false },

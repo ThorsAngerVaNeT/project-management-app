@@ -100,5 +100,7 @@
   "errTextHttpError": "Please try later",
   "errTextHttp401Error": "Login or password is incorrect",
   "errTextHttp409Error": "This login already exists",
-  "errUnknown": "Unknown Error"
+  "errUnknown": "Unknown Error",
+  "successTitle": "Success",
+  "successTextProfileUpdate": "Your profile has been updated!"
 }
