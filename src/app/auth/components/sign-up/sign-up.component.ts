@@ -14,10 +14,6 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  // isSaving = false;
-
-  // isDeleting = false;
-
   isLoading = false;
 
   signUpForm!: FormGroup;
