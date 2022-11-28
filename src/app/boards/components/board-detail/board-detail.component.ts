@@ -63,6 +63,7 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
       nzTitle: this.translateService.instant('CreateColumnModalTitle'),
       nzContent: ColumnAddComponent,
       nzComponentParams: { boardId: this.boardId, order: this.columnsCount },
+      nzWidth: 'null',
     });
   }
 

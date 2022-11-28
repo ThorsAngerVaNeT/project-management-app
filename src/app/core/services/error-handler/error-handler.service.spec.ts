@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { ErrorHandlerService } from './error-handler.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ErrorHandlerService', () => {
   let service: ErrorHandlerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule],
-      providers: [NzModalService],
+      imports: [OverlayModule, TranslateModule.forRoot()],
+      providers: [NzNotificationService],
     });
     service = TestBed.inject(ErrorHandlerService);
   });

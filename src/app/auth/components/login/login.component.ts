@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
-import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +9,11 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  isVisible = true;
-
-  isLoading = false;
+  authViewModel$ = this.storeFacade.selectAuthViewModel$;
 
   logInForm!: FormGroup;
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
+  constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
     this.logInForm = new FormGroup({
@@ -27,7 +24,6 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     if (this.logInForm.valid) {
-      this.isLoading = true;
       const { login, password } = this.logInForm.value;
       this.storeFacade.signIn({ login, password });
     } else {
@@ -46,9 +42,5 @@ export class LoginComponent implements OnInit {
 
   get password(): AbstractControl | null {
     return this.logInForm.get('password');
-  }
-
-  handleCancel(): void {
-    this.modal.destroy();
   }
 }

@@ -1,36 +1,43 @@
-<ng-template [nzModalTitle]>{{ 'LoginModalTitle' | translate }}</ng-template>
-<form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="logInForm">
-  <nz-form-item>
-    <nz-form-control [nzErrorTip]="loginErrorTip">
-      <nz-input-group nzPrefixIcon="login">
-        <input type="text" nz-input formControlName="login" placeholder="{{ 'loginPlaceholder' | translate }}" />
-      </nz-input-group>
-      <ng-template #loginErrorTip>
-        <ng-container *ngIf="login?.hasError('required')">{{ 'loginRequiredErrorTip' | translate }}</ng-container>
-        <ng-container *ngIf="login?.hasError('minlength')">{{ 'loginMinlengthErrorTip' | translate }}</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzErrorTip]="passwordErrorTip">
-      <nz-input-group nzPrefixIcon="lock">
-        <input
-          type="password"
-          nz-input
-          formControlName="password"
-          placeholder="{{ 'passwordPlaceholder' | translate }}"
-        />
-      </nz-input-group>
-      <ng-template #passwordErrorTip>
-        <ng-container *ngIf="password?.hasError('required')">{{ 'passwordRequiredErrorTip' | translate }}</ng-container>
-        <ng-container *ngIf="password?.hasError('pattern')">{{
-          'passwordLoginPatternErrorTip' | translate
-        }}</ng-container>
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
+<ng-container *ngIf="authViewModel$ | async as auth">
+  <h1 class="auth-heading">{{ 'LoginModalTitle' | translate }}</h1>
+  <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="logInForm">
+    <nz-form-item class="ant-form-item-explain-error" [class.error-highlight]="auth.error"
+      >{{ auth.error }}
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="loginErrorTip">
+        <nz-input-group nzPrefixIcon="login">
+          <input type="text" nz-input formControlName="login" placeholder="{{ 'loginPlaceholder' | translate }}" />
+        </nz-input-group>
+        <ng-template #loginErrorTip>
+          <ng-container *ngIf="login?.hasError('required')">{{ 'loginRequiredErrorTip' | translate }}</ng-container>
+          <ng-container *ngIf="login?.hasError('minlength')">{{ 'loginMinlengthErrorTip' | translate }}</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="passwordErrorTip">
+        <nz-input-group nzPrefixIcon="lock">
+          <input
+            type="password"
+            nz-input
+            formControlName="password"
+            placeholder="{{ 'passwordPlaceholder' | translate }}"
+          />
+        </nz-input-group>
+        <ng-template #passwordErrorTip>
+          <ng-container *ngIf="password?.hasError('required')">{{
+            'passwordRequiredErrorTip' | translate
+          }}</ng-container>
+          <ng-container *ngIf="password?.hasError('pattern')">{{
+            'passwordLoginPatternErrorTip' | translate
+          }}</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
 
-  <nz-form-item>
-    <button nz-button nzType="primary" [nzLoading]="isLoading">{{ 'LogInButton' | translate }}</button>
-  </nz-form-item>
-</form>
+    <nz-form-item>
+      <button nz-button nzType="primary" [nzLoading]="auth.isLoading">{{ 'LogInButton' | translate }}</button>
+    </nz-form-item>
+  </form>
+</ng-container>

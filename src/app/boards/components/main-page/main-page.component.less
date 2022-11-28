@@ -1,3 +1,5 @@
+@import 'variables';
+
 .main-inner-content {
   padding: 24px 0;
   display: grid;
@@ -28,4 +30,15 @@
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.25);
+}
+
+@media (max-width: @mobile-max-width) {
+  .new-board-card {
+    width: 260px;
+  }
+
+  .main-inner-content {
+    grid-template-columns: repeat(auto-fill, 260px);
+    grid-template-rows: repeat(auto-fill, 335px);
+  }
 }

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 // import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
-import { selectAuthError, selectAuthLoading, selectToken, selectUser } from '@auth/store/selectors/auth.selectors';
+import * as authSelectors from '@auth/store/selectors/auth.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
 import * as fromBoard from '@boards/store/actions/board.actions';
 import * as fromUser from '@users/store/actions/user.actions';
@@ -37,14 +37,16 @@ import { Locales } from '../../store/reducers/language.reducer';
 import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/task.selectors';
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 import { selectBoardId } from '../../store/selectors/router.selector';
+import * as fromRouter from '../../store/actions/router.action';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreFacade {
-  user$ = this.store.select(selectUser);
+  user$ = this.store.select(authSelectors.selectUser);
 
-  token$ = this.store.select(selectToken);
+  token$ = this.store.select(authSelectors.selectToken);
 
   boards$ = this.store.select(BoardSelectors.selectBoardsWithUsers);
 
@@ -72,9 +74,7 @@ export class StoreFacade {
 
   searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
-  authLoading$ = this.store.select(selectAuthLoading);
-
-  authError$ = this.store.select(selectAuthError);
+  selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
 
   oldCoverId$ = this.store.select(selectOldCoverId);
 
@@ -210,13 +210,13 @@ export class StoreFacade {
     this.store.dispatch(fromUser.loadUsers());
   }
 
-  getUser(id: User['_id']): void {
-    this.store.dispatch(fromUser.loadUser({ id }));
-  }
+  // getUser(id: User['_id']): void {
+  //   this.store.dispatch(fromUser.loadUser({ id }));
+  // }
 
-  createUser(user: UserParams): void {
-    this.store.dispatch(fromUser.createUser({ user }));
-  }
+  // createUser(user: UserParams): void {
+  //   this.store.dispatch(fromUser.createUser({ user }));
+  // }
 
   updateUser(userId: User['_id'], user: UserParams): void {
     this.store.dispatch(fromUser.updateUser({ userId, user }));
@@ -284,9 +284,9 @@ export class StoreFacade {
   //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
   // }
 
-  // getFilesByTask(taskId: ColumnTask['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
-  // }
+  getFilesByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
+  }
 
   getFilesByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
@@ -336,9 +336,9 @@ export class StoreFacade {
     this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 
-  // getBoardCovers(): void {
-  //   this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
-  // }
+  getBoardCovers(): void {
+    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  }
 
   getBoardCoverStream(boardId: Board['_id']): Observable<string> {
     return this.store.select(selectBoardCoverUrl(boardId));
@@ -370,5 +370,21 @@ export class StoreFacade {
 
   setCurrentUserId(id: User['_id']): void {
     this.store.dispatch(fromAuth.setCurrentUserId({ id }));
+  }
+
+  redirectToBoard(): void {
+    this.store.dispatch(fromRouter.redirectToBoard());
+  }
+
+  redirectToRoot(): void {
+    this.store.dispatch(fromRouter.redirectToRoot());
+  }
+
+  redirectToWelcome(): void {
+    this.store.dispatch(fromRouter.redirectToWelcome());
+  }
+
+  clearErrorMessage(): void {
+    this.store.dispatch(fromAuth.userCleanErrorMessage());
   }
 }

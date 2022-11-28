@@ -31,23 +31,26 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(environment.RETRY_HTTP_COUNT),
       catchError((error) =>
         throwError(() => {
-          if (
-            error instanceof HttpErrorResponse &&
-            (error.status === HttpStatusCode.Unauthorized || error.status === HttpStatusCode.Forbidden)
-          ) {
-            this.storeFacade.signOut();
-            this.router.navigateByUrl('/welcome');
-          } else {
-            if (!request.url.includes(APIEndpoints.auth)) {
-              this.notification.create(
-                'error',
-                this.translateService.instant('errTitle'),
-                `${this.translateService.instant('errTextHttpError')}.
-                ${error.message}`,
-              );
+          if (error instanceof HttpErrorResponse) {
+            switch (error.status) {
+              case HttpStatusCode.Unauthorized:
+                return new Error(this.translateService.instant('errTextHttp401Error'));
+              case HttpStatusCode.Forbidden:
+                this.storeFacade.signOut();
+                return error;
+              case HttpStatusCode.Conflict:
+                return new Error(this.translateService.instant('errTextHttp409Error'));
             }
-            return error;
           }
+          if (!request.url.includes(APIEndpoints.auth)) {
+            this.notification.create(
+              'error',
+              this.translateService.instant('errTitle'),
+              `${this.translateService.instant('errTextHttpError')}.
+              ${error?.error.message ?? error?.message}`,
+            );
+          }
+          return error;
         }),
       ),
     );

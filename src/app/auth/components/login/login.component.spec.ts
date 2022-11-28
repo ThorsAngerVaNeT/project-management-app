@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ScannedActionsSubject } from '@ngrx/store';
@@ -26,7 +26,7 @@ describe('LoginComponent', () => {
       ],
       declarations: [LoginComponent],
       imports: [TranslateModule.forRoot()],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);

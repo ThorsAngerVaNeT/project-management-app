@@ -49,6 +49,7 @@ export class BoardCardComponent implements OnInit {
       nzTitle: this.translateService.instant('EditBoardModalTitle'),
       nzContent: BoardAddComponent,
       nzComponentParams: { board: this.board },
+      nzWidth: 'null',
     });
   }
 
@@ -62,6 +63,7 @@ export class BoardCardComponent implements OnInit {
         this.storeFacade.deleteBoard(this.board._id);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 
@@ -70,6 +72,7 @@ export class BoardCardComponent implements OnInit {
     this.modalService.info({
       nzTitle: this.translateService.instant('AccessDeniedModalTitle'),
       nzContent: this.translateService.instant('AccessDeniedModalContent'),
+      nzWidth: 'null',
     });
   }
 

@@ -4,7 +4,7 @@
   height: 64px;
   align-items: center;
   padding: 0 64px;
-  line-height: 64px;
+  line-height: 1;
   background: @secondary-color;
   display: flex;
   justify-content: space-between;
@@ -14,11 +14,15 @@
 .ant-layout-header .anticon {
   color: @background-color-light;
 }
+.ant-layout-header .anticon:hover {
+  color: @primary-light;
+}
 
 .header__left-group,
 .header__right-group {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
 .header__logo {
@@ -42,6 +46,22 @@
 
 .header__user-menu {
   color: @background-color-light;
+  display: flex;
+  align-items: center;
+}
+
+.header__user-name {
+  display: inline-block;
+  max-width: 84px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 18px;
+}
+
+.header__user-menu .anticon {
+  color: @primary-light;
+  margin-left: 4px;
 }
 
 .header__user-menu:hover {
@@ -51,6 +71,7 @@
 .header__welcome_actions {
   display: flex;
   gap: 32px;
+  align-items: center;
 }
 
 .header__welcome_actions a,
@@ -62,4 +83,68 @@
 .header__welcome_actions a:hover,
 .header__welcome_actions span:hover {
   color: @primary-light;
+}
+
+.burger__toggler {
+  display: none;
+}
+
+.burger__toggler label:hover {
+  color: @primary-light;
+  cursor: pointer;
+}
+
+.burger__menu {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  background-color: @secondary-color;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 32px 16px;
+  gap: 16px;
+  color: @background-color-light;
+  z-index: 1000;
+  line-height: 2;
+  align-items: flex-end;
+}
+
+.burger__menu a {
+  color: @background-color-light;
+  width: fit-content;
+}
+
+.burger__menu a:hover {
+  color: @primary-light;
+}
+
+.burger__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 24px;
+  max-width: 302px;
+  align-items: flex-end;
+}
+
+@media (max-width: @tablet-max-width) {
+  .ant-layout-header {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: @mobile-max-width) {
+  .header__search-field {
+    display: none;
+  }
+  .header__right-group-wrapper {
+    display: none;
+  }
+}
+
+@media (max-width: @mobile-max-width) {
+  .burger__toggler {
+    display: flex;
+  }
 }

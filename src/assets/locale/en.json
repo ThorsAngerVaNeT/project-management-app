@@ -11,6 +11,7 @@
   "userAlreadyExistsErrorTip": "This user login already exists, please provide a new one",
   "namePlaceholder": "Name",
   "nameRequiredErrorTip": "Please provide a name",
+  "nameMinMaxlengthErrorTip": "Name should be 2-20 symbols",
   "passwordPatternErrorTip": "Please check if your password complies with requirements above",
   "deleteUserText": "Delete your user account",
   "deleteUserButton": "Delete Forever",
@@ -96,5 +97,8 @@
   "WrongFileFormatErrorTitle": "Wrong file format",
   "WrongFileFormatErrorContent": "Only *.png and *.jpg files are allowed!",
   "errTitle": "Something went wrong...",
-  "errTextHttpError": "Please try later"
+  "errTextHttpError": "Please try later",
+  "errTextHttp401Error": "Login or password is incorrect",
+  "errTextHttp409Error": "This login already exists",
+  "errUnknown": "Unknown Error"
 }

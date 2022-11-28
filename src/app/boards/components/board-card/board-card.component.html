@@ -1,8 +1,8 @@
 <ng-container *ngIf="user$ | async as user">
   <nz-card
     nzHoverable
-    style="width: 300px"
-    [nzCover]="coverTemplate3"
+    class="board-card"
+    [nzCover]="cover"
     [nzActions]="
       isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee, actionEdit] : [actionLock]
     "
@@ -14,8 +14,8 @@
       [routerLink]="routerLink"
     ></nz-card-meta>
   </nz-card>
-  <ng-template #coverTemplate3>
-    <img class="board-cover" width="300" height="182" [src]="boardCoverUrl$ | async" alt="" [routerLink]="routerLink" />
+  <ng-template #cover>
+    <img class="board-cover" [src]="boardCoverUrl$ | async" alt="ngPMA Board" [routerLink]="routerLink" />
   </ng-template>
   <ng-template #actionSee>
     <span

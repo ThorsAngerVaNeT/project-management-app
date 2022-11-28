@@ -3,15 +3,15 @@ import { CanActivate, CanLoad, Router, UrlTree } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { concatMap, filter, map, Observable, take, tap } from 'rxjs';
-import { UserState } from '../../../auth/store/reducers/auth.reducer';
-import { Board } from '../../../boards/model/board.model';
+import { AuthState } from '@auth/store/reducers/auth.reducer';
+import { Board } from '@boards/model/board.model';
 import { StoreFacade } from '../../services/store-facade/store-facade';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardUserGuard implements CanActivate, CanLoad {
-  user!: UserState;
+  user!: AuthState;
 
   boardId!: Board['_id'];
 

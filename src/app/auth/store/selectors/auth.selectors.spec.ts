@@ -1,8 +1,8 @@
-import { UserState } from '../reducers/auth.reducer';
+import { AuthState } from '../reducers/auth.reducer';
 import { selectToken } from './auth.selectors';
 
 describe('User Selectors', () => {
-  const initialState: UserState = {
+  const initialState: AuthState = {
     _id: 'TestId',
     name: 'TestName',
     login: 'TestLogin',

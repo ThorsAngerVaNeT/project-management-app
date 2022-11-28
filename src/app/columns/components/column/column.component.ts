@@ -33,7 +33,7 @@ export class ColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleControl = new FormControl('', Validators.required);
+    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   }
 
   toggleEdit(): void {
@@ -64,6 +64,7 @@ export class ColumnComponent implements OnInit {
         this.storeFacade.deleteColumn(boardId, columnId);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 
@@ -75,6 +76,9 @@ export class ColumnComponent implements OnInit {
       nzTitle: this.translateService.instant('CreateTaskModalTitle'),
       nzContent: TaskAddComponent,
       nzComponentParams: { boardId, columnId, order: this.column.tasks.length },
+      nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 

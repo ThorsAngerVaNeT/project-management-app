@@ -58,6 +58,7 @@ export class PointItemComponent implements OnInit {
           ? this.storeFacade.deletePoint(this.point._id)
           : this.storeFacade.deleteNewTaskPoint(this.point._id),
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 

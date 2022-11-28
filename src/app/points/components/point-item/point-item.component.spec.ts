@@ -6,6 +6,7 @@ import { mockPoint1 } from '@mocks/mock-points/mock-points';
 
 import { PointItemComponent } from './point-item.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PointItemComponent', () => {
   let component: PointItemComponent;
@@ -16,6 +17,7 @@ describe('PointItemComponent', () => {
       declarations: [PointItemComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
       imports: [TranslateModule.forRoot()],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PointItemComponent);

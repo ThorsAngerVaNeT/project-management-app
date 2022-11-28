@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, repeat, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/auth.actions';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
@@ -14,8 +14,7 @@ export class UserEffects {
     private actions$: Actions,
     private authService: AuthService,
     private usersService: UsersService,
-    private storeFacade: StoreFacade,
-    private router: Router,
+    private storeFacade: StoreFacade, // private router: Router,
   ) {}
 
   userSignUp$ = createEffect(() => {
@@ -40,18 +39,28 @@ export class UserEffects {
   userSignIn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userSignIn),
-      exhaustMap((action) =>
-        this.authService.signIn(action.data).pipe(
-          map((token) => {
-            const payload = this.storeFacade.decodeToken(token);
-            localStorage.setItem('token', token);
-            return AuthActions.userSignInSuccess({ token, payload });
-          }),
-          catchError((error) => of(AuthActions.userSignInFailure({ error }))),
-        ),
-      ),
+      exhaustMap((action) => this.authService.signIn(action.data)),
+      map((token) => {
+        const payload = this.storeFacade.decodeToken(token);
+        localStorage.setItem('token', token);
+        return AuthActions.userSignInSuccess({ token, payload });
+      }),
+      catchError((error) => of(AuthActions.userSignInFailure({ error }))),
+      repeat(),
     );
   });
+
+  userSignInSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.userSignInSuccess),
+        tap(() => {
+          this.storeFacade.redirectToBoard();
+        }),
+      );
+    },
+    { dispatch: false },
+  );
 
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
@@ -73,7 +82,7 @@ export class UserEffects {
         ofType(AuthActions.userSignOut),
         tap(() => {
           localStorage.setItem('token', '');
-          this.router.navigateByUrl('/welcome');
+          this.storeFacade.redirectToRoot();
         }),
       );
     },
