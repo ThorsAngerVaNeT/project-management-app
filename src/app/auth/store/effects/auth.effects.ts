@@ -88,4 +88,14 @@ export class UserEffects {
     },
     { dispatch: false },
   );
+
+  clearUserState$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.clearUserState),
+        tap(() => localStorage.setItem('token', '')),
+      );
+    },
+    { dispatch: false },
+  );
 }

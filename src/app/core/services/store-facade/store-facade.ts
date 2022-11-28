@@ -87,6 +87,10 @@ export class StoreFacade {
           return false;
         }
 
+        if (!/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/.test(token)) {
+          throw new Error('invalid token');
+        }
+
         const { exp } = this.decodeToken(token);
 
         if (exp * 1000 <= Date.now()) {
