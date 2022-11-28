@@ -2,7 +2,7 @@
   <div class="board__inner-content" *ngIf="boardDetail.board as board">
     <nz-page-header nzBackIcon>
       <nz-avatar nz-page-header-avatar [nzSize]="64" nzSrc="{{ boardCoverUrl$ | async }}"></nz-avatar>
-      <nz-page-header-title>{{ board.title }}</nz-page-header-title>
+      <nz-page-header-title title="{{ board.title }}">{{ board.title }}</nz-page-header-title>
     </nz-page-header>
 
     <div class="board-participants">
