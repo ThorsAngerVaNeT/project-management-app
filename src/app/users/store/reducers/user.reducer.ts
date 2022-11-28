@@ -22,7 +22,7 @@ export const EMPTY_USER: User = {
 export const reducer = createReducer(
   initialState,
   on(UserActions.loadUsersSuccess, (state, { users }) => adapter.setAll(users, state)),
-  on(UserActions.createUserSuccess, (state, { user }) => adapter.addOne(user, state)),
+  // on(UserActions.createUserSuccess, (state, { user }) => adapter.addOne(user, state)),
   on(UserActions.updateUserSuccess, (state, { user }) => adapter.updateOne(user, state)),
   on(UserActions.deleteUserSuccess, (state, { id }) => adapter.removeOne(id, state)),
 );

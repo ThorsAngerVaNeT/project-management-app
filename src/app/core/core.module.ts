@@ -20,6 +20,7 @@ import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ng
 import { HttpLoaderFactory, MissingTranslationService } from './helpers/translate.helpers';
 import { LanguageEffects } from './store/effects/language.effects';
 import { languageMetaReducers, languageReducer } from './store/reducers/language.reducer';
+import { RouterEffects } from './store/effects/router.effects';
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,7 @@ import { languageMetaReducers, languageReducer } from './store/reducers/language
     CommonModule,
     HttpClientModule,
     StoreModule.forRoot({ router: routerReducer, language: languageReducer }, { metaReducers: languageMetaReducers }),
-    EffectsModule.forRoot([ModalEffects, LanguageEffects]),
+    EffectsModule.forRoot([ModalEffects, LanguageEffects, RouterEffects]),
     StoreRouterConnectingModule.forRoot({ serializer: RouterSerializer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AuthModule,

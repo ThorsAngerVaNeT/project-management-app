@@ -111,5 +111,8 @@
   "MainDevelopers": "Developers",
   "ThorsAngerVaNeT": "Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD, deployed backend",
   "Ogimly": "With fondness created services and interceptors, implemented services error handling, was in charge of search logic and drag&drop support",
-  "022022": "Designed and developed interfaces with NG Zorro library, set up forms validation, implemented login and sign up functionality"
+  "022022": "Designed and developed interfaces with NG Zorro library, set up forms validation, implemented login and sign up functionality",
+  "errTextHttp401Error": "Login or password is incorrect",
+  "errTextHttp409Error": "This login already exists",
+  "errUnknown": "Unknown Error"
 }

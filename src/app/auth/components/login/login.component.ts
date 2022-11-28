@@ -9,9 +9,7 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  isVisible = true;
-
-  isLoading = false;
+  authViewModel$ = this.storeFacade.selectAuthViewModel$;
 
   logInForm!: FormGroup;
 
@@ -26,7 +24,6 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     if (this.logInForm.valid) {
-      this.isLoading = true;
       const { login, password } = this.logInForm.value;
       this.storeFacade.signIn({ login, password });
     } else {
