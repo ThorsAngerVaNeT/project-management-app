@@ -1,5 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockTask1 } from '@mocks/mock-tasks/mock-tasks';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -18,7 +18,7 @@ describe('TaskItemComponent', () => {
       declarations: [TaskItemComponent],
       providers: [provideMockStore(), NzModalService, Overlay],
       imports: [TranslateModule.forRoot()],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TaskItemComponent);
