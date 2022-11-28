@@ -1,27 +1,38 @@
-# NgPma
+# ngPMA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
+Be a Lord of the Board
+Organize your work in a visual intuitive way using ngPMA application features:
 
-## Development server
+Boards | Columns | Tasks | Checklists + Drag&Drop | Access Rights | Search
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies
 
-## Code scaffolding
+Angular
+NgRx
+TypeScript
+NG Zorro (AntD)
+RxJS
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Course
 
-## Build
+Developed as a certificate project by students of [Angular 2022Q3](https://rs.school/angular/) Course at the RSSchool.
+[RSSchool](https://rs.school/) is an education program conducted by [The Rolling Scopes developer community](https://rollingscopes.com/) since 2013.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Developers
 
-## Running unit tests
+[ThorsAngerVaNeT](https://github.com/thorsangervanet)
+Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD, deployed backend
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[Ogimly](https://github.com/ogimly)
+With fondness created services and interceptors, implemented services error handling, was in charge of search logic and drag&drop support
 
-## Running end-to-end tests
+[022022](https://github.com/022022)
+Designed and developed interfaces with NG Zorro library, set up forms validation, implemented login and sign up functionality
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Task
 
-## Further help
+[Project Management System](https://github.com/rolling-scopes-school/js-fe-course-en/blob/main/tasks/angular/project-management-system.md)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Deploy
+
+https://ng-pma.netlify.app/
