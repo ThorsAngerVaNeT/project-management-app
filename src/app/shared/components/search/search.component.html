@@ -18,16 +18,21 @@
 </div>
 <ng-template #renderTemplate>
   <div class="search__result-container">
-    <div *ngIf="searchResult$ | async as searchResult">
-      <div *ngFor="let task of searchResult">
-        <a routerLink="/boards/{{ task.boardId }}">
-          <div class="search__result">
-            <span class="search__result-title">{{ task.title }} </span
-            ><span class="search__result-description"> {{ task.description }}</span
-            ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
-          </div>
-        </a>
+    <ng-container *ngIf="(isLoading$ | async) === false; else loadingSpinner">
+      <div *ngIf="searchResult$ | async as searchResult">
+        <div *ngFor="let task of searchResult">
+          <a routerLink="/boards/{{ task.boardId }}">
+            <div class="search__result">
+              <span class="search__result-title">{{ task.title }} </span
+              ><span class="search__result-description"> {{ task.description }}</span
+              ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <nz-spin nzSimple></nz-spin>
+    </ng-template>
   </div>
 </ng-template>

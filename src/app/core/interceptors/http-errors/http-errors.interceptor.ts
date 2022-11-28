@@ -12,7 +12,6 @@ import { retry, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { StoreFacade } from '../../services/store-facade/store-facade';
-import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { APIEndpoints } from '../../enums/api-endpoints.enum';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +20,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private storeFacade: StoreFacade,
-    private router: Router,
     private notification: NzNotificationService,
     private translateService: TranslateService,
   ) {}
@@ -47,7 +45,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               'error',
               this.translateService.instant('errTitle'),
               `${this.translateService.instant('errTextHttpError')}.
-              ${error?.error.message ?? error?.message}`,
+              ${error?.error?.message ?? error?.message}`,
             );
           }
           return error;

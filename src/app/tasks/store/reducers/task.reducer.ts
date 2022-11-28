@@ -25,10 +25,7 @@ export const initialState: TasksState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(TaskActions.loadTasksSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
-  // on(TaskActions.loadTasksSetSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
-  // on(TaskActions.loadTasksByUserSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
   on(TaskActions.loadTasksByBoardSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
-  // on(TaskActions.loadTasksBySearchStringSuccess, (state, { tasks }) => adapter.setAll(tasks, state)),
   on(TaskActions.loadTaskSuccess, (state, { task }) => adapter.setOne(task, state)),
   on(TaskActions.createTask, (state): TasksState => ({ ...state, loading: true })),
   on(TaskActions.createTaskSuccess, (state, { task }) => adapter.addOne(task, state)),

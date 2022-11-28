@@ -10,6 +10,7 @@ import { EMPTY_POINT, Point } from '@points/model/point.model';
 import { User } from '@users/model/user.model';
 import { Dictionary } from '@ngrx/entity';
 import { EMPTY_USER } from '@users/store/reducers/user.reducer';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-add',
@@ -60,7 +61,11 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   taskIsLoading$ = this.storeFacade.taskIsLoading$;
 
-  constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private modal: NzModalRef,
+    private translateService: TranslateService,
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -120,6 +125,20 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   get users(): User[] {
     return Object.values(this.userEntities).map((user) => user ?? EMPTY_USER);
+  }
+
+  get taskId(): string {
+    return this.task ? `id: ${this.task._id}` : '';
+  }
+
+  get formTitle(): string {
+    return this.task
+      ? this.translateService.instant('EditTaskModalTitle')
+      : this.translateService.instant('CreateTaskModalTitle');
+  }
+
+  get isCreateTask(): boolean {
+    return !this.task;
   }
 
   handleOk(): void {

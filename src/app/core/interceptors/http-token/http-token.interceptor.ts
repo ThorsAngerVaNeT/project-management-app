@@ -14,7 +14,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     return this.token$.pipe(
       first(),
       switchMap((token) => {
-        if (!request.url.includes(APIEndpoints.auth)) {
+        if (!request.url.includes(APIEndpoints.auth) && !request.url.includes('/assets/')) {
           request = request.clone({ setHeaders: { Authorization: 'Bearer ' + token } });
         }
         return next.handle(request);

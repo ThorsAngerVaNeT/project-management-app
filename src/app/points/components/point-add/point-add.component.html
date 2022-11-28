@@ -5,6 +5,7 @@
       placeholder="{{ 'CheckpointTitleInputPlaceholder' | translate }}"
       nzSize="small"
       [formControl]="pointControl"
+      (change)="submitHandler()"
     />
 
     <ng-template #titleErrorTip>
@@ -22,7 +23,7 @@
       nz-tooltip
       nzTooltipTitle="{{ 'SaveButtonTooltip' | translate }}"
       nzType="check-circle"
-      (click)="point._id ? updateTitle() : addPoint()"
+      (click)="submitHandler()"
     ></span>
     <ng-container *ngIf="point._id">
       <nz-divider nzType="vertical"></nz-divider>

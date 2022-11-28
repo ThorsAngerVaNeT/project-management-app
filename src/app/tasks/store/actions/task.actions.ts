@@ -8,7 +8,6 @@ import {
 } from '../../model/task.model';
 import { Board } from '@boards/model/board.model';
 import { Column } from '@columns/model/column.model';
-// import { User } from '@users/model/user.model';
 import { PointParams } from '@points/model/point.model';
 
 export const loadTasks = createAction(
@@ -17,29 +16,11 @@ export const loadTasks = createAction(
 );
 export const loadTasksSuccess = createAction('[Tasks] Load Tasks Success', props<{ tasks: ColumnTask[] }>());
 
-// export const loadTasksSet = createAction('[Tasks] Load Tasks Set', props<{ ids: ColumnTask['_id'][] }>());
-// export const loadTasksSetSuccess = createAction('[Tasks] Load Tasks Set Success', props<{ tasks: ColumnTask[] }>());
-
-// export const loadTasksByUser = createAction('[Tasks] Load Tasks By User', props<{ userId: User['_id'] }>());
-// export const loadTasksByUserSuccess = createAction(
-//   '[Tasks] Load Tasks By User Success',
-//   props<{ tasks: ColumnTask[] }>(),
-// );
-
 export const loadTasksByBoard = createAction('[Tasks] Load Tasks By Board', props<{ boardId: Board['_id'] }>());
 export const loadTasksByBoardSuccess = createAction(
   '[Tasks] Load Tasks By Board Success',
   props<{ tasks: ColumnTask[] }>(),
 );
-
-// export const loadTasksBySearchString = createAction(
-//   '[Tasks] Load Tasks By SearchString',
-//   props<{ searchString: string }>(),
-// );
-// export const loadTasksBySearchStringSuccess = createAction(
-//   '[Tasks] Load Tasks By SearchString Success',
-//   props<{ tasks: ColumnTask[] }>(),
-// );
 
 export const loadTask = createAction(
   '[Tasks] Load Task',

@@ -5,7 +5,6 @@ import { catchError, concatMap, exhaustMap, map, repeat, tap } from 'rxjs/operat
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '@users/services/users.service';
 import * as AuthActions from '../actions/auth.actions';
-// import { Router } from '@angular/router';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class UserEffects {
     private actions$: Actions,
     private authService: AuthService,
     private usersService: UsersService,
-    private storeFacade: StoreFacade, // private router: Router,
+    private storeFacade: StoreFacade,
   ) {}
 
   userSignUp$ = createEffect(() => {
@@ -42,6 +41,7 @@ export class UserEffects {
       exhaustMap((action) => this.authService.signIn(action.data)),
       map((token) => {
         const payload = this.storeFacade.decodeToken(token);
+        localStorage.setItem('token', token);
         return AuthActions.userSignInSuccess({ token, payload });
       }),
       catchError((error) => of(AuthActions.userSignInFailure({ error }))),
@@ -64,13 +64,14 @@ export class UserEffects {
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.userGetInfo, AuthActions.userSignInSuccess),
-      concatLatestFrom(() => this.storeFacade.user$),
-      concatMap(([, state]) =>
-        this.usersService.getUser(state._id).pipe(
+      concatLatestFrom(() => this.storeFacade.token$),
+      concatMap(([, token]) => {
+        const { id } = this.storeFacade.decodeToken(token);
+        return this.usersService.getUser(id).pipe(
           map((user) => AuthActions.userGetInfoSuccess({ user })),
           catchError((error) => of(AuthActions.userGetInfoFailure({ error }))),
-        ),
-      ),
+        );
+      }),
     );
   });
 
@@ -78,7 +79,20 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthActions.userSignOut),
-        tap(() => this.storeFacade.redirectToRoot()),
+        tap(() => {
+          localStorage.setItem('token', '');
+          this.storeFacade.redirectToWelcome();
+        }),
+      );
+    },
+    { dispatch: false },
+  );
+
+  clearUserState$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActions.clearUserState),
+        tap(() => localStorage.setItem('token', '')),
       );
     },
     { dispatch: false },

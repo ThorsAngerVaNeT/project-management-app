@@ -32,3 +32,5 @@ export const selectSearchResultsWithUsers = createSelector(
     });
   },
 );
+
+export const selectSearchResultIsLoading = createSelector(selectSearchResultState, (state) => state.loading);

@@ -28,13 +28,10 @@ export const reducer = createReducer(
   initialState,
   on(ColumnActions.loadColumnsSuccess, (state, { columns }) => adapter.setAll(columns, state)),
   on(ColumnActions.loadColumnSuccess, (state, { column }) => adapter.setOne(column, state)),
-  // on(ColumnActions.loadColumnsSetSuccess, (state, { columns }) => adapter.setAll(columns, state)),
-  // on(ColumnActions.loadColumnsByUserSuccess, (state, { columns }) => adapter.setAll(columns, state)),
   on(ColumnActions.createColumn, (state): ColumnsState => ({ ...state, loading: true })),
   on(ColumnActions.createColumnSuccess, (state, { column }) => adapter.addOne(column, state)),
   on(ColumnActions.createColumnSuccess, (state): ColumnsState => ({ ...state, loading: false })),
   on(ColumnActions.createColumnFailure, (state): ColumnsState => ({ ...state, loading: false })),
-  // on(ColumnActions.createColumnsSetSuccess, (state, { columns }) => adapter.addMany(columns, state)),
   on(ColumnActions.updateColumnSuccess, (state, { column }) => adapter.updateOne(column, state)),
 
   on(ColumnActions.updateColumnsSet, (state, { columnsParams }) => {

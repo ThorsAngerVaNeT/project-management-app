@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-// import { environment } from '@environments/environment';
 import * as fromAuth from '@auth/store/actions/auth.actions';
 import * as authSelectors from '@auth/store/selectors/auth.selectors';
 import { Board, BoardParamsWithImage } from '@boards/model/board.model';
@@ -21,15 +20,11 @@ import {
 } from '@tasks/model/task.model';
 import { selectAllUsers, selectUsersEntities } from '@users/store/selectors/user.selectors';
 import * as fromPoint from '@points/store/actions/point.actions';
-import {
-  selectNewTaskAllPoints,
-  selectPointsByCurrentTask,
-  selectPointsLoading,
-} from '@points/store/selectors/point.selectors';
+import * as pointSelectors from '@points/store/selectors/point.selectors';
 import { Point, PointParams, PointUpdateParams } from '@points/model/point.model';
 import { selectBoardCovers, selectBoardCoverUrl, selectOldCoverId } from '@files/store/selectors/file.selectors';
 import * as fromSearchResult from '@tasks/store/actions/search-result.actions';
-import { selectSearchResultsWithUsers } from '@tasks/store/selectors/search-result.selectors';
+import * as searchResultSelectors from '@tasks/store/selectors/search-result.selectors';
 import jwt_decode from 'jwt-decode';
 import * as fromLanguage from '../../store/actions/language.actions';
 import { selectLocalizationValue } from '../../store/selectors/language.selectors';
@@ -38,6 +33,7 @@ import { selectTaskIsLoading, selectCachedTasks } from '@tasks/store/selectors/t
 import { selectColumnIsLoading, selectCachedColumns } from '@columns/store/selectors/column.selectors';
 import { selectBoardId } from '../../store/selectors/router.selector';
 import * as fromRouter from '../../store/actions/router.action';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -55,11 +51,11 @@ export class StoreFacade {
 
   userEntities$ = this.store.select(selectUsersEntities);
 
-  points$ = this.store.select(selectPointsByCurrentTask);
+  points$ = this.store.select(pointSelectors.selectPointsByCurrentTask);
 
-  newTaskPoints$ = this.store.select(selectNewTaskAllPoints);
+  newTaskPoints$ = this.store.select(pointSelectors.selectNewTaskAllPoints);
 
-  pointsLoading$ = this.store.select(selectPointsLoading);
+  pointsLoading$ = this.store.select(pointSelectors.selectPointsLoading);
 
   boardCovers$ = this.store.select(selectBoardCovers);
 
@@ -71,7 +67,9 @@ export class StoreFacade {
 
   boardsLoaded$ = this.store.select(BoardSelectors.selectBoardsLoaded);
 
-  searchResult$ = this.store.select(selectSearchResultsWithUsers);
+  searchResult$ = this.store.select(searchResultSelectors.selectSearchResultsWithUsers);
+
+  searchResultIsLoading$ = this.store.select(searchResultSelectors.selectSearchResultIsLoading);
 
   selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
 
@@ -79,23 +77,26 @@ export class StoreFacade {
 
   boardId$ = this.store.select(selectBoardId);
 
-  isLoggedIn$ = this.user$.pipe(
-    map((user) => {
+  isLoggedIn$ = this.token$.pipe(
+    map((token) => {
       try {
-        if (!user?.token) {
+        if (!token) {
           return false;
         }
 
-        const { exp } = this.decodeToken(user.token);
+        if (!/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/.test(token)) {
+          throw new Error('invalid token');
+        }
+
+        const { exp } = this.decodeToken(token);
 
         if (exp * 1000 <= Date.now()) {
-          this.signOut();
-          return false;
+          throw new Error('Token expired');
         }
 
         return true;
       } catch {
-        this.signOut();
+        this.clearUserState();
         return false;
       }
     }),
@@ -127,9 +128,9 @@ export class StoreFacade {
     this.store.dispatch(fromAuth.userSignUp({ data }));
   }
 
-  // getUserInfo(): void {
-  //   this.store.dispatch(fromAuth.userGetInfo());
-  // }
+  getUserInfo(): void {
+    this.store.dispatch(fromAuth.userGetInfo());
+  }
 
   getBoards(): void {
     this.store.dispatch(fromBoard.loadBoards());
@@ -150,14 +151,6 @@ export class StoreFacade {
     this.store.dispatch(fromBoard.loadMainPageData());
   }
 
-  // getBoardsSet(ids: Board['_id'][]): void {
-  //   this.store.dispatch(fromBoard.loadBoardsSet({ ids }));
-  // }
-
-  // getBoardsByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromBoard.loadBoardsByUser({ userId }));
-  // }
-
   createBoard(board: BoardParamsWithImage): void {
     this.store.dispatch(fromBoard.createBoard({ board }));
   }
@@ -174,14 +167,6 @@ export class StoreFacade {
     this.store.dispatch(fromColumn.loadColumns({ boardId }));
   }
 
-  // getColumnsSet(columnId: Column['_id'][]): void {
-  //   this.store.dispatch(fromColumn.loadColumnsSet({ columnId }));
-  // }
-
-  // getColumnsByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromColumn.loadColumnsByUser({ userId }));
-  // }
-
   getColumn(boardId: Board['_id'], columnId: Column['_id']): void {
     this.store.dispatch(fromColumn.loadColumn({ boardId, columnId }));
   }
@@ -189,10 +174,6 @@ export class StoreFacade {
   createColumn(boardId: Board['_id'], column: ColumnParams): void {
     this.store.dispatch(fromColumn.createColumn({ boardId, column }));
   }
-
-  // createColumnsSet(columns: ColumnsSetParams[]): void {
-  //   this.store.dispatch(fromColumn.createColumnsSet({ columns }));
-  // }
 
   updateColumn(boardId: Board['_id'], columnId: Column['_id'], column: ColumnParams): void {
     this.store.dispatch(fromColumn.updateColumn({ boardId, columnId, column }));
@@ -210,14 +191,6 @@ export class StoreFacade {
     this.store.dispatch(fromUser.loadUsers());
   }
 
-  // getUser(id: User['_id']): void {
-  //   this.store.dispatch(fromUser.loadUser({ id }));
-  // }
-
-  // createUser(user: UserParams): void {
-  //   this.store.dispatch(fromUser.createUser({ user }));
-  // }
-
   updateUser(userId: User['_id'], user: UserParams): void {
     this.store.dispatch(fromUser.updateUser({ userId, user }));
   }
@@ -230,21 +203,9 @@ export class StoreFacade {
     this.store.dispatch(fromTask.loadTasks({ boardId, columnId }));
   }
 
-  // getTasksSet(ids: ColumnTask['_id'][]): void {
-  //   this.store.dispatch(fromTask.loadTasksSet({ ids }));
-  // }
-
-  // getTasksByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromTask.loadTasksByUser({ userId }));
-  // }
-
   getTasksByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromTask.loadTasksByBoard({ boardId }));
   }
-
-  // getTasksBySearchString(searchString: string): void {
-  //   this.store.dispatch(fromTask.loadTasksBySearchString({ searchString }));
-  // }
 
   getTask(boardId: Board['_id'], columnId: Column['_id'], taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.loadTask({ boardId, columnId, taskId }));
@@ -276,29 +237,13 @@ export class StoreFacade {
     this.store.dispatch(fromTask.deleteTask({ boardId, columnId, taskId }));
   }
 
-  // getFilesSet(taskFileIds: TaskFile['_id'][]): void {
-  //   this.store.dispatch(fromFile.loadFilesSet({ taskFileIds }));
-  // }
-
-  // getFilesByUser(userId: User['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByUser({ userId }));
-  // }
-
-  // getFilesByTask(taskId: ColumnTask['_id']): void {
-  //   this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
-  // }
+  getFilesByTask(taskId: ColumnTask['_id']): void {
+    this.store.dispatch(fromFile.loadFilesByTask({ taskId }));
+  }
 
   getFilesByBoard(boardId: Board['_id']): void {
     this.store.dispatch(fromFile.loadFilesByBoard({ boardId }));
   }
-
-  // deleteFile(id: TaskFile['_id']): void {
-  //   this.store.dispatch(fromFile.deleteFile({ id }));
-  // }
-
-  // uploadFile(fileParams: UploadFileParams): void {
-  //   this.store.dispatch(fromFile.uploadFile({ fileParams }));
-  // }
 
   selectTask(taskId: ColumnTask['_id']): void {
     this.store.dispatch(fromTask.selectTask({ taskId }));
@@ -336,9 +281,9 @@ export class StoreFacade {
     this.store.dispatch(fromPoint.clearNewTaskPoint());
   }
 
-  // getBoardCovers(): void {
-  //   this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
-  // }
+  getBoardCovers(): void {
+    this.getFilesByTask(environment.BOARD_COVER_FILE_TASK_ID);
+  }
 
   getBoardCoverStream(boardId: Board['_id']): Observable<string> {
     return this.store.select(selectBoardCoverUrl(boardId));
@@ -362,6 +307,14 @@ export class StoreFacade {
 
   changeLanguage(language: Locales): void {
     this.store.dispatch(fromLanguage.changeLanguage({ language }));
+  }
+
+  clearUserState(): void {
+    this.store.dispatch(fromAuth.clearUserState());
+  }
+
+  setCurrentUserId(id: User['_id']): void {
+    this.store.dispatch(fromAuth.setCurrentUserId({ id }));
   }
 
   redirectToBoard(): void {

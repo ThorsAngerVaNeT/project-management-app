@@ -6,7 +6,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: ':boardId', component: BoardDetailComponent, canActivate: [BoardUserGuard], canLoad: [BoardUserGuard] },
+  { path: ':boardId', component: BoardDetailComponent, canActivate: [BoardUserGuard] },
 ];
 
 @NgModule({

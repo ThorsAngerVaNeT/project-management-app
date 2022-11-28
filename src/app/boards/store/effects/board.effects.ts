@@ -29,22 +29,6 @@ export class BoardEffects {
     );
   });
 
-  // loadBoardsSet$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(BoardActions.loadBoardsSet),
-  //     switchMap(({ ids }) => this.boardsService.getBoardsSet(ids)),
-  //     map((boards) => BoardActions.loadBoardsSetSuccess({ boards })),
-  //   );
-  // });
-
-  // loadBoardsByUser$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(BoardActions.loadBoardsByUser),
-  //     switchMap(({ userId }) => this.boardsService.getBoardsByUser(userId)),
-  //     map((boards) => BoardActions.loadBoardsByUserSuccess({ boards })),
-  //   );
-  // });
-
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.createBoard),

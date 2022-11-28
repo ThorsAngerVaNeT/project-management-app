@@ -14,22 +14,6 @@ import { Action } from '@ngrx/store';
 export class FileEffects {
   constructor(private actions$: Actions, private filesService: FilesService, private storeFacade: StoreFacade) {}
 
-  // loadFilesSet$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(FileActions.loadFilesSet),
-  //     switchMap(({ taskFileIds }) => this.filesService.getFilesSet(taskFileIds)),
-  //     map((files) => FileActions.loadFilesSetSuccess({ files })),
-  //   );
-  // });
-
-  // loadFilesByUser$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(FileActions.loadFilesByUser),
-  //     switchMap(({ userId }) => this.filesService.getFilesByUser(userId)),
-  //     map((files) => FileActions.loadFilesByUserSuccess({ files })),
-  //   );
-  // });
-
   loadFilesByTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByTask),
@@ -84,7 +68,6 @@ export class FileEffects {
       ofType(FileActions.deleteFile),
       concatMap(({ id }) => this.filesService.deleteFile(id)),
       map(({ _id: id }) => FileActions.deleteFileSuccess({ id })),
-      // catchError((error) => of(FileActions.deleteFileFailure({ error }))),
     );
   });
 

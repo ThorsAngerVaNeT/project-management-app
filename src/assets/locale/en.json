@@ -114,5 +114,7 @@
   "022022": "Designed and developed interfaces with NG Zorro library, set up forms validation, implemented login and sign up functionality",
   "errTextHttp401Error": "Login or password is incorrect",
   "errTextHttp409Error": "This login already exists",
-  "errUnknown": "Unknown Error"
+  "errUnknown": "Unknown Error",
+  "successTitle": "Success",
+  "successTextProfileUpdate": "Your profile has been updated!"
 }
