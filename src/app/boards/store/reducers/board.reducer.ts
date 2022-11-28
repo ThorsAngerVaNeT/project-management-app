@@ -38,6 +38,7 @@ export const reducer = createReducer(
   // on(BoardActions.loadBoardsByUserSuccess, (state, { boards }) => adapter.setMany(boards, state)),
   on(BoardActions.createBoard, (state): BoardsState => ({ ...state, boardLoading: true })),
   on(BoardActions.createBoardSuccess, (state, { board }) => adapter.addOne(board, state)),
+  on(BoardActions.createBoardSuccess, (state): BoardsState => ({ ...state, boardLoading: false })),
   on(BoardActions.createBoardFailure, (state): BoardsState => ({ ...state, boardLoading: false })),
   on(BoardActions.updateBoard, (state): BoardsState => ({ ...state, boardLoading: true })),
   on(BoardActions.updateBoardSuccess, (state, { board }) =>
