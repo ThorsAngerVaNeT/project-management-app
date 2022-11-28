@@ -1,7 +1,7 @@
 <ng-template [nzModalTitle]>
-  {{ 'EditTaskModalTitle' | translate }}
+  {{ formTitle }}
   <span nz-tooltip nzTooltipTitle="{{ taskId }}">
-    <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+    <span [class.hidden]="isCreateTask" nz-icon nzType="info-circle" nzTheme="outline"></span>
   </span>
 </ng-template>
 
