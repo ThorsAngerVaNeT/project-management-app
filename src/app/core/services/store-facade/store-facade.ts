@@ -72,7 +72,7 @@ export class StoreFacade {
 
   searchResult$ = this.store.select(selectSearchResultsWithUsers);
 
-  authLoading$ = this.store.select(authSelectors.selectAuthLoading);
+  selectAuthViewModel$ = this.store.select(authSelectors.selectAuthViewModel);
 
   authError$ = this.store.select(authSelectors.selectAuthError);
 

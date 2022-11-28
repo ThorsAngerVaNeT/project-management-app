@@ -9,9 +9,11 @@ import { StoreFacade } from '@core/services/store-facade/store-facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  isLoading$ = this.storeFacade.authIsLoading$;
+  // isLoading$ = this.storeFacade.authIsLoading$;
 
-  authError$ = this.storeFacade.authError$;
+  // authError$ = this.storeFacade.authError$;
+
+  authViewModel$ = this.storeFacade.selectAuthViewModel$;
 
   logInForm!: FormGroup;
 
