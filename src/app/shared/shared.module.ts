@@ -37,6 +37,7 @@ import { SearchResultEffects } from '@tasks/store/effects/search-result.effects'
 import * as fromSearchResult from '@tasks/store/reducers/search-result.reducer';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const MODULES = [
   NzLayoutModule,
@@ -77,6 +78,7 @@ const MODULES = [
     SortByOrderPipe,
     SearchComponent,
     LanguageSwitcherComponent,
+    NotFoundComponent,
   ],
   imports: [
     ...MODULES,
