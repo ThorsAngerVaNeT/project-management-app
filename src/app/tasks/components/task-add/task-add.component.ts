@@ -38,7 +38,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
           const board = boards[this.boardId ?? this.task.boardId];
           if (board && board.users) {
             const users = Object.entries(usersEntities).filter(
-              ([, user]) => user && user._id && board.users.includes(user._id),
+              ([, user]) => user && user._id && this.isBoardUser(board, user._id),
             );
             return Object.fromEntries(users);
           }
@@ -101,6 +101,19 @@ export class TaskAddComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  isBoardUser(board: Board, userId: User['_id']): boolean {
+    if (this.task) {
+      const taskUsers = this.task.users.map((user) => user._id);
+      return (
+        board.users.includes(userId) ||
+        board.owner === userId ||
+        this.task.userId === userId ||
+        taskUsers.includes(userId)
+      );
+    }
+    return board.users.includes(userId) || board.owner === userId;
   }
 
   get title(): AbstractControl | null {
