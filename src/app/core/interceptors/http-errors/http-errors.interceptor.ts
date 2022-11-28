@@ -15,10 +15,16 @@ import { StoreFacade } from '../../services/store-facade/store-facade';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { APIEndpoints } from '../../enums/api-endpoints.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private storeFacade: StoreFacade, private router: Router, private notification: NzNotificationService) {}
+  constructor(
+    private storeFacade: StoreFacade,
+    private router: Router,
+    private notification: NzNotificationService,
+    private translateService: TranslateService,
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -35,8 +41,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             if (!request.url.includes(APIEndpoints.auth)) {
               this.notification.create(
                 'error',
-                'Something went wrong...',
-                `Please try later.
+                this.translateService.instant('errTitle'),
+                `${this.translateService.instant('errTextHttpError')}.
                 ${error.message}`,
               );
             }
