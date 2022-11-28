@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { LoginComponent } from '@auth/components/login/login.component';
-import { SignUpComponent } from '@auth/components/sign-up/sign-up.component';
+import { BoardAddComponent } from '@boards/components/board-add/board-add.component';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -11,43 +11,43 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   user$ = this.storeFacade.user$;
+
+  burgerVisible = false;
 
   constructor(
     private storeFacade: StoreFacade,
     private modalService: NzModalService,
+    private router: Router,
+    private elementRef: ElementRef,
     private translateService: TranslateService,
   ) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe(() => (this.burgerVisible = false));
+  }
+
+  burgerToggle(): void {
+    this.burgerVisible = !this.burgerVisible;
+  }
 
   signOut(): void {
     this.storeFacade.signOut();
   }
 
-  signUp(): void {
+  showModal(): void {
     this.modalService.create({
-      nzContent: SignUpComponent,
-      nzFooter: null,
-      nzTitle: this.translateService.instant('SignUpModalTitle'),
-      nzComponentParams: {
-        buttonText: this.translateService.instant('SignUpButton'),
-      },
+      nzTitle: this.translateService.instant('CreateBoardModalTitle'),
+      nzContent: BoardAddComponent,
+      nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 
-  logIn(): void {
-    this.modalService.create({ nzContent: LoginComponent, nzFooter: null });
-  }
-
-  editProfile(): void {
-    this.modalService.create({
-      nzContent: SignUpComponent,
-      nzFooter: null,
-      nzTitle: this.translateService.instant('EditProfileModalTitle'),
-      nzComponentParams: {
-        buttonText: this.translateService.instant('EditProfileSaveButton'),
-        isEditing: true,
-      },
-    });
+  @HostListener('document:click', ['$event'])
+  closeClickedOutsideBurger(event: Event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) this.burgerVisible = false;
   }
 }

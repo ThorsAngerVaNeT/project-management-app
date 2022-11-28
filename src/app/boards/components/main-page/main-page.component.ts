@@ -32,6 +32,9 @@ export class MainPageComponent implements OnInit {
     this.modalService.create({
       nzTitle: this.translateService.instant('CreateBoardModalTitle'),
       nzContent: BoardAddComponent,
+      nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 }

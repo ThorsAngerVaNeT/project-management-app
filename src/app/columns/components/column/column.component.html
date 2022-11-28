@@ -25,6 +25,9 @@
           <ng-container *ngIf="titleControl.hasError('required')">{{
             'CreateBoardTitleRequiredErrorTip' | translate
           }}</ng-container>
+          <ng-container *ngIf="titleControl.hasError('maxlength')"
+            >{{ 'CreateColumnTitleMaxlengthErrorTip' | translate }}
+          </ng-container>
         </ng-template>
       </nz-input-group>
     </nz-form-control>

@@ -27,6 +27,9 @@ export class TaskItemComponent {
     this.modalService.create({
       nzContent: TaskAddComponent,
       nzComponentParams: { task: this.task, boardId: this.task.boardId },
+      nzWidth: 'null',
+      nzClassName: 'form-scrollable',
+      nzStyle: { top: '40px' },
     });
   }
 
@@ -41,6 +44,7 @@ export class TaskItemComponent {
         this.storeFacade.deleteTask(boardId, columnId, taskId);
       },
       nzOkDanger: true,
+      nzWidth: 'null',
     });
   }
 }

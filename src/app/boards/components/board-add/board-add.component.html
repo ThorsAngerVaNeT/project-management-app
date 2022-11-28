@@ -46,6 +46,7 @@
     <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
       <input
         type="file"
+        class="file-field"
         formControlName="image"
         #fileInput
         (change)="onFileInput(fileInput.files)"
