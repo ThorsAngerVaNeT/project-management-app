@@ -1,11 +1,14 @@
 <div class="hero">
   <div class="hero__headline">
     <h1>ngPMA</h1>
-    <h2>Be a Lord of the Board</h2>
-    <p>Organize your work in a visual intuitive way using ngPMA application features:</p>
+    <h2>{{ 'MainH2' | translate }}</h2>
     <p>
-      Boards | Columns | Tasks | Checklists
-      <span class="hero-divider" nz-icon nzType="plus"></span> Drag&Drop | Access Rights | Search
+      {{ 'MainDescription' | translate }}
+    </p>
+    <p>
+      {{ 'MainFeatures1' | translate }}
+      <span class="hero-divider" nz-icon nzType="plus"></span>
+      {{ 'MainFeatures2' | translate }}
     </p>
   </div>
 
@@ -14,7 +17,7 @@
   </div>
 </div>
 
-<h2>Technologies</h2>
+<h2>{{ 'MainTechnologies' | translate }}</h2>
 
 <div class="technologies">
   <div class="technologies__list">
@@ -25,29 +28,43 @@
   </div>
 </div>
 
-<h2>Course</h2>
+<h2>{{ 'MainCourseHeading' | translate }}</h2>
 
 <div class="course">
   <a href="https://rs.school/angular/"><img src="https://rollingscopes.com/images/logo_rs2.svg" /></a>
   <p>
-    Developed as a certificate project by students of <a href="https://rs.school/angular/">Angular 2022Q3 Course</a> at
-    the <a href="https://rs.school/">RSSchool</a>.
+    {{ 'MainCourseDescription1' | translate }}
+    <a href="https://rs.school/angular/">Angular 2022Q3 Course</a>{{ 'MainCourseDescription2' | translate }}
+    <a href="https://rs.school/">RSSchool</a>.
   </p>
   <p>
-    <a href="https://rs.school/">RSSchool</a> is an education program conducted by
-    <a href="https://rollingscopes.com/">The Rolling Scopes developer community </a> since 2013.
+    <a href="https://rs.school/">RSSchool</a> {{ 'MainCourseDescription3' | translate }}
+    <a href="https://rollingscopes.com/"> The Rolling Scopes developer community</a>
+    {{ 'MainCourseDescription4' | translate }}
   </p>
 </div>
 
-<h2>Developers</h2>
+<h2>{{ 'MainDevelopers' | translate }}</h2>
 
 <div class="developers">
-  <ng-container *ngFor="let item of developers">
-    <nz-card class="business-card" nzTitle="{{ item.name }}" [nzExtra]="extraTemplate">
-      {{ item.about }}
-    </nz-card>
-    <ng-template #extraTemplate>
-      <a href="{{ item.github }}"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
-    </ng-template>
-  </ng-container>
+  <nz-card class="business-card" nzTitle="ThorsAngerVaNeT" [nzExtra]="extraTemplate1">
+    {{ 'ThorsAngerVaNeT' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate1>
+    <a href="https://github.com/thorsangervanet"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="Ogimly" [nzExtra]="extraTemplate2">
+    {{ 'Ogimly' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate2>
+    <a href="https://github.com/ogimly"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="022022" [nzExtra]="extraTemplate3">
+    {{ '022022' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate3>
+    <a href="https://github.com/022022"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
 </div>

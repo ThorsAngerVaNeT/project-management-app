@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { WelcomeComponent } from './welcome.component';
 
@@ -13,6 +14,7 @@ describe('WelcomeComponent', () => {
       declarations: [WelcomeComponent],
       providers: [provideMockStore()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WelcomeComponent);

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-welcome',
@@ -36,24 +37,5 @@ export class WelcomeComponent {
     },
   ];
 
-  developers = [
-    {
-      name: 'ThorsAngerVaNeT',
-      about:
-        'Team Lead, organized NGRX Store for the app, developed board and all the related components, introduced routing restrictions, built CI/CD, deployed backend',
-      github: 'https://github.com/thorsangervanet',
-    },
-    {
-      name: 'Ogimly',
-      about:
-        'With fondness created services and interceptors, implemented services error handling, was in charge of search logic and drag&drop support',
-      github: 'https://github.com/ogimly',
-    },
-    {
-      name: '022022',
-      about:
-        'Designed and developed interfaces with NG Zorro library, set up forms validation, implemented login and sign up functionality',
-      github: 'https://github.com/022022',
-    },
-  ];
+  constructor(private translateService: TranslateService) {}
 }
