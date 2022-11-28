@@ -1,4 +1,4 @@
-<ng-template [nzModalTitle] *ngIf="task">
+<ng-template [nzModalTitle] *ngIf="!boardId">
   {{ 'EditTaskModalTitle' | translate }}
   <span nz-tooltip nzTooltipTitle="id: {{ task._id }}">
     <span nz-icon nzType="info-circle" nzTheme="outline"></span>
