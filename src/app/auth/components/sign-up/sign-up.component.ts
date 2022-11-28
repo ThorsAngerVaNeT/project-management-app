@@ -98,4 +98,10 @@ export class SignUpComponent implements OnInit {
   get password(): AbstractControl | null {
     return this.signUpForm.get('password');
   }
+
+  get title(): string {
+    return this.user._id
+      ? this.translateService.instant('editProfile')
+      : this.translateService.instant('SignUpModalTitle');
+  }
 }

@@ -1,5 +1,5 @@
 <div class="page-form" *ngIf="user$ | async as user">
-  <h1 class="auth-heading">{{ user._id ? 'Edit Profile' : 'Sign Up' }}</h1>
+  <h1 class="auth-heading">{{ title }}</h1>
   <div class="password-requirements" [innerHTML]="'passwordRequirements' | translate"></div>
   <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
     <nz-form-item class="ant-form-item-explain-error">{{ authError$ | async }} </nz-form-item>
