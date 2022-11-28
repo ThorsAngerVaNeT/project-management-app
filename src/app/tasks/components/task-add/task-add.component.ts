@@ -122,6 +122,10 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     return Object.values(this.userEntities).map((user) => user ?? EMPTY_USER);
   }
 
+  get taskId(): string {
+    return this.task ? `id: ${this.task._id}` : '';
+  }
+
   handleOk(): void {
     if (this.taskAddForm.valid) {
       const { title, description, responsible: userId, participants: users } = this.taskAddForm.value;
