@@ -87,7 +87,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if (this.signUpForm.valid) {
       this.isDeletingDisabled = true;
-      if (this.user) {
+      if (this.user._id) {
         this.editUser();
       } else {
         this.signUp();
