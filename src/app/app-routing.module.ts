@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth/auth.guard';
 import { RootPageGuard } from './core/guards/root-page/root-page.guard';
 
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./boards/boards.module').then((m) => m.BoardsModule),
     canLoad: [AuthGuard],
   },
-  { path: '**', redirectTo: '/404' },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
