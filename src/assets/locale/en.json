@@ -94,5 +94,7 @@
   "ConfirmCancelButton": "Cancel",
   "itemToDeleteThisCheckpoint": "this check point",
   "WrongFileFormatErrorTitle": "Wrong file format",
-  "WrongFileFormatErrorContent": "Only *.png and *.jpg files are allowed!"
+  "WrongFileFormatErrorContent": "Only *.png and *.jpg files are allowed!",
+  "errTitle": "Something went wrong...",
+  "errTextHttpError": "Please try later"
 }

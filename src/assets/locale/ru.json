@@ -94,5 +94,7 @@
   "ConfirmCancelButton": "Отмена",
   "itemToDeleteThisCheckpoint": "этот чек-поинт",
   "WrongFileFormatErrorTitle": "Неверный формат файла",
-  "WrongFileFormatErrorContent": "Разрешаются только *.png и *.jpg файлы!"
+  "WrongFileFormatErrorContent": "Разрешаются только *.png и *.jpg файлы!",
+  "errTitle": "Что-то пошло не так...",
+  "errTextHttpError": "Попробуйте повторить еще раз позднее"
 }

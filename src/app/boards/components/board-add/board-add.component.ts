@@ -118,6 +118,7 @@ export class BoardAddComponent implements OnInit, OnDestroy {
         this.modalService.error({
           nzTitle: this.translateService.instant('WrongFileFormatErrorTitle'),
           nzContent: this.translateService.instant('WrongFileFormatErrorContent'),
+          nzWidth: 'null',
         });
         this.boardAddForm.get('image')?.reset();
       }
