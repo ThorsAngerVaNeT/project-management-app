@@ -4,4 +4,4 @@ import { RouterStateUrl } from '../reducers/router.reducer';
 
 export const selectRouter = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
-export const selectBoardId = createSelector(selectRouter, (state) => state.state.params['boardId']);
+export const selectBoardId = createSelector(selectRouter, (state): string => state.state.params['boardId']);
