@@ -71,7 +71,7 @@ export const userReducer = createReducer(
   ),
   on(AuthActions.userUpdateGetInfoSuccess, (state: AuthState, { user }): AuthState => ({ ...state, ...user })),
   on(UserActions.deleteUser, (state: AuthState): AuthState => ({ ...state, loading: true })),
-  on(UserActions.deleteUserSuccess, (): AuthState => ({ ...initialState })),
+  on(UserActions.deleteUserSuccess, (): AuthState => ({ ...initialState, token: '' })),
   on(UserActions.deleteUserFailed, (state: AuthState): AuthState => ({ ...state, loading: false })),
   on(AuthActions.userCleanErrorMessage, (state: AuthState): AuthState => ({ ...state, error: '' })),
 );
