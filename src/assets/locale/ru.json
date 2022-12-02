@@ -17,6 +17,7 @@
   "deleteUserText": "Удалить ваш аккаунт",
   "deleteUserButton": "Удалить навсегда",
   "itemToDeleteYourAccount": "ваш аккаунт",
+  "SpacesErrorTip": "Здесь должно быть что-то, кроме пробелов",
   "CreateBoardTitle": "Заголовок",
   "CreateBoardTitleRequiredErrorTip": "Пожалуйста, введите заголовок",
   "CreateBoardTitleMinlengthErrorTip": "Заголовок должен содержать от 2 до 40 символов",

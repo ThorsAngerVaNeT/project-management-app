@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
+import { spaceValidator } from '@shared/validators/space.validator';
 import { Point } from '../../model/point.model';
 
 @Component({
@@ -19,7 +20,11 @@ export class PointAddComponent implements OnInit {
   constructor(private storeFacade: StoreFacade) {}
 
   ngOnInit(): void {
-    this.pointControl = new FormControl(this.point?.title, [Validators.required, Validators.maxLength(255)]);
+    this.pointControl = new FormControl(this.point?.title, [
+      Validators.required,
+      Validators.maxLength(255),
+      spaceValidator(0),
+    ]);
   }
 
   submitHandler(): void {

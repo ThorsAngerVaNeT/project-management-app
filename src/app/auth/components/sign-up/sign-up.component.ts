@@ -40,7 +40,7 @@ export class SignUpComponent implements OnInit {
       login: new FormControl(this.user ? this.user.login : '', [
         Validators.required,
         Validators.minLength(2),
-        Validators.pattern('^[a-z0-9]+$'),
+        Validators.pattern('^[a-zA-Z0-9]+$'),
       ]),
       name: new FormControl(this.user ? this.user.name : '', [
         Validators.required,

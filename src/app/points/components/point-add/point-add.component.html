@@ -15,6 +15,9 @@
       <ng-container *ngIf="pointControl.hasError('maxlength')">{{
         'CreatePointTitleMinlengthErrorTip' | translate
       }}</ng-container>
+      <ng-container *ngIf="pointControl.hasError('containsOnlySpace')">
+        {{ 'SpacesErrorTip' | translate }}
+      </ng-container>
     </ng-template>
   </nz-input-group>
   <ng-template #suffixButtons>

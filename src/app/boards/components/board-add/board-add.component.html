@@ -11,6 +11,7 @@
         <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
           'CreateBoardTitleMinlengthErrorTip' | translate
         }}</ng-container>
+        <ng-container *ngIf="title?.hasError('containsOnlySpace')"> {{ 'SpacesErrorTip' | translate }} </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>

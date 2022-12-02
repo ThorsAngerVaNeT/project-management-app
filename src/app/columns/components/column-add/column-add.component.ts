@@ -4,6 +4,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { Board } from '@boards/model/board.model';
 import { Column } from '../../model/column.model';
+import { spaceValidator } from '@shared/validators/space.validator';
 
 @Component({
   selector: 'app-column-add',
@@ -23,7 +24,7 @@ export class ColumnAddComponent implements OnInit {
   constructor(private storeFacade: StoreFacade, private modal: NzModalRef) {}
 
   ngOnInit(): void {
-    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20), spaceValidator(0)]);
   }
 
   handleOk(): void {

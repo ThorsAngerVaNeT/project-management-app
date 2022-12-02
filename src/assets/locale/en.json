@@ -17,6 +17,7 @@
   "deleteUserText": "Delete your user account",
   "deleteUserButton": "Delete Forever",
   "itemToDeleteYourAccount": "your account",
+  "SpacesErrorTip": "There shouldn't be only spaces",
   "CreateBoardTitle": "Title",
   "CreateBoardTitleRequiredErrorTip": "Please provide a title",
   "CreateBoardTitleMinlengthErrorTip": "Title should be 2-40 characters long",
