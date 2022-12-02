@@ -66,6 +66,7 @@ export class UserEffects {
     () => {
       return this.actions$.pipe(
         ofType(UserActions.deleteUserSuccess),
+        tap(() => localStorage.setItem('token', '')),
         tap(() => this.storeFacade.redirectToWelcome()),
       );
     },
