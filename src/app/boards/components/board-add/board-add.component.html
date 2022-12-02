@@ -59,7 +59,13 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()">{{ 'CreateBoardCancelText' | translate }}</button>
-    <button nz-button nzType="primary" [nzLoading]="isLoading$ | async" (click)="handleOk()">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="isLoading$ | async"
+      (click)="handleOk()"
+      [disabled]="!boardAddForm.valid"
+    >
       {{ 'CreateBoardOkText' | translate }}
     </button>
   </ng-template>

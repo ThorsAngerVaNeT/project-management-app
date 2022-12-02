@@ -16,7 +16,13 @@
 
 <ng-template [nzModalFooter]>
   <button nz-button (click)="handleCancel()">{{ 'CancelButtonText' | translate }}</button>
-  <button nz-button nzType="primary" [nzLoading]="isLoading$ | async" (click)="handleOk()">
+  <button
+    nz-button
+    nzType="primary"
+    [nzLoading]="isLoading$ | async"
+    (click)="handleOk()"
+    [disabled]="!titleControl.valid"
+  >
     {{ 'SaveButtonText' | translate }}
   </button>
 </ng-template>
