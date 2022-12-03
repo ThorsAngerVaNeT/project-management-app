@@ -119,5 +119,6 @@
   "errUnknown": "Неизвестная ошибка",
   "successTitle": "Успешно",
   "successTextProfileUpdate": "Ваш профиль был обновлен!",
-  "clearSearch": "Очистить результаты поиска"
+  "clearSearch": "Очистить результаты поиска",
+  "NotFoundText": "<h2>Такой страницы нет</h2>  <p>Попробуйте начать с <a routerLink='/'>главной страницы</a></p>"
 }
