@@ -76,13 +76,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     );
 
     this.taskAddForm = new FormGroup({
-      title: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(40),
-        spaceValidator(1),
-      ]),
-      description: new FormControl(null, [Validators.required, Validators.maxLength(255), spaceValidator(0)]),
+      title: new FormControl(null, [Validators.required, Validators.maxLength(40), spaceValidator()]),
+      description: new FormControl(null, [Validators.required, Validators.maxLength(255), spaceValidator()]),
       responsible: new FormControl(null, [Validators.required]),
       participants: new FormControl([], [Validators.required]),
     });

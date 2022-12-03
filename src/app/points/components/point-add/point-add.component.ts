@@ -23,7 +23,7 @@ export class PointAddComponent implements OnInit {
     this.pointControl = new FormControl(this.point?.title, [
       Validators.required,
       Validators.maxLength(255),
-      spaceValidator(0),
+      spaceValidator(),
     ]);
   }
 

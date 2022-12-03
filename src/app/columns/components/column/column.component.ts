@@ -32,7 +32,7 @@ export class ColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20), spaceValidator(0)]);
+    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20), spaceValidator()]);
   }
 
   toggleEdit(): void {

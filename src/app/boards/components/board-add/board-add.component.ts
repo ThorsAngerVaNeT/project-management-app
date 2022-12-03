@@ -59,9 +59,8 @@ export class BoardAddComponent implements OnInit, OnDestroy {
     this.boardAddForm = new FormGroup({
       title: new FormControl(this.board ? this.board.title : '', [
         Validators.required,
-        Validators.minLength(2),
         Validators.maxLength(40),
-        spaceValidator(1),
+        spaceValidator(),
       ]),
       participants: new FormControl(
         [
