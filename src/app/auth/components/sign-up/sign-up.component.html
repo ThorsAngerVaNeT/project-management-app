@@ -14,6 +14,7 @@
           <ng-template #loginErrorTip>
             <ng-container *ngIf="login?.hasError('required')">{{ 'loginRequiredErrorTip' | translate }}</ng-container>
             <ng-container *ngIf="login?.hasError('minlength')">{{ 'loginMinlengthErrorTip' | translate }}</ng-container>
+            <ng-container *ngIf="login?.hasError('pattern')">{{ 'loginPatternErrorTip' | translate }}</ng-container>
           </ng-template>
         </nz-form-control>
       </nz-form-item>

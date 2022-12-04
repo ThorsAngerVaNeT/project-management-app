@@ -11,6 +11,7 @@ import { User } from '@users/model/user.model';
 import { Dictionary } from '@ngrx/entity';
 import { EMPTY_USER } from '@users/store/reducers/user.reducer';
 import { TranslateService } from '@ngx-translate/core';
+import { spaceValidator } from '@shared/validators/space.validator';
 
 @Component({
   selector: 'app-task-add',
@@ -75,8 +76,8 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     );
 
     this.taskAddForm = new FormGroup({
-      title: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
-      description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
+      title: new FormControl(null, [Validators.required, Validators.maxLength(40), spaceValidator()]),
+      description: new FormControl(null, [Validators.required, Validators.maxLength(255), spaceValidator()]),
       responsible: new FormControl(null, [Validators.required]),
       participants: new FormControl([], [Validators.required]),
     });

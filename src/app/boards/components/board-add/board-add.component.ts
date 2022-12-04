@@ -8,6 +8,7 @@ import { User } from '@users/model/user.model';
 import { BoardWithUsers } from '../../model/board.model';
 import { TaskFile } from '@files/model/file.model';
 import { TranslateService } from '@ngx-translate/core';
+import { spaceValidator } from '@shared/validators/space.validator';
 
 @Component({
   selector: 'app-board-add',
@@ -58,8 +59,8 @@ export class BoardAddComponent implements OnInit, OnDestroy {
     this.boardAddForm = new FormGroup({
       title: new FormControl(this.board ? this.board.title : '', [
         Validators.required,
-        Validators.minLength(2),
         Validators.maxLength(40),
+        spaceValidator(),
       ]),
       participants: new FormControl(
         [

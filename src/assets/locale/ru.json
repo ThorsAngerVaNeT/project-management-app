@@ -7,7 +7,8 @@
   "passwordRequiredErrorTip": "Пожалуйста, введите пароль",
   "passwordLoginPatternErrorTip": "Пожалуйста, проверьте правильность ввода пароля",
   "LogInButton": "Войти",
-  "passwordRequirements": "<p>Пожалуйста, введите логин (длиннее двух символов), имя и надёжный пароль.</p><p>Надёжный пароль должен:</p><ul><li>состоять минимум из 8 символов</li><li>включать заглавные и строчные буквы</li><li>включать буквы и цифры</li><li>а также содержать как минимум один специальный символ (! @ # ? ]  и т.д.)</li></ul>",
+  "passwordRequirements": "<p>Пожалуйста, введите логин (длиннее двух латинских букв или/и арабских цифр), имя (2-20 символов) и надёжный пароль (из латинских букв и арабских цифр).</p><p>Надёжный пароль должен:</p><ul><li>состоять минимум из 8 символов</li><li>включать заглавные и строчные буквы</li><li>включать буквы и цифры</li><li>содержать как минимум один специальный символ (! @ # ? ]  и т.д.)</li></ul>",
+  "loginPatternErrorTip": "Используйте только латинские буквы и арабские цифры",
   "userAlreadyExistsErrorTip": "Пользователь с таким логином уже существует. Пожалуйста, придумайте новый логин",
   "namePlaceholder": "Имя",
   "nameRequiredErrorTip": "Пожалуйста, укажите имя",
@@ -16,9 +17,10 @@
   "deleteUserText": "Удалить ваш аккаунт",
   "deleteUserButton": "Удалить навсегда",
   "itemToDeleteYourAccount": "ваш аккаунт",
+  "SpacesErrorTip": "Здесь должно быть что-то, кроме пробелов",
   "CreateBoardTitle": "Заголовок",
   "CreateBoardTitleRequiredErrorTip": "Пожалуйста, введите заголовок",
-  "CreateBoardTitleMinlengthErrorTip": "Заголовок должен содержать от 2 до 40 символов",
+  "CreateBoardTitleMinlengthErrorTip": "Заголовок должен содержать до 40 символов",
   "CreateBoardParticipants": "Участники",
   "CreateBoardTeamMembers": "Пожалуйста, выберите участников",
   "CreateBoardImageTooltip": "Выберите обложку для вашей доски",
@@ -74,7 +76,7 @@
   "SearchByKeyWordsLabel": "по ключевым словам",
   "TaskTitle": "Заголовок",
   "TaskTitleRequiredErrorTip": "Пожалуйста, укажите заголовок",
-  "TaskTitleMinlengthErrorTip": "Заголовок должен содержать от 2 до 40 символов",
+  "TaskTitleMinlengthErrorTip": "Заголовок должен содержать до 40 символов",
   "TaskDescription": "Описание",
   "TaskDescriptionRequiredErrorTip": "Пожалуйста, укажите описание",
   "TaskDescriptionMaxlengthErrorTip": "Описание должно содержать не более 255 символов",
@@ -117,5 +119,6 @@
   "errUnknown": "Неизвестная ошибка",
   "successTitle": "Успешно",
   "successTextProfileUpdate": "Ваш профиль был обновлен!",
-  "clearSearch": "Очистить результаты поиска"
+  "clearSearch": "Очистить результаты поиска",
+  "NotFoundText": "<h2>Такой страницы нет</h2>  <p>Попробуйте начать с <a routerLink='/'>главной страницы</a></p>"
 }

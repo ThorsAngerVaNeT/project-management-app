@@ -11,6 +11,7 @@
         <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
           'CreateBoardTitleMinlengthErrorTip' | translate
         }}</ng-container>
+        <ng-container *ngIf="title?.hasError('containsOnlySpace')"> {{ 'SpacesErrorTip' | translate }} </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -58,7 +59,13 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()">{{ 'CreateBoardCancelText' | translate }}</button>
-    <button nz-button nzType="primary" [nzLoading]="isLoading$ | async" (click)="handleOk()">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="isLoading$ | async"
+      (click)="handleOk()"
+      [disabled]="!boardAddForm.valid"
+    >
       {{ 'CreateBoardOkText' | translate }}
     </button>
   </ng-template>

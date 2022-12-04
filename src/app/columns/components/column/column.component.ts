@@ -8,6 +8,7 @@ import { ColumnTasksWithColumnId } from '@tasks/model/task.model';
 import { ColumnWithTasks } from '../../model/column.model';
 import { TaskAddComponent } from '@tasks/components/task-add/task-add.component';
 import { TranslateService } from '@ngx-translate/core';
+import { spaceValidator } from '@shared/validators/space.validator';
 
 @Component({
   selector: 'app-column',
@@ -31,7 +32,7 @@ export class ColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20)]);
+    this.titleControl = new FormControl('', [Validators.required, Validators.maxLength(20), spaceValidator()]);
   }
 
   toggleEdit(): void {

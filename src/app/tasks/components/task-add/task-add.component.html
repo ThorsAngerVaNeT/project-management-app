@@ -15,6 +15,9 @@
         <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
           'TaskTitleMinlengthErrorTip' | translate
         }}</ng-container>
+        <ng-container *ngIf="title?.hasError('containsOnlySpace')">
+          {{ 'SpacesErrorTip' | translate }}
+        </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -37,6 +40,9 @@
         <ng-container *ngIf="description?.hasError('maxlength')">{{
           'TaskDescriptionMaxlengthErrorTip' | translate
         }}</ng-container>
+        <ng-container *ngIf="description?.hasError('containsOnlySpace')">
+          {{ 'SpacesErrorTip' | translate }}
+        </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
@@ -109,7 +115,13 @@
 
   <ng-template [nzModalFooter]>
     <button nz-button (click)="handleCancel()">{{ 'CreateTaskCancelText' | translate }}</button>
-    <button nz-button nzType="primary" [nzLoading]="taskIsLoading$ | async" (click)="handleOk()">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="taskIsLoading$ | async"
+      (click)="handleOk()"
+      [disabled]="!taskAddForm.valid"
+    >
       {{ 'CreateTaskOkText' | translate }}
     </button>
   </ng-template>
