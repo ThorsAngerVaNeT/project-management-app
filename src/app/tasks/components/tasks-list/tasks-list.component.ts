@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragMove, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { StoreFacade } from '@core/services/store-facade/store-facade';
 import { ColumnTaskWithUsers, ColumnTaskSetUpdateParams, ColumnTasksWithColumnId } from '../../model/task.model';
@@ -59,5 +59,27 @@ export class TasksListComponent {
     columnId: string,
   ): ColumnTaskSetUpdateParams[] {
     return columnTasks.map(({ _id }, index) => ({ _id, order: index, columnId }));
+  }
+
+  onDragMoved(event: CdkDragMove<ColumnTaskWithUsers[]>): void {
+    const columnsContainer = this.storeFacade.getColumnsContainer();
+    const clientWidth = columnsContainer.clientWidth;
+    const scrollWidth = columnsContainer.scrollWidth;
+    const deltaWidth = scrollWidth - clientWidth;
+
+    const x = event.pointerPosition.x;
+    const scrollingArea = Math.max(clientWidth / 5, 100); // 20% on each side but not less than 100px
+
+    if (event.delta.x === 1) {
+      // moving to right
+      const deltaX = Math.max(Math.abs(x - clientWidth), 1);
+      // if pointer is closer to right, then moving faster
+      if (deltaX < scrollingArea) columnsContainer.scrollLeft += deltaWidth / deltaX;
+    } else if (event.delta.x === -1) {
+      // moving to left
+      const deltaX = Math.max(Math.abs(x), 1);
+      // if pointer is closer to left, then moving faster
+      if (deltaX < scrollingArea) columnsContainer.scrollLeft -= deltaWidth / deltaX;
+    }
   }
 }

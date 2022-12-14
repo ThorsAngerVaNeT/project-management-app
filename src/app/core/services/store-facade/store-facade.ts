@@ -114,6 +114,8 @@ export class StoreFacade {
 
   boardIsLoading$ = this.store.select(BoardSelectors.selectBoardIsLoading);
 
+  columnsContainer!: HTMLDivElement;
+
   constructor(private store: Store) {}
 
   signIn(data: SignInParams): void {
@@ -331,5 +333,13 @@ export class StoreFacade {
 
   clearErrorMessage(): void {
     this.store.dispatch(fromAuth.userCleanErrorMessage());
+  }
+
+  setColumnsContainer(columnsContainer: HTMLDivElement): void {
+    this.columnsContainer = columnsContainer;
+  }
+
+  getColumnsContainer(): HTMLDivElement {
+    return this.columnsContainer;
   }
 }

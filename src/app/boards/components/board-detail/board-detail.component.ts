@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -17,7 +25,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./board-detail.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardDetailComponent implements OnInit, OnDestroy {
+export class BoardDetailComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('columnsContainer', { static: false }) columnsContainer!: ElementRef<HTMLDivElement>;
+
   boardId!: string;
 
   columnsCount!: number;
@@ -50,6 +60,10 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
         this.boardCoverUrl$ = this.storeFacade.getBoardCoverStream(boardId);
       }),
     );
+  }
+
+  ngAfterViewInit(): void {
+    this.storeFacade.setColumnsContainer(this.columnsContainer.nativeElement);
   }
 
   ngOnDestroy(): void {

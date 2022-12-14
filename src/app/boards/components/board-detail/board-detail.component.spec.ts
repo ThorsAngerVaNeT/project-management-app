@@ -21,10 +21,7 @@ describe('BoardDetailComponent', () => {
       providers: [
         {
           provide: StoreFacade,
-          useValue: {
-            getUsers: (): void => {},
-            boardDetail$: of(),
-          },
+          useValue: { getUsers: (): void => {}, boardDetail$: of() },
         },
         {
           provide: ActivatedRoute,
@@ -42,7 +39,9 @@ describe('BoardDetailComponent', () => {
 
     fixture = TestBed.createComponent(BoardDetailComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    component.columnsContainer = {
+      nativeElement: document.createElement('div'),
+    };
   });
 
   it('should create', () => {
