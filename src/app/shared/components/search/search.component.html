@@ -1,4 +1,51 @@
 <div class="search__group">
+  <nz-input-group class="search__select search__search-field" [nzSuffix]="inputClearTpl">
+    <input
+      type="text"
+      nz-input
+      nzBorderless
+      [(ngModel)]="searchText"
+      placeholder="{{ 'SearchInputPlaceholder' | translate }}"
+      (input)="search(searchText)"
+      nz-tooltip
+      nzTooltipPlacement="bottomLeft"
+      nzTooltipColor="#fafcfd"
+      [nzTooltipTitle]="contentTemplate"
+      [nzTooltipVisible]="visible"
+      (nzTooltipVisibleChange)="changeVisible($event)"
+    />
+  </nz-input-group>
+  <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
+    <nz-option nzValue="byIds" nzLabel="{{ 'SearchByIdsLabel' | translate }}"></nz-option>
+    <nz-option nzValue="byKeyWords" nzLabel="{{ 'SearchByKeyWordsLabel' | translate }}"></nz-option>
+  </nz-select>
+</div>
+<ng-template #inputClearTpl>
+  <span nz-icon class="search__clear-search" nzType="close-circle" *ngIf="searchText" (click)="clearSearch()"></span>
+</ng-template>
+<ng-template #contentTemplate>
+  <div class="search__result-container">
+    <p class="search__result-description">Search result:</p>
+    <ng-container *ngIf="(isLoading$ | async) === false; else loadingSpinner">
+      <div *ngIf="searchResult$ | async as searchResult">
+        <div *ngFor="let task of searchResult">
+          <a routerLink="/boards/{{ task.boardId }}">
+            <div class="search__result">
+              <span class="search__result-title">{{ task.title }} </span
+              ><span class="search__result-description"> {{ task.description }}</span
+              ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <nz-spin nzSimple></nz-spin>
+    </ng-template>
+  </div>
+</ng-template>
+
+<!-- <div class="search__group">
   <nz-select
     class="search__select search__search-field"
     nzBorderless
@@ -44,4 +91,4 @@
       <nz-spin nzSimple></nz-spin>
     </ng-template>
   </div>
-</ng-template>
+</ng-template> -->

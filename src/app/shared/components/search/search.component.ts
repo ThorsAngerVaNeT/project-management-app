@@ -18,6 +18,10 @@ export class SearchComponent {
 
   searchType: string = SearchTypes.byKeyWords;
 
+  searchText = '';
+
+  visible = false;
+
   constructor(private storeFacade: StoreFacade) {}
 
   public getUsersList(task: ColumnTaskWithUsers): string {
@@ -25,10 +29,20 @@ export class SearchComponent {
   }
 
   public search(searchString: string): void {
-    if (searchString) this.storeFacade.searchTask(searchString, this.searchType);
+    if (searchString) {
+      this.visible = true;
+      this.storeFacade.searchTask(searchString, this.searchType);
+    } else {
+      this.storeFacade.clearSearchTask();
+    }
   }
 
   public clearSearch(): void {
+    this.searchText = '';
     this.storeFacade.clearSearchTask();
+  }
+
+  changeVisible(value: boolean): void {
+    this.visible = value;
   }
 }
