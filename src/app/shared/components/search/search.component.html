@@ -21,7 +21,14 @@
   </nz-select>
 </div>
 <ng-template #inputClearTpl>
-  <span nz-icon class="search__clear-search" nzType="close-circle" *ngIf="searchText" (click)="clearSearch()"></span>
+  <span
+    class="search__clear-search"
+    title="{{ 'clearSearch' | translate }}"
+    nz-icon
+    nzType="close-circle"
+    *ngIf="searchText"
+    (click)="clearSearch()"
+  ></span>
 </ng-template>
 <ng-template #contentTemplate>
   <div class="search__result-container">
@@ -44,51 +51,3 @@
     </ng-template>
   </div>
 </ng-template>
-
-<!-- <div class="search__group">
-  <nz-select
-    class="search__select search__search-field"
-    nzBorderless
-    nzShowSearch
-    nzPlaceHolder="{{ 'SearchInputPlaceholder' | translate }}"
-    [nzDropdownRender]="renderTemplate"
-    [nzShowArrow]="false"
-    [nzFilterOption]="nzFilterOption"
-    (nzOnSearch)="search($event)"
-  >
-    <nz-option [nzValue]="null" nzLabel="{{ 'inputSearchLabel' | translate }}:" nzDisabled></nz-option>
-  </nz-select>
-  <span
-    class="search__clear-search"
-    title="{{ 'clearSearch' | translate }}"
-    nz-icon
-    nzType="close-circle"
-    nzTheme="outline"
-    (click)="clearSearch()"
-  ></span>
-
-  <nz-select class="search__select search__search-type" nzBorderless [(ngModel)]="searchType">
-    <nz-option nzValue="byIds" nzLabel="{{ 'SearchByIdsLabel' | translate }}"></nz-option>
-    <nz-option nzValue="byKeyWords" nzLabel="{{ 'SearchByKeyWordsLabel' | translate }}"></nz-option>
-  </nz-select>
-</div>
-<ng-template #renderTemplate>
-  <div class="search__result-container">
-    <ng-container *ngIf="(isLoading$ | async) === false; else loadingSpinner">
-      <div *ngIf="searchResult$ | async as searchResult">
-        <div *ngFor="let task of searchResult">
-          <a routerLink="/boards/{{ task.boardId }}">
-            <div class="search__result">
-              <span class="search__result-title">{{ task.title }} </span
-              ><span class="search__result-description"> {{ task.description }}</span
-              ><span class="search__result-description"> [{{ getUsersList(task) }}]</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </ng-container>
-    <ng-template #loadingSpinner>
-      <nz-spin nzSimple></nz-spin>
-    </ng-template>
-  </div>
-</ng-template> -->
