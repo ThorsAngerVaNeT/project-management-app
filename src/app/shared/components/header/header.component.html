@@ -7,61 +7,43 @@
       </a>
     </div>
   </div>
-
   <ng-container *ngIf="user$ | async as user">
-    <div class="burger__toggler">
-      <span (click)="burgerToggle()" for="burger__id" id="burger__icon"><span nz-icon nzType="menu"></span></span>
-
-      <div class="burger__menu" *ngIf="burgerVisible">
-        <ng-container *ngIf="user._id">
-          <div class="burger__controls">
-            <app-language-switcher></app-language-switcher>
-            <app-search></app-search>
-
-            <a class="header__user-menu" (click)="showModal()">
-              <span nz-icon nzType="plus"></span> {{ 'AddNewBoard' | translate }}
-            </a>
-          </div>
-
-          <a routerLink="/auth/profile">{{ 'editProfile' | translate }}</a>
-          <a (click)="signOut()">{{ 'logOut' | translate }}</a>
-        </ng-container>
-
-        <ng-container *ngIf="!user._id" class="header__welcome_actions">
+    <span class="burger__toggler" (click)="burgerToggle()" for="burger__id" id="burger__icon"
+      ><span nz-icon nzType="menu"></span
+    ></span>
+    <div class="header__menu" [class.burger__menu]="burgerVisible">
+      <ng-container *ngIf="user._id">
+        <app-search></app-search>
+        <div class="header__right-group">
+          <a class="header__menu-item" (click)="showModal()">
+            <span nz-icon nzType="plus"></span> {{ 'AddNewBoard' | translate }}
+          </a>
           <app-language-switcher></app-language-switcher>
-          <a routerLink="/auth/sign-up">{{ 'SignUpModalTitle' | translate }}</a>
-          <a routerLink="/auth/login">{{ 'LoginModalTitle' | translate }}</a>
-        </ng-container>
-      </div>
-    </div>
-
-    <app-search class="header__search-field" *ngIf="user._id"></app-search>
-
-    <div class="header__right-group-wrapper">
-      <div class="header__right-group" *ngIf="user._id">
-        <a class="header__user-menu" (click)="showModal()">
-          <span nz-icon nzType="plus"></span> {{ 'AddNewBoard' | translate }}
-        </a>
-
-        <app-language-switcher></app-language-switcher>
-
-        <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="header__user-menu">
-          <span class="header__user-name">{{ user.name }}</span>
-          <span nz-icon nzType="down"></span>
-        </a>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item routerLink="/auth/profile">{{ 'editProfile' | translate }}</li>
-            <li nz-menu-item (click)="signOut()">{{ 'logOut' | translate }}</li>
-          </ul>
-        </nz-dropdown-menu>
-      </div>
-
-      <div class="header__welcome_actions" *ngIf="!user._id">
-        <app-language-switcher></app-language-switcher>
-        <span routerLink="/auth/sign-up">{{ 'SignUpModalTitle' | translate }}</span>
-        <span routerLink="/auth/login">{{ 'LoginModalTitle' | translate }}</span>
-      </div>
+          <div class="burger__user-menu">
+            <a class="header__menu-item" routerLink="/auth/profile">{{ 'editProfile' | translate }}</a>
+            <a class="header__menu-item" (click)="signOut()">{{ 'logOut' | translate }}</a>
+          </div>
+          <div class="header__user-menu">
+            <a class="header__menu-item" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+              <span class="header__user-name">{{ user.name }}</span>
+              <span nz-icon nzType="down"></span>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item routerLink="/auth/profile">{{ 'editProfile' | translate }}</li>
+                <li nz-menu-item (click)="signOut()">{{ 'logOut' | translate }}</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!user._id" class="header__welcome_actions">
+        <div class="header__no-user-menu">
+          <app-language-switcher></app-language-switcher>
+          <a class="header__menu-item" routerLink="/auth/sign-up">{{ 'SignUpModalTitle' | translate }}</a>
+          <a class="header__menu-item" routerLink="/auth/login">{{ 'LoginModalTitle' | translate }}</a>
+        </div>
+      </ng-container>
     </div>
   </ng-container>
 </nz-header>

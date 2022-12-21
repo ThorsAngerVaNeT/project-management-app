@@ -28,7 +28,7 @@ export class MainPageComponent implements OnInit {
     this.storeFacade.getBoardsAllData();
   }
 
-  showModal(): void {
+  addBoard(): void {
     this.modalService.create({
       nzTitle: this.translateService.instant('CreateBoardModalTitle'),
       nzContent: BoardAddComponent,

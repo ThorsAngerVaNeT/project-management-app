@@ -1,12 +1,12 @@
 @import 'variables.less';
 
 .tasks {
-  background: @background-color-xlight;
   border-radius: 4px;
-  overflow: hidden;
   display: block;
 
   min-height: 60px;
+  padding-bottom: 24px;
+  padding-top: 24px;
 }
 
 .task-item-wrapper {
@@ -36,10 +36,7 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.tasks.cdk-drop-list-dragging .task-item-wrapper:not(.cdk-drag-placeholder),
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.tasks.cdk-drop-list-dragging .task-item-wrapper:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

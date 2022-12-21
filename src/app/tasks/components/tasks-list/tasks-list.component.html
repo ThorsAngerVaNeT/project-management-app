@@ -5,7 +5,12 @@
   [cdkDropListData]="tasksWithColumnId"
   (cdkDropListDropped)="drop($event)"
 >
-  <div class="task-item-wrapper" *ngFor="let task of tasksWithColumnId.tasks | sortByOrder; trackBy: trackById" cdkDrag>
+  <div
+    class="task-item-wrapper"
+    *ngFor="let task of tasksWithColumnId.tasks | sortByOrder; trackBy: trackById"
+    cdkDrag
+    (cdkDragMoved)="onDragMoved($event)"
+  >
     <app-task-item class="task-item" [task]="task" [class.selected]="task.selected"></app-task-item>
   </div>
 </nz-list>
