@@ -38,15 +38,24 @@
 }
 
 .header__menu,
-.header__user-menu {
+.header__user-menu,
+.header__no-user-menu {
   display: flex;
+}
+
+.header__menu,
+.header__no-user-menu {
+  gap: 20px;
+  align-items: center;
+  flex: 1;
 }
 
 .header__menu {
   justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-  flex: 1;
+}
+
+.header__no-user-menu {
+  justify-content: flex-end;
 }
 
 .header__menu-item {
@@ -108,7 +117,8 @@
 
   .burger__toggler,
   .burger__user-menu,
-  .burger__menu {
+  .burger__menu,
+  .header__no-user-menu {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
