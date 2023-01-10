@@ -1,0 +1,78 @@
+<ng-container *ngIf="authViewModel$ | async as auth">
+  <div class="page-form" *ngIf="user$ | async as user">
+    <h1 class="auth-heading">{{ title }}</h1>
+    <div class="password-requirements" [innerHTML]="'passwordRequirements' | translate"></div>
+    <form nz-form class="auth-form" (ngSubmit)="submitForm()" [formGroup]="signUpForm">
+      <nz-form-item class="ant-form-item-explain-error" [class.error-highlight]="auth.error"
+        >{{ auth.error }}
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="loginErrorTip">
+          <nz-input-group nzPrefixIcon="login">
+            <input type="text" nz-input formControlName="login" placeholder="{{ 'loginPlaceholder' | translate }}" />
+          </nz-input-group>
+          <ng-template #loginErrorTip>
+            <ng-container *ngIf="login?.hasError('required')">{{ 'loginRequiredErrorTip' | translate }}</ng-container>
+            <ng-container *ngIf="login?.hasError('minlength')">{{ 'loginMinlengthErrorTip' | translate }}</ng-container>
+            <ng-container *ngIf="login?.hasError('pattern')">{{ 'loginPatternErrorTip' | translate }}</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="nameErrorTip">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="name" placeholder="{{ 'namePlaceholder' | translate }}" />
+          </nz-input-group>
+          <ng-template #nameErrorTip>
+            <ng-container *ngIf="name?.hasError('required')">{{ 'nameRequiredErrorTip' | translate }}</ng-container>
+            <ng-container *ngIf="name?.hasError('maxlength') || name?.hasError('minlength')">{{
+              'nameMinMaxlengthErrorTip' | translate
+            }}</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTip">
+          <nz-input-group nzPrefixIcon="lock">
+            <input
+              type="password"
+              nz-input
+              formControlName="password"
+              placeholder="{{ 'passwordPlaceholder' | translate }}"
+            />
+          </nz-input-group>
+          <ng-template #passwordErrorTip>
+            <ng-container *ngIf="password?.hasError('required')">{{
+              'passwordRequiredErrorTip' | translate
+            }}</ng-container>
+            <ng-container *ngIf="password?.hasError('pattern')">{{
+              'passwordPatternErrorTip' | translate
+            }}</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <button
+          nz-button
+          nzType="primary"
+          [nzLoading]="auth.isLoading && activeButton === 'submit'"
+          [disabled]="!signUpForm.valid && auth.isLoading"
+        >
+          {{ btnSubmitCaption }}
+        </button>
+      </nz-form-item>
+    </form>
+    <div class="delete-block" *ngIf="user._id">
+      <div>{{ 'deleteUserText' | translate }}</div>
+      <button
+        nz-button
+        nzDanger
+        [nzLoading]="auth.isLoading && activeButton === 'delete'"
+        (click)="deleteUser()"
+        [disabled]="auth.isLoading"
+      >
+        {{ 'deleteUserButton' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>

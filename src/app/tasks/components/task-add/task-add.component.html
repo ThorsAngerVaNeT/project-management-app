@@ -1,0 +1,128 @@
+<ng-template [nzModalTitle]>
+  {{ formTitle }}
+  <span nz-tooltip nzTooltipTitle="{{ taskId }}">
+    <span [class.hidden]="isCreateTask" nz-icon nzType="info-circle" nzTheme="outline"></span>
+  </span>
+</ng-template>
+
+<form nz-form class="content-form" [formGroup]="taskAddForm" *ngIf="userEntities$ | async as userEntities">
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">{{ 'TaskTitle' | translate }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+      <input nz-input id="title" formControlName="title" placeholder="{{ 'CreateTaskTitlePlaceHolder' | translate }}" />
+      <ng-template #titleErrorTip>
+        <ng-container *ngIf="title?.hasError('required')">{{ 'TaskTitleRequiredErrorTip' | translate }}</ng-container>
+        <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
+          'TaskTitleMinlengthErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="title?.hasError('containsOnlySpace')">
+          {{ 'SpacesErrorTip' | translate }}
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="description">{{
+      'TaskDescription' | translate
+    }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="descriptionErrorTip">
+      <textarea
+        nz-input
+        rows="2"
+        formControlName="description"
+        placeholder="{{ 'CreateTaskDescriptionPlaceHolder' | translate }}"
+      ></textarea>
+      <ng-template #descriptionErrorTip>
+        <ng-container *ngIf="description?.hasError('required')">{{
+          'TaskDescriptionRequiredErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="description?.hasError('maxlength')">{{
+          'TaskDescriptionMaxlengthErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="description?.hasError('containsOnlySpace')">
+          {{ 'SpacesErrorTip' | translate }}
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="responsible">{{
+      'TaskResponsible' | translate
+    }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="responsibleErrorTip">
+      <nz-select
+        nzMode="default"
+        nzPlaceHolder="{{ 'CreateTaskResponsiblePlaceHolder' | translate }}"
+        formControlName="responsible"
+        (ngModelChange)="addResponsibleToParticipants($event)"
+      >
+        <nz-option *ngFor="let user of users" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
+      </nz-select>
+
+      <ng-template #responsibleErrorTip>
+        <ng-container *ngIf="responsible?.hasError('required')">{{
+          'TaskResponsibleRequiredErrorTip' | translate
+        }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="participants">{{
+      'CreateTaskParticipants' | translate
+    }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="participantsErrorTip">
+      <nz-select
+        nzMode="multiple"
+        nzPlaceHolder="{{ 'CreateTaskParticipantsPlaceHolder' | translate }}"
+        formControlName="participants"
+      >
+        <nz-option
+          nzLabel="{{ responsibleToParticipants.name }}"
+          nzValue="{{ responsibleToParticipants._id }}"
+          nzHide
+          nzDisabled
+        ></nz-option>
+        <nz-option
+          *ngFor="let user of users"
+          nzLabel="{{ user.name }}"
+          nzValue="{{ user._id }}"
+          [nzDisabled]="user._id === responsibleToParticipants._id"
+        ></nz-option>
+      </nz-select>
+      <ng-template #participantsErrorTip>
+        <ng-container *ngIf="participants?.hasError('required')">{{
+          'TaskParticipantsRequiredErrorTip' | translate
+        }}</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-divider nzText="{{ 'CreateTaskChecklist' | translate }}"></nz-divider>
+
+  <nz-form-item>
+    <ng-container *ngIf="(pointsLoading$ | async) === false; else loadingSpinner">
+      <app-point-item *ngFor="let point of points$ | async as points" [point]="point"></app-point-item>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <nz-spin nzSimple></nz-spin>
+    </ng-template>
+  </nz-form-item>
+
+  <app-point-add [point]="point"></app-point-add>
+
+  <ng-template [nzModalFooter]>
+    <button nz-button (click)="handleCancel()">{{ 'CreateTaskCancelText' | translate }}</button>
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="taskIsLoading$ | async"
+      (click)="handleOk()"
+      [disabled]="!taskAddForm.valid"
+    >
+      {{ 'CreateTaskOkText' | translate }}
+    </button>
+  </ng-template>
+</form>

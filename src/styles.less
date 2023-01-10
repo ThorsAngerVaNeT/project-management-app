@@ -1,0 +1,225 @@
+@import 'theme.less';
+
+@import 'variables.less';
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+html,
+body {
+  height: 100%;
+  background: @background-color-light;
+}
+
+nz-content {
+  padding: 0 64px;
+}
+
+app-root,
+app-main,
+app-board,
+app-welcome {
+  display: flex;
+  height: 100%;
+}
+
+.ant-layout-content {
+  min-height: auto;
+}
+
+.ant-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: @background-color-light;
+}
+
+.content-form {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+form .anticon {
+  color: @background-color-medium;
+}
+
+.auth-form {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.auth-form .ant-form-item-control {
+  width: 260px;
+}
+
+.auth-heading {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.ant-form-item-explain-error {
+  color: @error-color;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.ant-card-head-title .ant-form-item-explain-error {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+  display: inline-block;
+  margin-right: 4px;
+  color: @error-color;
+  content: '*';
+}
+
+.ant-btn-dangerous:hover {
+  background-color: @error-color;
+  color: @background-color-light;
+}
+
+.ant-modal {
+  max-width: 520px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: transparent;
+  border: @background-color-medium solid 1px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: @background-color-medium;
+  border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: @primary-color;
+}
+
+.tasks.scrollable::-webkit-scrollbar-track {
+  margin: 8px;
+}
+
+.project__columns {
+  overflow-x: auto;
+  max-width: calc(100vw - 152px);
+  padding-bottom: 12px;
+  scrollbar-color: @primary-color transparent;
+  cursor: grab;
+}
+
+.form-scrollable .ant-modal-body {
+  overflow-y: auto;
+  height: fit-content;
+  margin-right: 8px;
+  scrollbar-color: @primary-color transparent;
+}
+
+.tasks {
+  overflow-y: auto;
+  height: fit-content;
+  margin-right: -12px;
+  padding-right: 12px;
+  scrollbar-color: @primary-color transparent;
+}
+
+.tasks {
+  max-height: calc(100vh - 476px);
+}
+
+.form-scrollable .ant-modal-body {
+  max-height: calc(100vh - 200px);
+}
+
+.search__result-container {
+  max-height: calc(100vh - 150px);
+}
+
+.project__columns::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tasks::-webkit-scrollbar,
+.form-scrollable .ant-modal-body::-webkit-scrollbar,
+.search__result-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.project__columns::-webkit-scrollbar-track,
+.tasks::-webkit-scrollbar-track,
+.form-scrollable .ant-modal-body::-webkit-scrollbar-track,
+.search__result-container::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: transparent;
+  border: @background-color-medium solid 1px;
+}
+
+.tasks::-webkit-scrollbar-track,
+.form-scrollable .ant-modal-body::-webkit-scrollbar-track,
+.search__result-container::-webkit-scrollbar-track {
+  margin: 8px;
+}
+
+.project__columns::-webkit-scrollbar-thumb,
+.tasks::-webkit-scrollbar-thumb,
+.form-scrollable .ant-modal-body::-webkit-scrollbar-thumb,
+.search__result-container::-webkit-scrollbar-thumb {
+  background: @background-color-medium;
+  border-radius: 4px;
+}
+
+.project__columns::-webkit-scrollbar-thumb:hover,
+.tasks::-webkit-scrollbar-thumb:hover,
+.form-scrollable .ant-modal-body::-webkit-scrollbar-thumb:hover,
+.search__result-container::-webkit-scrollbar-thumb:hover {
+  background: @primary-color;
+}
+
+.ant-layout-header {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+}
+
+.ant-layout-content {
+  padding-top: 64px;
+}
+
+.project__column .ant-card-body {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+@media (max-width: @tablet-max-width) {
+  nz-content {
+    padding: 0 16px;
+  }
+
+  .project__columns {
+    max-width: calc(100vw - 52px);
+  }
+}
+
+@media (max-width: @mobile-max-width) {
+  .ant-page-header-heading-title {
+    width: calc(90vw - 152px);
+  }
+}
+
+@media (max-width: 542px) {
+  .ant-modal {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .ant-modal-body,
+  .ant-modal-confirm .ant-modal-body {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,42 @@
+@import 'variables';
+
+.ant-layout-footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: @background-color-medium;
+  align-items: center;
+  gap: 16px;
+}
+
+nz-footer img {
+  width: 64px;
+}
+
+.contacts {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contacts div, .copyright {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: @mobile-max-width) {
+  .ant-layout-footer {
+    flex-direction: column;
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  .contacts {
+    gap: 12px;
+  }
+
+  .contacts div, .copyright {
+    gap: 4px;
+  }
+}

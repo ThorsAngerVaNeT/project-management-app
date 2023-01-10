@@ -1,0 +1,86 @@
+@import 'variables';
+
+.search__group {
+  display: flex;
+}
+
+.search__select {
+  height: 32px;
+  background-color: transparent;
+  color: @primary-light;
+  border: solid 1px @background-color-medium;
+}
+
+.search__group:hover .search__select {
+  color: @primary-light;
+  border: solid 1px @primary-light;
+}
+
+.search__search-field {
+  width: 280px;
+  border-radius: 4px 0 0 4px;
+}
+
+.search__search-field input {
+  color: @primary-light;
+}
+
+.search__search-type {
+  width: 160px;
+  color: @background-color-medium;
+  margin-left: -1px;
+  border-radius: 0 4px 4px 0;
+}
+
+.search__select ::ng-deep.ant-select-arrow {
+  color: @background-color-light;
+}
+
+.search__result-container {
+  padding: 0 10px 0 10px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.search__result-description {
+  color: @custom-grey;
+}
+
+.search__select ::ng-deep.ant-select-arrow {
+  color: @background-color-light;
+}
+
+.search__clear-search {
+  cursor: pointer;
+  color: @background-color-medium;
+}
+.search__clear-search:hover {
+  color: @primary-light;
+}
+
+@media (max-width: @tablet-max-width) {
+  .search__search-field {
+    width: 200px;
+  }
+}
+
+@media (max-width: @mobile-max-width) {
+  .search__group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    // width: 100%;
+    max-width: 302px;
+    justify-content: flex-end;
+    margin: 12px 0;
+  }
+  .search__search-field {
+    border-radius: 4px;
+    width: 270px;
+  }
+
+  .search__search-type {
+    border-radius: 4px;
+    width: 270px;
+  }
+}

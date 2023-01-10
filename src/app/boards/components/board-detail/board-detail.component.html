@@ -1,0 +1,42 @@
+<ng-container *ngIf="boardDetail$ | async as boardDetail">
+  <div class="board__inner-content" *ngIf="boardDetail.board as board">
+    <nz-page-header nzBackIcon>
+      <nz-avatar nz-page-header-avatar [nzSize]="64" nzSrc="{{ boardCoverUrl$ | async }}"></nz-avatar>
+      <nz-page-header-title title="{{ board.title }}">{{ board.title }}</nz-page-header-title>
+    </nz-page-header>
+
+    <div class="board-participants">
+      {{ 'BoardDetailParticipants' | translate }}:
+      <nz-tag class="user-tag" *ngFor="let user of board.users">{{ user.name }}</nz-tag>
+    </div>
+
+    <div
+      #columnsContainer
+      class="project__columns"
+      *ngIf="boardDetail.columns as columns"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      [cdkDropListData]="columns"
+      (cdkDropListDropped)="drop($event)"
+      cdkDropListGroup
+    >
+      <div class="column-item-wrapper" *ngFor="let column of columns | sortByOrder; trackBy: trackById" cdkDrag>
+        <app-column [column]="column"></app-column>
+      </div>
+
+      <ng-template #newColumnPlaceholder></ng-template>
+      <button
+        nz-button
+        nz-tooltip
+        nzType="primary"
+        nzShape="circle"
+        nzTooltipTitle="{{ 'AddNewColumn' | translate }}"
+        nzTooltipPlacement="bottom"
+        nzTooltipColor="#203c56"
+        (click)="addNewColumn()"
+      >
+        <span nz-icon nzType="plus"></span>
+      </button>
+    </div>
+  </div>
+</ng-container>

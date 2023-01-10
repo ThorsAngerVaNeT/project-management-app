@@ -1,0 +1,66 @@
+@import 'variables';
+
+.ant-card:hover {
+  cursor: grab;
+}
+
+.title-to-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.title-to-input h3 {
+  margin: 0;
+  line-height: 32px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.title-to-input h3:hover {
+  cursor: pointer;
+  color: @primary-color;
+}
+
+.title-to-input .anticon {
+  color: @custom-grey;
+}
+
+.project__column {
+  min-width: 300px;
+}
+
+::ng-deep .ant-badge-count {
+  background: transparent;
+  color: @primary-color;
+  box-shadow: 0 0 0 1px @primary-color inset;
+}
+
+::ng-deep .ant-badge {
+  margin: auto;
+  margin-left: 12px;
+}
+
+.ant-card .anticon {
+  color: @primary-color;
+}
+
+.ant-card .anticon:hover {
+  color: @primary-light;
+  cursor: pointer;
+}
+
+.ant-card-head {
+  background-color: @background-color-xlight;
+}
+
+@media (max-width: @tablet-max-width) {
+  .project__column {
+    width: 260px;
+    min-width: auto;
+  }
+}

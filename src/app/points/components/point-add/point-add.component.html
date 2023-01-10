@@ -1,0 +1,42 @@
+<nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+  <nz-input-group [nzAddOnAfter]="suffixButtons">
+    <input
+      nz-input
+      placeholder="{{ 'CheckpointTitleInputPlaceholder' | translate }}"
+      nzSize="small"
+      [formControl]="pointControl"
+      (change)="submitHandler()"
+    />
+
+    <ng-template #titleErrorTip>
+      <ng-container *ngIf="pointControl.hasError('required')">
+        {{ 'CreatePointTitleRequiredErrorTip' | translate }}
+      </ng-container>
+      <ng-container *ngIf="pointControl.hasError('maxlength')">{{
+        'CreatePointTitleMinlengthErrorTip' | translate
+      }}</ng-container>
+      <ng-container *ngIf="pointControl.hasError('containsOnlySpace')">
+        {{ 'SpacesErrorTip' | translate }}
+      </ng-container>
+    </ng-template>
+  </nz-input-group>
+  <ng-template #suffixButtons>
+    <span
+      nz-icon
+      nz-tooltip
+      nzTooltipTitle="{{ 'SaveButtonTooltip' | translate }}"
+      nzType="check-circle"
+      (click)="submitHandler()"
+    ></span>
+    <ng-container *ngIf="point._id">
+      <nz-divider nzType="vertical"></nz-divider>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="{{ 'CancelButtonTooltip' | translate }}"
+        nzType="close-circle"
+        (click)="cancelEdit()"
+      ></span>
+    </ng-container>
+  </ng-template>
+</nz-form-control>

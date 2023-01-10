@@ -1,0 +1,85 @@
+<ng-template #title>
+  <div class="title-to-input" nzAlign="center">
+    <h3
+      nz-tooltip
+      nzTooltipTitle="{{ 'EditColumnTitleTooltip' | translate }}"
+      (click)="toggleEdit()"
+      title="{{ column.title }}"
+    >
+      {{ column.title }}
+      <nz-badge nzStandalone [nzCount]="column.tasks ? column.tasks.length : 0"></nz-badge>
+    </h3>
+    <span
+      nz-icon
+      nzType="delete"
+      nz-tooltip
+      nzTooltipTitle="{{ 'DeleteColumnTooltip' | translate }}"
+      class="anticon anticon-delete ng-star-inserted action-icon"
+      (click)="deleteColumn()"
+    ></span>
+  </div>
+</ng-template>
+
+<ng-template #titleInput>
+  <div class="title-to-input">
+    <nz-form-control [nzSm]="24" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+      <nz-input-group [nzAddOnAfter]="suffixButtons">
+        <input nz-input placeholder="{{ 'ColumnTitle' | translate }}" nzSize="small" [formControl]="titleControl" />
+
+        <ng-template #titleErrorTip>
+          <ng-container *ngIf="titleControl.hasError('required')">{{
+            'CreateBoardTitleRequiredErrorTip' | translate
+          }}</ng-container>
+          <ng-container *ngIf="titleControl.hasError('maxlength')"
+            >{{ 'CreateColumnTitleMaxlengthErrorTip' | translate }}
+          </ng-container>
+          <ng-container *ngIf="titleControl.hasError('containsOnlySpace')">
+            {{ 'SpacesErrorTip' | translate }}
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+    <ng-template #suffixButtons>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="{{ 'SaveButtonTooltip' | translate }}"
+        nzType="check-circle"
+        (click)="updateColumn()"
+      ></span>
+      <nz-divider nzType="vertical"></nz-divider>
+      <span
+        nz-icon
+        nz-tooltip
+        nzTooltipTitle="{{ 'CancelButtonTooltip' | translate }}"
+        nzType="close-circle"
+        (click)="toggleEdit()"
+      ></span>
+    </ng-template>
+  </div>
+</ng-template>
+
+<nz-card
+  nzHoverable
+  class="project__column"
+  [nzActions]="[actionAdd]"
+  [nzTitle]="column._id && !isEditState ? title : titleInput"
+>
+  <app-tasks-list [tasksWithColumnId]="tasksForTasksList"></app-tasks-list>
+</nz-card>
+
+<ng-template #actionAdd>
+  <button
+    nz-button
+    nz-tooltip
+    nzType="default"
+    nzShape="circle"
+    nzTooltipTitle="{{ 'AddNewTask' | translate }}"
+    nzTooltipPlacement="bottom"
+    nzTooltipColor="#203c56"
+    [disabled]="!column._id"
+    (click)="addTask()"
+  >
+    <span nz-icon nzType="plus"></span>
+  </button>
+</ng-template>

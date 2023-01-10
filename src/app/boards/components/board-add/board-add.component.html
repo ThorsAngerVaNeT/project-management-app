@@ -1,0 +1,72 @@
+<form nz-form class="content-form" [formGroup]="boardAddForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzRequired nzFor="title">{{ 'CreateBoardTitle' | translate }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="titleErrorTip">
+      <input nz-input formControlName="title" id="title" />
+
+      <ng-template #titleErrorTip>
+        <ng-container *ngIf="title?.hasError('required')">{{
+          'CreateBoardTitleRequiredErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="title?.hasError('maxlength') || title?.hasError('minlength')">{{
+          'CreateBoardTitleMinlengthErrorTip' | translate
+        }}</ng-container>
+        <ng-container *ngIf="title?.hasError('containsOnlySpace')"> {{ 'SpacesErrorTip' | translate }} </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="7" [nzXs]="24" nzFor="Participants">{{
+      'CreateBoardParticipants' | translate
+    }}</nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24">
+      <nz-select
+        nzMode="multiple"
+        nzPlaceHolder="{{ 'CreateBoardTeamMembers' | translate }}"
+        formControlName="participants"
+      >
+        <nz-option
+          nzLabel="{{ (user$ | async)?.name }}"
+          nzValue="{{ (user$ | async)?._id }}"
+          nzHide
+          nzDisabled
+        ></nz-option>
+        <nz-option *ngFor="let user of users$ | async" nzLabel="{{ user.name }}" nzValue="{{ user._id }}"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="7"
+      [nzXs]="24"
+      nzFor="boardCoverImage"
+      nzTooltipTitle="{{ 'CreateBoardImageTooltip' | translate }}"
+      >{{ 'BoardImage' | translate }}
+    </nz-form-label>
+    <nz-form-control [nzSm]="17" [nzXs]="24" [nzErrorTip]="">
+      <input
+        type="file"
+        class="file-field"
+        formControlName="image"
+        #fileInput
+        (change)="onFileInput(fileInput.files)"
+        aria-label=""
+        accept="{{ allowedFileTypes }}"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <ng-template [nzModalFooter]>
+    <button nz-button (click)="handleCancel()">{{ 'CreateBoardCancelText' | translate }}</button>
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="isLoading$ | async"
+      (click)="handleOk()"
+      [disabled]="!boardAddForm.valid"
+    >
+      {{ 'CreateBoardOkText' | translate }}
+    </button>
+  </ng-template>
+</form>

@@ -1,0 +1,33 @@
+<label
+  nz-checkbox
+  (ngModelChange)="toggleDone()"
+  [(ngModel)]="isChecked"
+  nz-tooltip
+  nzTooltipTitle="{{ 'CheckPointTooltip' | translate }}"
+  *ngIf="!isEdit; else editTitle"
+  title="{{ point.title }}"
+  >{{ point.title }}</label
+>
+
+<ng-template #editTitle>
+  <app-point-add [point]="point" (pointTitleSave)="onPointTitleSave($event)"></app-point-add>
+</ng-template>
+
+<span
+  nz-icon
+  nzType="edit"
+  nz-tooltip
+  nzTooltipTitle="{{ 'EditPointTooltip' | translate }}"
+  class="anticon anticon-edit ng-star-inserted action-icon"
+  (click)="toggleEdit()"
+  *ngIf="!isEdit"
+></span>
+<span
+  nz-icon
+  nzType="delete"
+  nz-tooltip
+  nzTooltipTitle="{{ 'DeletePointTooltip' | translate }}"
+  class="anticon anticon-delete ng-star-inserted action-icon"
+  (click)="deletePoint()"
+  *ngIf="!isEdit"
+></span>
