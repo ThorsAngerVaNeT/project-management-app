@@ -140,6 +140,14 @@ export class FileEffects {
     );
   });
 
+  deleteBoardCover$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.deleteBoardSuccess),
+      concatLatestFrom(() => this.storeFacade.boardCovers$),
+      map(([{ id }, covers]) => FileActions.deleteFile({ id: covers[id]._id })),
+    );
+  });
+
   preloadImagesAfterLoadFilesByTaskSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.loadFilesByTaskSuccess),
