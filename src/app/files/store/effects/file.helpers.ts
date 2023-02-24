@@ -6,7 +6,8 @@ import { TaskFile, UploadFileParams, UploadFileParamsWithPath } from '../../mode
 export const generateBoardCoverFilename = (boardId: Board['_id'] | number, filename: string): string =>
   `${boardId}-${Date.now()}.${filename.split('.').at(-1)}`;
 
-export const getFileUrl = (path: TaskFile['path']): string => `${environment.API_URL}${path}`;
+export const getFileUrl = (path: TaskFile['path']): string =>
+  path.startsWith('http') ? path : `${environment.API_URL}${path}`;
 
 export const getPreloadImage$ = (file: TaskFile): Observable<HTMLImageElement> =>
   new Observable((subscriber) => {
