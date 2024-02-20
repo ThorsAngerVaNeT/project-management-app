@@ -1,0 +1,43 @@
+<ng-container *ngIf="user$ | async as user">
+  <nz-card
+    nzHoverable
+    class="board-card"
+    [nzCover]="cover"
+    [nzActions]="isOwner ? [actionSee, actionEdit, actionEllipsis] : isParticipant ? [actionSee] : [actionLock]"
+    (click)="showInfo()"
+  >
+    <nz-card-meta
+      nzTitle="{{ board.title }}"
+      nzDescription="{{ 'Owner' | translate }}: {{ board.owner.name }}"
+      [routerLink]="routerLink"
+    ></nz-card-meta>
+  </nz-card>
+  <ng-template #cover>
+    <img class="board-cover" [src]="boardCoverUrl$ | async" alt="ngPMA Board" [routerLink]="routerLink" />
+  </ng-template>
+  <ng-template #actionSee>
+    <span
+      nz-icon
+      nzType="eye"
+      nzTheme="outline"
+      nz-tooltip
+      nzTooltipTitle="{{ 'OpenBoard' | translate }}"
+      [routerLink]="routerLink"
+    ></span>
+  </ng-template>
+  <ng-template #actionEdit>
+    <span nz-icon nzType="edit" nz-tooltip nzTooltipTitle="{{ 'EditBoard' | translate }}" (click)="editBoard()"></span>
+  </ng-template>
+  <ng-template #actionEllipsis>
+    <span
+      nz-icon
+      nzType="delete"
+      nz-tooltip
+      nzTooltipTitle="{{ 'DeleteBoard' | translate }}"
+      (click)="removeBoard()"
+    ></span>
+  </ng-template>
+  <ng-template #actionLock>
+    <span nz-icon nzTheme="twotone" nz-tooltip nzTooltipTitle="{{ 'AccessDenied' | translate }}" nzType="lock"></span>
+  </ng-template>
+</ng-container>

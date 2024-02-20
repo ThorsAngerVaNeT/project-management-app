@@ -1,0 +1,18 @@
+<nz-list-item>
+  <nz-list-item-meta nz-tooltip nzTooltipTitle="{{ 'EditTaskTooltip' | translate }}" (click)="editTask()">
+    <nz-list-item-meta-title title="{{ task.title }}">{{ task.title }}</nz-list-item-meta-title>
+    <nz-list-item-meta-description>{{ task.user.name }}</nz-list-item-meta-description>
+  </nz-list-item-meta>
+  <ul nz-list-item-actions>
+    <nz-list-item-action>
+      <span
+        nz-icon
+        nzType="delete"
+        nz-tooltip
+        nzTooltipTitle="{{ 'DeleteTaskTooltip' | translate }}"
+        class="anticon anticon-delete ng-star-inserted"
+        (click)="deleteTask()"
+      ></span>
+    </nz-list-item-action>
+  </ul>
+</nz-list-item>

@@ -1,0 +1,53 @@
+@import 'variables';
+
+.board__inner-content {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project__columns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.ant-page-header {
+  padding: 0;
+}
+
+.ant-avatar {
+  margin-right: 16px;
+}
+
+.user-tag {
+  background-color: @secondary-color;
+  border: none;
+  color: @background-color-light;
+  border-radius: 16px;
+  padding-bottom: 2px;
+}
+
+.column-item {
+  flex: 1;
+}
+
+.cdk-drag-preview {
+  background: @background-color-light;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.project__columns.cdk-drop-list-dragging .column-item-wrapper:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

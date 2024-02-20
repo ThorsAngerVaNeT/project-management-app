@@ -1,0 +1,70 @@
+<div class="hero">
+  <div class="hero__headline">
+    <h1>ngPMA</h1>
+    <h2>{{ 'MainH2' | translate }}</h2>
+    <p>
+      {{ 'MainDescription' | translate }}
+    </p>
+    <p>
+      {{ 'MainFeatures1' | translate }}
+      <span class="hero-divider" nz-icon nzType="plus"></span>
+      {{ 'MainFeatures2' | translate }}
+    </p>
+  </div>
+
+  <div class="hero__image">
+    <img src="assets/images/scrshot.png" />
+  </div>
+</div>
+
+<h2>{{ 'MainTechnologies' | translate }}</h2>
+
+<div class="technologies">
+  <div class="technologies__list">
+    <nz-card *ngFor="let item of technologies">
+      <a href="{{ item.link }}">{{ item.name }}</a>
+      <a href="{{ item.link }}"><img style="padding: 8px" src="{{ item.logo }}" /></a>
+    </nz-card>
+  </div>
+</div>
+
+<h2>{{ 'MainCourseHeading' | translate }}</h2>
+
+<div class="course">
+  <a href="https://rs.school/angular/"><img src="https://rollingscopes.com/images/logo_rs2.svg" /></a>
+  <p>
+    {{ 'MainCourseDescription1' | translate }}
+    <a href="https://rs.school/angular/">Angular 2022Q3 Course</a>{{ 'MainCourseDescription2' | translate }}
+    <a href="https://rs.school/">RSSchool</a>.
+  </p>
+  <p>
+    <a href="https://rs.school/">RSSchool</a> {{ 'MainCourseDescription3' | translate }}
+    <a href="https://rollingscopes.com/"> The Rolling Scopes developer community</a>
+    {{ 'MainCourseDescription4' | translate }}
+  </p>
+</div>
+
+<h2>{{ 'MainDevelopers' | translate }}</h2>
+
+<div class="developers">
+  <nz-card class="business-card" nzTitle="ThorsAngerVaNeT" [nzExtra]="extraTemplate1">
+    {{ 'ThorsAngerVaNeT' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate1>
+    <a href="https://github.com/thorsangervanet"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="Ogimly" [nzExtra]="extraTemplate2">
+    {{ 'Ogimly' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate2>
+    <a href="https://github.com/ogimly"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+
+  <nz-card class="business-card" nzTitle="022022" [nzExtra]="extraTemplate3">
+    {{ '022022' | translate }}
+  </nz-card>
+  <ng-template #extraTemplate3>
+    <a href="https://github.com/022022"><span nz-icon nzType="github" style="font-size: 24px"></span></a>
+  </ng-template>
+</div>

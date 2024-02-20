@@ -1,0 +1,32 @@
+@import 'variables';
+
+.ant-list-item {
+  padding-left: 8px;
+  border-radius: 2px;
+}
+
+.ant-list-item:hover {
+  background-color: @background-color-light;
+  cursor: grab;
+}
+
+::ng-deep .ant-list-item-meta-title:hover {
+  cursor: pointer;
+  color: @primary-color;
+}
+
+.anticon:hover {
+  color: @primary-color;
+  cursor: pointer;
+}
+
+::ng-deep h4.ant-list-item-meta-title,
+::ng-deep .ant-list-item-meta-description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ant-list-item-action {
+  margin-left: 16px;
+}
