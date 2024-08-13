@@ -61,7 +61,7 @@
     "@angular-eslint/schematics": "14.1.2",
     "@angular-eslint/template-parser": "14.1.2",
     "@angular/cdk": "^14.2.6",
-    "@angular/cli": "~14.2.3",
+    "@angular/cli": "~14.2.13",
     "@angular/compiler-cli": "^14.2.0",
     "@ngrx/eslint-plugin": "^14.3.2",
     "@ngrx/schematics": "^14.3.2",
